@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AR: Artrite Psoriasica - Guida Rapida</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="antialiased bg-secondary-gray">
+
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12 space-y-8">
+        
+        <!-- Intestazione Pagina -->
+        <header class="flex justify-between items-center mb-6">
+            <h1 class="content-title">Artrite Psoriasica (PsA)</h1>
+            <a href="index.html" class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-2 px-4 rounded-full transition duration-150 flex items-center">
+                &larr; Indietro
+            </a>
+        </header>
+    
+    <style>
+        /* Definizione delle classi di colore personalizzate e font */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+
+        :root {
+            --primary-color: #059669; /* emerald-600 */
+            --accent-color: #34D399; /* emerald-400 */
+            --secondary-bg: #F0FDF4; /* emerald-50 */
+            --light-gray: #F9FAFB;
+        }
+
+        .content-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            line-height: 1.25;
+        }
+
+        .content-section {
+            padding: 1.5rem;
+            background-color: white;
+            border-radius: 1rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        .therapy-tab {
+            padding: 0.75rem 1.25rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-weight: 600;
+            white-space: nowrap;
+            text-align: center;
+        }
+        .therapy-tab-active {
+            background-color: var(--primary-color);
+            color: white;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
+        }
+        .therapy-tab-inactive {
+            background-color: var(--secondary-bg);
+            color: #10B981; /* emerald-500 */
+            border: 2px solid #D1FAE5; /* emerald-100 */
+        }
+        .therapy-tab-inactive:hover {
+            background-color: #D1FAE5; /* emerald-100 */
+        }
+        
+        .therapy-content-box {
+            border: 2px solid var(--accent-color);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            background-color: var(--secondary-bg);
+            margin-top: 1rem;
+            min-height: 250px; /* Per mantenere l'altezza fissa */
+        }
+        
+        .step-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            counter-reset: step-counter;
+        }
+
+        .step-list li {
+            counter-increment: step-counter;
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .step-list li::before {
+            content: "Step " counter(step-counter);
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: bold;
+            border-radius: 9999px; /* Full rounded */
+            padding: 0.25rem 0.75rem;
+            margin-right: 1rem;
+            flex-shrink: 0;
+            font-size: 0.875rem;
+        }
+
+        .therapy-details {
+            font-size: 0.95rem;
+            color: #374151; /* gray-700 */
+        }
+
+        /* Stili per il calcolatore DAPSA e CASPAR (mantenuti) */
+        .criteria-label { display: block; font-weight: 600; color: #374151; margin-bottom: 0.5rem; font-size: 0.95rem; }
+        .criteria-select, .criteria-input {
+            width: 100%; padding: 0.75rem; border: 1px solid #D1D5DB; border-radius: 0.5rem;
+            background-color: #F9FAFB; appearance: none; cursor: pointer; transition: border-color 0.2s, box-shadow 0.2s; font-size: 1rem;
+        }
+        .criteria-select:focus, .criteria-input:focus {
+            border-color: var(--primary-color); box-shadow: 0 0 0 2px #A7F3D0; /* green-300 ring */ outline: none;
+        }
+        .input-group, .input-group-activity { margin-bottom: 1rem; padding: 0.75rem; background-color: #F3F4F6; border-radius: 0.75rem; }
+        .score-box { padding: 1rem; border-radius: 0.75rem; border: 2px solid; transition: background-color 0.3s, border-color 0.3s; }
+    </style>
+</head>
+<body class="antialiased bg-secondary-bg">
+
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12 space-y-8">
+        
+        <!-- Intestazione Pagina -->
+        <header class="mb-6">
+                 <p class="text-gray-500 mt-1">Guida rapida per la classificazione e la gestione terapeutica dominio-specifica (GRAPPA/EULAR).</p>
+        </header>
+
+        <!-- Sezione Terapia (Pulsanti per i Domini) -->
+        <section class="content-section">
+            <h2 class="text-2xl font-semibold text-primary-color mb-4 border-l-4 border-primary-color pl-3">Terapia: Gestione Dominio-Specifica</h2>
+            
+            <p class="text-sm italic text-gray-600 mb-4">Seleziona il dominio predominante non controllato per visualizzare la strategia terapeutica (Target: Remissione o Bassa Attività).</p>
+
+            <!-- Contenitore dei Pulsanti (Tabs) -->
+            <div class="flex flex-wrap gap-2 mb-4 overflow-x-auto pb-2">
+                <div class="therapy-tab therapy-tab-active" onclick="showTherapyDomain('periferica')" id="tab-periferica">Artrite Periferica</div>
+                <div class="therapy-tab therapy-tab-inactive" onclick="showTherapyDomain('assiale')" id="tab-assiale">Malattia Assiale (Spondilite)</div>
+                <div class="therapy-tab therapy-tab-inactive" onclick="showTherapyDomain('entesite')" id="tab-entesite">Entesite</div>
+                <div class="therapy-tab therapy-tab-inactive" onclick="showTherapyDomain('dattilite')" id="tab-dattilite">Dattilite</div>
+                <div class="therapy-tab therapy-tab-inactive" onclick="showTherapyDomain('cutanea')" id="tab-cutanea">Psoriasi Cutanea/Ungueale</div>
+            </div>
+
+            <!-- Contenuto della Terapia (Visualizzato dinamicamente) -->
+            <div id="therapy-content" class="therapy-content-box">
+                <!-- Contenuto dell'Artrite Periferica (Default) -->
+            </div>
+        </section>
+
+        <!-- Criteri Diagnostici e Strumenti -->
+        <section class="content-section">
+            <h2 class="text-2xl font-semibold text-primary-color mb-4 border-l-4 border-primary-color pl-3">Criteri Classificativi e Strumenti</h2>
+
+            <!-- Calcolatore DAPSA e CASPAR (Container) -->
+            <div class="space-y-8">
+                
+                <!-- CALCOLATORE CASPAR (Criteri di Classificazione PsA) -->
+                <div class="bg-white p-6 rounded-xl shadow-lg border-2 border-primary-color">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                        <svg class="w-6 h-6 mr-2 text-primary-color" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354l9.172 9.172a4 4 0 010 5.656l-9.172 9.172a4 4 0 01-5.656 0l-9.172-9.172a4 4 0 010-5.656l9.172-9.172a4 4 0 015.656 0z"></path></svg>
+                        Calcolatore Criteri Classificativi CASPAR
+                    </h3>
+
+                    <!-- Criteri di Inclusione CASPAR -->
+                    <div class="mb-4 bg-green-50 p-3 rounded-lg border border-green-200">
+                        <p class="font-semibold text-sm text-green-700">Paziente con Malattia Articolare Infiammatoria deve totalizzare **3 o più punti** per essere classificato PsA.</p>
+                    </div>
+
+                    <!-- Sezioni del Punteggio CASPAR -->
+                    <div class="space-y-4">
+                        <!-- 1. Coinvolgimento Cutaneo (Psoriasi) -->
+                        <div class="input-group">
+                            <label for="psoriasis_status" class="criteria-label">A. Psoriasi (Max 2 pt)</label>
+                            <select id="psoriasis_status" class="criteria-select" onchange="calculateCASPARScore()">
+                                <option value="0" selected>Psoriasi Assente (0 pt)</option>
+                                <option value="2">Psoriasi Attuale (2 pt)</option>
+                                <option value="1">Psoriasi Anamnestica (Non Attuale) (1 pt)</option>
+                                <option value="1">Anamnesi Familiare di Psoriasi (1 pt)</option>
+                            </select>
+                        </div>
+                        
+                        <!-- 2. Coinvolgimento Ungueale -->
+                        <div class="input-group">
+                            <label for="nail_dystrophy" class="criteria-label">B. Distrofia Ungueale Psoriasica (1 pt)</label>
+                            <select id="nail_dystrophy" class="criteria-select" onchange="calculateCASPARScore()">
+                                <option value="0" selected>Assente (0 pt)</option>
+                                <option value="1">Presente (1 pt)</option>
+                            </select>
+                        </div>
+                        
+                        <!-- 3. Dattilite -->
+                        <div class="input-group">
+                            <label for="dactylitis" class="criteria-label">C. Dattilite (1 pt)</label>
+                            <select id="dactylitis" class="criteria-select" onchange="calculateCASPARScore()">
+                                <option value="0" selected>Assente (0 pt)</option>
+                                <option value="1">Presente (1 pt)</option>
+                            </select>
+                        </div>
+                        
+                        <!-- 4. Coinvolgimento RX -->
+                        <div class="input-group">
+                            <label for="radiology" class="criteria-label">D. Evidenza Radiologica (1 pt)</label>
+                            <select id="radiology" class="criteria-select" onchange="calculateCASPARScore()">
+                                <option value="0" selected>Assente (0 pt)</option>
+                                <option value="1">Evidenza di neoformazione ossea iuxta-articolare (es. speroni) (1 pt)</option>
+                            </select>
+                        </div>
+                        
+                        <!-- 5. Fattore Reumatoide -->
+                        <div class="input-group">
+                            <label for="rheumatoid_factor" class="criteria-label">E. Fattore Reumatoide (FR) (1 pt)</label>
+                            <select id="rheumatoid_factor" class="criteria-select" onchange="calculateCASPARScore()">
+                                <option value="1" selected>FR Negativo (1 pt)</option>
+                                <option value="0">FR Positivo (0 pt)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Risultato CASPAR -->
+                    <div id="psa_caspar_result_box" class="mt-6 p-4 rounded-lg text-center font-bold transition-all duration-500 bg-gray-100 border border-gray-300">
+                        <p class="text-lg">Punteggio Totale: <span id="psa_caspar_score" class="text-2xl ml-1 text-primary-color">0</span></p>
+                        <p id="psa_caspar_status" class="text-xl mt-2 text-gray-700 font-semibold">Seleziona i criteri per iniziare il calcolo.</p>
+                    </div>
+                </div>
+
+                <!-- CALCOLATORI ATTIVITÀ DI MALATTIA (DAPSA, CDAI, SDAI, DAS28) -->
+                <div class="bg-white p-6 rounded-xl shadow-lg border-2 border-accent-color">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                        <svg class="w-6 h-6 mr-2 text-accent-color" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 6h.01M21 3h.01"></path></svg>
+                        Calcolatori Attività di Malattia (PROs)
+                    </h3>
+                    
+                    <div class="mb-6 space-y-3">
+                        <p class="text-sm italic text-gray-600 mb-4">Inserisci i parametri clinici (utilizzati per DAPSA, CDAI, SDAI, DAS28):</p>
+                        
+                        <!-- Input Comuni -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div class="input-group-activity">
+                                <label for="TJC68" class="criteria-label">TJC68 (Articolazioni Dolenti 0-68)</label>
+                                <input type="number" id="TJC68" min="0" max="68" value="0" class="criteria-input" oninput="runAllActivityCalculationsPsA()">
+                            </div>
+                            <div class="input-group-activity">
+                                <label for="SJC66" class="criteria-label">SJC66 (Articolazioni Tumefatte 0-66)</label>
+                                <input type="number" id="SJC66" min="0" max="66" value="0" class="criteria-input" oninput="runAllActivityCalculationsPsA()">
+                            </div>
+                            <div class="input-group-activity">
+                                <label for="PGA_DAPSA" class="criteria-label">PGA (Valutazione Globale Paziente 0-10)</label>
+                                <input type="number" id="PGA_DAPSA" min="0" max="10" step="0.1" value="0" class="criteria-input" oninput="runAllActivityCalculationsPsA()">
+                            </div>
+                            <div class="input-group-activity">
+                                <label for="EGA_DAPSA" class="criteria-label">EGA (Valutazione Globale Medico 0-10)</label>
+                                <input type="number" id="EGA_DAPSA" min="0" max="10" step="0.1" value="0" class="criteria-input" oninput="runAllActivityCalculationsPsA()">
+                            </div>
+                            <div class="input-group-activity col-span-1 sm:col-span-2">
+                                <label for="CRP_DAPSA" class="criteria-label">PCR (Proteina C Reattiva) in **mg/dL**</label>
+                                <input type="number" id="CRP_DAPSA" min="0" step="0.1" value="0" class="criteria-input" oninput="runAllActivityCalculationsPsA()">
+                            </div>
+                            
+                            <!-- Input per DAS28 (che usa TJC28/SJC28) -->
+                            <div class="input-group-activity col-span-1">
+                                <label for="TJC28_DAS" class="criteria-label">TJC28 (Art. Dolenti 0-28) (per DAS28)</label>
+                                <input type="number" id="TJC28_DAS" min="0" max="28" value="0" class="criteria-input" oninput="runAllActivityCalculationsPsA()">
+                            </div>
+                            <div class="input-group-activity col-span-1">
+                                <label for="SJC28_DAS" class="criteria-label">SJC28 (Art. Tumefatte 0-28) (per DAS28)</label>
+                                <input type="number" id="SJC28_DAS" min="0" max="28" value="0" class="criteria-input" oninput="runAllActivityCalculationsPsA()">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <hr class="my-4 border-gray-200">
+
+                    <!-- Risultati DAPSA e CDAI/SDAI/DAS28 -->
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+                        
+                        <!-- Risultato DAPSA -->
+                        <div id="dapsa_box" class="score-box bg-gray-100 border-gray-300">
+                            <p class="text-lg font-bold text-gray-800">DAPSA</p>
+                            <p class="text-3xl font-extrabold text-primary-color mt-1"><span id="dapsa_score">0.0</span></p>
+                            <p id="dapsa_status" class="text-sm mt-1 font-semibold text-gray-600">Inserisci i dati</p>
+                        </div>
+
+                        <!-- Risultato CDAI (PsA) -->
+                        <div id="cdai_psa_box" class="score-box bg-gray-100 border-gray-300">
+                            <p class="text-lg font-bold text-gray-800">CDAI (PsA)</p>
+                            <p class="text-3xl font-extrabold text-primary-color mt-1"><span id="cdai_psa_score">0.0</span></p>
+                            <p id="cdai_psa_status" class="text-sm mt-1 font-semibold text-gray-600">Inserisci i dati</p>
+                        </div>
+                        
+                        <!-- Risultato SDAI (PsA) -->
+                        <div id="sdai_psa_box" class="score-box bg-gray-100 border-gray-300">
+                            <p class="text-lg font-bold text-gray-800">SDAI (PsA)</p>
+                            <p class="text-3xl font-extrabold text-primary-color mt-1"><span id="sdai_psa_score">0.0</span></p>
+                            <p id="sdai_psa_status" class="text-sm mt-1 font-semibold text-gray-600">Inserisci i dati</p>
+                        </div>
+
+                        <!-- Risultato DAS28-CRP -->
+                        <div id="das28_psa_box" class="score-box bg-gray-100 border-gray-300">
+                            <p class="text-lg font-bold text-gray-800">DAS28-PCR</p>
+                            <p class="text-3xl font-extrabold text-primary-color mt-1"><span id="das28_psa_score">0.00</span></p>
+                            <p id="das28_psa_status" class="text-sm mt-1 font-semibold text-gray-600">Inserisci i dati</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6">
+                        <h4 class="font-bold text-md text-gray-800 mb-2">Soglie di Attività (PsA)</h4>
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs text-center font-mono">
+                            <div class="p-1 bg-green-200 rounded-md">Remissione</div>
+                            <div class="p-1 bg-yellow-200 rounded-md">Bassa</div>
+                            <div class="p-1 bg-orange-200 rounded-md">Moderata</div>
+                            <div class="p-1 bg-red-200 rounded-md">Alta</div>
+                        </div>
+                        <ul class="text-xs mt-2 space-y-1 text-gray-600">
+                            <li>**DAPSA:** $\le 4$ / $> 4 - \le 14$ / $> 14 - \le 28$ / $> 28$</li>
+                            <li>**CDAI (PsA):** $\le 2.8$ / $> 2.8 - \le 10$ / $> 10 - \le 22$ / $> 22$</li>
+                            <li>**DAS28-PCR:** $< 2.6$ / $\ge 2.6 - < 3.2$ / $\ge 3.2 - < 5.1$ / $\ge 5.1$</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Script JavaScript per i Calcolatori e la Logica della Terapia -->
+    <script>
+        // Mappa dei contenuti terapeutici per dominio
+        const therapyContentMap = {
+            periferica: `
+                <h4 class="text-xl font-bold text-primary-color mb-4">Artrite Periferica (Articolazioni Dolenti/Tumefatte)</h4>
+                <ul class="step-list">
+                    <li>
+                        <div>
+                            <span class="font-semibold text-gray-900">Prima Linea: csDMARDs e FANS</span>
+                            <p class="therapy-details">Inizia con **Metotrexato** o **Leflunomide**. Aggiungi **FANS** per il controllo del dolore/infiammazione. Considera infiltrazioni di corticosteroidi. (La Sulfasalazina è meno efficace per la PsA).</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div>
+                            <span class="font-semibold text-gray-900">Fallimento csDMARD: Terapie Biologiche/Targeted (bDMARD/tsDMARD)</span>
+                            <p class="therapy-details">Se non c'è miglioramento entro 3-6 mesi, passa a una terapia avanzata. La scelta dipende da altre manifestazioni (cute, entesite).</p>
+                            <ul class="list-disc ml-5 mt-1 text-sm text-gray-600">
+                                <li>**TNFi** (Adalimumab, Etanercept, ecc.)</li>
+                                <li>**Inibitori di JAK** (Tofacitinib, Upadacitinib, ecc.)</li>
+                                <li>**Inibitori IL-17** (Secukinumab, Ixekizumab)</li>
+                                <li>**Inibitori IL-12/23** (Ustekinumab, Guselkumab, ecc.)</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <div>
+                            <span class="font-semibold text-gray-900">Fallimento Biologico: Switch</span>
+                            <p class="therapy-details">Passa a un altro bDMARD/tsDMARD, preferibilmente con un meccanismo d'azione differente (es. da TNFi a IL-17i o JAKi).</p>
+                        </div>
+                    </li>
+                </ul>
+            `,
+            assiale: `
+                <h4 class="text-xl font-bold text-primary-color mb-4">Malattia Assiale (Spondilite, Rigidità Notturna)</h4>
+                <p class="therapy-details italic mb-4">I csDMARD (Metotrexato, Leflunomide) sono generalmente **NON EFFICACI** per la malattia assiale. La terapia si basa su FANS e biologici.</p>
+                <ul class="step-list">
+                    <li>
+                        <div>
+                            <span class="font-semibold text-gray-900">Prima Linea: FANS</span>
+                            <p class="therapy-details">Terapia ottimizzata con **FANS** (se tollerati) e fisioterapia. Valutare l'attività dopo 4 settimane di dose massima.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div>
+                            <span class="font-semibold text-gray-900">Fallimento FANS: Terapie Biologiche (bDMARD/tsDMARD)</span>
+                            <p class="therapy-details">Se non c'è risposta o persistono sintomi attivi (es. BASDAI elevato), si passa a:</p>
+                            <ul class="list-disc ml-5 mt-1 text-sm text-gray-600">
+                                <li>**TNFi** (Infliximab, Etanercept, ecc.)</li>
+                                <li>**Inibitori IL-17** (Secukinumab, Ixekizumab) - Molto efficaci per il coinvolgimento assiale.</li>
+                                <li>**Inibitori di JAK** (tsDMARD)</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <div>
+                            <span class="font-semibold text-gray-900">Switch Terapeutico</span>
+                            <p class="therapy-details">In caso di fallimento, passare a un altro TNFi o a una classe diversa (IL-17i o JAKi).</p>
+                        </div>
+                    </li>
+                </ul>
+            `,
+            entesite: `
+                <h4 class="text-xl font-bold text-primary-color mb-4">Entesite (Infiammazione dei Tendini/Legamenti)</h4>
+                <p class="therapy-details italic mb-4">L'entesite è difficile da trattare. I csDMARD hanno efficacia limitata.</p>
+                <ul class="step-list">
+                    <li>
+                        <div>
+                            <span class="font-semibold text-gray-900">Prima Linea: Trattamento Locale e FANS</span>
+                            <p class="therapy-details">Infiltrazione locale di corticosteroidi (fare attenzione al rischio di rottura tendinea) e **FANS**. Fisioterapia.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div>
+                            <span class="font-semibold text-gray-900">Fallimento: Terapie Biologiche/Targeted</span>
+                            <p class="therapy-details">Se l'entesite è persistente e sintomatica, la scelta ricade su farmaci con comprovata efficacia in questo dominio:</p>
+                            <ul class="list-disc ml-5 mt-1 text-sm text-gray-600">
+                                <li>**Inibitori IL-17** (Secukinumab, Ixekizumab) - Forte raccomandazione.</li>
+                                <li>**TNFi** (Adalimumab, Etanercept, ecc.)</li>
+                                <li>**Inibitori IL-23**</li>
+                                <li>**Inibitori di JAK**</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            `,
+            dattilite: `
+                <h4 class="text-xl font-bold text-primary-color mb-4">Dattilite ("Dito a Salsicciotto")</h4>
+                <p class="therapy-details italic mb-4">La dattilite è una manifestazione infiammatoria difficile da trattare, spesso associata ad alta attività di malattia.</p>
+                <ul class="step-list">
+                    <li>
+                        <div>
+                            <span class="font-semibold text-gray-900">Prima Linea: Terapia Anti-Infiammatoria</span>
+                            <p class="therapy-details">**FANS** e, se localizzata, infiltrazione di corticosteroidi locali (con cautela).</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div>
+                            <span class="font-semibold text-gray-900">Progressione: csDMARD e Fallimento</span>
+                            <p class="therapy-details">Se la dattilite è parte di un'artrite periferica, si inizia con **Metotrexato**. In caso di fallimento o dattilite severa isolata, si passa direttamente a:</p>
+                            <ul class="list-disc ml-5 mt-1 text-sm text-gray-600">
+                                <li>**TNFi** (Adalimumab, Etanercept, ecc.) - Molto efficaci.</li>
+                                <li>**Inibitori IL-17** (Ixekizumab, Secukinumab) - Hanno dimostrato elevata efficacia.</li>
+                                <li>**Inibitori di JAK**</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            `,
+            cutanea: `
+                <h4 class="text-xl font-bold text-primary-color mb-4">Psoriasi Cutanea e Ungueale</h4>
+                <p class="therapy-details italic mb-4">La gestione dermatologica deve essere coordinata. La scelta del farmaco reumatologico è influenzata dall'efficacia sulla cute (valutata con PASI).</p>
+                <ul class="step-list">
+                    <li>
+                        <div>
+                            <span class="font-semibold text-gray-900">Prima Linea: Topici e csDMARD</span>
+                            <p class="therapy-details">Terapia topica (corticosteroidi, calcipotriolo) e **Metotrexato** o **Leflunomide**. Il Metotrexato è un buon ponte tra artrite e cute. **EVITARE corticosteroidi sistemici** per il rischio di psoriasi pustolosa alla sospensione.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div>
+                            <span class="font-semibold text-gray-900">Fallimento: Farmaci Biologici/Targeted (bDMARD/tsDMARD)</span>
+                            <p class="therapy-details">Per psoriasi moderata/severa e coinvolgimento ungueale:</p>
+                            <ul class="list-disc ml-5 mt-1 text-sm text-gray-600">
+                                <li>**Inibitori IL-17** (Secukinumab, Ixekizumab) - Ottimi per la cute.</li>
+                                <li>**Inibitori IL-23** (Guselkumab, Risankizumab) - I più efficaci per la cute.</li>
+                                <li>**Inibitori IL-12/23** (Ustekinumab)</li>
+                                <li>**TNFi** (Adalimumab, ecc.)</li>
+                                <li>**Inibitori di JAK** o **Apremilast** (quest'ultimo più blando).</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            `
+        };
+
+        // Funzione per mostrare il contenuto della terapia
+        function showTherapyDomain(domain) {
+            // Rimuovi la classe attiva da tutti i pulsanti
+            document.querySelectorAll('.therapy-tab').forEach(tab => {
+                tab.classList.remove('therapy-tab-active');
+                tab.classList.add('therapy-tab-inactive');
+            });
+
+            // Aggiungi la classe attiva al pulsante selezionato
+            const activeTab = document.getElementById(`tab-${domain}`);
+            if (activeTab) {
+                activeTab.classList.remove('therapy-tab-inactive');
+                activeTab.classList.add('therapy-tab-active');
+            }
+
+            // Inserisci il contenuto del dominio
+            const contentDiv = document.getElementById('therapy-content');
+            contentDiv.innerHTML = therapyContentMap[domain] || '<p class="text-center text-gray-500 p-8">Contenuto non disponibile per questo dominio.</p>';
+        }
+
+
+        // --- Logica Calcolatori Attività di Malattia (DAPSA, CDAI, SDAI, DAS28) - MANTENUTA ---
+
+        // Funzione per il calcolo e l'aggiornamento del punteggio CASPAR
+        function calculateCASPARScore() {
+            // Leggi i valori dal DOM
+            const select = document.getElementById('psoriasis_status');
+            const selectedValue = select.value;
+            let psoriasisScore = parseInt(selectedValue) || 0;
+            
+            // Dati i valori del DOM, usiamo il valore diretto (2, 1, 0)
+            
+            // B. Distrofia Ungueale: 1 punto
+            const nailScore = parseInt(document.getElementById('nail_dystrophy').value) || 0;
+
+            // C. Dattilite: 1 punto
+            const dactylitisScore = parseInt(document.getElementById('dactylitis').value) || 0;
+
+            // D. Evidenza Radiologica: 1 punto
+            const radiologyScore = parseInt(document.getElementById('radiology').value) || 0;
+
+            // E. Fattore Reumatoide Negativo: 1 punto
+            const rfScore = parseInt(document.getElementById('rheumatoid_factor').value) || 0;
+
+            const totalScore = psoriasisScore + nailScore + dactylitisScore + radiologyScore + rfScore;
+
+            const resultBox = document.getElementById('psa_caspar_result_box');
+            const scoreSpan = document.getElementById('psa_caspar_score');
+            const statusP = document.getElementById('psa_caspar_status');
+
+            scoreSpan.textContent = totalScore;
+            
+            // Rimuove tutte le classi di stato precedenti
+            resultBox.classList.remove('bg-green-100', 'border-green-500', 'bg-red-100', 'border-red-500', 'bg-gray-100', 'border-gray-300');
+            statusP.classList.remove('text-red-700', 'text-green-700', 'text-gray-700');
+            scoreSpan.classList.remove('text-red-700', 'text-green-700');
+            scoreSpan.classList.add('text-primary-color'); // Default color
+
+            if (totalScore >= 3) {
+                // Classificazione positiva
+                resultBox.classList.add('bg-green-100', 'border-green-500');
+                statusP.textContent = 'CRITERI RAGGIUNTI (≥ 3). Classificabile come Artrite Psoriasica.';
+                statusP.classList.add('text-green-700');
+                scoreSpan.classList.remove('text-primary-color');
+                scoreSpan.classList.add('text-green-700');
+            } else {
+                // Classificazione negativa
+                resultBox.classList.add('bg-red-100', 'border-red-500');
+                statusP.textContent = 'CRITERI NON RAGGIUNTI (< 3). Non classificabile come PsA.';
+                statusP.classList.add('text-red-700');
+                scoreSpan.classList.remove('text-primary-color');
+                scoreSpan.classList.add('text-red-700');
+            }
+        }
+        
+        /**
+         * Determina lo stato di attività e il colore in base al punteggio e alle soglie.
+         * @param {number} score - Il punteggio calcolato.
+         * @param {number[]} thresholds - Array delle soglie [Remissione, Bassa Attività, Moderata Attività].
+         * @param {string} type - Tipo di calcolatore ('DAS28', 'SDAI', 'CDAI', 'DAPSA').
+         */
+        function getColorAndStatusPsA(score, thresholds, type) {
+            let status;
+            let color;
+            
+            // Soglie per DAS28-PCR (2.6, 3.2, 5.1)
+            const [remDAS28, lowDAS28, modDAS28] = [2.6, 3.2, 5.1]; 
+            
+            // Soglie per DAPSA/CDAI/SDAI (Rem, Low, Mod)
+            const [rem, low, mod] = thresholds;
+
+            if (type === 'DAS28') {
+                // DAS28
+                if (score >= modDAS28) { 
+                    color = 'red'; status = 'Alta Attività'; 
+                }
+                else if (score >= lowDAS28) { 
+                    color = 'orange'; status = 'Moderata Attività'; 
+                }
+                else if (score >= remDAS28) { 
+                    color = 'yellow'; status = 'Bassa Attività'; 
+                }
+                else { 
+                    color = 'green'; status = 'Remissione'; 
+                }
+            } else { // DAPSA, CDAI, SDAI
+                // Rem <= soglia_rem, Bassa > R E <= L, Mod > L E <= M, High > M
+                if (score > mod) { 
+                    color = 'red'; status = 'Alta Attività'; 
+                } else if (score > low) { 
+                    color = 'orange'; status = 'Moderata Attività';
+                } else if (score > rem) { 
+                    color = 'yellow'; status = 'Bassa Attività';
+                } else { // score <= rem
+                    color = 'green'; status = 'Remissione';
+                }
+            }
+            
+            // Formattazione
+            const formattedScore = (type === 'DAS28') ? score.toFixed(2) : score.toFixed(1);
+
+            return { status, color, formattedScore };
+        }
+
+        /**
+         * Aggiorna l'elemento visivo del punteggio.
+         */
+        function updateScoreBoxPsA(id, score, status, color, formattedScore) {
+            const box = document.getElementById(id + '_box');
+            const scoreElement = document.getElementById(id + '_score');
+            const statusElement = document.getElementById(id + '_status');
+
+            scoreElement.textContent = formattedScore;
+            statusElement.textContent = status;
+
+            // Rimuove e aggiunge le classi di colore
+            box.className = 'score-box text-center transition-all duration-300'; // Reset e classi base
+            box.classList.add(`bg-${color}-100`, `border-${color}-500`);
+            
+            // Imposta il colore del testo del punteggio
+            scoreElement.className = 'text-3xl font-extrabold mt-1'; // Reset
+            scoreElement.classList.add(`text-${color}-700`);
+            
+            statusElement.className = 'text-sm mt-1 font-semibold'; // Reset
+            statusElement.classList.add(`text-${color}-800`); 
+        }
+
+        /**
+         * Esegue tutti i calcoli degli indici di attività.
+         */
+        function runAllActivityCalculationsPsA() {
+            // Leggi i valori di input per DAPSA/CDAI/SDAI (TJC68/SJC66)
+            const TJC68 = parseFloat(document.getElementById('TJC68').value) || 0;
+            const SJC66 = parseFloat(document.getElementById('SJC66').value) || 0;
+            const PGA = parseFloat(document.getElementById('PGA_DAPSA').value) || 0; // 0-10
+            const EGA = parseFloat(document.getElementById('EGA_DAPSA').value) || 0; // 0-10
+            const CRP_mgdL = parseFloat(document.getElementById('CRP_DAPSA').value) || 0; // PCR in mg/dL
+
+            // Leggi i valori di input per DAS28 (TJC28/SJC28)
+            const TJC28 = parseFloat(document.getElementById('TJC28_DAS').value) || 0;
+            const SJC28 = parseFloat(document.getElementById('SJC28_DAS').value) || 0;
+
+            // 1. DAPSA (Disease Activity in Psoriatic Arthritis)
+            // DAPSA = TJC68 + SJC66 + PGA(0-10) + EGA(0-10) + CRP (mg/dL) 
+            const DAPSA_score = TJC68 + SJC66 + PGA + EGA + CRP_mgdL;
+            const DAPSA_thresholds = [4, 14, 28]; // Rem <= 4, Low > 4-14, Mod > 14-28, High > 28
+            const { status: DAPSA_status, color: DAPSA_color, formattedScore: DAPSA_formatted } = getColorAndStatusPsA(DAPSA_score, DAPSA_thresholds, 'DAPSA');
+            updateScoreBoxPsA('dapsa', DAPSA_score, DAPSA_status, DAPSA_color, DAPSA_formatted);
+            
+            // 2. CDAI (Clinical Disease Activity Index) - Usando 68/66 per PsA
+            // CDAI = TJC68 + SJC66 + PGA(0-10) + EGA(0-10)
+            const CDAI_score_psa = TJC68 + SJC66 + PGA + EGA;
+            const CDAI_thresholds = [2.8, 10, 22]; // Soglie AR (spesso usate anche per PsA)
+            const { status: CDAI_status_psa, color: CDAI_color_psa, formattedScore: CDAI_formatted_psa } = getColorAndStatusPsA(CDAI_score_psa, CDAI_thresholds, 'CDAI');
+            updateScoreBoxPsA('cdai_psa', CDAI_score_psa, CDAI_status_psa, CDAI_color_psa, CDAI_formatted_psa);
+
+            // 3. SDAI (Simplified Disease Activity Index) - Usando 68/66 per PsA
+            // SDAI = CDAI + CRP (mg/dL)
+            const SDAI_score_psa = CDAI_score_psa + CRP_mgdL;
+            const SDAI_thresholds = [3.3, 11, 26]; // Soglie AR (spesso usate anche per PsA)
+            const { status: SDAI_status_psa, color: SDAI_color_psa, formattedScore: SDAI_formatted_psa } = getColorAndStatusPsA(SDAI_score_psa, SDAI_thresholds, 'SDAI');
+            updateScoreBoxPsA('sdai_psa', SDAI_score_psa, SDAI_status_psa, SDAI_color_psa, SDAI_formatted_psa);
+
+            // 4. DAS28-CRP
+// Conversione: CRP_mgL = CRP_mgdL * 10 
+const CRP_mgL = CRP_mgdL * 10; 
+
+// Conversione PGA (0-10) a VAS (0-100mm)
+const PGA_mm = PGA * 10; 
+
+// Formula DAS28-CRP (standard: PGA in mm)
+const DAS28_score = (0.56 * Math.sqrt(TJC28)) + 
+                    (0.28 * Math.sqrt(SJC28)) + 
+                    (0.36 * Math.log(CRP_mgL + 1)) + 
+                    (0.014 * PGA_mm) + 0.96;
+
+// Assicura che il risultato sia un numero finito, altrimenti 0
+const final_DAS28 = isFinite(DAS28_score) ? DAS28_score : 0;
+
+const DAS28_thresholds = [2.6, 3.2, 5.1]; 
+const { status: DAS28_status_psa, color: DAS28_color_psa, formattedScore: DAS28_formatted_psa } = getColorAndStatusPsA(final_DAS28, DAS28_thresholds, 'DAS28');
+updateScoreBoxPsA('das28_psa', final_DAS28, DAS28_status_psa, DAS28_color_psa, DAS28_formatted_psa);
+
+        }
+
+        // Inizializza i calcolatori e imposta il tab predefinito
+        window.onload = function() {
+            calculateCASPARScore();
+            runAllActivityCalculationsPsA();
+            showTherapyDomain('periferica'); // Mostra la terapia per Artrite Periferica di default
+        };
+
+    </script>
+</body>
+</html>
