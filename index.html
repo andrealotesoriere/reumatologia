@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tool Clinici Reumatologia</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Impostazioni generali per un look pulito e ampio */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f9fb; /* Sfondo molto chiaro */
+            padding-top: 2rem;
+            padding-bottom: 2rem;
+        }
+        .app-container {
+            max-width: 1200px; /* Larghezza aumentata per la griglia estesa */
+            width: 95%;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+            background: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+        }
+        .card {
+            transition: all 0.3s ease;
+            transform-origin: center;
+            /* Rimosso l'icon-container per ridurre lo spazio interno */
+            padding: 1.5rem; 
+        }
+        .card:not(.disabled-card):hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+            border-color: #1D4ED8; /* blue-700 */
+        }
+        .disabled-card {
+            opacity: 0.6;
+            cursor: not-allowed;
+            filter: grayscale(10%);
+        }
+        /* Rimosso .icon-container poiché non necessario */
+    </style>
+</head>
+<body>
+
+    <div class="app-container">
+        
+        <!-- Intestazione Principale -->
+        <header class="text-center mb-12">
+            <h1 class="text-5xl font-extrabold text-gray-900 mb-2">Reuma Quick Tools</h1>
+            <p class="text-xl text-gray-500 font-light">Naviga rapidamente tra le patologie e gli strumenti di calcolo.</p>
+        </header>
+
+        <!-- --- Sezione 1: Artriti --- -->
+        <section class="mb-10">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 border-b pb-2 border-gray-200">1. Artriti</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                
+                <!-- Card: Artrite Reumatoide (AR) - ATTIVA -->
+                <a href="ar.html" class="card block bg-blue-50 border-2 border-blue-400 rounded-xl shadow-md hover:bg-blue-100">
+                    <h3 class="text-xl font-bold text-blue-800 mb-1">Artrite Reumatoide (AR)</h3>
+                    <p class="text-sm text-gray-600">DAS28, SDAI, CDAI, Criteri ACR/EULAR 2010.</p>
+                </a>
+
+                <!-- Card: Artrite Psoriasica (PsA) - ATTIVA (Placeholder) -->
+                <a href="psa_guida_rapida.html" class="card block bg-green-50 border-2 border-green-400 rounded-xl shadow-md hover:bg-green-100">
+                    <h3 class="text-xl font-bold text-green-800 mb-1">Artrite Psoriasica (PsA)</h3>
+                    <p class="text-sm text-gray-600">DAPSA, PASI, Criteri CASPAR.</p>
+                </a>
+                
+                <!-- Card: Spondiloartrite Assiale (axSpA)- DISABILITATA -->
+                <a href="#" class="card disabled-card block bg-gray-50 border-2 border-gray-300 rounded-xl shadow-md">
+                    <h3 class="text-xl font-bold text-gray-600 mb-1">Spondiloartrite Assiale (axSpA)</h3>
+                    <p class="text-sm text-gray-500">ASDAS-PCR/VES, BASDAI, Criteri ASAS.</p>
+                </a>
+                
+                <!-- Card: Artropatie Microcristalline - DISABILITATA -->
+                <a href="#" class="card disabled-card block bg-gray-50 border-2 border-gray-300 rounded-xl shadow-md">
+                    <h3 class="text-xl font-bold text-gray-600 mb-1">Artropatie Microcristalline</h3>
+                    <p class="text-sm text-gray-500">Gotta, Condrocalcinosi. Terapia fase acuta e cronica.</p>
+                </a>
+
+            </div>
+        </section>
+
+        <!-- --- Sezione 2: Connettiviti e Autoimmuni Sistemiche --- -->
+        <section class="mb-10">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 border-b pb-2 border-gray-200">2. Connettiviti e Autoimmuni Sistemiche</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                
+                <!-- Card: Lupus Eritematoso Sistemico (LES) - DISABILITATA -->
+                <a href="#" class="card disabled-card block bg-gray-50 border-2 border-gray-300 rounded-xl shadow-md">
+                    <h3 class="text-xl font-bold text-gray-600 mb-1">Lupus Eritematoso Sistemico (LES)</h3>
+                    <p class="text-sm text-gray-500">Criteri EULAR/ACR 2019, SLEDAI, Terapia per Lupus Nefritico.</p>
+                </a>
+                
+                <!-- Card: Sindrome di Sjogren (pSS) - DISABILITATA -->
+                <a href="#" class="card disabled-card block bg-gray-50 border-2 border-gray-300 rounded-xl shadow-md">
+                    <h3 class="text-xl font-bold text-gray-600 mb-1">Sindrome di Sjogren (pSS)</h3>
+                    <p class="text-sm text-gray-500">Criteri ACR/EULAR 2017. Gestione secchezza e coinvolgimento sistemico.</p>
+                </a>
+                
+                <!-- Card: Sclerosi Sistemica (SSc) - DISABILITATA -->
+                <a href="#" class="card disabled-card block bg-gray-50 border-2 border-gray-300 rounded-xl shadow-md">
+                    <h3 class="text-xl font-bold text-gray-600 mb-1">Sclerosi Sistemica (SSc)</h3>
+                    <p class="text-sm text-gray-500">Classificazione (limitata/diffusa), Crisi renale, Criteri ACR/EULAR 2013.</p>
+                </a>
+                
+                <!-- Card: Sindrome Antifosfolipidi (APS) - DISABILITATA -->
+                <a href="#" class="card disabled-card block bg-gray-50 border-2 border-gray-300 rounded-xl shadow-md">
+                    <h3 class="text-xl font-bold text-gray-600 mb-1">Sindrome Antifosfolipidi (APS)</h3>
+                    <p class="text-sm text-gray-500">Criteri di Sydney, Gestione in gravidanza, Terapia antitrombotica.</p>
+                </a>
+                
+                <!-- Card: Connettivite Indifferenziata (UCTD) - DISABILITATA -->
+                <a href="#" class="card disabled-card block bg-gray-50 border-2 border-gray-300 rounded-xl shadow-md">
+                    <h3 class="text-xl font-bold text-gray-600 mb-1">Connettivite Indifferenziata (UCTD)</h3>
+                    <p class="text-sm text-gray-500">Follow-up, rischio di evoluzione.</p>
+                </a>
+
+            </div>
+        </section>
+        
+        <!-- --- Sezione 3: Miositi e Vasculiti --- -->
+        <section class="mb-10">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 border-b pb-2 border-gray-200">3. Miositi e Vasculiti</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                
+                <!-- Card: Polimiosite/Dermatomiosite - DISABILITATA -->
+                <a href="#" class="card disabled-card block bg-gray-50 border-2 border-gray-300 rounded-xl shadow-md">
+                    <h3 class="text-xl font-bold text-gray-600 mb-1">Polimiosite e Dermatomiosite</h3>
+                    <p class="text-sm text-gray-500">Criteri, associazioni neoplastiche, terapia di induzione.</p>
+                </a>
+                
+                <!-- Card: Sindrome Anti-Sintetasi (ASS) - DISABILITATA -->
+                <a href="#" class="card disabled-card block bg-gray-50 border-2 border-gray-300 rounded-xl shadow-md">
+                    <h3 class="text-xl font-bold text-gray-600 mb-1">Sindrome Anti-Sintetasi</h3>
+                    <p class="text-sm text-gray-500">Interstiziopatia polmonare (ILD), "mechanic's hands".</p>
+                </a>
+                
+                <!-- Card: Arterite di Horton (GCA) - DISABILITATA -->
+                <a href="#" class="card disabled-card block bg-gray-50 border-2 border-gray-300 rounded-xl shadow-md">
+                    <h3 class="text-xl font-bold text-gray-600 mb-1">Arterite di Horton (GCA)</h3>
+                    <p class="text-sm text-gray-500">Criteri ACR 1990, Terapia (TOC vs GC), monitoraggio.</p>
+                </a>
+                
+                <!-- Card: Vasculiti ANCA-associate - DISABILITATA -->
+                <a href="#" class="card disabled-card block bg-gray-50 border-2 border-gray-300 rounded-xl shadow-md">
+                    <h3 class="text-xl font-bold text-gray-600 mb-1">Vasculiti ANCA-associate</h3>
+                    <p class="text-sm text-gray-500">GPA, MPA, EGPA. Classificazione, terapia d'induzione/mantenimento.</p>
+                </a>
+                
+                <!-- Card: Poliarterite Nodosa (PAN) - DISABILITATA -->
+                <a href="#" class="card disabled-card block bg-gray-50 border-2 border-gray-300 rounded-xl shadow-md">
+                    <h3 class="text-xl font-bold text-gray-600 mb-1">Poliarterite Nodosa (PAN)</h3>
+                    <p class="text-sm text-gray-500">Classificazione e terapia.</p>
+                </a>
+
+                <!-- Card: Malattia di Behcet - DISABILITATA -->
+                <a href="#" class="card disabled-card block bg-gray-50 border-2 border-gray-300 rounded-xl shadow-md">
+                    <h3 class="text-xl font-bold text-gray-600 mb-1">Malattia di Behcet</h3>
+                    <p class="text-sm text-gray-500">Criteri ICBD, gestione uveite e lesioni cutanee/mucosa.</p>
+                </a>
+                
+            </div>
+        </section>
+
+        <!-- --- Sezione 4: Reumatismi Extrarticolari e Altro --- -->
+        <section class="mb-10">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 border-b pb-2 border-gray-200">4. Altre Condizioni Reumatologiche e Metabolismo Osseo</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+
+                <!-- Card: Fibromialgia - DISABILITATA -->
+                <a href="#" class="card disabled-card block bg-gray-50 border-2 border-gray-300 rounded-xl shadow-md">
+                    <h3 class="text-xl font-bold text-gray-600 mb-1">Fibromialgia</h3>
+                    <p class="text-sm text-gray-500">Criteri ACR, score WPI/SSS, approccio terapeutico non farmacologico.</p>
+                </a>
+                
+                <!-- Card: Polimialgia Reumatica (PMR) - DISABILITATA -->
+                <a href="#" class="card disabled-card block bg-gray-50 border-2 border-gray-300 rounded-xl shadow-md">
+                    <h3 class="text-xl font-bold text-gray-600 mb-1">Polimialgia Reumatica (PMR)</h3>
+                    <p class="text-sm text-gray-500">Criteri EULAR/ACR 2012, Terapia Glucocorticoidi.</p>
+                </a>
+
+                <!-- Card: Artrosi (Osteoartrite) - DISABILITATA -->
+                <a href="#" class="card disabled-card block bg-gray-50 border-2 border-gray-300 rounded-xl shadow-md">
+                    <h3 class="text-xl font-bold text-gray-600 mb-1">Artrosi</h3>
+                    <p class="text-sm text-gray-500">Gestione non farmacologica e farmacologica.</p>
+                </a>
+                
+                <!-- Card: Interstiziopatie Polmonari (ILD) - DISABILITATA -->
+                <a href="#" class="card disabled-card block bg-gray-50 border-2 border-gray-300 rounded-xl shadow-md">
+                    <h3 class="text-xl font-bold text-gray-600 mb-1">Interstiziopatie (ILD)</h3>
+                    <p class="text-sm text-gray-500">Classificazione, approccio terapeutico (Anti-fibrotici, Immunosoppressori).</p>
+                </a>
+
+                <!-- Card: Osteoporosi - DISABILITATA -->
+                <a href="#" class="card disabled-card block bg-gray-50 border-2 border-gray-300 rounded-xl shadow-md">
+                    <h3 class="text-xl font-bold text-gray-600 mb-1">Osteoporosi/Malattie dell'osso</h3>
+                    <p class="text-sm text-gray-500">FRAX, terapia (Bifosfonati, Denosumab, Teriparatide).</p>
+                </a>
+                
+                <!-- Card: Fenomeno di Raynaud - DISABILITATA -->
+                <a href="#" class="card disabled-card block bg-gray-50 border-2 border-gray-300 rounded-xl shadow-md">
+                    <h3 class="text-xl font-bold text-gray-600 mb-1">Fenomeno di Raynaud</h3>
+                    <p class="text-sm text-gray-500">Primario vs secondario, capillaroscopia, gestione vasospasmo.</p>
+                </a>
+
+                <!-- Card: Eritema Nodoso (EN) - DISABILITATA -->
+                <a href="#" class="card disabled-card block bg-gray-50 border-2 border-gray-300 rounded-xl shadow-md">
+                    <h3 class="text-xl font-bold text-gray-600 mb-1">Eritema Nodoso (EN)</h3>
+                    <p class="text-sm text-gray-500">Cause reumatologiche, diagnostica differenziale.</p>
+                </a>
+
+                <!-- Card: Reumatologia in Gravidanza - DISABILITATA -->
+                <a href="#" class="card disabled-card block bg-gray-50 border-2 border-gray-300 rounded-xl shadow-md">
+                    <h3 class="text-xl font-bold text-gray-600 mb-1">Gravidanza e Terapia</h3>
+                    <p class="text-sm text-gray-500">Farmaci consentiti/vietati (MTX, Leflunomide, Biologici).</p>
+                </a>
+
+            </div>
+        </section>
+
+        <!-- Footer / Disclaimer -->
+        <footer class="mt-12 text-center text-xs text-gray-400 border-t pt-4">
+            <p>Questi strumenti sono intesi come riferimento rapido per professionisti sanitari. Non sostituiscono il giudizio clinico. Le schede disabilitate saranno attivate in seguito.</p>
+        </footer>
+
+    </div>
+
+</body>
+</html>
