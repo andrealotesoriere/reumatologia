@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AR: Artrite Reumatoide - Guida Rapida</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="antialiased bg-secondary-gray">
+
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12 space-y-8">
+        
+        <!-- Intestazione Pagina -->
+        <header class="flex justify-between items-center mb-6">
+            <h1 class="content-title">Artrite Reumatoide (AR)</h1>
+            <a href="index.html" class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-2 px-4 rounded-full transition duration-150 flex items-center">
+                &larr; Indietro
+            </a>
+        </header>
+    
+    <style>
+        /* Definizione delle classi di colore personalizzate e font */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+
+        :root {
+            --primary-color: #059669; /* emerald-600 */
+            --accent-color: #34D399; /* emerald-400 */
+            --secondary-bg: #F0FDF4; /* emerald-50 */
+            --light-gray: #F9FAFB;
+        }
+
+        .content-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            line-height: 1.25;
+        }
+
+        .content-section {
+            padding: 1.5rem;
+            background-color: white;
+            border-radius: 1rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        .therapy-tab {
+            padding: 0.75rem 1.25rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-weight: 600;
+            white-space: nowrap;
+            text-align: center;
+        }
+        .therapy-tab-active {
+            background-color: var(--primary-color);
+            color: white;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
+        }
+        .therapy-tab-inactive {
+            background-color: var(--secondary-bg);
+            color: #10B981; /* emerald-500 */
+            border: 2px solid #D1FAE5; /* emerald-100 */
+        }
+        .therapy-tab-inactive:hover {
+            background-color: #D1FAE5; /* emerald-100 */
+        }
+        
+        .therapy-content-box {
+            border: 2px solid var(--accent-color);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            background-color: var(--secondary-bg);
+            margin-top: 1rem;
+            min-height: 250px; /* Per mantenere l'altezza fissa */
+        }
+        
+        .step-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            counter-reset: step-counter;
+        }
+
+        .step-list li {
+            counter-increment: step-counter;
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .step-list li::before {
+            content: "Step " counter(step-counter);
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: bold;
+            border-radius: 9999px; /* Full rounded */
+            padding: 0.25rem 0.75rem;
+            margin-right: 1rem;
+            flex-shrink: 0;
+            font-size: 0.875rem;
+        }
+
+        .therapy-details {
+            font-size: 0.95rem;
+            color: #374151; /* gray-700 */
+        }
+
+        /* Stili per il calcolatore DAPSA e CASPAR (mantenuti) */
+        .criteria-label { display: block; font-weight: 600; color: #374151; margin-bottom: 0.5rem; font-size: 0.95rem; }
+        .criteria-select, .criteria-input {
+            width: 100%; padding: 0.75rem; border: 1px solid #D1D5DB; border-radius: 0.5rem;
+            background-color: #F9FAFB; appearance: none; cursor: pointer; transition: border-color 0.2s, box-shadow 0.2s; font-size: 1rem;
+        }
+        .criteria-select:focus, .criteria-input:focus {
+            border-color: var(--primary-color); box-shadow: 0 0 0 2px #A7F3D0; /* green-300 ring */ outline: none;
+        }
+        .input-group, .input-group-activity { margin-bottom: 1rem; padding: 0.75rem; background-color: #F3F4F6; border-radius: 0.75rem; }
+        .score-box { padding: 1rem; border-radius: 0.75rem; border: 2px solid; transition: background-color 0.3s, border-color 0.3s; }
+    </style>
+
+        <!-- Terapia (FASE I, II, Mantenimento) -->
+        <section class="content-section">
+            <h2 class="text-2xl font-semibold text-primary-blue mb-4 border-l-4 border-primary-blue pl-3">Terapia: Strategia Treat-to-Target (T2T)</h2>
+            
+            <div class="therapy-box">
+                <h3 class="text-xl font-bold text-gray-800 mb-2">Obiettivo: Remissione o Bassa Attività</h3>
+                <p class="text-sm italic">
+                    Raggiungere l'obiettivo entro **6 mesi**. Se non c'è miglioramento (**minore o uguale al 50%**) entro **3 mesi**, modificare la terapia.
+                </p>
+            </div>
+
+            <!-- FASE I: csDMARD -->
+            <div class="space-y-4">
+                <h3 class="text-xl font-bold text-green-700 mt-6">FASE I: csDMARD (Prima Linea)</h3>
+                
+                <div class="bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
+                    <h4 class="font-bold text-lg text-primary-blue mb-1">Metotrexato (MTX)</h4>
+                    <ul class="text-sm space-y-2 dmard-list pl-0">
+                        <li><span class="font-semibold">Posologia:</span> Escalation rapida fino a **20-25 mg** 1 volta/settimana (PO o SC). Dose relativa **circa 0.3 mg/kg**.</li>
+                        <li><span class="font-semibold">Supporto:</span> Acido Folico **maggiore o uguale a 5 mg**/settimana (distante dall'MTX).</li>
+                        <li><span class="font-semibold">Durata:</span> A tempo indeterminato.</li>
+                    </ul>
+                </div>
+
+                <div class="warning-box">
+                    <h4 class="font-bold text-md mb-1">Controindicazioni/Alternative & GCs</h4>
+                    <ul class="text-sm space-y-1 list-disc pl-5">
+                        <li><span class="font-semibold">Controindicazioni MTX:</span> **Gravidanza, Allattamento**, Insufficienza Epatica/Renale grave, Alcolismo.</li>
+                        <li><span class="font-semibold">Alternative:</span> **Leflunomide** 20 mg/die o **Sulfasalazina** 3000 mg/die.</li>
+                        <li><span class="font-semibold">Terapia Ponte (GCs):</span> **Fino a 7.5 mg**/die di Prednisone equiv. per **fino a 3 mesi**. Interrompere appena possibile.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- FASE II: bDMARD o tsDMARD -->
+            <div class="space-y-4 pt-4 border-t border-gray-200">
+                <h3 class="text-xl font-bold text-red-700 mt-6">FASE II: bDMARD / tsDMARD (dopo fallimento csDMARDs)</h3>
+                <p class="text-sm italic">
+                    La scelta dipende dai fattori prognostici sfavorevoli e dalle comorbidità. Vanno combinati con csDMARD (tipicamente MTX).
+                </p>
+
+                <!-- Anti-TNF (bDMARD) -->
+                <div class="bg-white p-4 rounded-lg border border-gray-200 shadow-sm mt-3">
+                    <h4 class="font-bold text-lg text-primary-blue mb-2">Anti-TNF (Prima Scelta Biologica)</h4>
+                    <ul class="text-sm space-y-1 dmard-list pl-0">
+                        <li>**Adalimumab** (Humira)</li>
+                        <li>**Etanercept** (Enbrel)</li>
+                        <li>**Golimumab** (Simponi)</li>
+                        <li>**Certolizumab pegol** (Cimzia)</li>
+                        <li>**Infliximab** (Remicade)</li>
+                        <li class="font-bold text-red-700">Attenzione: Da evitare in caso di Insufficienza Cardiaca (NYHA III/IV) o pregressa TBC non trattata.</li>
+                    </ul>
+                </div>
+                
+                <!-- Inibitori di JAK (tsDMARD) -->
+                <div class="bg-white p-4 rounded-lg border border-gray-200 shadow-sm mt-3">
+                    <h4 class="font-bold text-lg text-primary-blue mb-2">Inibitori di JAK (tsDMARD)</h4>
+                    <ul class="text-sm space-y-1 dmard-list pl-0">
+                        <li>**Baricitinib:** Preferire **4 mg**/die per maggiore efficacia.</li>
+                        <li>**Upadacitinib:** Dosaggio standard 15 mg/die (con cautela 30 mg in casi selezionati).</li>
+                        <li>**Tofacitinib:** Dosaggio standard **2 volte 5 mg**/die.</li>
+                        <li>**Filgotinib:** Dosaggio standard 200 mg/die (riduzione a 100 mg in caso di insufficienza renale/età avanzata).</li>
+                        <li class="font-bold text-red-700">Attenzione: Rischio HZ/VTE/CV (specialmente dose alta Tofacitinib o Upadacitinib 30 mg).</li>
+                    </ul>
+                </div>
+                
+                <!-- Anti-IL6R (bDMARD) -->
+                <div class="bg-white p-4 rounded-lg border border-gray-200 shadow-sm mt-3">
+                    <h4 class="font-bold text-lg text-primary-blue mb-2">Anti-IL6R (bDMARD)</h4>
+                    <ul class="text-sm space-y-1 dmard-list pl-0">
+                        <li>**Tocilizumab (Anti-IL6R):** Se IV, iniziare con **8 mg/kg**.</li>
+                        <li>**Sarilumab (Anti-IL6R):** Dosaggio SC standard.</li>
+                    </ul>
+                </div>
+                
+                <!-- Costimolazione & Anti-CD20 (bDMARD) -->
+                <div class="bg-white p-4 rounded-lg border border-gray-200 shadow-sm mt-3">
+                    <h4 class="font-bold text-lg text-primary-blue mb-2">Costimolazione & Anti-CD20 (bDMARD)</h4>
+                    <ul class="text-sm space-y-1 dmard-list pl-0">
+                        <li>**Abatacept (Anti-CTLA4):** Usato sia in combinazione con MTX che in **monoterapia** (in caso di intolleranza a MTX).</li>
+                        <li>**Rituximab (Anti-CD20):** **2 x 500 mg** o **1 x 1000 mg**.</li>
+                        <li>**Anakinra (Anti-IL1):** Raramente usato in AR, riservato a forme con sintomi sistemici e resistenti.</li>
+                    </ul>
+                </div>
+
+                <ul class="text-sm space-y-3 dmard-list pl-0 mt-4">
+                    <li><span class="font-semibold">Abbinamento (Matchmaking):</span> Preferire **Abatacept/Rituximab** per **RA-ILD**. Evitare **Anti-TNF/Rituximab** in Insufficienza Cardiaca Grave.</li>
+                </ul>
+            </div>
+
+            <!-- FASE III: Dopo fallimento bDMARD/tsDMARD -->
+            <div class="space-y-4 pt-4 border-t border-gray-200">
+                <h3 class="text-xl font-bold text-orange-700 mt-6">FASE III: Terapia di Terza Linea</h3>
+                <p class="text-sm italic">
+                    Passare a un bDMARD o tsDMARD con un meccanismo d'azione diverso rispetto a quello fallito (es. dopo fallimento Anti-TNF passare a JAKi o Anti-IL6R).
+                </p>
+            </div>
+
+            <!-- MANTENIMENTO -->
+            <div class="space-y-4 pt-4 border-t border-gray-200">
+                <h3 class="text-xl font-bold text-gray-800 mt-6">FASE DI MANTENIMENTO (Remissione di 6 mesi o più)</h3>
+                <ul class="text-sm space-y-2 list-disc pl-5">
+                    <li>Prima Interruzione: Glucocorticoidi.</li>
+                    <li>Successivamente: Riduzione progressiva (tapering) della dose di bDMARD/tsDMARD o csDMARD.</li>
+                    <li><span class="font-bold text-red-700">Attenzione:</span> Interruzione completa **sconsigliata** (alto rischio di riacutizzazione).</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Criteri Diagnostici e Strumenti -->
+        <section class="content-section">
+            <h2 class="text-2xl font-semibold text-primary-blue mb-4 border-l-4 border-primary-blue pl-3">Criteri Diagnostici e Strumenti</h2>
+
+            <!-- Calcolatori Attività di Malattia e Classificazione (Container) -->
+            <div class="space-y-8">
+                
+                <!-- CALCOLATORE ACR/EULAR 2010 -->
+                <div class="therapy-box bg-white p-6 rounded-xl shadow-lg border-2 border-primary-blue">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                        <svg class="w-6 h-6 mr-2 text-primary-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 6h.01M21 3h.01"></path></svg>
+                        Calcolatore Criteri Classificativi ACR/EULAR 2010
+                    </h3>
+
+                    <!-- Popolazione a cui applicare i criteri -->
+                    <div class="mb-4 bg-yellow-50 p-3 rounded-lg border border-yellow-200">
+                        <p class="font-semibold text-sm text-yellow-700">Popolazione target:</p>
+                        <ul class="text-xs list-disc pl-5 mt-1 text-gray-700">
+                            <li>Pazienti con almeno una articolazione affetta da sinovite (tumefatta).</li>
+                            <li>La sinovite non deve essere ascrivibile ad altra malattia.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Sezioni del Punteggio -->
+                    <div class="space-y-4">
+                        <div class="input-group">
+                            <label for="joint_involvement" class="criteria-label">A. Coinvolgimento Articolare (Max 5 pt)</label>
+                            <select id="joint_involvement" class="criteria-select" onchange="calculateACRScore()">
+                                <option value="0" selected>1 grande articolazione (0 pt)</option>
+                                <option value="1">2-10 grandi articolazioni (1 pt)</option>
+                                <option value="2">1-3 piccole articolazioni (con o senza grandi) (2 pt)</option>
+                                <option value="3">4-10 piccole articolazioni (con o senza grandi) (3 pt)</option>
+                                <option value="5">maggiore di 10 articolazioni (con almeno una piccola) (5 pt)</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label for="serology" class="criteria-label">B. Sierologia (FR e Anti-Citrullina) (Max 3 pt)</label>
+                            <select id="serology" class="criteria-select" onchange="calculateACRScore()">
+                                <option value="0" selected>Negativi (FR negativo e Anti-Citrullina negativo) (0 pt)</option>
+                                <option value="2">FR o Anti-Citrullina positivi deboli (2 pt)</option>
+                                <option value="3">FR o Anti-Citrullina positivi forti (3 pt)</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label for="acute_phase" class="criteria-label">C. Risposta Biochimica (VES o PCR) (Max 1 pt)</label>
+                            <select id="acute_phase" class="criteria-select" onchange="calculateACRScore()">
+                                <option value="0" selected>VES e/o PCR normali (0 pt)</option>
+                                <option value="1">VES o PCR alterate (1 pt)</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label for="duration" class="criteria-label">D. Durata dei Sintomi (Max 1 pt)</label>
+                            <select id="duration" class="criteria-select" onchange="calculateACRScore()">
+                                <option value="0" selected>minore di 6 settimane (0 pt)</option>
+                                <option value="1">maggiore o uguale a 6 settimane (1 pt)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Risultato ACR -->
+                    <div id="ar_result_box" class="mt-6 p-4 rounded-lg text-center font-bold transition-all duration-500 bg-gray-100 border border-gray-300">
+                        <p class="text-lg">Punteggio Totale: <span id="ar_score" class="text-2xl ml-1 text-primary-blue">0</span></p>
+                        <p id="ar_status" class="text-xl mt-2 text-gray-700 font-semibold">Seleziona i criteri per iniziare il calcolo.</p>
+                    </div>
+                </div>
+
+                <!-- CALCOLATORI ATTIVITÀ DI MALATTIA (DAS28, SDAI, CDAI) -->
+                <div class="therapy-box bg-white p-6 rounded-xl shadow-lg border-2 border-accent-blue">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                        <svg class="w-6 h-6 mr-2 text-accent-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M3 14h18m-9-4v8m-7-8v8m14-8v8"></path></svg>
+                        Calcolatori Attività di Malattia (PROs)
+                    </h3>
+                    
+                    <div class="mb-6 space-y-3">
+                        <p class="text-sm italic text-gray-600">Inserisci i parametri clinici che verranno usati per tutti e tre i calcolatori:</p>
+                        
+                        <!-- Input Comuni -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div class="input-group-activity">
+                                <label for="TJC28" class="criteria-label">TJC28 (Articolazioni Dolenti 0-28)</label>
+                                <input type="number" id="TJC28" min="0" max="28" value="0" class="criteria-input" oninput="runAllActivityCalculations()">
+                            </div>
+                            <div class="input-group-activity">
+                                <label for="SJC28" class="criteria-label">SJC28 (Articolazioni Tumefatte 0-28)</label>
+                                <input type="number" id="SJC28" min="0" max="28" value="0" class="criteria-input" oninput="runAllActivityCalculations()">
+                            </div>
+                            <div class="input-group-activity">
+                                <label for="PGA" class="criteria-label">PGA (Valutazione Globale Paziente 0-10)</label>
+                                <input type="number" id="PGA" min="0" max="10" step="0.1" value="0" class="criteria-input" oninput="runAllActivityCalculations()">
+                            </div>
+                            <div class="input-group-activity">
+                                <label for="EGA" class="criteria-label">EGA (Valutazione Globale Medico 0-10)</label>
+                                <input type="number" id="EGA" min="0" max="10" step="0.1" value="0" class="criteria-input" oninput="runAllActivityCalculations()">
+                            </div>
+                            <!-- PCR in mg/dL -->
+                            <div class="input-group-activity">
+                                <label for="CRP" class="criteria-label">PCR (Proteina C Reattiva) in **mg/dL**</label>
+                                <input type="number" id="CRP" min="0" step="0.1" value="0" class="criteria-input" oninput="runAllActivityCalculations()">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <hr class="my-4 border-gray-200">
+
+                    <!-- Risultati -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
+                        
+                        <!-- Risultato DAS28-CRP -->
+                        <div id="das28_box" class="score-box bg-gray-100 border-gray-300">
+                            <p class="text-lg font-bold text-gray-800">DAS28-PCR</p>
+                            <p class="text-3xl font-extrabold text-primary-blue mt-1"><span id="das28_score">0.00</span></p>
+                            <p id="das28_status" class="text-sm mt-1 font-semibold text-gray-600">Inserisci i dati</p>
+                        </div>
+                        
+                        <!-- Risultato SDAI -->
+                        <div id="sdai_box" class="score-box bg-gray-100 border-gray-300">
+                            <p class="text-lg font-bold text-gray-800">SDAI</p>
+                            <p class="text-3xl font-extrabold text-primary-blue mt-1"><span id="sdai_score">0.0</span></p>
+                            <p id="sdai_status" class="text-sm mt-1 font-semibold text-gray-600">Inserisci i dati</p>
+                        </div>
+
+                        <!-- Risultato CDAI -->
+                        <div id="cdai_box" class="score-box bg-gray-100 border-gray-300">
+                            <p class="text-lg font-bold text-gray-800">CDAI</p>
+                            <p class="text-3xl font-extrabold text-primary-blue mt-1"><span id="cdai_score">0.0</span></p>
+                            <p id="cdai_status" class="text-sm mt-1 font-semibold text-gray-600">Inserisci i dati</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6">
+                        <h4 class="font-bold text-md text-gray-800 mb-2">Soglie di Attività (AR)</h4>
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs text-center font-mono">
+                            <div class="p-1 bg-green-200 rounded-md">Remissione</div>
+                            <div class="p-1 bg-yellow-200 rounded-md">Bassa</div>
+                            <div class="p-1 bg-orange-200 rounded-md">Moderata</div>
+                            <div class="p-1 bg-red-200 rounded-md">Alta</div>
+                        </div>
+                        <ul class="text-xs mt-2 space-y-1 text-gray-600">
+                            <li>**DAS28-PCR:** $< 2.6$ / $\ge 2.6 - < 3.2$ / $\ge 3.2 - < 5.1$ / $\ge 5.1$</li>
+                            <li>**CDAI:** $\le 2.8$ / $> 2.8 - \le 10$ / $> 10 - \le 22$ / $> 22$</li>
+                            <li>**SDAI:** $\le 3.3$ / $> 3.3 - \le 11$ / $> 11 - \le 26$ / $> 26$</li>
+                        </ul>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Script JavaScript per i Calcolatori -->
+    <script>
+        // Stili CSS specifici per il calcolatore (aggiunti una sola volta)
+        const style = document.createElement('style');
+        style.innerHTML = `
+            .criteria-label {
+                display: block;
+                font-weight: 600;
+                color: #374151; /* gray-700 */
+                margin-bottom: 0.5rem;
+                font-size: 0.95rem;
+            }
+            .criteria-select, .criteria-input {
+                width: 100%;
+                padding: 0.75rem;
+                border: 1px solid #D1D5DB; /* gray-300 */
+                border-radius: 0.5rem;
+                background-color: #F9FAFB; /* gray-50 */
+                appearance: none;
+                cursor: pointer;
+                transition: border-color 0.2s, box-shadow 0.2s;
+                font-size: 1rem;
+            }
+            .criteria-select:focus, .criteria-input:focus {
+                border-color: #1E40AF; /* blue-700 */
+                ring: 2px;
+                ring-color: #93C5FD; /* blue-300 */
+                outline: none;
+            }
+            .input-group, .input-group-activity {
+                margin-bottom: 1rem;
+                padding: 0.75rem;
+                background-color: #F3F4F6; /* gray-100 */
+                border-radius: 0.75rem;
+            }
+            .score-box {
+                padding: 1rem;
+                border-radius: 0.75rem;
+                border: 2px solid;
+                transition: background-color 0.3s, border-color 0.3s;
+            }
+        `;
+        document.head.appendChild(style);
+
+        // --- Calcolatore Criteri ACR/EULAR 2010 ---
+
+        function calculateACRScore() {
+            const jointScore = parseInt(document.getElementById('joint_involvement').value) || 0;
+            const serologyScore = parseInt(document.getElementById('serology').value) || 0;
+            const phaseScore = parseInt(document.getElementById('acute_phase').value) || 0;
+            const durationScore = parseInt(document.getElementById('duration').value) || 0;
+
+            const totalScore = jointScore + serologyScore + phaseScore + durationScore;
+
+            const resultBox = document.getElementById('ar_result_box');
+            const scoreSpan = document.getElementById('ar_score');
+            const statusP = document.getElementById('ar_status');
+
+            scoreSpan.textContent = totalScore;
+            
+            resultBox.classList.remove('bg-green-100', 'border-green-500', 'bg-red-100', 'border-red-500', 'bg-gray-100', 'border-gray-300');
+            statusP.classList.remove('text-red-700', 'text-green-700', 'text-gray-700');
+
+            if (totalScore >= 6) {
+                resultBox.classList.add('bg-green-100', 'border-green-500');
+                statusP.textContent = 'CRITERI RAGGIUNTI (≥ 6). Malattia Classificabile come AR.';
+                statusP.classList.add('text-green-700');
+            } else {
+                resultBox.classList.add('bg-red-100', 'border-red-500');
+                statusP.textContent = 'CRITERI NON RAGGIUNTI (< 6). Non classificabile come AR.';
+                statusP.classList.add('text-red-700');
+            }
+        }
+        
+        // --- Logica Calcolatori Attività di Malattia (DAS28, SDAI, CDAI) ---
+
+        function getColorAndStatus(score, thresholds, type) {
+            let status = 'Remissione';
+            let color = 'green';
+            // Formattazione a 2 cifre per DAS28, 1 cifra per SDAI/CDAI
+            let formattedScore = (type === 'DAS28') ? score.toFixed(2) : score.toFixed(1);
+
+            const [rem, low, mod] = thresholds;
+
+            if (type === 'DAS28') {
+                // DAS28 usa soglie inclusive (>=)
+                if (score >= 5.1) { color = 'red'; status = 'Alta Attività'; }
+                else if (score >= 3.2) { color = 'orange'; status = 'Moderata Attività'; }
+                else if (score >= 2.6) { color = 'yellow'; status = 'Bassa Attività'; }
+                else { color = 'green'; status = 'Remissione'; }
+            } else { // CDAI / SDAI
+                // CDAI/SDAI usa soglie: Rem <= soglia_rem, Bassa > soglia_rem E <= soglia_bassa, etc.
+                if (score > mod) { 
+                    color = 'red'; status = 'Alta Attività'; 
+                } else if (score > low) { 
+                    color = 'orange'; status = 'Moderata Attività';
+                } else if (score > rem) { 
+                    color = 'yellow'; status = 'Bassa Attività';
+                } else { // score <= rem
+                    color = 'green'; status = 'Remissione';
+                }
+            }
+
+            return { status, color, formattedScore };
+        }
+
+        function updateScoreBox(id, score, status, color, formattedScore) {
+            const box = document.getElementById(id + '_box');
+            document.getElementById(id + '_score').textContent = formattedScore;
+            document.getElementById(id + '_status').textContent = status;
+
+            box.className = 'score-box text-center'; // Reset classes
+            box.classList.add(`bg-${color}-100`, `border-${color}-500`);
+            document.getElementById(id + '_score').classList.remove('text-primary-blue', 'text-red-700', 'text-orange-700', 'text-green-700', 'text-yellow-700');
+            // Imposta il colore del testo del punteggio in base allo stato
+            const scoreElement = document.getElementById(id + '_score');
+            scoreElement.classList.add(`text-${color}-700`, 'font-extrabold');
+            
+            // Per la remissione, usiamo un colore neutro se è verde troppo chiaro
+            if (color === 'green') {
+                scoreElement.classList.remove(`text-green-700`);
+                scoreElement.classList.add('text-green-600');
+            }
+        }
+
+        function runAllActivityCalculations() {
+            const TJC = parseFloat(document.getElementById('TJC28').value) || 0;
+            const SJC = parseFloat(document.getElementById('SJC28').value) || 0;
+            const PGA = parseFloat(document.getElementById('PGA').value) || 0; // 0-10
+            const EGA = parseFloat(document.getElementById('EGA').value) || 0; // 0-10
+            
+            // Variabile di input in mg/dL 
+            const CRP_mgdL = parseFloat(document.getElementById('CRP').value) || 0; 
+
+            // 1. CDAI
+            // CDAI = TJC + SJC + PGA(0-10) + EGA(0-10)
+            const CDAI_score = TJC + SJC + PGA + EGA;
+            const CDAI_thresholds = [2.8, 10, 22]; // Rem <= 2.8, Bassa > 2.8-10, Mod > 10-22, High > 22
+            const { status: CDAI_status, color: CDAI_color, formattedScore: CDAI_formatted } = getColorAndStatus(CDAI_score, CDAI_thresholds, 'CDAI');
+            updateScoreBox('cdai', CDAI_score, CDAI_status, CDAI_color, CDAI_formatted);
+
+            // 2. SDAI
+            // SDAI = TJC + SJC + PGA(0-10) + EGA(0-10) + CRP (mg/dL) 
+            const SDAI_score = TJC + SJC + PGA + EGA + CRP_mgdL;
+            const SDAI_thresholds = [3.3, 11, 26]; // Rem <= 3.3, Bassa > 3.3-11, Mod > 11-26, High > 26
+            const { status: SDAI_status, color: SDAI_color, formattedScore: SDAI_formatted } = getColorAndStatus(SDAI_score, SDAI_thresholds, 'SDAI');
+            updateScoreBox('sdai', SDAI_score, SDAI_status, SDAI_color, SDAI_formatted);
+
+            // 3. DAS28-CRP (Modificata con costante +0.96)
+            // La formula DAS28-CRP richiede CRP in mg/L. Conversione: CRP_mgL = CRP_mgdL * 10
+            const CRP_mgL = CRP_mgdL * 10; 
+            
+            // PGA (0-10) convertito a 0-100mm (VAS) moltiplicando per 10
+            const PGA_mm = PGA * 10; 
+            
+            // Formula DAS28-CRP personalizzata (come in REDCap)
+            const DAS28_score = (0.56 * Math.sqrt(TJC)) + 
+                                (0.28 * Math.sqrt(SJC)) + 
+                                (0.36 * Math.log(CRP_mgL + 1)) + 
+                                (0.014 * PGA_mm) + 0.96; // AGGIUNTA COSTANTE +0.96
+
+            const DAS28_thresholds = [2.6, 3.2, 5.1]; // Rem < 2.6, Low 2.6-3.2, Mod 3.2-5.1, High >= 5.1
+            const { status: DAS28_status, color: DAS28_color, formattedScore: DAS28_formatted } = getColorAndStatus(DAS28_score, DAS28_thresholds, 'DAS28');
+            updateScoreBox('das28', DAS28_score, DAS28_status, DAS28_color, DAS28_formatted);
+        }
+
+        // Eseguo il calcolo all'avvio per mostrare il punteggio iniziale e l'ACR/EULAR
+        window.onload = function() {
+            calculateACRScore();
+            runAllActivityCalculations();
+        };
+
+    </script>
+</body>
+</html>
