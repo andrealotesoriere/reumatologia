@@ -1,0 +1,44 @@
+/* Aggiunge il font Inter */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
+
+/* Configurazione Tailwind */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Stili di base */
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+/* Stile per le card del menu nella homepage */
+.menu-card {
+    @apply flex justify-between items-center bg-white p-5 rounded-xl shadow-lg hover:shadow-xl transition duration-300 transform hover:scale-[1.01] border-l-4 border-accent-blue;
+}
+
+/* Stile comune per le sezioni interne delle pagine */
+.content-section {
+    @apply bg-white p-6 sm:p-8 rounded-xl shadow-xl space-y-6;
+}
+
+.content-title {
+    @apply text-3xl font-bold text-gray-800 mb-6 border-b pb-3;
+}
+
+.therapy-box {
+    @apply bg-blue-50 p-4 rounded-lg border border-blue-200;
+}
+
+.warning-box {
+    @apply bg-red-50 p-4 rounded-lg border border-red-200 text-red-700;
+}
+
+/* Stile per i listati terapeutici (es. DMARDs) */
+.dmard-list li {
+    @apply border-l-4 border-primary-blue pl-3 py-1;
+}
+
+/* Stile per la visualizzazione delle formule LaTeX */
+.latex-formula {
+    font-family: serif; /* Migliora la leggibilità dei caratteri matematici */
+}
