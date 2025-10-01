@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Questionario Fibromialgia</title>
+<style>
+  body { font-family: Arial, sans-serif; max-width: 800px; margin: auto; padding: 20px; }
+  .question-section { border: 1px solid #ccc; padding: 20px; margin-bottom: 20px; border-radius: 8px; }
+  h2 { color: #004d99; }
+  ul { list-style-type: none; padding: 0; }
+  li { margin-bottom: 10px; }
+  .pain-area { display: inline-block; width: 45%; }
+  input[type="checkbox"] { margin-right: 10px; }
+  .score { margin-top: 20px; font-weight: bold; }
+  .diagnosis-result { font-weight: bold; font-size: 1.2em; margin-top: 10px; }
+  .diagnosis-met { color: red; }
+  .diagnosis-not-met { color: blue; }
+  table { width: 100%; border-collapse: collapse; }
+  th, td { padding: 8px; text-align: left; }
+
+  /* Stili per i nuovi pulsanti */
+  .button-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+  }
+  .fiqr-button, .therapy-button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    text-decoration: none; /* Rimuove la sottolineatura per i link */
+  }
+  .fiqr-button:hover, .therapy-button:hover {
+    background-color: #0056b3;
+  }
+
+  /* Stili per la stampa */
+  @media print {
+    body {
+      font-size: 10pt;
+    }
+    
+    /* Nasconde elementi non essenziali per il referto */
+    .print-button, .other-pathology-section, .fiqr-button, .therapy-button, #button-container, #therapy-button-container {
+      display: none;
+    }
+    
+    /* Imposta i margini della pagina per massimizzare lo spazio stampabile */
+    @page {
+      margin: 1cm;
+    }
+
+    /* Riduci il padding delle sezioni per compattare il layout */
+    .question-section {
+      padding: 10px;
+    }
+    
+    /* Riduci la dimensione degli elementi per adattarli alla pagina */
+    h1 { font-size: 18pt; }
+    h2 { font-size: 14pt; }
+    p { font-size: 10pt; }
+    
+    /* Garantisci che i blocchi non vengano interrotti in mezzo a una pagina */
+    .question-section, table {
+      page-break-inside: avoid;
+    }
+
+    .signature-section {
+      margin-top: 50px;
+      padding-top: 20px;
+      border-top: 1px solid #000;
+    }
+    .signature-line {
+      width: 300px;
+      border-bottom: 1px solid #000;
+      margin-top: 40px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<h1>Criteri diagnostici 2016 (Fibromyalgia Severity Scale)</h1>
+
+<div class="question-section">
+  <h2>Indice di Diffusione del Dolore (Widespread Pain Index-WPI)</h2>
+  <p>(1 punto per ogni casella spuntata; Range di punteggio: 0-19)</p>
+  <p>1- Indicare se si è provato dolore o indolenzimento nel corso degli ultimi 7 giorni, nelle aree riportate. Spuntare le caselle in corrispondenza di ogni area interessata da dolore o dall'indolenzimento.</p>
+
+  <form id="wpi-form">
+    <ul>
+      <li class="pain-area"><label><input type="checkbox" name="pain_area" value="Mascella sinistra"> Mascella sinistra</label></li>
+      <li class="pain-area"><label><input type="checkbox" name="pain_area" value="Mascella destra"> Mascella destra</label></li>
+      <li class="pain-area"><label><input type="checkbox" name="pain_area" value="Braccio sinistro"> Braccio sinistro</label></li>
+      <li class="pain-area"><label><input type="checkbox" name="pain_area" value="Braccio destro"> Braccio destro</label></li>
+      <li class="pain-area"><label><input type="checkbox" name="pain_area" value="Avambraccio sinistro"> Avambraccio sinistro</label></li>
+      <li class="pain-area"><label><input type="checkbox" name="pain_area" value="Avambraccio destro"> Avambraccio destro</label></li>
+      <li class="pain-area"><label><input type="checkbox" name="pain_area" value="Anca (gluteo, trocantere) sinistra"> Anca (gluteo, trocantere) sinistra</label></li>
+      <li class="pain-area"><label><input type="checkbox" name="pain_area" value="Anca (gluteo, trocantere) destra"> Anca (gluteo, trocantere) destra</label></li>
+      <li class="pain-area"><label><input type="checkbox" name="pain_area" value="Coscia sinistra"> Coscia sinistra</label></li>
+      <li class="pain-area"><label><input type="checkbox" name="pain_area" value="Coscia destra"> Coscia destra</label></li>
+      <li class="pain-area"><label><input type="checkbox" name="pain_area" value="Gamba sinistra"> Gamba sinistra</label></li>
+      <li class="pain-area"><label><input type="checkbox" name="pain_area" value="Gamba destra"> Gamba destra</label></li>
+      <li class="pain-area"><label><input type="checkbox" name="pain_area" value="Cingolo scapolare sinistro"> Cingolo scapolare sinistro</label></li>
+      <li class="pain-area"><label><input type="checkbox" name="pain_area" value="Cingolo scapolare destro"> Cingolo scapolare destro</label></li>
+      <li class="pain-area"><label><input type="checkbox" name="pain_area" value="Collo"> Collo</label></li>
+      <li class="pain-area"><label><input type="checkbox" name="pain_area" value="Area Dorsale"> Area Dorsale</label></li>
+      <li class="pain-area"><label><input type="checkbox" name="pain_area" value="Area Lombare"> Area Lombare</label></li>
+      <li class="pain-area"><label><input type="checkbox" name="pain_area" value="Torace"> Torace</label></li>
+      <li class="pain-area"><label><input type="checkbox" name="pain_area" value="Addome"> Addome</label></li>
+    </ul>
+    <p class="score">Punteggio WPI: <span id="wpi-score">0</span> /19 aree</p>
+  </form>
+</div>
+<hr>
+
+<div class="question-section">
+  <h2>Indice di Gravità dei Sintomi (Symptom Severity Scale-SSS)</h2>
+  <p>(Range di punteggio: 0-12)</p>
+  <p>2- Per ognuno dei sintomi elencati esprimere la loro gravità nel corso degli ultimi 7 giorni, utilizzando la scala di seguito riportata.</p>
+  <p><strong>0=</strong> Nessun problema</p>
+  <p><strong>1=</strong> Problema lieve: generalmente lieve e intermittente</p>
+  <p><strong>2=</strong> Problema moderato: disturbo di considerevole entità; presente spesso e/o di grado moderato</p>
+  <p><strong>3=</strong> Problema grave: continuo, che ostacola le attività della vita quotidiana</p>
+
+  <form id="sss-form">
+    <table>
+      <thead>
+        <tr>
+          <th></th>
+          <th>0</th>
+          <th>1</th>
+          <th>2</th>
+          <th>3</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>A. Astenia, spossatezza</td>
+          <td><label><input type="radio" name="symptom_A" value="0"></label></td>
+          <td><label><input type="radio" name="symptom_A" value="1"></label></td>
+          <td><label><input type="radio" name="symptom_A" value="2"></label></td>
+          <td><label><input type="radio" name="symptom_A" value="3"></label></td>
+        </tr>
+        <tr>
+          <td>B. Difficoltà di concentrazione, perdita di memoria</td>
+          <td><label><input type="radio" name="symptom_B" value="0"></label></td>
+          <td><label><input type="radio" name="symptom_B" value="1"></label></td>
+          <td><label><input type="radio" name="symptom_B" value="2"></label></td>
+          <td><label><input type="radio" name="symptom_B" value="3"></label></td>
+        </tr>
+        <tr>
+          <td>C. Stanchezza al risveglio, sonno non ristoratore</td>
+          <td><label><input type="radio" name="symptom_C" value="0"></label></td>
+          <td><label><input type="radio" name="symptom_C" value="1"></label></td>
+          <td><label><input type="radio" name="symptom_C" value="2"></label></td>
+          <td><label><input type="radio" name="symptom_C" value="3"></label></td>
+        </tr>
+        <tr>
+          <td colspan="5">
+            <p>3- Indicare la presenza o assenza dei 3 sintomi (D, E, F) negli ultimi sei mesi. (Assente: 0 | Presente: 1)</p>
+          </td>
+        </tr>
+        <tr>
+          <td>D. Dolori o crampi addominali</td>
+          <td><label><input type="radio" name="symptom_D" value="0"></label></td>
+          <td><label><input type="radio" name="symptom_D" value="1"></label></td>
+          <td colspan="2"></td>
+        </tr>
+        <tr>
+          <td>E. Depressione</td>
+          <td><label><input type="radio" name="symptom_E" value="0"></label></td>
+          <td><label><input type="radio" name="symptom_E" value="1"></label></td>
+          <td colspan="2"></td>
+        </tr>
+        <tr>
+          <td>F. Emicrania, cefalea</td>
+          <td><label><input type="radio" name="symptom_F" value="0"></label></td>
+          <td><label><input type="radio" name="symptom_F" value="1"></label></td>
+          <td colspan="2"></td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="score">Punteggio SSS: <span id="sss-score">0</span> /12</p>
+  </form>
+</div>
+<hr>
+
+<div class="question-section">
+  <h2>Criteri aggiuntivi (senza punteggio)</h2>
+  
+  <p>4- I sintomi delle domande 2 e 3 e il dolore diffuso sono stati avvertiti per almeno tre mesi?</p>
+  <label><input type="radio" name="duration" value="Si"> Sì</label>
+  <label><input type="radio" name="duration" value="No"> No</label>
+
+  <p class="other-pathology-section">5- E' presente una patologia che può motivare il dolore avvertito?</p>
+  <div class="other-pathology-section">
+    <label><input type="radio" name="other_pathology" value="Si"> Sì</label>
+    <label><input type="radio" name="other_pathology" value="No"> No</label>
+  </div>
+</div>
+<hr>
+
+<div class="question-section">
+  <p class="score">Punteggio Totale: <span id="total-score">0</span> /31</p>
+  <p class="diagnosis-result">Criteri soddisfatti: <span id="diagnosis-text">Nessun risultato</span></p>
+  
+  <div class="button-group">
+    <div id="button-container" style="display: none;">
+      <a href="fiqr_questionnaire.html" class="fiqr-button">Compila Questionario FIQ-R</a>
+    </div>
+    <div id="therapy-button-container">
+      <a href="terapia_fibromialgia.html" target="_blank" class="therapy-button">Opzioni Terapeutiche</a>
+    </div>
+  </div>
+</div>
+
+<div class="signature-section">
+  <p><strong>Firma del Medico:</strong></p>
+  <div class="signature-line"></div>
+</div>
+
+<div class="print-button">
+  <button onclick="window.print()">Stampa Referto</button>
+</div>
+
+<script>
+  function calculateWPI() {
+    const checkboxes = document.querySelectorAll('#wpi-form input[type="checkbox"]');
+    let score = 0;
+    checkboxes.forEach(checkbox => {
+      if (checkbox.checked) {
+        score++;
+      }
+    });
+    document.getElementById('wpi-score').innerText = score;
+    updateTotalScore();
+  }
+
+  function calculateSSS() {
+    let score = 0;
+    const symptomNames = ['symptom_A', 'symptom_B', 'symptom_C', 'symptom_D', 'symptom_E', 'symptom_F'];
+    
+    symptomNames.forEach(name => {
+      const selectedRadio = document.querySelector(`input[name="${name}"]:checked`);
+      if (selectedRadio) {
+        score += parseInt(selectedRadio.value);
+      }
+    });
+    
+    document.getElementById('sss-score').innerText = score;
+    updateTotalScore();
+  }
+
+  function checkDiagnosisCriteria() {
+    const wpiScore = parseInt(document.getElementById('wpi-score').innerText);
+    const sssScore = parseInt(document.getElementById('sss-score').innerText);
+    const hasDuration = document.querySelector('input[name="duration"][value="Si"]:checked');
+    const hasNoOtherPathology = document.querySelector('input[name="other_pathology"][value="No"]:checked');
+    
+    let diagnosisText = document.getElementById('diagnosis-text');
+    let criteriaMet = false;
+
+    if (hasDuration && hasNoOtherPathology) {
+      if ((wpiScore >= 7 && sssScore >= 5) || (wpiScore >= 4 && wpiScore <= 6 && sssScore >= 9)) {
+        criteriaMet = true;
+      }
+    }
+    
+    const fiqrButtonContainer = document.getElementById('button-container');
+
+    if (criteriaMet) {
+      diagnosisText.innerText = "RISPETTATI";
+      diagnosisText.className = "diagnosis-met";
+      // Mostra solo il contenitore del pulsante FIQ-R
+      fiqrButtonContainer.style.display = 'block';
+    } else {
+      diagnosisText.innerText = "NON RISPETTATI";
+      diagnosisText.className = "diagnosis-not-met";
+      // Nasconde il contenitore del pulsante FIQ-R
+      fiqrButtonContainer.style.display = 'none';
+    }
+  }
+
+  function updateTotalScore() {
+    const wpiScore = parseInt(document.getElementById('wpi-score').innerText);
+    const sssScore = parseInt(document.getElementById('sss-score').innerText);
+    const totalScore = wpiScore + sssScore;
+    document.getElementById('total-score').innerText = totalScore;
+    checkDiagnosisCriteria();
+  }
+
+  document.querySelectorAll('#wpi-form input[type="checkbox"]').forEach(checkbox => {
+    checkbox.addEventListener('change', calculateWPI);
+  });
+
+  document.querySelectorAll('#sss-form input[type="radio"]').forEach(radio => {
+    radio.addEventListener('change', calculateSSS);
+  });
+  
+  document.querySelectorAll('input[name="duration"]').forEach(radio => {
+    radio.addEventListener('change', checkDiagnosisCriteria);
+  });
+  
+  document.querySelectorAll('input[name="other_pathology"]').forEach(radio => {
+    radio.addEventListener('change', checkDiagnosisCriteria);
+  });
+
+  // Initial calculation on page load
+  calculateWPI();
+  calculateSSS();
+</script>
+
+</body>
+</html>
