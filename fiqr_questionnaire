@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Questionario FIQ-R</title>
+<style>
+  body { font-family: Arial, sans-serif; max-width: 800px; margin: auto; padding: 20px; }
+  .question-section { border: 1px solid #ccc; padding: 20px; margin-bottom: 20px; border-radius: 8px; }
+  h2 { color: #004d99; }
+  ul { list-style-type: none; padding: 0; }
+  li { margin-bottom: 20px; }
+  .question-label { font-weight: bold; }
+  .score { margin-top: 20px; font-weight: bold; font-size: 1.1em; }
+  
+  /* Stili per la scala di scelta */
+  .radio-scale {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+  .radio-scale label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 0.9em;
+    cursor: pointer;
+  }
+
+  /* Stili per la stampa */
+  @media print {
+    body { font-size: 10pt; }
+    .print-button { display: none; }
+    .radio-scale input[type="radio"] { display: none; }
+    .radio-scale label::after {
+      content: '☐';
+      font-size: 1.2em;
+    }
+    .radio-scale input[type="radio"]:checked + .custom-radio::after {
+      content: '☒';
+    }
+    .radio-scale label {
+      pointer-events: none;
+    }
+
+    @page { margin: 1cm; }
+    
+    .question-section, table {
+      page-break-inside: avoid;
+    }
+
+    .signature-section {
+      margin-top: 50px;
+      padding-top: 20px;
+      border-top: 1px solid #000;
+    }
+    .signature-line {
+      width: 300px;
+      border-bottom: 1px solid #000;
+      margin-top: 40px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<h1>Questionario FIQ-R (Fibromyalgia Impact Questionnaire - Revised)</h1>
+
+<div class="question-section">
+  <h2>DOMINIO 1: FUNZIONE FISICA</h2>
+  <p>Per ognuna delle seguenti nove domande, segni il numero che meglio indica il grado di difficoltà da Lei avvertito, nel corso dell'ultima settimana, a causa della fibromialgia.</p>
+  
+  <form id="fiqr-form">
+    <ul>
+      <li>
+        <div class="question-label">1. SPAZZOLARE O PETTINARE I CAPELLI</div>
+        <div class="radio-scale">
+          <p style="margin: 0; font-size: 0.9em; flex: 1; text-align: left;">Nessuna difficoltà</p>
+          <div style="flex: 3; display: flex; justify-content: space-between;">
+            <label><input type="radio" name="q1" value="0" onclick="updateScore()">0</label>
+            <label><input type="radio" name="q1" value="1" onclick="updateScore()">1</label>
+            <label><input type="radio" name="q1" value="2" onclick="updateScore()">2</label>
+            <label><input type="radio" name="q1" value="3" onclick="updateScore()">3</label>
+            <label><input type="radio" name="q1" value="4" onclick="updateScore()">4</label>
+            <label><input type="radio" name="q1" value="5" onclick="updateScore()">5</label>
+            <label><input type="radio" name="q1" value="6" onclick="updateScore()">6</label>
+            <label><input type="radio" name="q1" value="7" onclick="updateScore()">7</label>
+            <label><input type="radio" name="q1" value="8" onclick="updateScore()">8</label>
+            <label><input type="radio" name="q1" value="9" onclick="updateScore()">9</label>
+            <label><input type="radio" name="q1" value="10" onclick="updateScore()">10</label>
+          </div>
+          <p style="margin: 0; font-size: 0.9em; flex: 1; text-align: right;">Estrema difficoltà</p>
+        </div>
+      </li>
+      <li>
+        <div class="question-label">2. CAMMINARE ININTERROTTAMENTE PER 20 MINUTI</div>
+        <div class="radio-scale">
+          <p style="margin: 0; font-size: 0.9em; flex: 1; text-align: left;">Nessuna difficoltà</p>
+          <div style="flex: 3; display: flex; justify-content: space-between;">
+            <label><input type="radio" name="q2" value="0" onclick="updateScore()">0</label>
+            <label><input type="radio" name="q2" value="1" onclick="updateScore()">1</label>
+            <label><input type="radio" name="q2" value="2" onclick="updateScore()">2</label>
+            <label><input type="radio" name="q2" value="3" onclick="updateScore()">3</label>
+            <label><input type="radio" name="q2" value="4" onclick="updateScore()">4</label>
+            <label><input type="radio" name="q2" value="5" onclick="updateScore()">5</label>
+            <label><input type="radio" name="q2" value="6" onclick="updateScore()">6</label>
+            <label><input type="radio" name="q2" value="7" onclick="updateScore()">7</label>
+            <label><input type="radio" name="q2" value="8" onclick="updateScore()">8</label>
+            <label><input type="radio" name="q2" value="9" onclick="updateScore()">9</label>
+            <label><input type="radio" name="q2" value="10" onclick="updateScore()">10</label>
+          </div>
+          <p style="margin: 0; font-size: 0.9em; flex: 1; text-align: right;">Estrema difficoltà</p>
+        </div>
+      </li>
+      <li>
+        <div class="question-label">3. PREPARARE I PASTI</div>
+        <div class="radio-scale">
+          <p style="margin: 0; font-size: 0.9em; flex: 1; text-align: left;">Nessuna difficoltà</p>
+          <div style="flex: 3; display: flex; justify-content: space-between;">
+            <label><input type="radio" name="q3" value="0" onclick="updateScore()">0</label>
+            <label><input type="radio" name="q3" value="1" onclick="updateScore()">1</label>
+            <label><input type="radio" name="q3" value="2" onclick="updateScore()">2</label>
+            <label><input type="radio" name="q3" value="3" onclick="updateScore()">3</label>
+            <label><input type="radio" name="q3" value="4" onclick="updateScore()">4</label>
+            <label><input type="radio" name="q3" value="5" onclick="updateScore()">5</label>
+            <label><input type="radio" name="q3" value="6" onclick="updateScore()">6</label>
+            <label><input type="radio" name="q3" value="7" onclick="updateScore()">7</label>
+            <label><input type="radio" name="q3" value="8" onclick="updateScore()">8</label>
+            <label><input type="radio" name="q3" value="9" onclick="updateScore()">9</label>
+            <label><input type="radio" name="q3" value="10" onclick="updateScore()">10</label>
+          </div>
+          <p style="margin: 0; font-size: 0.9em; flex: 1; text-align: right;">Estrema difficoltà</p>
+        </div>
+      </li>
+      <li>
+        <div class="question-label">4. PASSARE L'ASPIRAPOLVERE E LAVARE I PAVIMENTI</div>
+        <div class="radio-scale">
+          <p style="margin: 0; font-size: 0.9em; flex: 1; text-align: left;">Nessuna difficoltà</p>
+          <div style="flex: 3; display: flex; justify-content: space-between;">
+            <label><input type="radio" name="q4" value="0" onclick="updateScore()">0</label>
+            <label><input type="radio" name="q4" value="1" onclick="updateScore()">1</label>
+            <label><input type="radio" name="q4" value="2" onclick="updateScore()">2</label>
+            <label><input type="radio" name="q4" value="3" onclick="updateScore()">3</label>
+            <label><input type="radio" name="q4" value="4" onclick="updateScore()">4</label>
+            <label><input type="radio" name="q4" value="5" onclick="updateScore()">5</label>
+            <label><input type="radio" name="q4" value="6" onclick="updateScore()">6</label>
+            <label><input type="radio" name="q4" value="7" onclick="updateScore()">7</label>
+            <label><input type="radio" name="q4" value="8" onclick="updateScore()">8</label>
+            <label><input type="radio" name="q4" value="9" onclick="updateScore()">9</label>
+            <label><input type="radio" name="q4" value="10" onclick="updateScore()">10</label>
+          </div>
+          <p style="margin: 0; font-size: 0.9em; flex: 1; text-align: right;">Estrema difficoltà</p>
+        </div>
+      </li>
+      <li>
+        <div class="question-label">5. SOLLEVARE E PORTARE LE BORSE DELLA SPESA</div>
+        <div class="radio-scale">
+          <p style="margin: 0; font-size: 0.9em; flex: 1; text-align: left;">Nessuna difficoltà</p>
+          <div style="flex: 3; display: flex; justify-content: space-between;">
+            <label><input type="radio" name="q5" value="0" onclick="updateScore()">0</label>
+            <label><input type="radio" name="q5" value="1" onclick="updateScore()">1</label>
+            <label><input type="radio" name="q5" value="2" onclick="updateScore()">2</label>
+            <label><input type="radio" name="q5" value="3" onclick="updateScore()">3</label>
+            <label><input type="radio" name="q5" value="4" onclick="updateScore()">4</label>
+            <label><input type="radio" name="q5" value="5" onclick="updateScore()">5</label>
+            <label><input type="radio" name="q5" value="6" onclick="updateScore()">6</label>
+            <label><input type="radio" name="q5" value="7" onclick="updateScore()">7</label>
+            <label><input type="radio" name="q5" value="8" onclick="updateScore()">8</label>
+            <label><input type="radio" name="q5" value="9" onclick="updateScore()">9</label>
+            <label><input type="radio" name="q5" value="10" onclick="updateScore()">10</label>
+          </div>
+          <p style="margin: 0; font-size: 0.9em; flex: 1; text-align: right;">Estrema difficoltà</p>
+        </div>
+      </li>
+      <li>
+        <div class="question-label">6. SALIRE UN PIANO DI SCALE</div>
+        <div class="radio-scale">
+          <p style="margin: 0; font-size: 0.9em; flex: 1; text-align: left;">Nessuna difficoltà</p>
+          <div style="flex: 3; display: flex; justify-content: space-between;">
+            <label><input type="radio" name="q6" value="0" onclick="updateScore()">0</label>
+            <label><input type="radio" name="q6" value="1" onclick="updateScore()">1</label>
+            <label><input type="radio" name="q6" value="2" onclick="updateScore()">2</label>
+            <label><input type="radio" name="q6" value="3" onclick="updateScore()">3</label>
+            <label><input type="radio" name="q6" value="4" onclick="updateScore()">4</label>
+            <label><input type="radio" name="q6" value="5" onclick="updateScore()">5</label>
+            <label><input type="radio" name="q6" value="6" onclick="updateScore()">6</label>
+            <label><input type="radio" name="q6" value="7" onclick="updateScore()">7</label>
+            <label><input type="radio" name="q6" value="8" onclick="updateScore()">8</label>
+            <label><input type="radio" name="q6" value="9" onclick="updateScore()">9</label>
+            <label><input type="radio" name="q6" value="10" onclick="updateScore()">10</label>
+          </div>
+          <p style="margin: 0; font-size: 0.9em; flex: 1; text-align: right;">Estrema difficoltà</p>
+        </div>
+      </li>
+      <li>
+        <div class="question-label">7. CAMBIARE LE LENZUOLA DEL LETTO</div>
+        <div class="radio-scale">
+          <p style="margin: 0; font-size: 0.9em; flex: 1; text-align: left;">Nessuna difficoltà</p>
+          <div style="flex: 3; display: flex; justify-content: space-between;">
+            <label><input type="radio" name="q7" value="0" onclick="updateScore()">0</label>
+            <label><input type="radio" name="q7" value="1" onclick="updateScore()">1</label>
+            <label><input type="radio" name="q7" value="2" onclick="updateScore()">2</label>
+            <label><input type="radio" name="q7" value="3" onclick="updateScore()">3</label>
+            <label><input type="radio" name="q7" value="4" onclick="updateScore()">4</label>
+            <label><input type="radio" name="q7" value="5" onclick="updateScore()">5</label>
+            <label><input type="radio" name="q7" value="6" onclick="updateScore()">6</label>
+            <label><input type="radio" name="q7" value="7" onclick="updateScore()">7</label>
+            <label><input type="radio" name="q7" value="8" onclick="updateScore()">8</label>
+            <label><input type="radio" name="q7" value="9" onclick="updateScore()">9</label>
+            <label><input type="radio" name="q7" value="10" onclick="updateScore()">10</label>
+          </div>
+          <p style="margin: 0; font-size: 0.9em; flex: 1; text-align: right;">Estrema difficoltà</p>
+        </div>
+      </li>
+      <li>
+        <div class="question-label">8. STARE SEDUTO SU UNA SEDIA PER ALMENO 45 MINUTI</div>
+        <div class="radio-scale">
+          <p style="margin: 0; font-size: 0.9em; flex: 1; text-align: left;">Nessuna difficoltà</p>
+          <div style="flex: 3; display: flex; justify-content: space-between;">
+            <label><input type="radio" name="q8" value="0" onclick="updateScore()">0</label>
+            <label><input type="radio" name="q8" value="1" onclick="updateScore()">1</label>
+            <label><input type="radio" name="q8" value="2" onclick="updateScore()">2</label>
+            <label><input type="radio" name="q8" value="3" onclick="updateScore()">3</label>
+            <label><input type="radio" name="q8" value="4" onclick="updateScore()">4</label>
+            <label><input type="radio" name="q8" value="5" onclick="updateScore()">5</label>
+            <label><input type="radio" name="q8" value="6" onclick="updateScore()">6</label>
+            <label><input type="radio" name="q8" value="7" onclick="updateScore()">7</label>
+            <label><input type="radio" name="q8" value="8" onclick="updateScore()">8</label>
+            <label><input type="radio" name="q8" value="9" onclick="updateScore()">9</label>
+            <label><input type="radio" name="q8" value="10" onclick="updateScore()">10</label>
+          </div>
+          <p style="margin: 0; font-size: 0.9em; flex: 1; text-align: right;">Estrema difficoltà</p>
+        </div>
+      </li>
+      <li>
+        <div class="question-label">9. ANDARE A FARE LA SPESA</div>
+        <div class="radio-scale">
+          <p style="margin: 0; font-size: 0.9em; flex: 1; text-align: left;">Nessuna difficoltà</p>
+          <div style="flex: 3; display: flex; justify-content: space-between;">
+            <label><input type="radio" name="q9" value="0" onclick="updateScore()">0</label>
+            <label><input type="radio" name="q9" value="1" onclick="updateScore()">1</label>
+            <label><input type="radio" name="q9" value="2" onclick="updateScore()">2</label>
+            <label><input type="radio" name="q9" value="3" onclick="updateScore()">3</label>
+            <label><input type="radio" name="q9" value="4" onclick="updateScore()">4</label>
+            <label><input type="radio" name="q9" value="5" onclick="updateScore()">5</label>
+            <label><input type="radio" name="q9" value="6" onclick="updateScore()">6</label>
+            <label><input type="radio" name="q9" value="7" onclick="updateScore()">7</label>
+            <label><input type="radio" name="q9" value="8" onclick="updateScore()">8</label>
+            <label><input type="radio" name="q9" value="9" onclick="updateScore()">9</label>
+            <label><input type="radio" name="q9" value="10" onclick="updateScore()">10</label>
+          </div>
+          <p style="margin: 0; font-size: 0.9em; flex: 1; text-align: right;">Estrema difficoltà</p>
+        </div>
+      </li>
+    </ul>
+    <p class="score">DOMINIO 1 - SUBTOTALE: <span id="domain1-score">0</span></p>
+  
+    <hr>
+
+  <h2>DOMINIO 2: STATO DI SALUTE GENERALE</h2>
+  <p>Per ognuna delle seguenti due domande, segni il numero che meglio indica il grado di difficoltà da Lei avvertito, nel corso dell'ultima settimana, a causa della fibromialgia.</p>
+  
+    <ul>
+      <li>
+        <div class="question-label">10. LA FIBROMIALGIA MI HA IMPEDITO DI PORTARE A TERMINE I LAVORI/COMPITI DELLA SETTIMANA</div>
+        <div class="radio-scale">
+          <p style="margin: 0; font-size: 0.9em; flex: 1; text-align: left;">Mai</p>
+          <div style="flex: 3; display: flex; justify-content: space-between;">
+            <label><input type="radio" name="q10" value="0" onclick="updateScore()">0</label>
+            <label><input type="radio" name="q10" value="1" onclick="updateScore()">1</label>
+            <label><input type="radio" name="q10" value="2" onclick="updateScore()">2</label>
+            <label><input type="radio" name="q10" value="3" onclick="updateScore()">3</label>
+            <label><input type="radio" name="q10" value="4" onclick="updateScore()">4</label>
+            <label><input type="radio" name="q10" value="5" onclick="updateScore()">5</label>
+            <label><input type="radio" name="q10" value="6" onclick="updateScore()">6</label>
+            <label><input type="radio" name="q10" value="7" onclick="updateScore()">7</label>
+            <label><input type="radio" name="q10" value="8" onclick="updateScore()">8</label>
+            <label><input type="radio" name="q10" value="9" onclick="updateScore()">9</label>
+            <label><input type="radio" name="q10" value="10" onclick="updateScore()">10</label>
+          </div>
+          <p style="margin: 0; font-size: 0.9em; flex: 1; text-align: right;">Sempre</p>
+        </div>
+      </li>
+      <li>
+        <div class="question-label">11. SONO STATO/A COMPLETAMENTE SOPRAFFATTO/A DAI SINTOMI DELLA FIBROMIALGIA</div>
+        <div class="radio-scale">
+          <p style="margin: 0; font-size: 0.9em; flex: 1; text-align: left;">Mai</p>
+          <div style="flex: 3; display: flex; justify-content: space-between;">
+            <label><input type="radio" name="q11" value="0" onclick="updateScore()">0</label>
+            <label><input type="radio" name="q11" value="1" onclick="updateScore()">1</label>
+            <label><input type="radio" name="q11" value="2" onclick="updateScore()">2</label>
+            <label><input type="radio" name="q11" value="3" onclick="updateScore()">3</label>
+            <label><input type="radio" name="q11" value="4" onclick="updateScore()">4</label>
+            <label><input type="radio" name="q11" value="5" onclick="updateScore()">5</label>
+            <label><input type="radio" name="q11" value="6" onclick="updateScore()">6</label>
+            <label><input type="radio" name="q11" value="7" onclick="updateScore()">7</label>
+            <label><input type="radio" name="q11" value="8" onclick="updateScore()">8</label>
+            <label><input type="radio" name="q11" value="9" onclick="updateScore()">9</label>
+            <label><input type="radio" name="q11" value="10" onclick="updateScore()">10</label>
+          </div>
+          <p style="margin: 0; font-size: 0.9em; flex: 1; text-align: right;">Sempre</p>
+        </div>
+      </li>
+    </ul>
+    <p class="score">DOMINIO 2 - SUBTOTALE: <span id="domain2-score">0</span></p>
+  
+    <hr>
+  
+  <h2>DOMINIO 3: SINTOMI</h2>
+  <p>Per ognuna delle seguenti dieci domande, segni il numero che meglio indica il grado di difficoltà da Lei avvertito, nel corso dell'ultima settimana, a causa della fibromialgia.</p>
+  
+    <ul>
+      <li>
+        <div class="question-label">12. ASSEGNI UN PUNTEGGIO AL SUO LIVELLO DI DOLORE</div>
+        <div class="radio-scale">
+          <p style="margin: 0; font-size: 0.9em; flex: 1; text-align: left;">Nessun dolore</p>
+          <div style="flex: 3; display: flex; justify-content: space-between;">
+            <label><input type="radio" name="q12" value="0" onclick="updateScore()">0</label>
+            <label><input type="radio" name="q12" value="1" onclick="updateScore()">1</label>
+            <label><input type="radio" name="q12" value="2" onclick="updateScore()">2</label>
+            <label><input type="radio" name="q12" value="3" onclick="updateScore()">3</label>
+            <label><input type="radio" name="q12" value="4" onclick="updateScore()">4</label>
+            <label><input type="radio" name="q12" value="5" onclick="updateScore()">5</label>
+            <label><input type="radio" name="q12" value="6" onclick="updateScore()">6</label>
+            <label><input type="radio" name="q12" value="7" onclick="updateScore()">7</label>
+            <label><input type="radio" name="q12" value="8" onclick="updateScore()">8</label>
+            <label><input type="radio" name="q12" value="9" onclick="updateScore()">9</label>
+            <label><input type="radio" name="q12" value="10" onclick="updateScore()">10</label>
+          </div>
+          <p style="margin: 0; font-size: 0.9em; flex: 1; text-align: right;">Estremo dolore</p>
+        </div>
+      </li>
+      <li>
+        <div class="question-label">13. ASSEGNI UN PUNTEGGIO AL SUO LIVELLO DI STANCHEZZA</div>
+        <div class="radio-scale">
+          <p style="margin: 0; font-size: 0.9em; flex: 1; text-align: left;">Nessuna stanchezza</p>
+          <div style="flex: 3; display: flex; justify-content: space-between;">
+            <label><input type="radio" name="q13" value="0" onclick="updateScore()">0</label>
+            <label><input type="radio" name="q13" value="1" onclick="updateScore()">1</label>
+            <label><input type="radio" name="q13" value="2" onclick="updateScore()">2</label>
+            <label><input type="radio" name="q13" value="3" onclick="updateScore()">3</label>
+            <label><input type="radio" name="q13" value="4" onclick="updateScore()">4</label>
+            <label><input type="radio" name="q13" value="5" onclick="updateScore()">5</label>
+            <label><input type="radio" name="q13" value="6" onclick="updateScore()">6</label>
+            <label><input type="radio" name="q13" value="7" onclick="updateScore()">7</label>
+            <label><input type="radio" name="q13" value="8" onclick="updateScore()">8</label>
+            <label><input type="radio" name="q13" value="9" onclick="updateScore()">9</label>
+            <label><input type="radio" name="q13" value="10" onclick="updateScore()">10</label>
+          </div>
+          <p style="margin: 0; font-size: 0.9em; flex: 1; text-align: right;">Estrema stanchezza</p>
+        </div>
+      </li>
+      <li>
+        <div class="question-label">14. ASSEGNI UN PUNTEGGIO AL SUO LIVELLO DI RIGIDITA'</div>
+        <div class="radio-scale">
+          <p style="margin: 0; font-size: 0.9em; flex: 1; text-align: left;">Nessuna rigidità</p>
+          <div style="flex: 3; display: flex; justify-content: space-between;">
+            <label><input type="radio" name="q14" value="0" onclick="updateScore()">0</label>
+            <label><input type="radio" name="q14" value="1" onclick="updateScore()">1</label>
+            <label><input type="radio" name="q14" value="2" onclick="updateScore()">2</label>
+            <label><input type="radio" name="q14" value="3" onclick="updateScore()">3</label>
+            <label><input type="radio" name="q14" value="4" onclick="updateScore()">4</label>
+            <label><input type="radio" name="q14" value="5" onclick="updateScore()">5</label>
+            <label><input type="radio" name="q14" value="6" onclick="updateScore()">6</label>
+            <label><input type="radio" name="q14" value="7" onclick="updateScore()">7</label>
+            <label><input type="radio" name="q14" value="8" onclick="updateScore()">8</label>
+            <label><input type="radio" name="q14" value="9" onclick="updateScore()">9</label>
+            <label><input type="radio" name="q14" value="10" onclick="updateScore()">10</label>
+          </div>
+          <p style="margin: 0; font-size: 0.9em; flex: 1; text-align: right;">Estrema rigidità</p>
+        </div>
+      </li>
+      <li>
+        <div class="question-label">15. ASSEGNI UN PUNTEGGIO ALLA QUALITA' DEL SUO SONNO</div>
+        <div class="radio-scale">
+          <p style="margin: 0; font-size: 0.9em; flex: 1; text-align: left;">Ben riposato/a</p>
+          <div style="flex: 3; display: flex; justify-content: space-between;">
+            <label><input type="radio" name="q15" value="0" onclick="updateScore()">0</label>
+            <label><input type="radio" name="q15" value="1" onclick="updateScore()">1</label>
+            <label><input type="radio" name="q15" value="2" onclick="updateScore()">2</label>
+            <label><input type="radio" name="q15" value="3" onclick="updateScore()">3</label>
+            <label><input type="radio" name="q15" value="4" onclick="updateScore()">4</label>
+            <label><input type="radio" name="q15" value="5" onclick="updateScore()">5</label>
+            <label><input type="radio" name="q15" value="6" onclick="updateScore()">6</label>
+            <label><input type="radio" name="q15" value="7" onclick="updateScore()">7</label>
+            <label><input type="radio" name="q15" value="8" onclick="updateScore()">8</label>
+            <label><input type="radio" name="q15" value="9" onclick="updateScore()">9</label>
+            <label><input type="radio" name="q15" value="10" onclick="updateScore()">10</label>
+          </div>
+          <p style="margin: 0; font-size: 0.9em; flex: 1; text-align: right;">Estremamente stanco/a</p>
+        </div>
+      </li>
+      <li>
+        <div class="question-label">16. ASSEGNI UN PUNTEGGIO AL SUO GRADO DI DEPRESSIONE</div>
+        <div class="radio-scale">
+          <p style="margin: 0; font-size: 0.9em; flex: 1; text-align: left;">Per nulla depresso/a</p>
+          <div style="flex: 3; display: flex; justify-content: space-between;">
+            <label><input type="radio" name="q16" value="0" onclick="updateScore()">0</label>
+            <label><input type="radio" name="q16" value="1" onclick="updateScore()">1</label>
+            <label><input type="radio" name="q16" value="2" onclick="updateScore()">2</label>
+            <label><input type="radio" name="q16" value="3" onclick="updateScore()">3</label>
+            <label><input type="radio" name="q16" value="4" onclick="updateScore()">4</label>
+            <label><input type="radio" name="q16" value="5" onclick="updateScore()">5</label>
+            <label><input type="radio" name="q16" value="6" onclick="updateScore()">6</label>
+            <label><input type="radio" name="q16" value="7" onclick="updateScore()">7</label>
+            <label><input type="radio" name="q16" value="8" onclick="updateScore()">8</label>
+            <label><input type="radio" name="q16" value="9" onclick="updateScore()">9</label>
+            <label><input type="radio" name="q16" value="10" onclick="updateScore()">10</label>
+          </div>
+          <p style="margin: 0; font-size: 0.9em; flex: 1; text-align: right;">Estremamente depresso/a</p>
+        </div>
+      </li>
+      <li>
+        <div class="question-label">17. ASSEGNI UN PUNTEGGIO AI SUOI PROBLEMI DI MEMORIA</div>
+        <div class="radio-scale">
+          <p style="margin: 0; font-size: 0.9em; flex: 1; text-align: left;">Buona memoria</p>
+          <div style="flex: 3; display: flex; justify-content: space-between;">
+            <label><input type="radio" name="q17" value="0" onclick="updateScore()">0</label>
+            <label><input type="radio" name="q17" value="1" onclick="updateScore()">1</label>
+            <label><input type="radio" name="q17" value="2" onclick="updateScore()">2</label>
+            <label><input type="radio" name="q17" value="3" onclick="updateScore()">3</label>
+            <label><input type="radio" name="q17" value="4" onclick="updateScore()">4</label>
+            <label><input type="radio" name="q17" value="5" onclick="updateScore()">5</label>
+            <label><input type="radio" name="q17" value="6" onclick="updateScore()">6</label>
+            <label><input type="radio" name="q17" value="7" onclick="updateScore()">7</label>
+            <label><input type="radio" name="q17" value="8" onclick="updateScore()">8</label>
+            <label><input type="radio" name="q17" value="9" onclick="updateScore()">9</label>
+            <label><input type="radio" name="q17" value="10" onclick="updateScore()">10</label>
+          </div>
+          <p style="margin: 0; font-size: 0.9em; flex: 1; text-align: right;">Scarsissima memoria</p>
+        </div>
+      </li>
+      <li>
+        <div class="question-label">18. ASSEGNI UN PUNTEGGIO AL SUO GRADO DI ANSIA</div>
+        <div class="radio-scale">
+          <p style="margin: 0; font-size: 0.9em; flex: 1; text-align: left;">Per nulla ansioso/a</p>
+          <div style="flex: 3; display: flex; justify-content: space-between;">
+            <label><input type="radio" name="q18" value="0" onclick="updateScore()">0</label>
+            <label><input type="radio" name="q18" value="1" onclick="updateScore()">1</label>
+            <label><input type="radio" name="q18" value="2" onclick="updateScore()">2</label>
+            <label><input type="radio" name="q18" value="3" onclick="updateScore()">3</label>
+            <label><input type="radio" name="q18" value="4" onclick="updateScore()">4</label>
+            <label><input type="radio" name="q18" value="5" onclick="updateScore()">5</label>
+            <label><input type="radio" name="q18" value="6" onclick="updateScore()">6</label>
+            <label><input type="radio" name="q18" value="7" onclick="updateScore()">7</label>
+            <label><input type="radio" name="q18" value="8" onclick="updateScore()">8</label>
+            <label><input type="radio" name="q18" value="9" onclick="updateScore()">9</label>
+            <label><input type="radio" name="q18" value="10" onclick="updateScore()">10</label>
+          </div>
+          <p style="margin: 0; font-size: 0.9em; flex: 1; text-align: right;">Estremamente ansioso/a</p>
+        </div>
+      </li>
+      <li>
+        <div class="question-label">19. ASSEGNI UN PUNTEGGIO AL SUO LIVELLO DI DOLORABILITA' (dolore percepito al tatto)</div>
+        <div class="radio-scale">
+          <p style="margin: 0; font-size: 0.9em; flex: 1; text-align: left;">Nessuna dolorabilità</p>
+          <div style="flex: 3; display: flex; justify-content: space-between;">
+            <label><input type="radio" name="q19" value="0" onclick="updateScore()">0</label>
+            <label><input type="radio" name="q19" value="1" onclick="updateScore()">1</label>
+            <label><input type="radio" name="q19" value="2" onclick="updateScore()">2</label>
+            <label><input type="radio" name="q19" value="3" onclick="updateScore()">3</label>
+            <label><input type="radio" name="q19" value="4" onclick="updateScore()">4</label>
+            <label><input type="radio" name="q19" value="5" onclick="updateScore()">5</label>
+            <label><input type="radio" name="q19" value="6" onclick="updateScore()">6</label>
+            <label><input type="radio" name="q19" value="7" onclick="updateScore()">7</label>
+            <label><input type="radio" name="q19" value="8" onclick="updateScore()">8</label>
+            <label><input type="radio" name="q19" value="9" onclick="updateScore()">9</label>
+            <label><input type="radio" name="q19" value="10" onclick="updateScore()">10</label>
+          </div>
+          <p style="margin: 0; font-size: 0.9em; flex: 1; text-align: right;">Estrema dolorabilità</p>
+        </div>
+      </li>
+      <li>
+        <div class="question-label">20. ASSEGNI UN PUNTEGGIO AL SUO GRADO DI EQUILIBRIO</div>
+        <div class="radio-scale">
+          <p style="margin: 0; font-size: 0.9em; flex: 1; text-align: left;">Nessun problema</p>
+          <div style="flex: 3; display: flex; justify-content: space-between;">
+            <label><input type="radio" name="q20" value="0" onclick="updateScore()">0</label>
+            <label><input type="radio" name="q20" value="1" onclick="updateScore()">1</label>
+            <label><input type="radio" name="q20" value="2" onclick="updateScore()">2</label>
+            <label><input type="radio" name="q20" value="3" onclick="updateScore()">3</label>
+            <label><input type="radio" name="q20" value="4" onclick="updateScore()">4</label>
+            <label><input type="radio" name="q20" value="5" onclick="updateScore()">5</label>
+            <label><input type="radio" name="q20" value="6" onclick="updateScore()">6</label>
+            <label><input type="radio" name="q20" value="7" onclick="updateScore()">7</label>
+            <label><input type="radio" name="q20" value="8" onclick="updateScore()">8</label>
+            <label><input type="radio" name="q20" value="9" onclick="updateScore()">9</label>
+            <label><input type="radio" name="q20" value="10" onclick="updateScore()">10</label>
+          </div>
+          <p style="margin: 0; font-size: 0.9em; flex: 1; text-align: right;">Scarsissimo equilibrio</p>
+        </div>
+      </li>
+      <li>
+        <div class="question-label">21. ASSEGNI UN PUNTEGGIO AL LIVELLO DELLA SUA SENSIBILTA' AI RUMORI, ALLE LUCI, AGLI ODORI ED AL FREDDO</div>
+        <div class="radio-scale">
+          <p style="margin: 0; font-size: 0.9em; flex: 1; text-align: left;">Nessuna sensibilità</p>
+          <div style="flex: 3; display: flex; justify-content: space-between;">
+            <label><input type="radio" name="q21" value="0" onclick="updateScore()">0</label>
+            <label><input type="radio" name="q21" value="1" onclick="updateScore()">1</label>
+            <label><input type="radio" name="q21" value="2" onclick="updateScore()">2</label>
+            <label><input type="radio" name="q21" value="3" onclick="updateScore()">3</label>
+            <label><input type="radio" name="q21" value="4" onclick="updateScore()">4</label>
+            <label><input type="radio" name="q21" value="5" onclick="updateScore()">5</label>
+            <label><input type="radio" name="q21" value="6" onclick="updateScore()">6</label>
+            <label><input type="radio" name="q21" value="7" onclick="updateScore()">7</label>
+            <label><input type="radio" name="q21" value="8" onclick="updateScore()">8</label>
+            <label><input type="radio" name="q21" value="9" onclick="updateScore()">9</label>
+            <label><input type="radio" name="q21" value="10" onclick="updateScore()">10</label>
+          </div>
+          <p style="margin: 0; font-size: 0.9em; flex: 1; text-align: right;">Estrema sensibilità</p>
+        </div>
+      </li>
+    </ul>
+    <p class="score">DOMINIO 3 - SUBTOTALE: <span id="domain3-score">0</span></p>
+  </form>
+</div>
+---
+<div class="question-section">
+  <h2>PUNTEGGIO TOTALE FIQ-R</h2>
+  <p>Punteggio Totale FIQ-R: <span id="total-fiqr-score">0</span></p>
+</div>
+
+<div class="signature-section">
+  <p><strong>Firma del Medico:</strong></p>
+  <div class="signature-line"></div>
+</div>
+
+<div class="print-button">
+  <button onclick="window.print()">Stampa Referto FIQ-R</button>
+</div>
+
+<script>
+  function updateScore() {
+    let domain1Score = 0;
+    for (let i = 1; i <= 9; i++) {
+      const selectedRadio = document.querySelector(`input[name="q${i}"]:checked`);
+      if (selectedRadio) {
+        domain1Score += parseInt(selectedRadio.value);
+      }
+    }
+    document.getElementById('domain1-score').innerText = domain1Score;
+
+    let domain2Score = 0;
+    for (let i = 10; i <= 11; i++) {
+      const selectedRadio = document.querySelector(`input[name="q${i}"]:checked`);
+      if (selectedRadio) {
+        domain2Score += parseInt(selectedRadio.value);
+      }
+    }
+    document.getElementById('domain2-score').innerText = domain2Score;
+
+    let domain3Score = 0;
+    for (let i = 12; i <= 21; i++) {
+      const selectedRadio = document.querySelector(`input[name="q${i}"]:checked`);
+      if (selectedRadio) {
+        domain3Score += parseInt(selectedRadio.value);
+      }
+    }
+    document.getElementById('domain3-score').innerText = domain3Score;
+    
+    // Calcola il punteggio totale secondo le istruzioni del PDF
+    const totalScore = (domain1Score / 3) + domain2Score + (domain3Score / 2);
+    document.getElementById('total-fiqr-score').innerText = totalScore.toFixed(2);
+  }
+
+  // Esegue il calcolo iniziale al caricamento della pagina
+  document.addEventListener('DOMContentLoaded', updateScore);
+</script>
+
+</body>
+</html>
