@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Opzioni Terapeutiche</title>
+<style>
+  body { 
+    font-family: Arial, sans-serif;
+    max-width: 900px;
+    margin: auto;
+    padding: 20px;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f9f9f9;
+  }
+  .container {
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  h1 {
+    text-align: center;
+    color: #004d99;
+    font-size: 2em;
+    border-bottom: 2px solid #004d99;
+    padding-bottom: 10px;
+  }
+  .main-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 20px 0;
+    flex-wrap: wrap;
+  }
+  .small-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 10px 0;
+    flex-wrap: wrap;
+  }
+  .main-button {
+    flex: 1;
+    padding: 20px 15px;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    min-width: 200px;
+  }
+  .main-button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+  }
+  .main-button.active {
+    background-color: #004d99;
+    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
+  }
+  .small-button {
+    padding: 10px;
+    font-size: 0.9em;
+    color: white;
+    background-color: #6c757d;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  .small-button:hover {
+    background-color: #5a6268;
+  }
+  .small-button.active {
+    background-color: #343a40;
+  }
+  .content-section {
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+  }
+  .content-section.hidden {
+    display: none;
+  }
+  h2 {
+    color: #007bff;
+    margin-top: 0;
+  }
+  h3 {
+    color: #333;
+    margin-top: 15px;
+    font-size: 1.1em;
+  }
+  ul {
+    list-style-type: none;
+    padding-left: 20px;
+  }
+  li {
+    margin-bottom: 15px;
+  }
+  .sir-section, .eular-section, .symptom-section {
+    border-left: 5px solid #004d99;
+    padding-left: 15px;
+    margin-top: 25px;
+  }
+  .sir-section h4, .eular-section h4, .symptom-section h4 {
+    color: #004d99;
+    margin-bottom: 5px;
+  }
+  .sir-recommendation, .eular-recommendation, .symptom-recommendation {
+    font-style: italic;
+    color: #555;
+  }
+  
+  .evidence-strong { color: #28a745; font-weight: bold; } /* Verde per evidenza solida */
+  .evidence-limited { color: #ffc107; font-weight: bold; } /* Giallo per evidenza limitata */
+  .evidence-not-rec { color: #dc3545; font-weight: bold; } /* Rosso per non raccomandato */
+  
+  /* Nuove classi per i colori dei sintomi */
+  .symptom-dolore { color: #dc3545; font-weight: bold; } /* Rosso */
+  .symptom-ansia { color: #007bff; font-weight: bold; } /* Blu */
+  .symptom-sonno { color: #6f42c1; font-weight: bold; } /* Viola */
+  .symptom-affaticamento { color: #ffc107; font-weight: bold; } /* Giallo */
+  .symptom-cognitivi { color: #28a745; font-weight: bold; } /* Verde */
+
+  .back-button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #6c757d;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+  }
+  .back-button:hover {
+    background-color: #5a6268;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Opzioni Terapeutiche</h1>
+
+  <div class="main-buttons">
+    <button id="nonPharmaButton" class="main-button">Terapia Non Farmacologica</button>
+    <button id="pharmaButton" class="main-button">Terapia Farmacologica</button>
+    <button id="symptomButton" class="main-button">Per Sintomo</button>
+  </div>
+  
+  <p style="text-align: center; font-size: 0.9em; margin-top: 10px;">Oppure consulta le linee guida delle società scientifiche:</p>
+  <div class="small-buttons">
+    <button id="sirButton" class="small-button">Linee Guida SIR 2021</button>
+    <button id="eularButton" class="small-button">Linee Guida EULAR 2016</button>
+  </div>
+  
+  <div id="nonPharmaContent" class="content-section hidden">
+    <h2>Approcci Terapeutici Non Farmacologici</h2>
+    <p>Queste terapie si concentrano sul miglioramento dei sintomi attraverso modifiche dello stile di vita e interventi specifici non basati su farmaci.</p>
+    
+    <h3>Educazione del Paziente</h3>
+    <p>Spiegare la natura della fibromialgia (un disturbo della processazione del dolore), rassicurare il paziente e definire aspettative realistiche è il primo passo fondamentale.</p>
+
+    <h3>Esercizio Fisico</h3>
+    <p>È l'unica terapia con una raccomandazione "forte" (strong for) secondo le linee guida EULAR. L'esercizio (aerobico, di resistenza, stretching o una combinazione) produce miglioramenti nella qualità della vita, nel dolore e nella funzione fisica. L'esercizio aerobico di intensità moderata ha le prove più solide a suo favore. Si consiglia di iniziare con bassa intensità e frequenza, aumentandole gradualmente.</p>
+
+    <h3>Terapie Meditative in Movimento</h3>
+    <p>Terapie come yoga, Pilates e tai chi hanno dimostrato di migliorare la funzione e ridurre il dolore. Il tai chi, in particolare, ha mostrato un moderato miglioramento sintomatico.</p>
+
+    <h3>Terapie Aggiuntive in caso di Risposta Insufficiente</h3>
+    <ul>
+      <li>
+        <span class="evidence-strong">Terapie Psicologiche:</span>
+        <p><strong>Terapia Cognitivo-Comportamentale (TCC):</strong> La TCC ha dimostrato di portare a modesti miglioramenti del dolore e della disabilità a breve e medio termine.</p>
+      </li>
+      <li>
+        <span class="evidence-strong">Terapie Fisiche Complementari:</span>
+        <ul>
+          <li><strong>Idroterapia/Balneoterapia:</strong> Migliora il dolore e la qualità della vita.</li>
+          <li><strong>Agopuntura:</strong> Può migliorare il dolore e la rigidità a breve termine.</li>
+          <li><strong>Terapia Manuale (Rilascio Miofasciale):</strong> Può ridurre i sintomi e migliorare la qualità della vita.</li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+
+  <div id="pharmaContent" class="content-section hidden">
+    <h2>Schema delle Terapie Farmacologiche per Grado di Evidenza</h2>
+    
+    <h3>Farmaci con Evidenze Solide o Moderate <span class="evidence-strong">(Raccomandazione "Debole a Favore")</span></h3>
+    <p>Questi farmaci sono supportati da revisioni sistematiche di alta qualità, ma il beneficio è riscontrato solo in una parte dei pazienti.</p>
+    <ul>
+      <li>
+        <strong>Inibitori della Ricaptazione della Serotonina-Norepinefrina (SNRI/NSRI)</strong>
+        <ul>
+          <li><strong>Duloxetina:</strong> NNT di 6.4 per un sollievo dal dolore del 30%.</li>
+          <li><strong>Milnacipran:</strong> NNT tra 6 e 10 per un sollievo del 30%.</li>
+        </ul>
+      </li>
+      <li>
+        <strong>Gabapentinoidi (Anticonvulsivanti)</strong>
+        <ul>
+          <li><strong>Pregabalin:</strong> Efficace nel ridurre il dolore, l'affaticamento e migliorare il sonno. NNT di 8 per una risposta al trattamento.</li>
+        </ul>
+      </li>
+      <li>
+        <strong>Antidepressivi Triciclici (TCA)</strong>
+        <ul>
+          <li><strong>Amitriptilina:</strong> Raccomandata a basso dosaggio per ridurre il dolore e migliorare il sonno.</li>
+        </ul>
+      </li>
+      <li>
+        <strong>Analgesici Atipici</strong>
+        <ul>
+          <li><strong>Tramadolo:</strong> Raccomandato solo per dolore da moderato a severo, sotto stretto monitoraggio.</li>
+        </ul>
+      </li>
+    </ul>
+
+    <h3>Farmaci con Evidenze Limitate o Contrastanti <span class="evidence-limited">(Raccomandazione "Solo per Ricerca")</span></h3>
+    <p>Le prove sono insufficienti o i risultati incerti per un uso clinico di routine.</p>
+    <ul>
+      <li><strong>Gabapentin:</strong> Evidenze insufficienti.</li>
+      <li><strong>Ciclobenzaprina:</strong> Può essere raccomandata per i disturbi del sonno.</li>
+      <li><strong>Mirtazapina:</strong> Nessun effetto significativo sul dolore, ma può aiutare con il sonno.</li>
+      <li><strong>Cannabinoidi (es. Nabilone):</strong> Le prove attuali sono limitate.</li>
+      <li><strong>Naltrexone a Basso Dosaggio (LDN):</strong> Prove ancora preliminari.</li>
+    </ul>
+
+    <h3 style="margin-top: 30px;">Miorilassanti <span class="evidence-limited">(Uso clinico, evidenze limitate)</span></h3>
+    <p>Farmaci usati nella pratica clinica per la loro azione miorilassante, ma con evidenze limitate o assenti nella fibromialgia.</p>
+    <ul>
+      <li><strong>Tizanidina</strong> (Sirdalud): Dose usuale 2-4 mg due-tre volte al giorno.</li>
+      <li><strong>Paracetamolo 500 mg + Tiocolchicoside 2 mg:</strong> 1 compressa fino a 3 volte al giorno, per un massimo di 7 giorni al mese.</li>
+    </ul>
+    
+    <h3>Farmaci NON Raccomandati <span class="evidence-not-rec">(Raccomandazione "Contro")</span></h3>
+    <p>L'uso di questi farmaci è sconsigliato per mancanza di efficacia o rischi sfavorevoli.</p>
+    <ul>
+      <li><strong>Oppioidi Forti:</strong> Fortemente sconsigliati.</li>
+      <li><strong>FANS (Farmaci Antinfiammatori Non Steroidei):</strong> Sconsigliati, non sono superiori al placebo.</li>
+      <li><strong>SSRI (Inibitori Selettivi della Ricaptazione della Serotonina):</strong> Sconsigliati per i sintomi chiave della fibromialgia.</li>
+      <li><strong>Corticosteroidi:</strong> Fortemente sconsigliati.</li>
+    </ul>
+  </div>
+
+  <div id="sirContent" class="content-section hidden">
+    <h2>Raccomandazioni Terapeutiche SIR 2021</h2>
+    <p>La Società Italiana di Reumatologia (SIR) propone un approccio multimodale e personalizzato, che integra diverse strategie di trattamento.</p>
+
+    <h3>Strategie Generali di Trattamento</h3>
+    <ul>
+      <li><span class="evidence-strong">Approccio Multimodale:</span> Combinare attività fisica con supporto psicoterapeutico.</li>
+      <li><span class="evidence-strong">Partecipazione Attiva del Paziente:</span> Le terapie non farmacologiche con coinvolgimento attivo del paziente sono fondamentali.</li>
+      <li><span class="evidence-strong">Personalizzazione:</span> Scegliere i farmaci in base ai sintomi predominanti, iniziando a dosi basse.</li>
+    </ul>
+
+    <h3>Terapie Non Farmacologiche</h3>
+    <div class="sir-section">
+      <h4>Terapie Fisiche <span class="evidence-strong">(Livello 1, Grado A)</span></h4>
+      <ul>
+        <li>Esercizio di resistenza aerobica.</li>
+        <li>Esercizio di potenziamento muscolare.</li>
+        <li>Attività in acqua / acquagym.</li>
+        <li>Terapia termale (balneoterapia).</li>
+      </ul>
+    </div>
+    <div class="sir-section">
+      <h4>Terapie Psicologiche <span class="evidence-strong">(Livello 1, Grado A)</span></h4>
+      <ul>
+        <li>Terapia cognitivo-comportamentale e terapia occupazionale.</li>
+        <li>Ipnosi, immaginazione guidata o scrittura terapeutica <span class="evidence-limited">(Livello 3, Grado C)</span>.</li>
+      </ul>
+    </div>
+    <div class="sir-section">
+      <h4>Terapie Non Convenzionali <span class="evidence-strong">(Complementari)</span></h4>
+      <ul>
+        <li>Terapie di movimento meditativo (qigong, yoga, tai chi) <span class="evidence-strong">(Livello 1, Grado A)</span>.</li>
+        <li>Programma di riduzione dello stress basato sulla mindfulness (MBSR) e training di rilassamento <span class="evidence-strong">(Livello 1, Grado A)</span>.</li>
+        <li>Agopuntura <span class="evidence-strong">(Livello 1, Grado A)</span>.</li>
+        <li>Idroterapia <span class="evidence-limited">(Livello 1, Grado C)</span>.</li>
+      </ul>
+    </div>
+
+    <h3>Terapie Farmacologiche</h3>
+    <div class="sir-section">
+      <h4>Antidepressivi <span class="evidence-strong">(Livello 1, Grado A)</span></h4>
+      <ul>
+        <li>Inibitori della ricaptazione della serotonina (fluoxetina, paroxetina).</li>
+        <li>Inibitori della ricaptazione della serotonina e noradrenalina (duloxetina).</li>
+        <li>Antidepressivi triciclici (amitriptilina).</li>
+      </ul>
+    </div>
+    <div class="sir-section">
+      <h4>Anticonvulsivanti <span class="evidence-strong">(Livello 1, Grado A)</span></h4>
+      <ul>
+        <li><strong>Pregabalin:</strong> Utile per le proprietà di modulazione del dolore.</li>
+      </ul>
+    </div>
+    <div class="sir-section">
+      <h4>Analgesici</h4>
+      <ul>
+        <li><strong>Tramadolo:</strong> <span class="evidence-strong">(Livello 1, Grado A)</span> Riservato a pazienti con dolore da moderato a severo.</li>
+        <li><strong>Paracetamolo:</strong> <span class="evidence-limited">(Livello 5, Grado D)</span> Utile in alcuni pazienti.</li>
+      </ul>
+    </div>
+    <div class="sir-section">
+      <h4>Miorilassanti e Altri Farmaci</h4>
+      <ul>
+        <li><strong>Ciclobenzaprina:</strong> <span class="evidence-strong">(Livello 1, Grado A)</span> Considerata per i disturbi del sonno.</li>
+        <li><strong>Cannabinoidi:</strong> <span class="evidence-limited">(Livello 3, Grado C)</span> Considerati per i disturbi del sonno, ma con scarso supporto dalla letteratura.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div id="eularContent" class="content-section hidden">
+    <h2>Raccomandazioni Terapeutiche EULAR 2016</h2>
+    <p>Le raccomandazioni EULAR si basano su un'ampia revisione della letteratura e propongono un approccio graduale e personalizzato.</p>
+
+    <h3>Principi Generali e Approccio Graduale</h3>
+    <ul>
+      <li><span class="evidence-strong">Diagnosi Pronta:</span> Necessaria per una gestione ottimale.</li>
+      <li><span class="evidence-strong">Approccio Graduale:</span> Il trattamento deve essere personalizzato in base ai sintomi, alle preferenze del paziente e alle comorbilità.</li>
+      <li><span class="evidence-strong">Decisione Condivisa:</span> Le scelte terapeutiche dovrebbero essere prese insieme al paziente.</li>
+      <li><span class="evidence-strong">Priorità Non Farmacologiche:</span> La gestione iniziale si concentra su terapie non farmacologiche per disponibilità, costi e sicurezza.</li>
+    </ul>
+
+    <h3>Terapie Non Farmacologiche</h3>
+    <div class="eular-section">
+      <h4>Terapie con Raccomandazione "Forte a Favore" <span class="evidence-strong">(Strong for)</span></h4>
+      <ul>
+        <li><strong>Esercizio Fisico:</strong> Unica terapia con raccomandazione "forte a favore", efficace su dolore e funzione fisica.</li>
+      </ul>
+    </div>
+    <div class="eular-section">
+      <h4>Terapie con Raccomandazione "Debole a Favore" <span class="evidence-limited">(Weak for)</span></h4>
+      <ul>
+        <li><strong>Terapie Fisiche:</strong> Agopuntura e idroterapia.</li>
+        <li><strong>Terapie Meditative in Movimento:</strong> Qigong, yoga, tai chi e mindfulness (MBSR).</li>
+        <li><strong>Terapie Psicologiche:</strong> Terapia cognitivo-comportamentale (TCC).</li>
+        <li><strong>Terapie Multicomponenti:</strong> Programmi di riabilitazione multimodale.</li>
+      </ul>
+    </div>
+    <div class="eular-section">
+      <h4>Terapie con Raccomandazione "Contro" <span class="evidence-not-rec">(Against)</span></h4>
+      <ul>
+        <li><strong>Chiropatica:</strong> <span class="evidence-not-rec">(Strong against)</span> per preoccupazioni di sicurezza.</li>
+        <li><strong>Altri:</strong> Biofeedback, capsaicina, ipnoterapia, massaggio e SAMe <span class="evidence-not-rec">(Weak against)</span>.</li>
+        <li><strong>Altre Complementari:</strong> Immaginazione guidata e omeopatia <span class="evidence-not-rec">(Strong against)</span>.</li>
+      </ul>
+    </div>
+
+    <h3>Terapie Farmacologiche</h3>
+    <div class="eular-section">
+      <h4>Farmaci con Raccomandazione "Debole a Favore" <span class="evidence-limited">(Weak for)</span></h4>
+      <ul>
+        <li><strong>Per Dolore Severo:</strong> Duloxetina, Milnacipran, Pregabalin, Tramadolo.</li>
+        <li><strong>Per Disturbi del Sonno:</strong> Amitriptilina, Ciclobenzaprina, Pregabalin.</li>
+      </ul>
+    </div>
+    <div class="eular-section">
+      <h4>Farmaci con Raccomandazione "Contro" <span class="evidence-not-rec">(Against)</span></h4>
+      <ul>
+        <li><strong>Forte Contro:</strong> Oppioidi forti, corticosteroidi, ormone della crescita, sodio oxibato.</li>
+        <li><strong>Debole Contro:</strong> FANS, inibitori delle MAO, SSRI.</li>
+      </ul>
+    </div>
+    <div class="eular-section">
+      <h4>Farmaci da Usare "Solo per Ricerca" <span class="evidence-limited">(Research Only)</span></h4>
+      <ul>
+        <li><strong>Gabapentin:</strong> Le prove sono insufficienti per l'uso clinico.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div id="symptomContent" class="content-section hidden">
+    <h2>Terapie Farmacologiche per Sintomo Predominante</h2>
+    <p>Schema semplificato che lega il farmaco al sintomo principale per cui può essere utilizzato, basato sulle evidenze più solide.</p>
+    
+    <div class="symptom-section">
+        <h3><span class="symptom-dolore">Per il Dolore</span></h3>
+        <ul>
+            <li><strong>Duloxetina e Milnacipran</strong> (SNRI) <small>(Approvati dalla FDA per la FMS)</small></li>
+            <li><strong>Pregabalin</strong> (Gabapentinoide) <small>(Approvato dalla FDA per la FMS)</small></li>
+            <li><strong>Amitriptilina</strong> (TCA) <small>(Efficace soprattutto a breve termine)</small></li>
+            <li><strong>Tramadolo</strong> (Analgesico) <small>(Usato con cautela per dolore severo)</small></li>
+            <li><strong>Ciclobenzaprina</strong> (Miorilassante)</li>
+            <li><strong>Tizanidina</strong> e <strong>Paracetamolo + Tiocolchicoside</strong> <small>(Altri miorilassanti usati in pratica clinica)</small></li>
+        </ul>
+    </div>
+    
+    <div class="symptom-section">
+        <h3><span class="symptom-ansia">Per Ansia e Depressione</span></h3>
+        <ul>
+            <li><strong>Duloxetina</strong> e <strong>Milnacipran</strong> (SNRI)</li>
+            <li><strong>Pregabalin</strong> (Gabapentinoide)</li>
+            <li><strong>Amitriptilina</strong> (TCA)</li>
+            <li><strong>SSRI</strong> (es. Fluoxetina) <small>(Usati solo per i sintomi in comorbilità, non per il dolore)</small></li>
+        </ul>
+    </div>
+    
+    <div class="symptom-section">
+        <h3><span class="symptom-sonno">Per i Disturbi del Sonno</span></h3>
+        <ul>
+            <li><strong>Pregabalin</strong> (Gabapentinoide)</li>
+            <li><strong>Amitriptilina</strong> (TCA)</li>
+            <li><strong>Ciclobenzaprina</strong> (Miorilassante)</li>
+            <li><strong>Cannabinoidi</strong> <small>(Evidenze limitate)</small></li>
+            <li><strong>Tizanidina</strong> <small>(Usata in pratica clinica)</small></li>
+        </ul>
+    </div>
+
+    <div class="symptom-section">
+        <h3><span class="symptom-affaticamento">Per l'Affaticamento (Fatigue)</span></h3>
+        <ul>
+            <li><strong>Milnacipran</strong> (SNRI)</li>
+            <li><strong>Pregabalin</strong> (Gabapentinoide)</li>
+        </ul>
+    </div>
+
+    <div class="symptom-section">
+        <h3><span class="symptom-cognitivi">Per i Disturbi Cognitivi</span></h3>
+        <ul>
+            <li><strong>Milnacipran</strong> (SNRI)</li>
+        </ul>
+    </div>
+  </div>
+  
+  <a href="." class="back-button">Torna alla pagina principale</a>
+</div>
+
+<script>
+  const nonPharmaButton = document.getElementById('nonPharmaButton');
+  const pharmaButton = document.getElementById('pharmaButton');
+  const sirButton = document.getElementById('sirButton');
+  const eularButton = document.getElementById('eularButton');
+  const symptomButton = document.getElementById('symptomButton');
+  
+  const nonPharmaContent = document.getElementById('nonPharmaContent');
+  const pharmaContent = document.getElementById('pharmaContent');
+  const sirContent = document.getElementById('sirContent');
+  const eularContent = document.getElementById('eularContent');
+  const symptomContent = document.getElementById('symptomContent');
+
+  function showSection(sectionToShow) {
+    // Nasconde tutte le sezioni
+    nonPharmaContent.classList.add('hidden');
+    pharmaContent.classList.add('hidden');
+    sirContent.classList.add('hidden');
+    eularContent.classList.add('hidden');
+    symptomContent.classList.add('hidden');
+
+    // Rimuove la classe 'active' da tutti i pulsanti
+    nonPharmaButton.classList.remove('active');
+    pharmaButton.classList.remove('active');
+    sirButton.classList.remove('active');
+    eularButton.classList.remove('active');
+    symptomButton.classList.remove('active');
+
+    // Mostra la sezione desiderata e rende attivo il pulsante corrispondente
+    if (sectionToShow === 'nonPharma') {
+      nonPharmaContent.classList.remove('hidden');
+      nonPharmaButton.classList.add('active');
+    } else if (sectionToShow === 'pharma') {
+      pharmaContent.classList.remove('hidden');
+      pharmaButton.classList.add('active');
+    } else if (sectionToShow === 'sir') {
+      sirContent.classList.remove('hidden');
+      sirButton.classList.add('active');
+    } else if (sectionToShow === 'eular') {
+      eularContent.classList.remove('hidden');
+      eularButton.classList.add('active');
+    } else if (sectionToShow === 'symptom') {
+        symptomContent.classList.remove('hidden');
+        symptomButton.classList.add('active');
+    }
+  }
+
+  nonPharmaButton.addEventListener('click', () => showSection('nonPharma'));
+  pharmaButton.addEventListener('click', () => showSection('pharma'));
+  sirButton.addEventListener('click', () => showSection('sir'));
+  eularButton.addEventListener('click', () => showSection('eular'));
+  symptomButton.addEventListener('click', () => showSection('symptom'));
+
+  // Mostra una sezione di default al caricamento (es. le non farmacologiche)
+  showSection('nonPharma');
+</script>
+
+</body>
+</html>
