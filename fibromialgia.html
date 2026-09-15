@@ -1,333 +1,332 @@
 <!DOCTYPE html>
-<html>
+<html lang="it">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fibromialgia</title>
-    <link rel="stylesheet" href="style.css"> 
+    <title>Fibromialgia: Criteri Diagnostici 2016</title>
+    <link rel="stylesheet" href="style.css">
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300..700&display=swap');
+
+        :root {
+            --primary: #8B7FD1;
+            --primary-light: #EFEBFB;
+            --secondary: #5FB8A6;
+            --secondary-light: #E4F5F1;
+            --warning: #D99A5B;
+            --warning-light: #FBF0E4;
+            --alert: #D97C97;
+            --alert-light: #FBEBF0;
+            --ink: #4B4560;
+            --ink-soft: #8783A0;
+            --page-bg: #FAF9FD;
+        }
+
+        body { font-family: 'Inter', sans-serif; background-color: var(--page-bg); color: var(--ink); }
+
+        .back-link {
+            background-color: white; color: var(--ink-soft); font-weight: 500;
+            padding: 0.5rem 1.1rem; border-radius: 999px; box-shadow: 0 2px 8px rgba(139, 127, 209, 0.12);
+            transition: all 0.2s;
+        }
+        .back-link:hover { color: var(--primary); box-shadow: 0 4px 12px rgba(139, 127, 209, 0.18); }
+
+        .content-title { font-size: 2rem; font-weight: 600; color: var(--primary); letter-spacing: -0.01em; }
+
+        .content-section { padding: 2rem; background-color: white; border-radius: 1.75rem; box-shadow: 0 10px 40px -12px rgba(139, 127, 209, 0.15); }
+
+        .section-title { font-size: 1.2rem; font-weight: 600; color: var(--ink); margin-bottom: 0.5rem; }
+        .section-hint { font-size: 0.85rem; color: var(--ink-soft); margin-bottom: 1.25rem; line-height: 1.5; }
+
+        .region-label { font-size: 0.8rem; font-weight: 600; color: var(--primary); margin-bottom: 0.6rem; margin-top: 1.25rem; text-transform: uppercase; letter-spacing: 0.03em; }
+
+        .pain-chip {
+            display: flex; align-items: center; gap: 0.5rem; padding: 0.6rem 0.9rem; border-radius: 1rem;
+            background-color: #FAF9FD; border: 1px solid #E9E5F5; cursor: pointer; font-size: 0.85rem; transition: all 0.15s;
+        }
+        .pain-chip:hover { background-color: var(--primary-light); }
+        .pain-chip:has(input:checked) { background-color: var(--primary-light); border-color: var(--primary); color: var(--primary); font-weight: 500; }
+        .pain-chip input { accent-color: var(--primary); }
+
+        .severity-row { padding: 1rem 0; border-bottom: 1px solid #F0EDF9; }
+        .severity-row:last-child { border-bottom: none; }
+        .severity-label { font-size: 0.9rem; font-weight: 500; color: var(--ink); margin-bottom: 0.7rem; }
+        .severity-options { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+        .severity-option {
+            padding: 0.45rem 1rem; border-radius: 999px; background-color: #FAF9FD; border: 1px solid #E9E5F5;
+            font-size: 0.8rem; cursor: pointer; color: var(--ink-soft); transition: all 0.15s;
+        }
+        .severity-option:hover { background-color: var(--primary-light); }
+        .severity-option:has(input:checked) { background-color: var(--primary); color: white; border-color: var(--primary); }
+        .severity-option input { display: none; }
+
+        .score-readout {
+            display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1.5rem;
+        }
+        .score-pill {
+            background-color: #FAF9FD; border: 1px solid #E9E5F5; border-radius: 1.25rem; padding: 1rem 1.5rem; flex: 1; min-width: 140px; text-align: center;
+        }
+        .score-pill .label { font-size: 0.8rem; color: var(--ink-soft); }
+        .score-pill .value { font-size: 1.75rem; font-weight: 600; color: var(--primary); margin-top: 0.2rem; }
+
+        .duration-question { margin-top: 1rem; }
+        .duration-question .severity-options { margin-top: 0.6rem; }
+
+        .diagnosis-box {
+            margin-top: 1.5rem; padding: 1.5rem; border-radius: 1.5rem; text-align: center; transition: all 0.3s;
+            background-color: #FAF9FD; border: 1px solid #E9E5F5;
+        }
+        .diagnosis-box .verdict { font-size: 1.3rem; font-weight: 600; margin-top: 0.3rem; }
+
+        .pill-button {
+            display: inline-block; padding: 0.7rem 1.4rem; border-radius: 999px; font-weight: 500; font-size: 0.9rem;
+            text-decoration: none; transition: all 0.2s; cursor: pointer; border: none;
+        }
+        .pill-button.primary { background-color: var(--primary); color: white; }
+        .pill-button.primary:hover { background-color: #7A6DC4; }
+        .pill-button.secondary { background-color: var(--secondary-light); color: var(--secondary); }
+        .pill-button.secondary:hover { background-color: #D3EFE8; }
+
+        .signature-section { margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid #F0EDF9; }
+        .signature-line { width: 280px; border-bottom: 1px solid #D6D0EA; margin-top: 2.5rem; }
+
+        @media print {
+            body { font-size: 10pt; background: white; }
+            .no-print { display: none !important; }
+            .content-section { box-shadow: none; padding: 0; }
+            @page { margin: 1.5cm; }
+        }
+    </style>
 </head>
-<body class="antialiased bg-secondary-gray">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12 space-y-8">
-                
-        <header class="flex justify-between items-center mb-6">
-            <h1 class="text-5xl font-extrabold text-green-700">Fibromialgia</h1>
-            
-            <a href="index.html" class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-2 px-4 rounded-full transition duration-150 flex items-center">
-                &larr; Indietro
-            </a>
+<body class="antialiased">
+
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-14 space-y-8">
+
+        <header class="flex justify-between items-center mb-2 no-print">
+            <h1 class="content-title">Fibromialgia</h1>
+            <a href="index.html" class="back-link">&larr; Indietro</a>
         </header>
-<style>
-  body { font-family: Arial, sans-serif; max-width: 800px; margin: auto; padding: 20px; }
-  .question-section { border: 1px solid #ccc; padding: 20px; margin-bottom: 20px; border-radius: 8px; }
-  h2 { color: #004d99; }
-  ul { list-style-type: none; padding: 0; }
-  li { margin-bottom: 10px; }
-  .pain-area { display: inline-block; width: 45%; }
-  input[type="checkbox"] { margin-right: 10px; }
-  .score { margin-top: 20px; font-weight: bold; }
-  .diagnosis-result { font-weight: bold; font-size: 1.2em; margin-top: 10px; }
-  .diagnosis-met { color: red; }
-  .diagnosis-not-met { color: blue; }
-  table { width: 100%; border-collapse: collapse; }
-  th, td { padding: 8px; text-align: left; }
 
-  /* Stili per i nuovi pulsanti */
-  .button-group {
-    display: flex;
-    gap: 10px;
-    margin-top: 15px;
-  }
-  .fiqr-button, .therapy-button {
-    background-color: #007bff;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1em;
-    text-decoration: none; /* Rimuove la sottolineatura per i link */
-  }
-  .fiqr-button:hover, .therapy-button:hover {
-    background-color: #0056b3;
-  }
+        <section class="content-section">
+            <h2 class="text-lg font-semibold mb-1">Criteri diagnostici 2016</h2>
+            <p class="text-sm text-gray-500 mb-6">Revisione ACR 2016 dei criteri 2010/2011 per la fibromialgia.</p>
 
-  /* Stili per la stampa */
-  @media print {
-    body {
-      font-size: 10pt;
-    }
-    
-    /* Nasconde elementi non essenziali per il referto */
-    .print-button, .other-pathology-section, .fiqr-button, .therapy-button, #button-container, #therapy-button-container {
-      display: none;
-    }
-    
-    /* Imposta i margini della pagina per massimizzare lo spazio stampabile */
-    @page {
-      margin: 1cm;
-    }
+            <!-- WPI -->
+            <div>
+                <h3 class="section-title">Indice di diffusione del dolore (WPI)</h3>
+                <p class="section-hint">Segnala le aree in cui hai provato dolore o indolenzimento negli ultimi 7 giorni. 1 punto per area, punteggio 0-19.</p>
 
-    /* Riduci il padding delle sezioni per compattare il layout */
-    .question-section {
-      padding: 10px;
-    }
-    
-    /* Riduci la dimensione degli elementi per adattarli alla pagina */
-    h1 { font-size: 18pt; }
-    h2 { font-size: 14pt; }
-    p { font-size: 10pt; }
-    
-    /* Garantisci che i blocchi non vengano interrotti in mezzo a una pagina */
-    .question-section, table {
-      page-break-inside: avoid;
-    }
+                <div class="region-label">Regione superiore sinistra</div>
+                <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                    <label class="pain-chip"><input type="checkbox" class="wpi-check" data-region="L-upper"> Cingolo scapolare sx</label>
+                    <label class="pain-chip"><input type="checkbox" class="wpi-check" data-region="L-upper"> Braccio sx</label>
+                    <label class="pain-chip"><input type="checkbox" class="wpi-check" data-region="L-upper"> Avambraccio sx</label>
+                </div>
 
-    .signature-section {
-      margin-top: 50px;
-      padding-top: 20px;
-      border-top: 1px solid #000;
-    }
-    .signature-line {
-      width: 300px;
-      border-bottom: 1px solid #000;
-      margin-top: 40px;
-    }
-  }
-</style>
-</head>
-<body>
+                <div class="region-label">Regione superiore destra</div>
+                <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                    <label class="pain-chip"><input type="checkbox" class="wpi-check" data-region="R-upper"> Cingolo scapolare dx</label>
+                    <label class="pain-chip"><input type="checkbox" class="wpi-check" data-region="R-upper"> Braccio dx</label>
+                    <label class="pain-chip"><input type="checkbox" class="wpi-check" data-region="R-upper"> Avambraccio dx</label>
+                </div>
 
-<h1>Criteri diagnostici 2016 (Fibromyalgia Severity Scale)</h1>
+                <div class="region-label">Regione inferiore sinistra</div>
+                <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                    <label class="pain-chip"><input type="checkbox" class="wpi-check" data-region="L-lower"> Anca (gluteo, trocantere) sx</label>
+                    <label class="pain-chip"><input type="checkbox" class="wpi-check" data-region="L-lower"> Coscia sx</label>
+                    <label class="pain-chip"><input type="checkbox" class="wpi-check" data-region="L-lower"> Gamba sx</label>
+                </div>
 
-<div class="question-section">
-  <h2>Indice di Diffusione del Dolore (Widespread Pain Index-WPI)</h2>
-  <p>(1 punto per ogni casella spuntata; Range di punteggio: 0-19)</p>
-  <p>1- Indicare se si è provato dolore o indolenzimento nel corso degli ultimi 7 giorni, nelle aree riportate. Spuntare le caselle in corrispondenza di ogni area interessata da dolore o dall'indolenzimento.</p>
+                <div class="region-label">Regione inferiore destra</div>
+                <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                    <label class="pain-chip"><input type="checkbox" class="wpi-check" data-region="R-lower"> Anca (gluteo, trocantere) dx</label>
+                    <label class="pain-chip"><input type="checkbox" class="wpi-check" data-region="R-lower"> Coscia dx</label>
+                    <label class="pain-chip"><input type="checkbox" class="wpi-check" data-region="R-lower"> Gamba dx</label>
+                </div>
 
-  <form id="wpi-form">
-    <ul>
-      <li class="pain-area"><label><input type="checkbox" name="pain_area" value="Mascella sinistra"> Mascella sinistra</label></li>
-      <li class="pain-area"><label><input type="checkbox" name="pain_area" value="Mascella destra"> Mascella destra</label></li>
-      <li class="pain-area"><label><input type="checkbox" name="pain_area" value="Braccio sinistro"> Braccio sinistro</label></li>
-      <li class="pain-area"><label><input type="checkbox" name="pain_area" value="Braccio destro"> Braccio destro</label></li>
-      <li class="pain-area"><label><input type="checkbox" name="pain_area" value="Avambraccio sinistro"> Avambraccio sinistro</label></li>
-      <li class="pain-area"><label><input type="checkbox" name="pain_area" value="Avambraccio destro"> Avambraccio destro</label></li>
-      <li class="pain-area"><label><input type="checkbox" name="pain_area" value="Anca (gluteo, trocantere) sinistra"> Anca (gluteo, trocantere) sinistra</label></li>
-      <li class="pain-area"><label><input type="checkbox" name="pain_area" value="Anca (gluteo, trocantere) destra"> Anca (gluteo, trocantere) destra</label></li>
-      <li class="pain-area"><label><input type="checkbox" name="pain_area" value="Coscia sinistra"> Coscia sinistra</label></li>
-      <li class="pain-area"><label><input type="checkbox" name="pain_area" value="Coscia destra"> Coscia destra</label></li>
-      <li class="pain-area"><label><input type="checkbox" name="pain_area" value="Gamba sinistra"> Gamba sinistra</label></li>
-      <li class="pain-area"><label><input type="checkbox" name="pain_area" value="Gamba destra"> Gamba destra</label></li>
-      <li class="pain-area"><label><input type="checkbox" name="pain_area" value="Cingolo scapolare sinistro"> Cingolo scapolare sinistro</label></li>
-      <li class="pain-area"><label><input type="checkbox" name="pain_area" value="Cingolo scapolare destro"> Cingolo scapolare destro</label></li>
-      <li class="pain-area"><label><input type="checkbox" name="pain_area" value="Collo"> Collo</label></li>
-      <li class="pain-area"><label><input type="checkbox" name="pain_area" value="Area Dorsale"> Area Dorsale</label></li>
-      <li class="pain-area"><label><input type="checkbox" name="pain_area" value="Area Lombare"> Area Lombare</label></li>
-      <li class="pain-area"><label><input type="checkbox" name="pain_area" value="Torace"> Torace</label></li>
-      <li class="pain-area"><label><input type="checkbox" name="pain_area" value="Addome"> Addome</label></li>
-    </ul>
-    <p class="score">Punteggio WPI: <span id="wpi-score">0</span> /19 aree</p>
-  </form>
-</div>
-<hr>
+                <div class="region-label">Regione assiale</div>
+                <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                    <label class="pain-chip"><input type="checkbox" class="wpi-check" data-region="axial"> Collo</label>
+                    <label class="pain-chip"><input type="checkbox" class="wpi-check" data-region="axial"> Area dorsale</label>
+                    <label class="pain-chip"><input type="checkbox" class="wpi-check" data-region="axial"> Area lombare</label>
+                </div>
 
-<div class="question-section">
-  <h2>Indice di Gravità dei Sintomi (Symptom Severity Scale-SSS)</h2>
-  <p>(Range di punteggio: 0-12)</p>
-  <p>2- Per ognuno dei sintomi elencati esprimere la loro gravità nel corso degli ultimi 7 giorni, utilizzando la scala di seguito riportata.</p>
-  <p><strong>0=</strong> Nessun problema</p>
-  <p><strong>1=</strong> Problema lieve: generalmente lieve e intermittente</p>
-  <p><strong>2=</strong> Problema moderato: disturbo di considerevole entità; presente spesso e/o di grado moderato</p>
-  <p><strong>3=</strong> Problema grave: continuo, che ostacola le attività della vita quotidiana</p>
+                <div class="region-label">Altre aree <span class="normal-case font-normal text-gray-400">(contano nel punteggio WPI, non nel conteggio delle 5 regioni)</span></div>
+                <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                    <label class="pain-chip"><input type="checkbox" class="wpi-check" data-region="none"> Mascella sx</label>
+                    <label class="pain-chip"><input type="checkbox" class="wpi-check" data-region="none"> Mascella dx</label>
+                    <label class="pain-chip"><input type="checkbox" class="wpi-check" data-region="none"> Torace</label>
+                    <label class="pain-chip"><input type="checkbox" class="wpi-check" data-region="none"> Addome</label>
+                </div>
 
-  <form id="sss-form">
-    <table>
-      <thead>
-        <tr>
-          <th></th>
-          <th>0</th>
-          <th>1</th>
-          <th>2</th>
-          <th>3</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>A. Astenia, spossatezza</td>
-          <td><label><input type="radio" name="symptom_A" value="0"></label></td>
-          <td><label><input type="radio" name="symptom_A" value="1"></label></td>
-          <td><label><input type="radio" name="symptom_A" value="2"></label></td>
-          <td><label><input type="radio" name="symptom_A" value="3"></label></td>
-        </tr>
-        <tr>
-          <td>B. Difficoltà di concentrazione, perdita di memoria</td>
-          <td><label><input type="radio" name="symptom_B" value="0"></label></td>
-          <td><label><input type="radio" name="symptom_B" value="1"></label></td>
-          <td><label><input type="radio" name="symptom_B" value="2"></label></td>
-          <td><label><input type="radio" name="symptom_B" value="3"></label></td>
-        </tr>
-        <tr>
-          <td>C. Stanchezza al risveglio, sonno non ristoratore</td>
-          <td><label><input type="radio" name="symptom_C" value="0"></label></td>
-          <td><label><input type="radio" name="symptom_C" value="1"></label></td>
-          <td><label><input type="radio" name="symptom_C" value="2"></label></td>
-          <td><label><input type="radio" name="symptom_C" value="3"></label></td>
-        </tr>
-        <tr>
-          <td colspan="5">
-            <p>3- Indicare la presenza o assenza dei 3 sintomi (D, E, F) negli ultimi sei mesi. (Assente: 0 | Presente: 1)</p>
-          </td>
-        </tr>
-        <tr>
-          <td>D. Dolori o crampi addominali</td>
-          <td><label><input type="radio" name="symptom_D" value="0"></label></td>
-          <td><label><input type="radio" name="symptom_D" value="1"></label></td>
-          <td colspan="2"></td>
-        </tr>
-        <tr>
-          <td>E. Depressione</td>
-          <td><label><input type="radio" name="symptom_E" value="0"></label></td>
-          <td><label><input type="radio" name="symptom_E" value="1"></label></td>
-          <td colspan="2"></td>
-        </tr>
-        <tr>
-          <td>F. Emicrania, cefalea</td>
-          <td><label><input type="radio" name="symptom_F" value="0"></label></td>
-          <td><label><input type="radio" name="symptom_F" value="1"></label></td>
-          <td colspan="2"></td>
-        </tr>
-      </tbody>
-    </table>
-    <p class="score">Punteggio SSS: <span id="sss-score">0</span> /12</p>
-  </form>
-</div>
-<hr>
+                <div class="score-readout">
+                    <div class="score-pill"><div class="label">Punteggio WPI</div><div class="value"><span id="wpi-score">0</span> / 19</div></div>
+                    <div class="score-pill"><div class="label">Regioni con dolore</div><div class="value"><span id="regions-score">0</span> / 5</div></div>
+                </div>
+            </div>
 
-<div class="question-section">
-  <h2>Criteri aggiuntivi (senza punteggio)</h2>
-  
-  <p>4- I sintomi delle domande 2 e 3 e il dolore diffuso sono stati avvertiti per almeno tre mesi?</p>
-  <label><input type="radio" name="duration" value="Si"> Sì</label>
-  <label><input type="radio" name="duration" value="No"> No</label>
+            <hr class="my-8" style="border-color: #F0EDF9;">
 
-  <p class="other-pathology-section">5- E' presente una patologia che può motivare il dolore avvertito?</p>
-  <div class="other-pathology-section">
-    <label><input type="radio" name="other_pathology" value="Si"> Sì</label>
-    <label><input type="radio" name="other_pathology" value="No"> No</label>
-  </div>
-</div>
-<hr>
+            <!-- SSS -->
+            <div>
+                <h3 class="section-title">Indice di gravità dei sintomi (SSS)</h3>
+                <p class="section-hint">Per ciascun sintomo, indica la gravità avvertita negli ultimi 7 giorni: 0 = nessun problema, 1 = lieve e intermittente, 2 = moderato, presente spesso, 3 = grave e continuo, ostacola le attività quotidiane. Punteggio 0-12.</p>
 
-<div class="question-section">
-  <p class="score">Punteggio Totale: <span id="total-score">0</span> /31</p>
-  <p class="diagnosis-result">Criteri soddisfatti: <span id="diagnosis-text">Nessun risultato</span></p>
-  
-  <div class="button-group">
-    <div id="button-container" style="display: none;">
-      <a href="fiqr_questionnaire.html" class="fiqr-button">Compila Questionario FIQ-R</a>
+                <div class="severity-row">
+                    <div class="severity-label">Astenia, spossatezza</div>
+                    <div class="severity-options">
+                        <label class="severity-option"><input type="radio" name="symptom_A" value="0" checked>0</label>
+                        <label class="severity-option"><input type="radio" name="symptom_A" value="1">1</label>
+                        <label class="severity-option"><input type="radio" name="symptom_A" value="2">2</label>
+                        <label class="severity-option"><input type="radio" name="symptom_A" value="3">3</label>
+                    </div>
+                </div>
+                <div class="severity-row">
+                    <div class="severity-label">Difficoltà di concentrazione, perdita di memoria</div>
+                    <div class="severity-options">
+                        <label class="severity-option"><input type="radio" name="symptom_B" value="0" checked>0</label>
+                        <label class="severity-option"><input type="radio" name="symptom_B" value="1">1</label>
+                        <label class="severity-option"><input type="radio" name="symptom_B" value="2">2</label>
+                        <label class="severity-option"><input type="radio" name="symptom_B" value="3">3</label>
+                    </div>
+                </div>
+                <div class="severity-row">
+                    <div class="severity-label">Stanchezza al risveglio, sonno non ristoratore</div>
+                    <div class="severity-options">
+                        <label class="severity-option"><input type="radio" name="symptom_C" value="0" checked>0</label>
+                        <label class="severity-option"><input type="radio" name="symptom_C" value="1">1</label>
+                        <label class="severity-option"><input type="radio" name="symptom_C" value="2">2</label>
+                        <label class="severity-option"><input type="radio" name="symptom_C" value="3">3</label>
+                    </div>
+                </div>
+
+                <p class="section-hint mt-4">Presenza o assenza negli ultimi 6 mesi:</p>
+
+                <div class="severity-row">
+                    <div class="severity-label">Dolori o crampi addominali</div>
+                    <div class="severity-options">
+                        <label class="severity-option"><input type="radio" name="symptom_D" value="0" checked>Assente</label>
+                        <label class="severity-option"><input type="radio" name="symptom_D" value="1">Presente</label>
+                    </div>
+                </div>
+                <div class="severity-row">
+                    <div class="severity-label">Depressione</div>
+                    <div class="severity-options">
+                        <label class="severity-option"><input type="radio" name="symptom_E" value="0" checked>Assente</label>
+                        <label class="severity-option"><input type="radio" name="symptom_E" value="1">Presente</label>
+                    </div>
+                </div>
+                <div class="severity-row">
+                    <div class="severity-label">Emicrania, cefalea</div>
+                    <div class="severity-options">
+                        <label class="severity-option"><input type="radio" name="symptom_F" value="0" checked>Assente</label>
+                        <label class="severity-option"><input type="radio" name="symptom_F" value="1">Presente</label>
+                    </div>
+                </div>
+
+                <div class="score-readout">
+                    <div class="score-pill"><div class="label">Punteggio SSS</div><div class="value"><span id="sss-score">0</span> / 12</div></div>
+                </div>
+            </div>
+
+            <hr class="my-8" style="border-color: #F0EDF9;">
+
+            <!-- Durata -->
+            <div class="duration-question">
+                <div class="severity-label">I sintomi sono presenti a un livello simile da almeno 3 mesi?</div>
+                <div class="severity-options">
+                    <label class="severity-option"><input type="radio" name="duration" value="Si">Sì</label>
+                    <label class="severity-option"><input type="radio" name="duration" value="No">No</label>
+                </div>
+            </div>
+
+            <!-- Diagnosi -->
+            <div class="diagnosis-box">
+                <p class="text-sm text-gray-500">Criteri soddisfatti</p>
+                <p id="diagnosis-text" class="verdict" style="color: var(--ink-soft);">Completa i campi sopra</p>
+            </div>
+
+            <div class="flex flex-wrap gap-3 mt-6 no-print">
+                <div id="button-container" style="display: none;">
+                    <a href="fiqr_questionnaire.html" class="pill-button primary">Compila questionario FIQ-R</a>
+                </div>
+                <div id="therapy-button-container">
+                    <a href="terapia_fibromialgia.html" target="_blank" class="pill-button secondary">Opzioni terapeutiche</a>
+                </div>
+            </div>
+
+            <div class="signature-section">
+                <p class="text-sm font-medium text-gray-600">Firma del medico</p>
+                <div class="signature-line"></div>
+            </div>
+
+            <div class="no-print mt-6">
+                <button onclick="window.print()" class="pill-button secondary">Stampa referto</button>
+            </div>
+        </section>
+
     </div>
-    <div id="therapy-button-container">
-      <a href="terapia_fibromialgia.html" target="_blank" class="therapy-button">Opzioni Terapeutiche</a>
-    </div>
-  </div>
-</div>
 
-<div class="signature-section">
-  <p><strong>Firma del Medico:</strong></p>
-  <div class="signature-line"></div>
-</div>
+    <script>
+        function calculateWPI() {
+            const checkboxes = document.querySelectorAll('.wpi-check');
+            let total = 0;
+            const regions = new Set();
+            checkboxes.forEach(cb => {
+                if (cb.checked) {
+                    total++;
+                    const region = cb.dataset.region;
+                    if (region !== 'none') regions.add(region);
+                }
+            });
+            document.getElementById('wpi-score').textContent = total;
+            document.getElementById('regions-score').textContent = regions.size;
+            checkDiagnosisCriteria();
+        }
 
-<div class="print-button">
-  <button onclick="window.print()">Stampa Referto</button>
-</div>
+        function calculateSSS() {
+            let score = 0;
+            ['symptom_A', 'symptom_B', 'symptom_C', 'symptom_D', 'symptom_E', 'symptom_F'].forEach(name => {
+                const selected = document.querySelector(`input[name="${name}"]:checked`);
+                if (selected) score += parseInt(selected.value);
+            });
+            document.getElementById('sss-score').textContent = score;
+            checkDiagnosisCriteria();
+        }
 
-<script>
-  function calculateWPI() {
-    const checkboxes = document.querySelectorAll('#wpi-form input[type="checkbox"]');
-    let score = 0;
-    checkboxes.forEach(checkbox => {
-      if (checkbox.checked) {
-        score++;
-      }
-    });
-    document.getElementById('wpi-score').innerText = score;
-    updateTotalScore();
-  }
+        function checkDiagnosisCriteria() {
+            const wpiScore = parseInt(document.getElementById('wpi-score').textContent) || 0;
+            const sssScore = parseInt(document.getElementById('sss-score').textContent) || 0;
+            const regionsCount = parseInt(document.getElementById('regions-score').textContent) || 0;
+            const hasDuration = !!document.querySelector('input[name="duration"][value="Si"]:checked');
+            const generalizedPain = regionsCount >= 4;
 
-  function calculateSSS() {
-    let score = 0;
-    const symptomNames = ['symptom_A', 'symptom_B', 'symptom_C', 'symptom_D', 'symptom_E', 'symptom_F'];
-    
-    symptomNames.forEach(name => {
-      const selectedRadio = document.querySelector(`input[name="${name}"]:checked`);
-      if (selectedRadio) {
-        score += parseInt(selectedRadio.value);
-      }
-    });
-    
-    document.getElementById('sss-score').innerText = score;
-    updateTotalScore();
-  }
+            const scoreMet = (wpiScore >= 7 && sssScore >= 5) || (wpiScore >= 4 && wpiScore <= 6 && sssScore >= 9);
+            const criteriaMet = hasDuration && generalizedPain && scoreMet;
 
-  function checkDiagnosisCriteria() {
-    const wpiScore = parseInt(document.getElementById('wpi-score').innerText);
-    const sssScore = parseInt(document.getElementById('sss-score').innerText);
-    const hasDuration = document.querySelector('input[name="duration"][value="Si"]:checked');
-    const hasNoOtherPathology = document.querySelector('input[name="other_pathology"][value="No"]:checked');
-    
-    let diagnosisText = document.getElementById('diagnosis-text');
-    let criteriaMet = false;
+            const diagnosisText = document.getElementById('diagnosis-text');
+            const fiqrButtonContainer = document.getElementById('button-container');
 
-    if (hasDuration && hasNoOtherPathology) {
-      if ((wpiScore >= 7 && sssScore >= 5) || (wpiScore >= 4 && wpiScore <= 6 && sssScore >= 9)) {
-        criteriaMet = true;
-      }
-    }
-    
-    const fiqrButtonContainer = document.getElementById('button-container');
+            if (criteriaMet) {
+                diagnosisText.textContent = 'Rispettati';
+                diagnosisText.style.color = '#3D8F7F';
+                fiqrButtonContainer.style.display = 'block';
+            } else {
+                diagnosisText.textContent = 'Non rispettati';
+                diagnosisText.style.color = '#8783A0';
+                fiqrButtonContainer.style.display = 'none';
+            }
+        }
 
-    if (criteriaMet) {
-      diagnosisText.innerText = "RISPETTATI";
-      diagnosisText.className = "diagnosis-met";
-      // Mostra solo il contenitore del pulsante FIQ-R
-      fiqrButtonContainer.style.display = 'block';
-    } else {
-      diagnosisText.innerText = "NON RISPETTATI";
-      diagnosisText.className = "diagnosis-not-met";
-      // Nasconde il contenitore del pulsante FIQ-R
-      fiqrButtonContainer.style.display = 'none';
-    }
-  }
+        document.querySelectorAll('.wpi-check').forEach(cb => cb.addEventListener('change', calculateWPI));
+        document.querySelectorAll('input[name^="symptom_"]').forEach(r => r.addEventListener('change', calculateSSS));
+        document.querySelectorAll('input[name="duration"]').forEach(r => r.addEventListener('change', checkDiagnosisCriteria));
 
-  function updateTotalScore() {
-    const wpiScore = parseInt(document.getElementById('wpi-score').innerText);
-    const sssScore = parseInt(document.getElementById('sss-score').innerText);
-    const totalScore = wpiScore + sssScore;
-    document.getElementById('total-score').innerText = totalScore;
-    checkDiagnosisCriteria();
-  }
-
-  document.querySelectorAll('#wpi-form input[type="checkbox"]').forEach(checkbox => {
-    checkbox.addEventListener('change', calculateWPI);
-  });
-
-  document.querySelectorAll('#sss-form input[type="radio"]').forEach(radio => {
-    radio.addEventListener('change', calculateSSS);
-  });
-  
-  document.querySelectorAll('input[name="duration"]').forEach(radio => {
-    radio.addEventListener('change', checkDiagnosisCriteria);
-  });
-  
-  document.querySelectorAll('input[name="other_pathology"]').forEach(radio => {
-    radio.addEventListener('change', checkDiagnosisCriteria);
-  });
-
-  // Initial calculation on page load
-  calculateWPI();
-  calculateSSS();
-</script>
+        calculateWPI();
+        calculateSSS();
+    </script>
 
 </body>
 </html>
