@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>APS — Classificazione e terapia | Strumenti di Reumatologia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F6F8F7;
+    --surface:#FFFFFF;
+    --surface-alt:#EEF3F1;
+    --border:#DCE4E1;
+    --text:#25302E;
+    --text-muted:#5B6A66;
+    --text-faint:#8B9793;
+
+    --teal:#3E6D69;
+    --teal-dark:#2C504D;
+    --teal-soft:#DDEBE8;
+    --teal-line:#BBD6D2;
+
+    --violet:#7669A0;
+    --violet-dark:#584D80;
+    --violet-soft:#E7E2F3;
+    --violet-line:#CBC0E3;
+
+    --clay:#B15F49;
+    --clay-soft:#F3DED7;
+    --clay-line:#E2B7A8;
+
+    --sage:#5E8467;
+    --sage-soft:#E1EAE2;
+
+    --radius-lg:22px;
+    --radius-md:14px;
+    --radius-sm:9px;
+    --radius-pill:999px;
+
+    --shadow-card: 0 1px 2px rgba(37,48,46,0.04), 0 6px 20px rgba(37,48,46,0.05);
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter', system-ui, sans-serif;
+    font-size:16px;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+    padding-bottom:96px; /* room for sticky score bar */
+  }
+
+  h1,h2,h3,h4{
+    font-family:'Spectral', Georgia, serif;
+    font-weight:600;
+    color:var(--teal-dark);
+    margin:0 0 0.4em 0;
+    line-height:1.25;
+  }
+
+  a{color:var(--teal-dark);}
+
+  .wrap{
+    max-width:760px;
+    margin:0 auto;
+    padding:0 20px;
+  }
+
+  /* ---------- Header ---------- */
+  header.site{
+    background:var(--surface);
+    border-bottom:1px solid var(--border);
+  }
+  .site-inner{
+    max-width:760px;
+    margin:0 auto;
+    padding:18px 20px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:16px;
+  }
+  .site-inner .crumb{
+    font-size:14px;
+    color:var(--text-muted);
+  }
+  .site-inner .crumb a{
+    text-decoration:none;
+    color:var(--text-muted);
+    border-bottom:1px solid var(--border);
+  }
+  .site-inner .crumb a:hover{color:var(--teal-dark);}
+  .site-inner .crumb .sep{margin:0 6px; color:var(--text-faint);}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    padding:44px 0 8px 0;
+  }
+  .hero h1{
+    font-size:clamp(28px, 4vw, 38px);
+    letter-spacing:-0.01em;
+  }
+  .hero .sub{
+    color:var(--text-muted);
+    font-size:17px;
+    max-width:58ch;
+    margin-top:10px;
+  }
+
+  .disclaimer{
+    margin:22px 0 0 0;
+    padding:16px 18px;
+    background:var(--clay-soft);
+    border:1px solid var(--clay-line);
+    border-radius:var(--radius-md);
+    color:#5A3527;
+    font-size:14.5px;
+    line-height:1.55;
+  }
+  .disclaimer strong{color:#4A2A1E;}
+
+  /* ---------- Section nav (Classificazione / Terapia) ---------- */
+  .modules{
+    display:flex;
+    gap:10px;
+    margin:26px 0 0 0;
+    border-bottom:1px solid var(--border);
+  }
+  .modules a{
+    text-decoration:none;
+    font-size:14.5px;
+    font-weight:600;
+    color:var(--text-muted);
+    padding:10px 4px 12px 4px;
+    border-bottom:2px solid transparent;
+  }
+  .modules a.active{
+    color:var(--teal-dark);
+    border-bottom-color:var(--teal);
+  }
+  .modules a.disabled{
+    color:var(--text-faint);
+    cursor:default;
+  }
+
+  /* ---------- Step indicator ---------- */
+  .steps{
+    display:flex;
+    align-items:center;
+    gap:0;
+    margin:34px 0 6px 0;
+  }
+  .step-dot{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    flex:1;
+  }
+  .step-dot .circle{
+    width:26px;height:26px;
+    border-radius:50%;
+    background:var(--surface-alt);
+    border:1px solid var(--border);
+    color:var(--text-muted);
+    font-size:12.5px;
+    font-weight:700;
+    display:flex;align-items:center;justify-content:center;
+    flex:none;
+  }
+  .step-dot .label{
+    font-size:13px;
+    color:var(--text-muted);
+    font-weight:600;
+    display:none;
+  }
+  .step-dot .line{
+    height:1px;
+    background:var(--border);
+    flex:1;
+    margin:0 6px;
+  }
+  .step-dot:last-child .line{display:none;}
+  .step-dot.done .circle{background:var(--teal); border-color:var(--teal); color:#fff;}
+  .step-dot.current .circle{background:var(--surface); border-color:var(--teal); color:var(--teal-dark); box-shadow:0 0 0 3px var(--teal-soft);}
+  @media(min-width:600px){
+    .step-dot .label{display:block;}
+  }
+
+  /* ---------- Cards / sections ---------- */
+  section.block{
+    margin-top:48px;
+  }
+  .block-head{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    gap:12px;
+    margin-bottom:6px;
+  }
+  .block-head h2{font-size:23px;}
+  .block-note{
+    color:var(--text-muted);
+    font-size:14.5px;
+    margin-bottom:20px;
+  }
+
+  .domain{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:var(--radius-lg);
+    padding:20px 22px 22px 22px;
+    margin-bottom:14px;
+    box-shadow:var(--shadow-card);
+  }
+  .domain.lab{
+    border-color:var(--violet-line);
+  }
+  .domain-top{
+    display:flex;
+    align-items:flex-start;
+    justify-content:space-between;
+    gap:12px;
+  }
+  .domain-title{
+    font-family:'Spectral', serif;
+    font-weight:600;
+    font-size:18px;
+    color:var(--teal-dark);
+    margin:0;
+  }
+  .domain.lab .domain-title{color:var(--violet-dark);}
+  .domain-points{
+    flex:none;
+    font-size:13px;
+    font-weight:700;
+    padding:4px 11px;
+    border-radius:var(--radius-pill);
+    background:var(--surface-alt);
+    color:var(--text-faint);
+    white-space:nowrap;
+  }
+  .domain-points.active{
+    background:var(--teal-soft);
+    color:var(--teal-dark);
+  }
+  .domain.lab .domain-points.active{
+    background:var(--violet-soft);
+    color:var(--violet-dark);
+  }
+
+  fieldset{
+    border:none;
+    padding:0;
+    margin:14px 0 0 0;
+  }
+  .opt{
+    display:block;
+    border:1px solid var(--border);
+    border-radius:var(--radius-md);
+    padding:12px 14px;
+    margin-bottom:8px;
+    cursor:pointer;
+    transition:border-color .15s ease, background .15s ease;
+  }
+  .opt:hover{border-color:var(--teal-line);}
+  .opt input{position:absolute; opacity:0; width:0; height:0;}
+  .opt .row{
+    display:flex;
+    align-items:flex-start;
+    gap:10px;
+  }
+  .opt .bullet{
+    flex:none;
+    width:18px;height:18px;
+    border-radius:50%;
+    border:1.5px solid var(--text-faint);
+    margin-top:2px;
+    position:relative;
+  }
+  .opt input:checked ~ .row .bullet{border-color:var(--teal);}
+  .opt input:checked ~ .row .bullet::after{
+    content:"";
+    position:absolute; inset:3px;
+    border-radius:50%;
+    background:var(--teal);
+  }
+  .domain.lab .opt input:checked ~ .row .bullet{border-color:var(--violet);}
+  .domain.lab .opt input:checked ~ .row .bullet::after{background:var(--violet);}
+  .opt.selected{
+    background:var(--teal-soft);
+    border-color:var(--teal-line);
+  }
+  .domain.lab .opt.selected{
+    background:var(--violet-soft);
+    border-color:var(--violet-line);
+  }
+  .opt .txt{flex:1;}
+  .opt .txt .lbl{font-weight:600; font-size:14.5px;}
+  .opt .txt .desc{color:var(--text-muted); font-size:13.5px; margin-top:2px;}
+  .opt .wt{
+    flex:none;
+    font-size:12.5px;
+    font-weight:700;
+    color:var(--text-faint);
+    padding:2px 8px;
+    border-radius:var(--radius-pill);
+    border:1px solid var(--border);
+    margin-left:6px;
+  }
+  .opt.selected .wt{color:var(--teal-dark); border-color:var(--teal-line);}
+  .domain.lab .opt.selected .wt{color:var(--violet-dark); border-color:var(--violet-line);}
+
+  details.def{
+    margin-top:10px;
+  }
+  details.def summary{
+    cursor:pointer;
+    font-size:13px;
+    color:var(--text-muted);
+    font-weight:600;
+    list-style:none;
+    display:flex;
+    align-items:center;
+    gap:6px;
+  }
+  details.def summary::-webkit-details-marker{display:none;}
+  details.def summary::before{
+    content:"›";
+    display:inline-block;
+    transform:rotate(0deg);
+    transition:transform .15s ease;
+    font-size:16px;
+    line-height:1;
+  }
+  details.def[open] summary::before{transform:rotate(90deg);}
+  details.def .def-body{
+    margin-top:10px;
+    padding:12px 14px;
+    background:var(--surface-alt);
+    border-radius:var(--radius-sm);
+    font-size:13.5px;
+    color:var(--text-muted);
+    line-height:1.6;
+  }
+  details.def .def-body ul{margin:6px 0; padding-left:18px;}
+  details.def .def-body li{margin-bottom:4px;}
+  details.def .def-body p{margin:0 0 8px 0;}
+  details.def .def-body p:last-child{margin-bottom:0;}
+
+  .caveat{
+    font-size:13px;
+    color:var(--text-faint);
+    margin-top:12px;
+    padding-top:12px;
+    border-top:1px dashed var(--border);
+  }
+
+  /* risk-factor sub-checklist */
+  .subcheck{
+    margin-top:14px;
+    padding:16px;
+    background:var(--surface-alt);
+    border-radius:var(--radius-md);
+    display:none;
+  }
+  .subcheck.open{display:block;}
+  .subcheck h4{
+    font-family:'Inter', sans-serif;
+    font-weight:700;
+    font-size:13.5px;
+    color:var(--text);
+    text-transform:none;
+    margin:0 0 8px 0;
+  }
+  .subcheck .group{margin-bottom:14px;}
+  .subcheck .group:last-child{margin-bottom:0;}
+  .check{
+    display:flex;
+    align-items:flex-start;
+    gap:9px;
+    padding:6px 0;
+    cursor:pointer;
+    font-size:13.5px;
+  }
+  .check input{margin-top:3px;}
+  .check .desc{color:var(--text-muted); font-size:13px;}
+  .subcheck-result{
+    margin-top:12px;
+    padding:10px 12px;
+    border-radius:var(--radius-sm);
+    font-size:13.5px;
+    font-weight:600;
+  }
+  .subcheck-result.high{background:var(--clay-soft); color:#5A3527;}
+  .subcheck-result.low{background:var(--sage-soft); color:#3A4E40;}
+
+  /* entry criteria */
+  .entry-check{
+    display:flex;
+    align-items:flex-start;
+    gap:12px;
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:var(--radius-lg);
+    padding:18px 20px;
+    box-shadow:var(--shadow-card);
+  }
+  .entry-check input{margin-top:4px; width:18px; height:18px;}
+  .entry-check label{font-size:15px; cursor:pointer;}
+  .entry-check .fine{color:var(--text-muted); font-size:13.5px; margin-top:4px;}
+
+  /* result */
+  .result{
+    border-radius:var(--radius-lg);
+    padding:26px 26px 24px 26px;
+    border:1px solid var(--border);
+    background:var(--surface);
+    box-shadow:var(--shadow-card);
+  }
+  .result.pos{background:var(--sage-soft); border-color:#BFD3C4;}
+  .result.neg{background:var(--surface-alt); border-color:var(--border);}
+  .result h3{font-size:21px; margin-bottom:6px;}
+  .result.pos h3{color:#33503E;}
+  .result .verdict-sub{font-size:14.5px; color:var(--text-muted); margin-bottom:18px;}
+  .result-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:14px;
+    margin-bottom:16px;
+  }
+  .result-box{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:var(--radius-md);
+    padding:14px 16px;
+  }
+  .result-box .k{font-size:12.5px; color:var(--text-faint); font-weight:700; text-transform:uppercase; letter-spacing:.04em;}
+  .result-box .v{font-family:'Spectral', serif; font-size:26px; font-weight:600; color:var(--teal-dark); margin-top:2px;}
+  .result-box.viol .v{color:var(--violet-dark);}
+  .result-detail{font-size:13.5px; color:var(--text-muted); line-height:1.65;}
+
+  /* ---------- sticky score bar ---------- */
+  .scorebar{
+    position:fixed;
+    left:0; right:0; bottom:0;
+    background:rgba(255,255,255,0.92);
+    backdrop-filter:blur(8px);
+    border-top:1px solid var(--border);
+    padding:12px 20px;
+    z-index:40;
+  }
+  .scorebar-inner{
+    max-width:760px;
+    margin:0 auto;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:14px;
+  }
+  .scorebar .pill{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-size:13.5px;
+    font-weight:600;
+    padding:7px 13px;
+    border-radius:var(--radius-pill);
+    background:var(--surface-alt);
+    color:var(--text-muted);
+    border:1px solid var(--border);
+  }
+  .scorebar .pill .num{font-family:'Spectral', serif; font-size:16px; font-weight:700;}
+  .scorebar .pill.met{background:var(--teal-soft); color:var(--teal-dark); border-color:var(--teal-line);}
+  .scorebar .pill.viol.met{background:var(--violet-soft); color:var(--violet-dark); border-color:var(--violet-line);}
+  .scorebar .status{
+    font-size:13px;
+    font-weight:700;
+    color:var(--text-faint);
+  }
+  .scorebar .status.pos{color:var(--sage);}
+  @media(max-width:520px){
+    .scorebar .status{display:none;}
+  }
+
+  /* ---------- Fonti ---------- */
+  .fonti{
+    margin-top:64px;
+    padding-top:32px;
+    border-top:1px solid var(--border);
+  }
+  .fonti h2{font-size:21px;}
+  .fonti ol{
+    padding-left:20px;
+    margin:16px 0 0 0;
+  }
+  .fonti li{
+    font-size:14px;
+    color:var(--text-muted);
+    margin-bottom:12px;
+    line-height:1.55;
+  }
+  .fonti li .t{color:var(--text); font-weight:600;}
+  .fonti li .j{font-style:italic;}
+
+  /* ---------- future therapy placeholder ---------- */
+  .soon{
+    margin-top:64px;
+    padding:26px;
+    border:1px dashed var(--border);
+    border-radius:var(--radius-lg);
+    text-align:center;
+  }
+  .soon h3{color:var(--text-muted); font-size:17px;}
+  .soon p{color:var(--text-faint); font-size:14px; margin-top:6px;}
+
+  footer.site{
+    max-width:760px;
+    margin:60px auto 0 auto;
+    padding:24px 20px 40px 20px;
+    color:var(--text-faint);
+    font-size:12.5px;
+    border-top:1px solid var(--border);
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="site-inner">
+    <div class="crumb"><a href="index.html">Strumenti di Reumatologia</a><span class="sep">/</span>APS</div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="hero">
+    <h1>Sindrome da anticorpi antifosfolipidi</h1>
+    <p class="sub">Calcolatore di classificazione basato sui criteri ACR/EULAR 2023.</p>
+    <div class="disclaimer">
+      <strong>Da leggere prima di usarlo.</strong> I criteri ACR/EULAR 2023 sono criteri di <em>classificazione</em>, nati per selezionare coorti omogenee negli studi clinici — non sono criteri diagnostici. Sono costruiti per essere molto specifici (99%) anche a costo della sensibilità (84%): un punteggio sotto soglia non esclude una APS clinicamente reale. Il risultato di questo strumento è un supporto al ragionamento, non sostituisce il giudizio clinico.
+    </div>
+  </div>
+
+  <nav class="modules">
+    <a href="#classificazione" class="active">Classificazione</a>
+    <a href="#terapia" class="disabled">Terapia e monitoraggio — presto</a>
+  </nav>
+
+  <div class="steps" id="stepIndicator">
+    <div class="step-dot current" data-step="1">
+      <div class="circle">1</div>
+      <div class="label">Ingresso</div>
+      <div class="line"></div>
+    </div>
+    <div class="step-dot" data-step="2">
+      <div class="circle">2</div>
+      <div class="label">Clinica</div>
+      <div class="line"></div>
+    </div>
+    <div class="step-dot" data-step="3">
+      <div class="circle">3</div>
+      <div class="label">Laboratorio</div>
+      <div class="line"></div>
+    </div>
+    <div class="step-dot" data-step="4">
+      <div class="circle">4</div>
+      <div class="label">Esito</div>
+    </div>
+  </div>
+
+  <a name="classificazione"></a>
+
+  <!-- ========== STEP 1: ENTRY CRITERIA ========== -->
+  <section class="block" id="step1">
+    <div class="block-head"><h2>1. Criterio d'ingresso</h2></div>
+    <p class="block-note">Prerequisito per applicare i criteri: almeno un criterio clinico (domini 1–6) e un test aPL positivo (LA, oppure titolo moderato-alto di aCL o aβ2GPI, IgG o IgM), avvenuti entro 3 anni l'uno dall'altro.</p>
+
+    <div class="entry-check">
+      <input type="checkbox" id="entry3y">
+      <div>
+        <label for="entry3y">Il criterio clinico e il test aPL positivo sono avvenuti entro 3 anni l'uno dall'altro.</label>
+        <div class="fine">Se non è così, i criteri ACR/EULAR 2023 non si applicano a questo caso: valuta comunque la persistenza della positività aPL e il quadro clinico con giudizio clinico indipendente.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== STEP 2: CLINICAL DOMAINS ========== -->
+  <section class="block" id="step2">
+    <div class="block-head">
+      <h2>2. Domini clinici</h2>
+      <span class="domain-points" id="clinTotalBadge">0 pt</span>
+    </div>
+    <p class="block-note">Per ciascun dominio conta solo il livello più alto applicabile. Non contare un criterio se esiste una spiegazione altrettanto o più probabile dell'APS.</p>
+
+    <!-- D1 VTE -->
+    <div class="domain" data-domain="d1">
+      <div class="domain-top">
+        <h3 class="domain-title">D1 — Macrovascolare (tromboembolismo venoso)</h3>
+        <span class="domain-points" data-badge="d1">0 pt</span>
+      </div>
+      <fieldset data-group="d1">
+        <label class="opt" data-w="0"><input type="radio" name="d1" value="0" checked><span class="row"><span class="bullet"></span><span class="txt"><span class="lbl">Assente</span></span></span></label>
+        <label class="opt" data-w="x"><input type="radio" name="d1" value="x" data-showsub="d1sub"><span class="row"><span class="bullet"></span><span class="txt"><span class="lbl">TEV presente (altrimenti inspiegato, confermato da test appropriati)</span><span class="desc">Include EP, TVP arti, trombosi splancnica/vena renale/venosa cerebrale/retinica.</span></span></span></label>
+      </fieldset>
+
+      <div class="subcheck" id="d1sub">
+        <h4>Profilo di rischio TEV al momento dell'evento</h4>
+        <div class="group">
+          <div style="font-size:12.5px;font-weight:700;color:var(--text-faint);margin-bottom:4px;">Fattori maggiori (1 sufficiente per "alto rischio")</div>
+          <label class="check"><input type="checkbox" name="d1major" value="1"><span>Neoplasia attiva (non trattata, trattamento non curativo, o recidiva/progressione nonostante terapia curativa)</span></label>
+          <label class="check"><input type="checkbox" name="d1major" value="1"><span>Ricovero a letto per malattia acuta, ≥3 giorni nei 3 mesi precedenti</span></label>
+          <label class="check"><input type="checkbox" name="d1major" value="1"><span>Trauma maggiore con fratture o lesione midollare nel mese precedente</span></label>
+          <label class="check"><input type="checkbox" name="d1major" value="1"><span>Chirurgia con anestesia generale/spinale/epidurale &gt;30 min nei 3 mesi precedenti</span></label>
+        </div>
+        <div class="group">
+          <div style="font-size:12.5px;font-weight:700;color:var(--text-faint);margin-bottom:4px;">Fattori minori (2 o più necessari per "alto rischio")</div>
+          <label class="check"><input type="checkbox" name="d1minor"><span>Malattia autoimmune sistemica attiva o IBD attiva</span></label>
+          <label class="check"><input type="checkbox" name="d1minor"><span>Infezione acuta severa (sepsi, polmonite, SARS-CoV-2)</span></label>
+          <label class="check"><input type="checkbox" name="d1minor"><span>Catetere venoso centrale nello stesso distretto</span></label>
+          <label class="check"><input type="checkbox" name="d1minor"><span>Terapia ormonale/contraccettivi estroprogestinici/PMA in corso</span></label>
+          <label class="check"><input type="checkbox" name="d1minor"><span>Viaggio a lunga distanza (≥8 ore)</span></label>
+          <label class="check"><input type="checkbox" name="d1minor"><span>Obesità (BMI ≥30)</span></label>
+          <label class="check"><input type="checkbox" name="d1minor"><span>Gravidanza o puerperio (&lt;6 settimane dal parto)</span></label>
+          <label class="check"><input type="checkbox" name="d1minor"><span>Immobilizzazione prolungata non altrimenti conteggiata</span></label>
+          <label class="check"><input type="checkbox" name="d1minor"><span>Chirurgia con anestesia generale/spinale/epidurale &lt;30 min nei 3 mesi precedenti</span></label>
+        </div>
+        <div class="subcheck-result" id="d1result"></div>
+      </div>
+
+      <details class="def">
+        <summary>Definizione completa</summary>
+        <div class="def-body">
+          <p>TEV altrimenti inspiegato e confermato da test appropriati: embolia polmonare, trombosi venosa profonda degli arti, trombosi splancnica, della vena renale, venosa cerebrale, retinica.</p>
+          <p><strong>Pesi:</strong> con profilo ad alto rischio TEV = 1 punto · senza profilo ad alto rischio = 3 punti.</p>
+        </div>
+      </details>
+    </div>
+
+    <!-- D2 Arterial thrombosis -->
+    <div class="domain" data-domain="d2">
+      <div class="domain-top">
+        <h3 class="domain-title">D2 — Macrovascolare (trombosi arteriosa)</h3>
+        <span class="domain-points" data-badge="d2">0 pt</span>
+      </div>
+      <fieldset data-group="d2">
+        <label class="opt" data-w="0"><input type="radio" name="d2" value="0" checked><span class="row"><span class="bullet"></span><span class="txt"><span class="lbl">Assente</span></span></span></label>
+        <label class="opt" data-w="x"><input type="radio" name="d2" value="x" data-showsub="d2sub"><span class="row"><span class="bullet"></span><span class="txt"><span class="lbl">Trombosi arteriosa presente (altrimenti inspiegata, confermata da test appropriati)</span><span class="desc">Infarto miocardico, trombosi arteriosa periferica/splancnica/retinica, ictus, altri infarti d'organo senza trombo visualizzato.</span></span></span></label>
+      </fieldset>
+
+      <div class="subcheck" id="d2sub">
+        <h4>Profilo di rischio cardiovascolare (CVD) al momento dell'evento</h4>
+        <div class="group">
+          <div style="font-size:12.5px;font-weight:700;color:var(--text-faint);margin-bottom:4px;">Fattori alti (1 sufficiente per "alto rischio")</div>
+          <label class="check"><input type="checkbox" name="d2high"><span>Ipertensione arteriosa con PA sistolica ≥180 o diastolica ≥110</span></label>
+          <label class="check"><input type="checkbox" name="d2high"><span>Malattia renale cronica con eGFR ≤60 per più di 3 mesi</span></label>
+          <label class="check"><input type="checkbox" name="d2high"><span>Diabete mellito con danno d'organo, o lunga durata (tipo 1 ≥20a; tipo 2 ≥10a)</span></label>
+          <label class="check"><input type="checkbox" name="d2high"><span>Iperlipidemia severa (colesterolo totale ≥310 mg/dL o LDL &gt;190 mg/dL)</span></label>
+        </div>
+        <div class="group">
+          <div style="font-size:12.5px;font-weight:700;color:var(--text-faint);margin-bottom:4px;">Fattori moderati (3 o più necessari per "alto rischio")</div>
+          <label class="check"><input type="checkbox" name="d2mod"><span>Ipertensione in trattamento, o PA sistolica persistente ≥140 o diastolica ≥90</span></label>
+          <label class="check"><input type="checkbox" name="d2mod"><span>Fumo di sigaretta attuale</span></label>
+          <label class="check"><input type="checkbox" name="d2mod"><span>Diabete mellito senza danno d'organo e breve durata (tipo 1 &lt;20a; tipo 2 &lt;10a)</span></label>
+          <label class="check"><input type="checkbox" name="d2mod"><span>Iperlipidemia moderata in trattamento, o valori elevati ma &lt;310/&lt;190</span></label>
+          <label class="check"><input type="checkbox" name="d2mod"><span>Obesità (BMI ≥30)</span></label>
+        </div>
+        <div class="subcheck-result" id="d2result"></div>
+      </div>
+
+      <details class="def">
+        <summary>Definizione completa</summary>
+        <div class="def-body">
+          <p><strong>Pesi:</strong> con profilo ad alto rischio CVD = 2 punti · senza profilo ad alto rischio = 4 punti.</p>
+        </div>
+      </details>
+    </div>
+
+    <!-- D3 Microvascular -->
+    <div class="domain" data-domain="d3">
+      <div class="domain-top">
+        <h3 class="domain-title">D3 — Microvascolare</h3>
+        <span class="domain-points" data-badge="d3">0 pt</span>
+      </div>
+      <fieldset data-group="d3">
+        <label class="opt" data-w="0"><input type="radio" name="d3" value="0" checked><span class="row"><span class="bullet"></span><span class="txt"><span class="lbl">Assente</span></span></span></label>
+        <label class="opt" data-w="2"><input type="radio" name="d3" value="2"><span class="row"><span class="bullet"></span><span class="txt"><span class="lbl">Sospetta</span><span class="desc">Livedo racemosa o lesioni da vasculopatia livedoide all'esame obiettivo, nefropatia da aPL sospetta (esame/lab), emorragia polmonare (sintomi + imaging).</span></span><span class="wt">2 pt</span></span></label>
+        <label class="opt" data-w="5"><input type="radio" name="d3" value="5"><span class="row"><span class="bullet"></span><span class="txt"><span class="lbl">Accertata</span><span class="desc">Conferma istologica di vasculopatia livedoide, nefropatia da aPL, emorragia polmonare (BAL/istologia); malattia miocardica (MINOCA + RM cardiaca); emorragia/microtrombosi surrenalica.</span></span><span class="wt">5 pt</span></span></label>
+      </fieldset>
+      <details class="def">
+        <summary>Definizione completa</summary>
+        <div class="def-body">
+          <p><strong>Sospetta</strong> (uno o più): livedo racemosa altrimenti inspiegata (discromia non uniforme, irreversibile, asimmetrica — la livedo reticularis uniforme e reversibile non va contata); lesioni da vasculopatia livedoide; nefropatia da aPL (ipertensione nuova/peggiorata, proteinuria ≥0,5g/24h, insufficienza renale acuta, ematuria glomerulare); emorragia polmonare con sintomi respiratori e infiltrati all'imaging.</p>
+          <p><strong>Accertata</strong> (una o più, dopo aver soddisfatto la definizione "sospetta" corrispondente): vasculopatia livedoide su istologia; nefropatia da aPL su istologia (lesioni trombotiche microangiopatiche acute o lesioni vascolari/glomerulari croniche); emorragia polmonare su BAL o istologia; malattia miocardica (MINOCA con anomalie alla RM cardiaca, o trombosi istologica dei piccoli vasi); emorragia o microtrombosi surrenalica.</p>
+        </div>
+      </details>
+    </div>
+
+    <!-- D4 Obstetric -->
+    <div class="domain" data-domain="d4">
+      <div class="domain-top">
+        <h3 class="domain-title">D4 — Ostetrico</h3>
+        <span class="domain-points" data-badge="d4">0 pt</span>
+      </div>
+      <fieldset data-group="d4">
+        <label class="opt" data-w="0"><input type="radio" name="d4" value="0" checked><span class="row"><span class="bullet"></span><span class="txt"><span class="lbl">Assente</span></span></span></label>
+        <label class="opt" data-w="1"><input type="radio" name="d4" value="1"><span class="row"><span class="bullet"></span><span class="txt"><span class="lbl">≥3 perdite pre-fetali/fetali precoci consecutive, oppure ≥1 morte fetale isolata (16–34w)</span><span class="desc">Senza preeclampsia severa né insufficienza placentare severa associate.</span></span><span class="wt">1 pt</span></span></label>
+        <label class="opt" data-w="3"><input type="radio" name="d4" value="3"><span class="row"><span class="bullet"></span><span class="txt"><span class="lbl">Preeclampsia severa OPPURE insufficienza placentare severa (&lt;34w)</span><span class="desc">Con o senza morte fetale associata.</span></span><span class="wt">3 pt</span></span></label>
+        <label class="opt" data-w="4"><input type="radio" name="d4" value="4"><span class="row"><span class="bullet"></span><span class="txt"><span class="lbl">Preeclampsia severa E insufficienza placentare severa (&lt;34w)</span><span class="desc">Con o senza morte fetale associata.</span></span><span class="wt">4 pt</span></span></label>
+      </fieldset>
+      <details class="def">
+        <summary>Definizione completa</summary>
+        <div class="def-body">
+          <p><strong>Morte pre-fetale/embrionale:</strong> perdita altrimenti inspiegata prima di 10w0d. <strong>Morte fetale:</strong> tra 10w0d–15w6d (precoce) o 16w0d–34w0d.</p>
+          <p><strong>Preeclampsia con caratteristiche severe:</strong> PA sistolica ≥140 o diastolica ≥90 in 2 occasioni a ≥4h dopo 20 settimane, con proteinuria di nuova insorgenza, più almeno una caratteristica severa (PA severamente elevata, disfunzione SNC, disturbi visivi, edema polmonare, funzione epatica compromessa, disfunzione renale, piastrinopenia &lt;100.000).</p>
+          <p><strong>Insufficienza placentare con caratteristiche severe:</strong> restrizione di crescita intrauterina (&lt;10° percentile) con test di sorveglianza fetale anomali, Doppler anomalo, crescita fetale &lt;3° percentile, oppure oligoidramnios. Può includere anche malperfusione vascolare materna all'istologia placentare.</p>
+        </div>
+      </details>
+    </div>
+
+    <!-- D5 Cardiac valve -->
+    <div class="domain" data-domain="d5">
+      <div class="domain-top">
+        <h3 class="domain-title">D5 — Valvulopatia cardiaca</h3>
+        <span class="domain-points" data-badge="d5">0 pt</span>
+      </div>
+      <fieldset data-group="d5">
+        <label class="opt" data-w="0"><input type="radio" name="d5" value="0" checked><span class="row"><span class="bullet"></span><span class="txt"><span class="lbl">Assente / non testata</span></span></span></label>
+        <label class="opt" data-w="2"><input type="radio" name="d5" value="2"><span class="row"><span class="bullet"></span><span class="txt"><span class="lbl">Ispessimento valvolare</span><span class="desc">Altrimenti inspiegato, criteri ecocardiografici World Heart Federation.</span></span><span class="wt">2 pt</span></span></label>
+        <label class="opt" data-w="4"><input type="radio" name="d5" value="4"><span class="row"><span class="bullet"></span><span class="txt"><span class="lbl">Vegetazione valvolare</span><span class="desc">Altrimenti inspiegata, criteri American Society of Echocardiography.</span></span><span class="wt">4 pt</span></span></label>
+      </fieldset>
+    </div>
+
+    <!-- D6 Hematologic -->
+    <div class="domain" data-domain="d6">
+      <div class="domain-top">
+        <h3 class="domain-title">D6 — Ematologico</h3>
+        <span class="domain-points" data-badge="d6">0 pt</span>
+      </div>
+      <fieldset data-group="d6">
+        <label class="opt" data-w="0"><input type="radio" name="d6" value="0" checked><span class="row"><span class="bullet"></span><span class="txt"><span class="lbl">Assente</span></span></span></label>
+        <label class="opt" data-w="2"><input type="radio" name="d6" value="2"><span class="row"><span class="bullet"></span><span class="txt"><span class="lbl">Piastrinopenia</span><span class="desc">Conta piastrinica più bassa mai registrata tra 20.000 e 130.000/L, confermata su striscio periferico e ripetuta. Altrimenti inspiegata.</span></span><span class="wt">2 pt</span></span></label>
+      </fieldset>
+    </div>
+  </section>
+
+  <!-- ========== STEP 3: LABORATORY DOMAINS ========== -->
+  <section class="block" id="step3">
+    <div class="block-head">
+      <h2>3. Domini di laboratorio</h2>
+      <span class="domain-points" id="labTotalBadge">0 pt</span>
+    </div>
+    <p class="block-note">Moderato = 40–79 unità ELISA · Alto = ≥80 unità ELISA. Basato su ELISA standardizzata — le soglie non si applicano direttamente a piattaforme automatizzate non-ELISA.</p>
+
+    <div class="domain lab" data-domain="d7">
+      <div class="domain-top">
+        <h3 class="domain-title">D7 — Lupus Anticoagulant (saggio funzionale coagulativo)</h3>
+        <span class="domain-points" data-badge="d7">0 pt</span>
+      </div>
+      <fieldset data-group="d7">
+        <label class="opt" data-w="0"><input type="radio" name="d7" value="0" checked><span class="row"><span class="bullet"></span><span class="txt"><span class="lbl">Negativo / non testato</span></span></span></label>
+        <label class="opt" data-w="1"><input type="radio" name="d7" value="1"><span class="row"><span class="bullet"></span><span class="txt"><span class="lbl">Positivo, singola determinazione</span></span><span class="wt">1 pt</span></span></label>
+        <label class="opt" data-w="5"><input type="radio" name="d7" value="5"><span class="row"><span class="bullet"></span><span class="txt"><span class="lbl">Positivo, persistente</span><span class="desc">Due occasioni, almeno 12 settimane di distanza.</span></span><span class="wt">5 pt</span></span></label>
+      </fieldset>
+      <details class="def">
+        <summary>Nota sull'interpretazione del test LA</summary>
+        <div class="def-body">
+          <p>Procedura in 3 fasi (screening–mixing study–conferma) secondo le linee guida ISTH. Testare, quando possibile, in assenza di anticoagulanti: sia gli antagonisti della vitamina K sia i DOAC possono dare falsi positivi/negativi. Un risultato ottenuto in corso di terapia anticoagulante andrebbe confermato da personale di laboratorio esperto.</p>
+        </div>
+      </details>
+    </div>
+
+    <div class="domain lab" data-domain="d8">
+      <div class="domain-top">
+        <h3 class="domain-title">D8 — aCL e aβ2GPI (saggio in fase solida, ELISA)</h3>
+        <span class="domain-points" data-badge="d8">0 pt</span>
+      </div>
+      <fieldset data-group="d8">
+        <label class="opt" data-w="0"><input type="radio" name="d8" value="0" checked><span class="row"><span class="bullet"></span><span class="txt"><span class="lbl">Negativo / non testato</span></span></span></label>
+        <label class="opt" data-w="1"><input type="radio" name="d8" value="1"><span class="row"><span class="bullet"></span><span class="txt"><span class="lbl">IgM isolato, moderato-alto positivo (aCL e/o aβ2GPI)</span><span class="desc">Nessuna positività IgG.</span></span><span class="wt">1 pt</span></span></label>
+        <label class="opt" data-w="4"><input type="radio" name="d8" value="4"><span class="row"><span class="bullet"></span><span class="txt"><span class="lbl">IgG moderato positivo (aCL e/o aβ2GPI)</span></span><span class="wt">4 pt</span></span></label>
+        <label class="opt" data-w="5"><input type="radio" name="d8" value="5"><span class="row"><span class="bullet"></span><span class="txt"><span class="lbl">IgG alto positivo (aCL O aβ2GPI)</span></span><span class="wt">5 pt</span></span></label>
+        <label class="opt" data-w="7"><input type="radio" name="d8" value="7"><span class="row"><span class="bullet"></span><span class="txt"><span class="lbl">IgG alto positivo (aCL E aβ2GPI)</span></span><span class="wt">7 pt</span></span></label>
+      </fieldset>
+      <p class="caveat">Positività persistente richiesta (2 determinazioni, ≥12 settimane di distanza). Se le due determinazioni non coincidono per livello, conta quella più bassa delle due.</p>
+    </div>
+  </section>
+
+  <!-- ========== STEP 4: RESULT ========== -->
+  <section class="block" id="step4">
+    <div class="block-head"><h2>4. Esito</h2></div>
+    <div class="result neg" id="resultBox">
+      <h3 id="verdictTitle">Criteri non soddisfatti</h3>
+      <p class="verdict-sub" id="verdictSub">Completa i passaggi precedenti per calcolare il punteggio.</p>
+      <div class="result-grid">
+        <div class="result-box">
+          <div class="k">Punteggio clinico</div>
+          <div class="v" id="rClin">0</div>
+        </div>
+        <div class="result-box viol">
+          <div class="k">Punteggio laboratorio</div>
+          <div class="v" id="rLab">0</div>
+        </div>
+      </div>
+      <div class="result-detail">Classificazione raggiunta con ≥3 punti dai domini clinici <strong>e</strong> ≥3 punti dai domini di laboratorio, con criterio d'ingresso soddisfatto.</div>
+    </div>
+  </section>
+
+  <div class="soon" id="terapia">
+    <h3>Terapia e monitoraggio</h3>
+    <p>Modulo in costruzione — profilo anticorpale, storia clinica, stratificazione del rischio e indicazioni terapeutiche.</p>
+  </div>
+
+  <div class="fonti">
+    <h2>Fonti</h2>
+    <ol>
+      <li><span class="t">Barbhaiya M, Zuily S, Naden R, et al.</span> 2023 ACR/EULAR antiphospholipid syndrome classification criteria. <span class="j">Ann Rheum Dis</span> 2023;0:1–13.</li>
+      <li><span class="t">Knight JS, Erkan D.</span> Rethinking antiphospholipid syndrome to guide future management and research. <span class="j">Nat Rev Rheumatol</span> 2024. https://doi.org/10.1038/s41584-024-01110-y</li>
+      <li><span class="t">Tektonidou MG, Andreoli L, Limper M, et al.</span> EULAR recommendations for the management of antiphospholipid syndrome in adults. <span class="j">Ann Rheum Dis</span> 2019;78:1296–1304.</li>
+      <li><span class="t">Knight JS, Branch DW, Ortel TL.</span> Antiphospholipid syndrome: advances in diagnosis, pathogenesis, and management. <span class="j">BMJ</span> 2023;380:e069717.</li>
+      <li><span class="t">Arachchillage DR, et al.</span> Guidelines on the investigation and management of antiphospholipid syndrome. <span class="j">Br J Haematol</span> 2024;205:855–880.</li>
+      <li><span class="t">Murvai VR, Galiș R, Panaitescu A, et al.</span> Antiphospholipid syndrome in pregnancy: a comprehensive literature review. <span class="j">BMC Pregnancy Childbirth</span> 2025;25:337.</li>
+      <li><span class="t">Man YL, Sanna G.</span> Neuropsychiatric manifestations of antiphospholipid syndrome — a narrative review. <span class="j">Brain Sci</span> 2022;12:91.</li>
+    </ol>
+  </div>
+
+  <footer class="site">
+    Strumento di supporto clinico, non sostituisce il giudizio del medico. Ultimo aggiornamento in base alle fonti sopra elencate.
+  </footer>
+
+</div>
+
+<div class="scorebar">
+  <div class="scorebar-inner">
+    <div class="pill" id="pillClin">Clinico <span class="num" id="pillClinNum">0</span> pt</div>
+    <div class="status" id="scorebarStatus">Completa i criteri</div>
+    <div class="pill viol" id="pillLab">Laboratorio <span class="num" id="pillLabNum">0</span> pt</div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const state = {
+    entry:false,
+    d1:0, d2:0, d3:0, d4:0, d5:0, d6:0,
+    d7:0, d8:0
+  };
+
+  function evalRiskGroup(majorNames, minorNames, resultElId, targetField, weights){
+    const majors = document.querySelectorAll('input[name="'+majorNames+'"]:checked').length;
+    const minors = document.querySelectorAll('input[name="'+minorNames+'"]:checked').length;
+    const highRisk = majors >= 1 || minors >= 2;
+    const el = document.getElementById(resultElId);
+    if(highRisk){
+      el.className = 'subcheck-result high';
+      el.textContent = 'Profilo ad alto rischio → peso ' + weights[0] + ' punti.';
+      state[targetField] = weights[0];
+    } else {
+      el.className = 'subcheck-result low';
+      el.textContent = 'Profilo senza alto rischio → peso ' + weights[1] + ' punti.';
+      state[targetField] = weights[1];
+    }
+    render();
+  }
+
+  function evalRiskGroupThreshold(highNames, modNames, modThreshold, resultElId, targetField, weights){
+    const highs = document.querySelectorAll('input[name="'+highNames+'"]:checked').length;
+    const mods = document.querySelectorAll('input[name="'+modNames+'"]:checked').length;
+    const highRisk = highs >= 1 || mods >= modThreshold;
+    const el = document.getElementById(resultElId);
+    if(highRisk){
+      el.className = 'subcheck-result high';
+      el.textContent = 'Profilo ad alto rischio CVD → peso ' + weights[0] + ' punti.';
+      state[targetField] = weights[0];
+    } else {
+      el.className = 'subcheck-result low';
+      el.textContent = 'Profilo senza alto rischio CVD → peso ' + weights[1] + ' punti.';
+      state[targetField] = weights[1];
+    }
+    render();
+  }
+
+  // Entry checkbox
+  document.getElementById('entry3y').addEventListener('change', function(e){
+    state.entry = e.target.checked;
+    updateStepIndicator();
+    render();
+  });
+
+  // Generic radio groups (non-subchecklist domains + the base radios for d1/d2)
+  ['d1','d2','d3','d4','d5','d6','d7','d8'].forEach(function(name){
+    document.querySelectorAll('input[name="'+name+'"]').forEach(function(input){
+      input.addEventListener('change', function(){
+        const opt = input.closest('.opt');
+        document.querySelectorAll('input[name="'+name+'"]').forEach(function(i){
+          i.closest('.opt').classList.remove('selected');
+        });
+        if(opt) opt.classList.add('selected');
+
+        // toggle subchecklists
+        if(name === 'd1'){
+          const sub = document.getElementById('d1sub');
+          if(input.value === 'x'){
+            sub.classList.add('open');
+            evalRiskGroup('d1major','d1minor','d1result','d1',[1,3]);
+          } else {
+            sub.classList.remove('open');
+            state.d1 = 0;
+          }
+        } else if(name === 'd2'){
+          const sub = document.getElementById('d2sub');
+          if(input.value === 'x'){
+            sub.classList.add('open');
+            evalRiskGroupThreshold('d2high','d2mod',3,'d2result','d2',[2,4]);
+          } else {
+            sub.classList.remove('open');
+            state.d2 = 0;
+          }
+        } else {
+          state[name] = parseInt(input.value, 10) || 0;
+        }
+        render();
+      });
+    });
+  });
+
+  // Subcheck internal checkboxes
+  document.querySelectorAll('input[name="d1major"], input[name="d1minor"]').forEach(function(cb){
+    cb.addEventListener('change', function(){ evalRiskGroup('d1major','d1minor','d1result','d1',[1,3]); });
+  });
+  document.querySelectorAll('input[name="d2high"], input[name="d2mod"]').forEach(function(cb){
+    cb.addEventListener('change', function(){ evalRiskGroupThreshold('d2high','d2mod',3,'d2result','d2',[2,4]); });
+  });
+
+  function updateStepIndicator(){
+    const dots = document.querySelectorAll('.step-dot');
+    let current = 1;
+    if(state.entry) current = 2;
+    const clinAny = state.d1||state.d2||state.d3||state.d4||state.d5||state.d6;
+    const labAny = state.d7||state.d8;
+    if(state.entry && clinAny) current = 3;
+    if(state.entry && clinAny && labAny) current = 4;
+    dots.forEach(function(d){
+      const s = parseInt(d.dataset.step,10);
+      d.classList.remove('done','current');
+      if(s < current) d.classList.add('done');
+      else if(s === current) d.classList.add('current');
+    });
+  }
+
+  // mark default-checked options as selected on load
+  document.querySelectorAll('input[type="radio"]:checked').forEach(function(input){
+    const opt = input.closest('.opt');
+    if(opt) opt.classList.add('selected');
+  });
+
+  function render(){
+    const clinTotal = state.d1+state.d2+state.d3+state.d4+state.d5+state.d6;
+    const labTotal = state.d7+state.d8;
+
+    // per-domain badges
+    ['d1','d2','d3','d4','d5','d6','d7','d8'].forEach(function(k){
+      const b = document.querySelector('[data-badge="'+k+'"]');
+      if(!b) return;
+      b.textContent = state[k] + ' pt';
+      b.classList.toggle('active', state[k] > 0);
+    });
+
+    document.getElementById('clinTotalBadge').textContent = clinTotal + ' pt';
+    document.getElementById('clinTotalBadge').classList.toggle('active', clinTotal > 0);
+    document.getElementById('labTotalBadge').textContent = labTotal + ' pt';
+    document.getElementById('labTotalBadge').classList.toggle('active', labTotal > 0);
+
+    document.getElementById('pillClinNum').textContent = clinTotal;
+    document.getElementById('pillLabNum').textContent = labTotal;
+    document.getElementById('pillClin').classList.toggle('met', clinTotal >= 3);
+    document.getElementById('pillLab').classList.toggle('met', labTotal >= 3);
+
+    document.getElementById('rClin').textContent = clinTotal;
+    document.getElementById('rLab').textContent = labTotal;
+
+    const clinAny = clinTotal > 0;
+    const labAny = labTotal > 0;
+    const entryMet = state.entry && clinAny && labAny;
+    const classified = entryMet && clinTotal >= 3 && labTotal >= 3;
+
+    const box = document.getElementById('resultBox');
+    const title = document.getElementById('verdictTitle');
+    const sub = document.getElementById('verdictSub');
+    const status = document.getElementById('scorebarStatus');
+
+    if(classified){
+      box.className = 'result pos';
+      title.textContent = 'Classificabile come APS (a fini di ricerca)';
+      sub.textContent = 'Criterio d\'ingresso soddisfatto, punteggio clinico e di laboratorio entrambi ≥3. Integra sempre con il giudizio clinico.';
+      status.textContent = 'Classificato ✓';
+      status.classList.add('pos');
+    } else if(!state.entry){
+      box.className = 'result neg';
+      title.textContent = 'Criterio d\'ingresso non confermato';
+      sub.textContent = 'Conferma che il criterio clinico e il test aPL siano avvenuti entro 3 anni l\'uno dall\'altro per procedere.';
+      status.textContent = 'Completa i criteri';
+      status.classList.remove('pos');
+    } else if(!clinAny || !labAny){
+      box.className = 'result neg';
+      title.textContent = 'Criterio d\'ingresso incompleto';
+      sub.textContent = 'Serve almeno un criterio clinico e un test di laboratorio positivo.';
+      status.textContent = 'Completa i criteri';
+      status.classList.remove('pos');
+    } else {
+      box.className = 'result neg';
+      title.textContent = 'Soglia non raggiunta';
+      sub.textContent = 'Servono almeno 3 punti clinici e 3 punti di laboratorio. Punteggio attuale: ' + clinTotal + ' clinico, ' + labTotal + ' laboratorio.';
+      status.textContent = 'Sotto soglia';
+      status.classList.remove('pos');
+    }
+
+    updateStepIndicator();
+  }
+
+  render();
+})();
+</script>
+
+</body>
+</html>
