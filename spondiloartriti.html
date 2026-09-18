@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Spondiloartriti | RheumaTools</title>
+<title> Spondiloartriti | RheumaTools</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -170,6 +170,29 @@
   .thresholds{margin-top:22px; font-size:12.5px; color:var(--text-faint); line-height:1.8;}
   .thresholds strong{color:var(--text-muted);}
 
+  /* ---- criteri sub-nav ---- */
+  .crit-tabs{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:22px;}
+  .criteria-panel{display:none;}
+  .criteria-panel.on{display:block;}
+
+  .entry-gate{
+    display:flex; align-items:flex-start; gap:12px; background:var(--surface-alt);
+    border-radius:var(--radius-md); padding:14px 16px; margin-bottom:18px;
+  }
+  .entry-gate input{margin-top:3px; width:17px; height:17px; accent-color:var(--teal);}
+  .entry-gate label{font-size:13.5px; cursor:pointer;}
+  .entry-gate .fine{color:var(--text-faint); font-size:12px; margin-top:3px;}
+
+  .arm-box{border:1px solid var(--border); border-radius:var(--radius-md); padding:16px 18px; margin-bottom:14px;}
+  .arm-box h4{font-size:14.5px; margin-bottom:10px;}
+  .arm-box .arm-status{font-size:12px; font-weight:700; padding:3px 10px; border-radius:var(--radius-pill); background:var(--surface-alt); color:var(--text-faint); display:inline-block; margin-left:8px;}
+  .arm-box .arm-status.met{background:var(--sage-soft); color:var(--sage-dark);}
+
+  .check-list{display:flex; flex-direction:column; gap:7px; margin:10px 0 18px 0;}
+  .check-item{display:flex; align-items:flex-start; gap:10px; padding:10px 14px; background:var(--surface-alt); border-radius:var(--radius-sm); cursor:pointer; font-size:13.5px; line-height:1.4;}
+  .check-item:hover{background:var(--teal-soft);}
+  .check-item input{margin-top:2px; width:16px; height:16px; accent-color:var(--teal); flex:none;}
+
   .fonti{margin-top:64px; padding-top:32px; border-top:1px solid var(--border);}
   .fonti h2{font-size:21px;}
   .fonti ol{padding-left:20px; margin:16px 0 0 0;}
@@ -199,9 +222,9 @@
       <span class="lb-title">Terapia per dominio</span>
       <span class="lb-desc">Periferica, assiale, entesite, dattilite, cute.</span>
     </button>
-    <button type="button" class="landing-btn" data-target="caspar">
-      <span class="lb-title">Criteri CASPAR</span>
-      <span class="lb-desc">Classificazione della PsA.</span>
+    <button type="button" class="landing-btn" data-target="criteri">
+      <span class="lb-title">Criteri classificativi</span>
+      <span class="lb-desc">CASPAR, ASAS assiale, ASAS periferica.</span>
     </button>
     <button type="button" class="landing-btn" data-target="attivita">
       <span class="lb-title">Attività di malattia</span>
@@ -347,12 +370,20 @@
     </div>
   </section>
 
-  <!-- ================= MODULO: CASPAR ================= -->
-  <section class="block hidden" id="caspar">
+  <!-- ================= MODULO: CRITERI CLASSIFICATIVI ================= -->
+  <section class="block hidden" id="criteri">
     <button type="button" class="back-link" data-back>← Cambia sezione</button>
-    <div class="block-head"><h2>Criteri classificativi CASPAR</h2></div>
+    <div class="block-head"><h2>Criteri classificativi</h2></div>
 
-    <div class="panel">
+    <div class="crit-tabs" id="critTabs">
+      <button type="button" class="subtab on" data-crit="caspar">CASPAR (PsA)</button>
+      <button type="button" class="subtab" data-crit="axspa">ASAS — assiale</button>
+      <button type="button" class="subtab" data-crit="perspa">ASAS — periferica</button>
+    </div>
+
+    <!-- ---- CASPAR ---- -->
+    <div class="panel criteria-panel on" id="crit-caspar">
+      <h3>CASPAR</h3>
       <div class="box info">
         <p>Un paziente con malattia articolare infiammatoria è classificabile come PsA con un punteggio ≥3.</p>
       </div>
@@ -400,6 +431,100 @@
         <div class="verdict" id="casparVerdict">Seleziona i criteri per iniziare.</div>
       </div>
     </div>
+
+    <!-- ---- ASAS axSpA ---- -->
+    <div class="panel criteria-panel" id="crit-axspa">
+      <h3>ASAS — Spondiloartrite assiale</h3>
+      <div class="box info">
+        <p>Classificabile in presenza di sacroileite da imaging più ≥1 manifestazione SpA (braccio "imaging"), oppure HLA-B27 più ≥2 altre manifestazioni SpA (braccio "clinico").</p>
+      </div>
+
+      <div class="entry-gate">
+        <input type="checkbox" id="axEntry">
+        <div>
+          <label for="axEntry">Lombalgia cronica da oltre 3 mesi, con esordio prima dei 45 anni.</label>
+          <div class="fine">Prerequisito per applicare i criteri ASAS per la SpA assiale.</div>
+        </div>
+      </div>
+
+      <div class="arm-box">
+        <h4>Braccio "imaging"<span class="arm-status" id="axImagingStatus">non soddisfatto</span></h4>
+        <div class="toggle-row" data-tog="axSacro">
+          <button type="button" class="toggle-opt" data-val="0">Nessuna sacroileite da imaging</button>
+          <button type="button" class="toggle-opt" data-val="1">Sacroileite presente (Rx o RM)</button>
+        </div>
+      </div>
+
+      <div class="arm-box">
+        <h4>Braccio "clinico"<span class="arm-status" id="axClinicalStatus">non soddisfatto</span></h4>
+        <div class="toggle-row" data-tog="axHla">
+          <button type="button" class="toggle-opt" data-val="0">HLA-B27 negativo</button>
+          <button type="button" class="toggle-opt" data-val="1">HLA-B27 positivo</button>
+        </div>
+      </div>
+
+      <h4 style="font-size:14.5px; margin-top:6px;">Manifestazioni SpA (presenti o pregresse)</h4>
+      <p class="block-note" style="margin-bottom:8px;">Contano per il braccio imaging (insieme a HLA-B27) e per il braccio clinico (escluso HLA-B27, già richiesto a parte).</p>
+      <div class="check-list" id="axFeatures">
+        <label class="check-item"><input type="checkbox" data-ax="1"><span><strong>Lombalgia infiammatoria</strong> — ≥4 di 5: esordio &lt;40 anni, insidiosa, migliora con l'esercizio, non migliora a riposo, dolore notturno che migliora alzandosi</span></label>
+        <label class="check-item"><input type="checkbox" data-ax="1"><span><strong>Artrite</strong> — sinovite attiva, presente o pregressa, diagnosticata da un medico</span></label>
+        <label class="check-item"><input type="checkbox" data-ax="1"><span><strong>Entesite del tallone</strong> — dolore o dolorabilità all'inserzione del tendine d'Achille o della fascia plantare sul calcagno</span></label>
+        <label class="check-item"><input type="checkbox" data-ax="1"><span><strong>Uveite</strong> — anteriore, presente o pregressa, confermata da oculista</span></label>
+        <label class="check-item"><input type="checkbox" data-ax="1"><span><strong>Dattilite</strong> — presente o pregressa, diagnosticata da un medico</span></label>
+        <label class="check-item"><input type="checkbox" data-ax="1"><span><strong>Psoriasi</strong> — presente o pregressa, diagnosticata da un medico</span></label>
+        <label class="check-item"><input type="checkbox" data-ax="1"><span><strong>Malattia infiammatoria intestinale</strong> — Crohn o colite ulcerosa, presente o pregressa</span></label>
+        <label class="check-item"><input type="checkbox" data-ax="1"><span><strong>Buona risposta ai FANS</strong> — la lombalgia scompare o migliora molto 24–48h dopo dose piena</span></label>
+        <label class="check-item"><input type="checkbox" data-ax="1"><span><strong>Familiarità per SpA</strong> — parente di 1° o 2° grado con AS, psoriasi, uveite acuta, artrite reattiva o MICI</span></label>
+        <label class="check-item"><input type="checkbox" data-ax="1"><span><strong>PCR elevata</strong> — sopra il limite superiore di norma, in presenza di lombalgia, escluse altre cause</span></label>
+      </div>
+
+      <div class="result" id="axResult">
+        <div class="verdict" id="axVerdict">Completa i campi sopra.</div>
+      </div>
+    </div>
+
+    <!-- ---- ASAS peripheral SpA ---- -->
+    <div class="panel criteria-panel" id="crit-perspa">
+      <h3>ASAS — Spondiloartrite periferica</h3>
+      <div class="box info">
+        <p>Per pazienti con manifestazioni periferiche (senza lombalgia infiammatoria attuale). Classificabile con la manifestazione d'ingresso più (A) ≥1 parametro maggiore, oppure (B) ≥2 altri parametri.</p>
+      </div>
+
+      <h4 style="font-size:14.5px;">Manifestazione d'ingresso (attuale)</h4>
+      <div class="toggle-row" data-tog="perEntry" style="margin-bottom:18px;">
+        <button type="button" class="toggle-opt" data-val="arthritis">Artrite attuale</button>
+        <button type="button" class="toggle-opt" data-val="enthesitis">Entesite attuale</button>
+        <button type="button" class="toggle-opt" data-val="dactylitis">Dattilite attuale</button>
+        <button type="button" class="toggle-opt" data-val="none">Nessuna delle tre</button>
+      </div>
+
+      <div class="arm-box">
+        <h4>(A) Parametri maggiori<span class="arm-status" id="perAStatus">non soddisfatto</span></h4>
+        <div class="check-list" id="perFeaturesA">
+          <label class="check-item"><input type="checkbox" data-per-a="1"><span>Psoriasi (presente o pregressa)</span></label>
+          <label class="check-item"><input type="checkbox" data-per-a="1"><span>Malattia infiammatoria intestinale (presente o pregressa)</span></label>
+          <label class="check-item"><input type="checkbox" data-per-a="1"><span>Infezione precedente — uretrite/cervicite o diarrea nel mese precedente l'esordio</span></label>
+          <label class="check-item"><input type="checkbox" data-per-a="1"><span>HLA-B27 positivo</span></label>
+          <label class="check-item"><input type="checkbox" data-per-a="1"><span>Uveite (presente o pregressa)</span></label>
+          <label class="check-item"><input type="checkbox" data-per-a="1"><span>Sacroileite da imaging (Rx o RM)</span></label>
+        </div>
+      </div>
+
+      <div class="arm-box">
+        <h4>(B) Altri parametri<span class="arm-status" id="perBStatus">non soddisfatto</span></h4>
+        <div class="check-list" id="perFeaturesB">
+          <label class="check-item"><input type="checkbox" data-per-b="1" data-sync="arthritis"><span>Artrite (presente o pregressa)</span></label>
+          <label class="check-item"><input type="checkbox" data-per-b="1" data-sync="enthesitis"><span>Entesite, qualsiasi sede (presente o pregressa)</span></label>
+          <label class="check-item"><input type="checkbox" data-per-b="1" data-sync="dactylitis"><span>Dattilite (presente o pregressa)</span></label>
+          <label class="check-item"><input type="checkbox" data-per-b="1"><span>Lombalgia infiammatoria pregressa (non attuale)</span></label>
+          <label class="check-item"><input type="checkbox" data-per-b="1"><span>Familiarità per SpA</span></label>
+        </div>
+      </div>
+
+      <div class="result" id="perResult">
+        <div class="verdict" id="perVerdict">Completa i campi sopra.</div>
+      </div>
+    </div>
   </section>
 
   <!-- ================= MODULO: ATTIVITÀ DI MALATTIA ================= -->
@@ -445,6 +570,8 @@
     <h2>Fonti</h2>
     <ol>
       <li><span class="t">Taylor W, Gladman D, Helliwell P, et al.</span> Classification criteria for psoriatic arthritis: development of new criteria from a large international study — CASPAR.</li>
+      <li><span class="t">Rudwaleit M, van der Heijde D, Landewé R, et al.</span> The development of Assessment of SpondyloArthritis international Society classification criteria for axial spondyloarthritis (part II): validation and final selection.</li>
+      <li><span class="t">Rudwaleit M, van der Heijde D, Landewé R, et al.</span> The Assessment of SpondyloArthritis international Society classification criteria for peripheral spondyloarthritis and for spondyloarthritis in general.</li>
       <li><span class="t">Coates LC, Soriano ER, Corp N, et al.</span> Group for Research and Assessment of Psoriasis and Psoriatic Arthritis (GRAPPA): updated treatment recommendations for psoriatic arthritis.</li>
       <li><span class="t">Gossec L, Baraliakos X, Kerschbaumer A, et al.</span> EULAR recommendations for the management of psoriatic arthritis with pharmacological therapies.</li>
       <li><span class="t">Schoels MM, Aletaha D, Alasti F, Smolen JS.</span> Disease activity in psoriatic arthritis (PsA): defining remission and treatment success using the DAPSA score.</li>
@@ -494,6 +621,135 @@
     document.getElementById(id).addEventListener('change', updateCaspar);
   });
   updateCaspar();
+
+  // ---------------- criteri sub-tabs ----------------
+  document.querySelectorAll('#critTabs .subtab').forEach(function(tab){
+    tab.addEventListener('click', function(){
+      document.querySelectorAll('#critTabs .subtab').forEach(function(t){ t.classList.remove('on'); });
+      tab.classList.add('on');
+      document.querySelectorAll('.criteria-panel').forEach(function(p){ p.classList.remove('on'); });
+      document.getElementById('crit-' + tab.dataset.crit).classList.add('on');
+    });
+  });
+
+  // ---------------- ASAS axSpA ----------------
+  const axState = {entry:false, sacro:0, hla:0};
+
+  document.getElementById('axEntry').addEventListener('change', function(e){
+    axState.entry = e.target.checked;
+    updateAx();
+  });
+  document.querySelectorAll('.toggle-row[data-tog="axSacro"] .toggle-opt').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      document.querySelectorAll('.toggle-row[data-tog="axSacro"] .toggle-opt').forEach(function(b){ b.classList.remove('on'); });
+      btn.classList.add('on');
+      axState.sacro = parseInt(btn.dataset.val, 10);
+      updateAx();
+    });
+  });
+  document.querySelectorAll('.toggle-row[data-tog="axHla"] .toggle-opt').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      document.querySelectorAll('.toggle-row[data-tog="axHla"] .toggle-opt').forEach(function(b){ b.classList.remove('on'); });
+      btn.classList.add('on');
+      axState.hla = parseInt(btn.dataset.val, 10);
+      updateAx();
+    });
+  });
+  document.querySelectorAll('#axFeatures input[type=checkbox]').forEach(function(cb){
+    cb.addEventListener('change', updateAx);
+  });
+
+  function updateAx(){
+    const checked = document.querySelectorAll('#axFeatures input[type=checkbox]:checked').length;
+    // checked = "other" SpA features (10 items, HLA-B27 excluded — handled separately)
+    const imagingFeatureCount = checked + (axState.hla ? 1 : 0);
+    const imagingArm = axState.sacro === 1 && imagingFeatureCount >= 1;
+    const clinicalArm = axState.hla === 1 && checked >= 2;
+
+    const imgStatus = document.getElementById('axImagingStatus');
+    imgStatus.textContent = imagingArm ? 'soddisfatto' : 'non soddisfatto';
+    imgStatus.classList.toggle('met', imagingArm);
+
+    const clinStatus = document.getElementById('axClinicalStatus');
+    clinStatus.textContent = clinicalArm ? 'soddisfatto' : 'non soddisfatto';
+    clinStatus.classList.toggle('met', clinicalArm);
+
+    const box = document.getElementById('axResult');
+    const verdict = document.getElementById('axVerdict');
+    const classified = axState.entry && (imagingArm || clinicalArm);
+
+    if(!axState.entry){
+      box.classList.remove('pos');
+      verdict.textContent = 'Conferma il prerequisito (lombalgia >3 mesi, esordio <45 anni) per procedere.';
+    } else if(classified){
+      box.classList.add('pos');
+      verdict.textContent = 'Criteri soddisfatti (' + (imagingArm ? 'braccio imaging' : '') + (imagingArm && clinicalArm ? ' e ' : '') + (clinicalArm ? 'braccio clinico' : '') + '). Classificabile come SpA assiale.';
+    } else {
+      box.classList.remove('pos');
+      verdict.textContent = 'Nessuno dei due bracci è soddisfatto. Non classificabile come SpA assiale.';
+    }
+  }
+  updateAx();
+
+  // ---------------- ASAS peripheral SpA ----------------
+  const perState = {entry:{arthritis:false, enthesitis:false, dactylitis:false}};
+
+  document.querySelectorAll('.toggle-row[data-tog="perEntry"] .toggle-opt').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      btn.classList.toggle('on');
+      const val = btn.dataset.val;
+      if(val === 'none'){
+        document.querySelectorAll('.toggle-row[data-tog="perEntry"] .toggle-opt').forEach(function(b){ b.classList.remove('on'); });
+        btn.classList.add('on');
+        perState.entry = {arthritis:false, enthesitis:false, dactylitis:false};
+      } else {
+        document.querySelector('.toggle-row[data-tog="perEntry"] .toggle-opt[data-val="none"]').classList.remove('on');
+        const isOn = btn.classList.contains('on');
+        perState.entry[val] = isOn;
+        // one-way convenience sync: marking "current" also checks the matching B item;
+        // un-marking it does NOT uncheck B, since the user may still have it independently
+        if(isOn){
+          const syncBox = document.querySelector('#perFeaturesB input[data-sync="' + val + '"]');
+          if(syncBox) syncBox.checked = true;
+        }
+      }
+      updatePer();
+    });
+  });
+  document.querySelectorAll('#perFeaturesA input[type=checkbox], #perFeaturesB input[type=checkbox]').forEach(function(cb){
+    cb.addEventListener('change', updatePer);
+  });
+
+  function updatePer(){
+    const entryMet = perState.entry.arthritis || perState.entry.enthesitis || perState.entry.dactylitis;
+    const countA = document.querySelectorAll('#perFeaturesA input[type=checkbox]:checked').length;
+    const countB = document.querySelectorAll('#perFeaturesB input[type=checkbox]:checked').length;
+    const armA = countA >= 1;
+    const armB = countB >= 2;
+
+    const aStatus = document.getElementById('perAStatus');
+    aStatus.textContent = armA ? 'soddisfatto' : 'non soddisfatto';
+    aStatus.classList.toggle('met', armA);
+    const bStatus = document.getElementById('perBStatus');
+    bStatus.textContent = armB ? 'soddisfatto' : 'non soddisfatto';
+    bStatus.classList.toggle('met', armB);
+
+    const box = document.getElementById('perResult');
+    const verdict = document.getElementById('perVerdict');
+    const classified = entryMet && (armA || armB);
+
+    if(!entryMet){
+      box.classList.remove('pos');
+      verdict.textContent = 'Serve almeno una manifestazione d\'ingresso attuale (artrite, entesite o dattilite).';
+    } else if(classified){
+      box.classList.add('pos');
+      verdict.textContent = 'Criteri soddisfatti (' + (armA ? 'parametro A' : '') + (armA && armB ? ' e ' : '') + (armB ? '≥2 parametri B' : '') + '). Classificabile come SpA periferica.';
+    } else {
+      box.classList.remove('pos');
+      verdict.textContent = 'Manifestazione d\'ingresso presente, ma né (A) né (B) sono soddisfatti.';
+    }
+  }
+  updatePer();
 
   // ---------------- DAPSA / DAS28-PCR ----------------
   function severityKey(score, rem, low, mod, type){
@@ -546,7 +802,7 @@
   const landing = document.getElementById('landing');
   const modules = {
     terapia: document.getElementById('terapia'),
-    caspar: document.getElementById('caspar'),
+    criteri: document.getElementById('criteri'),
     attivita: document.getElementById('attivita')
   };
 
