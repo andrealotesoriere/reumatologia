@@ -124,30 +124,6 @@
   }
   .disclaimer strong{color:#4A2A1E;}
 
-  /* ---------- Section nav (Classificazione / Terapia) ---------- */
-  .modules{
-    display:flex;
-    gap:10px;
-    margin:26px 0 0 0;
-    border-bottom:1px solid var(--border);
-  }
-  .modules a{
-    text-decoration:none;
-    font-size:14.5px;
-    font-weight:600;
-    color:var(--text-muted);
-    padding:10px 4px 12px 4px;
-    border-bottom:2px solid transparent;
-  }
-  .modules a.active{
-    color:var(--teal-dark);
-    border-bottom-color:var(--teal);
-  }
-  .modules a.disabled{
-    color:var(--text-faint);
-    cursor:default;
-  }
-
   /* ---------- Step indicator ---------- */
   .steps{
     display:flex;
@@ -518,6 +494,208 @@
   .soon h3{color:var(--text-muted); font-size:17px;}
   .soon p{color:var(--text-faint); font-size:14px; margin-top:6px;}
 
+  /* ---------- therapy module ---------- */
+  .cta-therapy{
+    display:inline-block;
+    margin-top:16px;
+    font-family:inherit;
+    font-size:14px;
+    font-weight:700;
+    color:var(--teal-dark);
+    background:none;
+    border:none;
+    border-bottom:1px solid var(--teal-line);
+    padding:0 0 2px 0;
+    cursor:pointer;
+  }
+
+  .labtip{
+    margin:20px 0 26px 0;
+    padding:14px 16px;
+    background:var(--violet-soft);
+    border:1px solid var(--violet-line);
+    border-radius:var(--radius-md);
+    font-size:13.5px;
+    color:#3E3560;
+    line-height:1.55;
+  }
+
+  .scenario-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+    margin-bottom:8px;
+  }
+  @media(max-width:560px){
+    .scenario-grid{grid-template-columns:1fr;}
+  }
+  .scenario-card{
+    text-align:left;
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:var(--radius-lg);
+    padding:16px 18px;
+    cursor:pointer;
+    font-family:inherit;
+    box-shadow:var(--shadow-card);
+    transition:border-color .15s ease, background .15s ease;
+  }
+  .scenario-card:hover{border-color:var(--teal-line);}
+  .scenario-card .sc-title{
+    display:block;
+    font-family:'Spectral', serif;
+    font-weight:600;
+    font-size:16px;
+    color:var(--teal-dark);
+  }
+  .scenario-card .sc-desc{
+    display:block;
+    font-size:13px;
+    color:var(--text-muted);
+    margin-top:4px;
+  }
+  .scenario-card.selected{
+    background:var(--teal-soft);
+    border-color:var(--teal-line);
+  }
+  .scenario-card.caps{border-color:var(--clay-line);}
+  .scenario-card.caps .sc-title{color:#8A4A38;}
+  .scenario-card.caps.selected{background:var(--clay-soft); border-color:var(--clay-line);}
+
+  .scenario-panel{
+    display:none;
+    margin-top:28px;
+    padding-top:24px;
+    border-top:1px solid var(--border);
+  }
+  .scenario-panel.open{display:block;}
+
+  .panel-q{margin-bottom:18px;}
+  .panel-q[data-visible-if]{display:none;}
+  .panel-q[data-visible-if].shown{display:block;}
+  .q-label{
+    font-size:13.5px;
+    font-weight:700;
+    color:var(--text);
+    margin-bottom:8px;
+  }
+  .toggle-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+  }
+  .toggle-opt{
+    font-family:inherit;
+    font-size:13.5px;
+    font-weight:600;
+    color:var(--text-muted);
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:var(--radius-pill);
+    padding:8px 16px;
+    cursor:pointer;
+    transition:all .15s ease;
+  }
+  .toggle-opt:hover{border-color:var(--teal-line);}
+  .toggle-opt.on{
+    background:var(--teal);
+    border-color:var(--teal);
+    color:#fff;
+  }
+
+  .rec-list{margin-top:22px;}
+  .rec-card{
+    border-left:3px solid var(--teal);
+    background:var(--surface-alt);
+    border-radius:0 var(--radius-sm) var(--radius-sm) 0;
+    padding:12px 16px;
+    margin-bottom:10px;
+  }
+  .rec-card[data-show-if]{display:none;}
+  .rec-card[data-show-if].shown{display:block;}
+  .rec-card .src{
+    font-size:11px;
+    font-weight:700;
+    color:var(--text-faint);
+    text-transform:uppercase;
+    letter-spacing:.03em;
+  }
+  .rec-card .txt{
+    font-size:14.5px;
+    color:var(--text);
+    margin-top:4px;
+    line-height:1.55;
+  }
+  .rec-card.warn{border-left-color:var(--clay); background:var(--clay-soft);}
+  .rec-card.warn .src{color:#8A4A38;}
+  .rec-card.note{border-left-color:var(--violet); background:var(--violet-soft);}
+  .rec-card.note .src{color:var(--violet-dark);}
+
+  .caps-alert{
+    background:var(--clay-soft);
+    border:1px solid var(--clay-line);
+    border-radius:var(--radius-md);
+    padding:16px 18px;
+    color:#5A3527;
+    font-weight:600;
+    font-size:14.5px;
+    line-height:1.55;
+  }
+
+  .landing{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:16px;
+    margin:34px 0 12px 0;
+  }
+  @media(max-width:560px){ .landing{grid-template-columns:1fr;} }
+  .landing-btn{
+    font-family:inherit;
+    text-align:left;
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:var(--radius-lg);
+    padding:30px 26px;
+    cursor:pointer;
+    box-shadow:var(--shadow-card);
+    transition:border-color .15s ease, transform .12s ease;
+  }
+  .landing-btn:hover{border-color:var(--teal-line); transform:translateY(-1px);}
+  .landing-btn .lb-title{
+    display:block;
+    font-family:'Spectral', serif;
+    font-weight:600;
+    font-size:21px;
+    color:var(--teal-dark);
+  }
+  .landing-btn[data-target="terapia"]:hover{border-color:var(--violet-line);}
+  .landing-btn[data-target="terapia"] .lb-title{color:var(--violet-dark);}
+  .landing-btn .lb-desc{
+    display:block;
+    margin-top:7px;
+    font-size:13.5px;
+    color:var(--text-muted);
+    line-height:1.5;
+  }
+
+  .hidden{display:none !important;}
+
+  .back-link{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    font-family:inherit;
+    font-size:13.5px;
+    font-weight:600;
+    color:var(--text-muted);
+    background:none;
+    border:none;
+    cursor:pointer;
+    padding:0;
+    margin-bottom:22px;
+  }
+  .back-link:hover{color:var(--teal-dark);}
+
   footer.site{
     max-width:760px;
     margin:60px auto 0 auto;
@@ -540,16 +718,25 @@
 
   <div class="hero">
     <h1>Sindrome da anticorpi antifosfolipidi</h1>
-    <p class="sub">Calcolatore di classificazione basato sui criteri ACR/EULAR 2023.</p>
+    <p class="sub">Classificazione secondo ACR/EULAR 2023, e supporto alla scelta terapeutica e al monitoraggio in base a profilo anticorpale e storia clinica.</p>
     <div class="disclaimer">
-      <strong>Da leggere prima di usarlo.</strong> I criteri ACR/EULAR 2023 sono criteri di <em>classificazione</em>, nati per selezionare coorti omogenee negli studi clinici — non sono criteri diagnostici. Sono costruiti per essere molto specifici (99%) anche a costo della sensibilità (84%): un punteggio sotto soglia non esclude una APS clinicamente reale. Il risultato di questo strumento è un supporto al ragionamento, non sostituisce il giudizio clinico.
+      <strong>Da leggere prima di usarlo.</strong> I criteri ACR/EULAR 2023 sono criteri di <em>classificazione</em>, nati per selezionare coorti omogenee negli studi clinici — non sono criteri diagnostici. Sono costruiti per essere molto specifici (99%) anche a costo della sensibilità (84%): un punteggio sotto soglia non esclude una APS clinicamente reale. Anche le raccomandazioni terapeutiche più avanti sono un supporto al ragionamento: non sostituiscono il giudizio clinico né la discussione con un centro di riferimento nei casi complessi.
     </div>
   </div>
 
-  <nav class="modules">
-    <a href="#classificazione" class="active">Classificazione</a>
-    <a href="#terapia" class="disabled">Terapia e monitoraggio — presto</a>
-  </nav>
+  <div class="landing" id="landing">
+    <button type="button" class="landing-btn" data-target="classificazione">
+      <span class="lb-title">Classificazione</span>
+      <span class="lb-desc">Criteri ACR/EULAR 2023 — domini clinici e di laboratorio, punteggio in tempo reale.</span>
+    </button>
+    <button type="button" class="landing-btn" data-target="terapia">
+      <span class="lb-title">Terapia e monitoraggio</span>
+      <span class="lb-desc">Raccomandazioni per scenario clinico e profilo anticorpale.</span>
+    </button>
+  </div>
+
+  <div id="classificazione" class="hidden">
+  <button type="button" class="back-link" data-back>← Cambia modulo</button>
 
   <div class="steps" id="stepIndicator">
     <div class="step-dot current" data-step="1">
@@ -573,8 +760,7 @@
     </div>
   </div>
 
-  <a name="classificazione"></a>
-
+  
   <!-- ========== STEP 1: ENTRY CRITERIA ========== -->
   <section class="block" id="step1">
     <div class="block-head"><h2>1. Criterio d'ingresso</h2></div>
@@ -807,13 +993,354 @@
         </div>
       </div>
       <div class="result-detail">Classificazione raggiunta con ≥3 punti dai domini clinici <strong>e</strong> ≥3 punti dai domini di laboratorio, con criterio d'ingresso soddisfatto.</div>
+      <button type="button" class="cta-therapy" id="ctaTherapy" style="display:none;">Vai alle raccomandazioni terapeutiche →</button>
     </div>
   </section>
 
-  <div class="soon" id="terapia">
-    <h3>Terapia e monitoraggio</h3>
-    <p>Modulo in costruzione — profilo anticorpale, storia clinica, stratificazione del rischio e indicazioni terapeutiche.</p>
-  </div>
+  </div><!-- /classificazione -->
+
+  <section class="block therapy-module hidden" id="terapia">
+    <button type="button" class="back-link" data-back>← Cambia modulo</button>
+    <div class="block-head"><h2>Terapia e monitoraggio</h2></div>
+    <p class="block-note">Seleziona lo scenario clinico più vicino al paziente. Le raccomandazioni sono tratte da EULAR 2019 e dalle linee guida BSH/Arachchillage 2024 (più recenti e in alcuni punti più caute) — dove le due fonti divergono lo segnaliamo esplicitamente. Ogni raccomandazione riporta fonte e grado di evidenza.</p>
+
+    <div class="labtip">
+      <strong>Prima di testare o interpretare il Lupus Anticoagulant:</strong> quando possibile evita il test durante terapia anticoagulante e nei 3 mesi successivi a un evento trombotico acuto — in entrambi i casi il risultato può essere falsato (BSH 2024).
+    </div>
+
+    <div class="scenario-grid" id="scenarioGrid">
+      <button type="button" class="scenario-card" data-scenario="asym">
+        <span class="sc-title">Portatore aPL asintomatico</span>
+        <span class="sc-desc">Positività aPL senza storia di trombosi né morbidità ostetrica.</span>
+      </button>
+      <button type="button" class="scenario-card" data-scenario="vte">
+        <span class="sc-title">Trombosi venosa</span>
+        <span class="sc-desc">TVP, embolia polmonare, trombosi in sede inusuale.</span>
+      </button>
+      <button type="button" class="scenario-card" data-scenario="art">
+        <span class="sc-title">Trombosi arteriosa, ictus o TIA</span>
+        <span class="sc-desc">Ictus, TIA, IMA, trombosi arteriosa periferica o d'organo.</span>
+      </button>
+      <button type="button" class="scenario-card" data-scenario="rec">
+        <span class="sc-title">Trombosi ricorrente in terapia</span>
+        <span class="sc-desc">Nuovo evento nonostante anticoagulazione già in corso.</span>
+      </button>
+      <button type="button" class="scenario-card" data-scenario="obs">
+        <span class="sc-title">Gravidanza / APS ostetrica</span>
+        <span class="sc-desc">Storia ostetrica, gravidanza in corso, periodo post partum.</span>
+      </button>
+      <button type="button" class="scenario-card caps" data-scenario="caps">
+        <span class="sc-title">Sospetta APS catastrofica (CAPS)</span>
+        <span class="sc-desc">Emergenza medica — trombosi multiorgano ad esordio rapido.</span>
+      </button>
+    </div>
+
+    <!-- ===== SCENARIO: ASYMPTOMATIC ===== -->
+    <div class="scenario-panel" id="panel-asym" data-panel="asym">
+      <div class="panel-q">
+        <div class="q-label">Profilo anticorpale</div>
+        <div class="toggle-row" data-q="profile">
+          <button class="toggle-opt" data-val="single">Singolo positivo</button>
+          <button class="toggle-opt" data-val="doubletriple">Doppio o triplo positivo (alto rischio)</button>
+        </div>
+      </div>
+      <div class="panel-q">
+        <div class="q-label">Malattia autoimmune sistemica associata (es. LES)?</div>
+        <div class="toggle-row" data-q="sle">
+          <button class="toggle-opt" data-val="yes">Sì</button>
+          <button class="toggle-opt" data-val="no">No</button>
+        </div>
+      </div>
+      <div class="panel-q">
+        <div class="q-label">La paziente è in gravidanza?</div>
+        <div class="toggle-row" data-q="pregnant">
+          <button class="toggle-opt" data-val="yes">Sì</button>
+          <button class="toggle-opt" data-val="no">No</button>
+        </div>
+      </div>
+
+      <div class="rec-list">
+        <div class="rec-card warn">
+          <div class="src">BSH 2024 · 2B (contro)</div>
+          <div class="txt">L'uso routinario di aspirina a basse dosi (LDA) o idrossiclorochina per la prevenzione primaria nei portatori aPL asintomatici <strong>non</strong> è raccomandato.</div>
+        </div>
+        <div class="rec-card note" data-show-if="profile:doubletriple">
+          <div class="src">Le fonti divergono</div>
+          <div class="txt">EULAR 2019 raccomanda LDA 75–100 mg/die nei portatori con profilo aPL ad alto rischio, con o senza fattori di rischio tradizionali (2a/B). BSH 2024, più recente, non la raccomanda di routine e la riserva a valutazione caso per caso — vedi sotto.</div>
+        </div>
+        <div class="rec-card" data-show-if="profile:doubletriple">
+          <div class="src">BSH 2024 · 2D</div>
+          <div class="txt">Nei portatori a profilo alto rischio (triplo positivo), senza altra malattia autoimmune, valuta idrossiclorochina come tromboprofilassi primaria caso per caso.</div>
+        </div>
+        <div class="rec-card" data-show-if="sle:yes">
+          <div class="src">EULAR 2019 · 2a/B</div>
+          <div class="txt">Con LES e profilo aPL ad alto rischio, LDA è raccomandata anche in assenza di storia di trombosi o morbidità ostetrica. A basso rischio, può essere considerata (2b/C).</div>
+        </div>
+        <div class="rec-card">
+          <div class="src">BSH 2024 · 2C</div>
+          <div class="txt">Tromboprofilassi (tipicamente EBPM) nelle situazioni ad alto rischio transitorio: chirurgia, immobilizzazione prolungata.</div>
+        </div>
+        <div class="rec-card">
+          <div class="src">BSH 2024 · 1C / 2B</div>
+          <div class="txt">Consiglia sempre la correzione dei fattori di rischio modificabili (fumo, ipertensione, diabete); screening del rischio cardiovascolare con statina se indicata.</div>
+        </div>
+        <div class="rec-card">
+          <div class="src">BSH 2024 · 2C</div>
+          <div class="txt">Discuti rischi e benefici di contraccettivi estroprogestinici e terapia ormonale sostitutiva con la paziente.</div>
+        </div>
+        <div class="rec-card" data-show-if="pregnant:yes">
+          <div class="src">BSH 2024 · 2C</div>
+          <div class="txt">In gravidanza, valuta tromboprofilassi ante e/o post-natale (10 giorni o 6 settimane) in base al rischio individuale e alla modalità del parto, anche senza storia di trombosi o morbidità ostetrica.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== SCENARIO: VENOUS THROMBOSIS ===== -->
+    <div class="scenario-panel" id="panel-vte" data-panel="vte">
+      <div class="panel-q">
+        <div class="q-label">Tipo di evento</div>
+        <div class="toggle-row" data-q="provoked">
+          <button class="toggle-opt" data-val="unprovoked">Non provocato</button>
+          <button class="toggle-opt" data-val="minor">Provocato da fattore minore persistente</button>
+          <button class="toggle-opt" data-val="major">Provocato da fattore maggiore transitorio</button>
+        </div>
+      </div>
+      <div class="panel-q">
+        <div class="q-label">Profilo anticorpale</div>
+        <div class="toggle-row" data-q="profile">
+          <button class="toggle-opt" data-val="triple">Triplo positivo</button>
+          <button class="toggle-opt" data-val="singledouble">Singolo o doppio positivo</button>
+        </div>
+      </div>
+
+      <div class="rec-list">
+        <div class="rec-card">
+          <div class="src">EULAR 2019 · 1b/B · BSH 2024 · 1B</div>
+          <div class="txt">Anticoagulante di scelta: antagonista della vitamina K (VKA), target INR 2.0–3.0.</div>
+        </div>
+        <div class="rec-card" data-show-if="provoked:unprovoked">
+          <div class="src">BSH 2024 · 1B</div>
+          <div class="txt">Evento non provocato → anticoagulazione indefinita.</div>
+        </div>
+        <div class="rec-card" data-show-if="provoked:minor">
+          <div class="src">EULAR 2019 · 2b/B</div>
+          <div class="txt">Fattore minore persistente e profilo ad alto rischio (es. triplo positivo) → considera anticoagulazione a lungo termine, specialmente se il fattore di rischio persiste in assenza di rischio emorragico maggiore.</div>
+        </div>
+        <div class="rec-card" data-show-if="provoked:major">
+          <div class="src">EULAR 2019 · 5/D</div>
+          <div class="txt">Fattore maggiore transitorio → durata secondo le linee guida generali per pazienti senza APS; una durata più lunga può essere considerata con profilo aPL ripetutamente ad alto rischio o altri fattori di recidiva.</div>
+        </div>
+        <div class="rec-card warn" data-show-if="profile:triple">
+          <div class="src">BSH 2024 · 1B (contro) · EULAR 2019 · 1b/B (contro rivaroxaban)</div>
+          <div class="txt">Triplo positivo: <strong>non</strong> iniziare un DOAC per trattamento o profilassi secondaria. Se già in DOAC, discuti il passaggio a VKA; se la paziente non vuole cambiare, continua il DOAC piuttosto che sospendere l'anticoagulazione.</div>
+        </div>
+        <div class="rec-card note" data-show-if="profile:singledouble">
+          <div class="src">Le fonti divergono · BSH 2024 · 2C (contro)</div>
+          <div class="txt">Anche con singola o doppia positività, BSH 2024 sconsiglia l'avvio di un DOAC (evidenza più recente e cautelativa). EULAR 2019 lo considerava un'opzione se il target INR è difficile da raggiungere in aderenza a VKA, o in caso di controindicazione al VKA.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== SCENARIO: ARTERIAL / STROKE / TIA ===== -->
+    <div class="scenario-panel" id="panel-art" data-panel="art">
+      <div class="panel-q">
+        <div class="q-label">Tipo di evento</div>
+        <div class="toggle-row" data-q="type">
+          <button class="toggle-opt" data-val="stroke">Ictus</button>
+          <button class="toggle-opt" data-val="tia">TIA</button>
+          <button class="toggle-opt" data-val="other">Altro (IMA, arti, splancnico...)</button>
+        </div>
+      </div>
+      <div class="panel-q">
+        <div class="q-label">Controindicazione al VKA?</div>
+        <div class="toggle-row" data-q="vkacontra">
+          <button class="toggle-opt" data-val="yes">Sì</button>
+          <button class="toggle-opt" data-val="no">No</button>
+        </div>
+      </div>
+
+      <div class="rec-list">
+        <div class="rec-card" data-show-if="type:stroke">
+          <div class="src">BSH 2024 · 2C</div>
+          <div class="txt">Ictus: gestione congiunta con i neurologi/stroke physician. VKA con target INR 2.5 (2.0–3.0).</div>
+        </div>
+        <div class="rec-card warn" data-show-if="type:stroke">
+          <div class="src">BSH 2024 · 1B (contro)</div>
+          <div class="txt">DOAC controindicato per trattamento o profilassi secondaria dopo ictus in APS.</div>
+        </div>
+        <div class="rec-card" data-show-if="type:stroke,vkacontra:no">
+          <div class="src">BSH 2024 · 2C</div>
+          <div class="txt">Con altri fattori di rischio vascolare e nessun rischio emorragico significativo, considera l'aggiunta di un antiaggregante al VKA.</div>
+        </div>
+        <div class="rec-card" data-show-if="vkacontra:yes">
+          <div class="src">BSH 2024 · 2C</div>
+          <div class="txt">Se il VKA è controindicato, considera la doppia antiaggregazione piuttosto che un singolo antiaggregante.</div>
+        </div>
+        <div class="rec-card" data-show-if="type:tia">
+          <div class="src">BSH 2024 · 1C</div>
+          <div class="txt">TIA: richiedi conferma da un servizio stroke specialistico prima di procedere.</div>
+        </div>
+        <div class="rec-card" data-show-if="type:tia">
+          <div class="src">BSH 2024 · 2D</div>
+          <div class="txt">Dopo imaging cerebrale e valutazione specialistica, considera VKA con target INR 2.5 (2.0–3.0).</div>
+        </div>
+        <div class="rec-card" data-show-if="type:other">
+          <div class="src">BSH 2024 · 2C</div>
+          <div class="txt">Trombosi arteriosa non cerebrovascolare o microvascolare: VKA con target INR 2.5 (2.0–3.0). Gestione congiunta con i cardiologi se evento cardiaco; valuta l'aggiunta di un antiaggregante in base a eventuali interventi cardiovascolari.</div>
+        </div>
+        <div class="rec-card">
+          <div class="src">BSH 2024 · 2C</div>
+          <div class="txt">Antiaggreganti o anticoagulazione per la sola emicrania in soggetti aPL-positivi senza altro criterio APS non sono raccomandati.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== SCENARIO: RECURRENT ===== -->
+    <div class="scenario-panel" id="panel-rec" data-panel="rec">
+      <div class="panel-q">
+        <div class="q-label">Terapia attuale al momento della recidiva</div>
+        <div class="toggle-row" data-q="current">
+          <button class="toggle-opt" data-val="doac">DOAC o solo antiaggregante</button>
+          <button class="toggle-opt" data-val="vkaok">VKA, INR in range affidabile (TTR ≥60%)</button>
+          <button class="toggle-opt" data-val="vkabad">VKA, controllo INR inaffidabile o TTR basso</button>
+        </div>
+      </div>
+
+      <div class="rec-list">
+        <div class="rec-card">
+          <div class="src">BSH 2024 · 2C</div>
+          <div class="txt">Riferisci il paziente a un centro specialistico: il rischio di recidiva nonostante terapia arriva fino al 30–40% nei profili triplo positivi.</div>
+        </div>
+        <div class="rec-card" data-show-if="current:doac">
+          <div class="src">BSH 2024 · 2C</div>
+          <div class="txt">Passa a un VKA.</div>
+        </div>
+        <div class="rec-card" data-show-if="current:vkabad">
+          <div class="src">BSH 2024 · 2C</div>
+          <div class="txt">Verifica prima aderenza, interazioni farmaco/alimentari e accuratezza dell'INR (PT basale, reagente insensibile al LA) — la recidiva può derivare da un controllo INR solo apparente.</div>
+        </div>
+        <div class="rec-card" data-show-if="current:vkaok">
+          <div class="src">BSH 2024 · 2C</div>
+          <div class="txt">Con TTR adeguato ma target 2.0–3.0 insufficiente: aumenta il target INR a 3.0–4.0, oppure aggiungi un antiaggregante mantenendo il target a 2.5 (2.0–3.0).</div>
+        </div>
+        <div class="rec-card" data-show-if="current:vkaok">
+          <div class="src">BSH 2024 · 2C · 1A (screening)</div>
+          <div class="txt">Se la recidiva persiste nonostante INR 3.5 (3.0–4.0) o INR 2.5 + antiaggregante, considera l'aggiunta di idrossiclorochina. Se avviata, screening oftalmologico per tossicità retinica a 12 mesi, poi a 5 anni, poi annuale.</div>
+        </div>
+        <div class="rec-card">
+          <div class="src">BSH 2024 · 2C</div>
+          <div class="txt">Se ancora refrattario: valuta rituximab e il parere di un centro specialistico.</div>
+        </div>
+        <div class="rec-card">
+          <div class="src">BSH 2024 · 2C</div>
+          <div class="txt">Controllo rigoroso dei fattori di rischio cardiovascolare, statina inclusa salvo controindicazioni.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== SCENARIO: OBSTETRIC ===== -->
+    <div class="scenario-panel" id="panel-obs" data-panel="obs">
+      <div class="panel-q">
+        <div class="q-label">Storia clinica</div>
+        <div class="toggle-row" data-q="history">
+          <button class="toggle-opt" data-val="none">Solo aPL positivo, nessuna storia</button>
+          <button class="toggle-opt" data-val="obstetric">Storia di APS ostetrica</button>
+          <button class="toggle-opt" data-val="thrombotic">Storia di APS trombotica</button>
+        </div>
+      </div>
+      <div class="panel-q" data-visible-if="history:obstetric">
+        <div class="q-label">Risposta a aspirina + EBPM in gravidanze precedenti</div>
+        <div class="toggle-row" data-q="refractory">
+          <button class="toggle-opt" data-val="responsive">Adeguata</button>
+          <button class="toggle-opt" data-val="refractory">Refrattaria (complicanze ricorrenti)</button>
+        </div>
+      </div>
+      <div class="panel-q">
+        <div class="q-label">Sviluppa trombosi durante la gravidanza nonostante EBPM profilattica?</div>
+        <div class="toggle-row" data-q="breakthrough">
+          <button class="toggle-opt" data-val="yes">Sì</button>
+          <button class="toggle-opt" data-val="no">No</button>
+        </div>
+      </div>
+
+      <div class="rec-list">
+        <div class="rec-card" data-show-if="history:none">
+          <div class="src">EULAR 2019 · 5/D</div>
+          <div class="txt">Profilo aPL ad alto rischio, nessuna storia di trombosi o morbidità ostetrica: considera LDA (75–100 mg/die) durante la gravidanza.</div>
+        </div>
+        <div class="rec-card" data-show-if="history:obstetric">
+          <div class="src">BSH 2024 · 1B</div>
+          <div class="txt">Aspirina (75–150 mg/die) + EBPM a dose profilattica dal test di gravidanza positivo per tutta la durata della gravidanza. Considera l'aumento dell'aspirina a 150 mg da 12 settimane.</div>
+        </div>
+        <div class="rec-card" data-show-if="history:obstetric">
+          <div class="src">BSH 2024 · 2C</div>
+          <div class="txt">Monitoraggio: Doppler dell'arteria uterina a 20–24 settimane; se alterato, ecografie di crescita seriate. Gestione in clinica congiunta ematologia-ostetricia, con piano di parto documentato (incluso il piano anticoagulante).</div>
+        </div>
+        <div class="rec-card warn" data-show-if="refractory:refractory">
+          <div class="src">BSH 2024 · 1C / 2D</div>
+          <div class="txt">Refrattaria ad aspirina + EBPM: prednisolone, IVIG o idrossiclorochina solo caso per caso; riferisci a un centro specialistico in caso di esiti sfavorevoli ricorrenti.</div>
+        </div>
+        <div class="rec-card" data-show-if="history:thrombotic">
+          <div class="src">BSH 2024 · 1B / 2C</div>
+          <div class="txt">Storia di APS trombotica: sospendi il VKA (teratogeno 6–12 settimane) e passa a EBPM a dose terapeutica alla conferma di gravidanza; continua in gravidanza e nel post partum fino al rientro in VKA.</div>
+        </div>
+        <div class="rec-card warn" data-show-if="breakthrough:yes">
+          <div class="src">BSH 2024 · 2C</div>
+          <div class="txt">Trombosi durante la gravidanza nonostante EBPM profilattica: passa a dose terapeutica per il resto della gravidanza, per almeno 6 settimane post partum e per un totale minimo di 3 mesi di trattamento; rivaluta poi la necessità di anticoagulazione a lungo termine.</div>
+        </div>
+        <div class="rec-card">
+          <div class="src">BSH 2024 · 1B</div>
+          <div class="txt">Allattamento: sia EBPM sia warfarin sono compatibili.</div>
+        </div>
+        <div class="rec-card" data-show-if="history:obstetric">
+          <div class="src">BSH 2024 · 2C</div>
+          <div class="txt">Post partum, senza storia di trombosi: valuta LDA a lungo termine in base al rapporto rischio/beneficio individuale.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== SCENARIO: CAPS ===== -->
+    <div class="scenario-panel" id="panel-caps" data-panel="caps">
+      <div class="caps-alert">
+        Emergenza medica. Mortalità ≈30% nonostante trattamento ottimale (BSH 2024). Sospetta CAPS con trombosi in più organi/sistemi/tessuti a esordio rapido, spesso con microangiopatia trombotica.
+      </div>
+      <details class="def" style="margin-top:16px;">
+        <summary>Criteri di classificazione CAPS</summary>
+        <div class="def-body">
+          <p>CAPS definita: tutti e 4 i criteri seguenti — (1) coinvolgimento di ≥3 organi/sistemi/tessuti; (2) manifestazioni simultanee o entro una settimana; (3) conferma istopatologica di occlusione dei piccoli vasi in almeno un organo; (4) conferma di laboratorio di aPL (LA, aCL e/o aβ2GPI).</p>
+          <p>CAPS probabile: tutti e 4 con solo 2 organi coinvolti; oppure tutti e 4 ma senza la seconda conferma di laboratorio a 6 settimane per decesso precoce; oppure criteri 1+2+4; oppure 1+3+4 con un terzo evento tra una settimana e un mese nonostante anticoagulazione.</p>
+        </div>
+      </details>
+      <div class="rec-list" style="margin-top:16px;">
+        <div class="rec-card">
+          <div class="src">BSH 2024 · 1A</div>
+          <div class="txt">Sospetta CAPS in un paziente APS con trombosi multisito, inclusa trombosi microvascolare che porta a insufficienza d'organo.</div>
+        </div>
+        <div class="rec-card">
+          <div class="src">BSH 2024 · 2B</div>
+          <div class="txt">Identifica e correggi, dove possibile, il fattore scatenante: infezione, chirurgia, sospensione o sotto-dosaggio dell'anticoagulazione, gravidanza, neoplasia.</div>
+        </div>
+        <div class="rec-card">
+          <div class="src">BSH 2024 · 2C</div>
+          <div class="txt">Anticoagulazione iniziale con eparina non frazionata endovena; monitora l'effetto anticoagulante con livelli anti-Xa piuttosto che APTT (il LA può falsare l'APTT).</div>
+        </div>
+        <div class="rec-card">
+          <div class="src">BSH 2024 · 2C</div>
+          <div class="txt">Terapia tripla: eparina a dose terapeutica + corticosteroidi ad alte dosi + IVIG e/o plasma exchange. Considera più fortemente il plasma exchange rispetto a IVIG se è presente microangiopatia trombotica.</div>
+        </div>
+        <div class="rec-card">
+          <div class="src">BSH 2024 · 2C</div>
+          <div class="txt">Gestione multidisciplinare: ematologo, terapia intensiva e altri specialisti coinvolti.</div>
+        </div>
+        <div class="rec-card">
+          <div class="src">BSH 2024 · 2C</div>
+          <div class="txt">Se non risponde alla prima linea: valuta rituximab e il parere di un centro specialistico; considera eculizumab (inibitore del complemento C5), in particolare se è presente microangiopatia trombotica.</div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+  <!-- /terapia -->
 
   <div class="fonti">
     <h2>Fonti</h2>
@@ -993,12 +1520,15 @@
     const sub = document.getElementById('verdictSub');
     const status = document.getElementById('scorebarStatus');
 
+    const cta = document.getElementById('ctaTherapy');
+    if(cta) cta.style.display = 'none';
     if(classified){
       box.className = 'result pos';
       title.textContent = 'Classificabile come APS (a fini di ricerca)';
       sub.textContent = 'Criterio d\'ingresso soddisfatto, punteggio clinico e di laboratorio entrambi ≥3. Integra sempre con il giudizio clinico.';
       status.textContent = 'Classificato ✓';
       status.classList.add('pos');
+      if(cta) cta.style.display = 'inline-block';
     } else if(!state.entry){
       box.className = 'result neg';
       title.textContent = 'Criterio d\'ingresso non confermato';
@@ -1023,6 +1553,104 @@
   }
 
   render();
+
+  // ================= THERAPY MODULE =================
+  const scenarioAnswers = {}; // { scenarioKey: { qKey: value } }
+
+  document.querySelectorAll('.scenario-card').forEach(function(card){
+    card.addEventListener('click', function(){
+      const key = card.dataset.scenario;
+      document.querySelectorAll('.scenario-card').forEach(function(c){ c.classList.remove('selected'); });
+      card.classList.add('selected');
+      document.querySelectorAll('.scenario-panel').forEach(function(p){ p.classList.remove('open'); });
+      const panel = document.getElementById('panel-' + key);
+      if(panel){
+        panel.classList.add('open');
+        panel.scrollIntoView({behavior:'smooth', block:'nearest'});
+      }
+    });
+  });
+
+  document.querySelectorAll('.scenario-panel').forEach(function(panel){
+    const key = panel.dataset.panel;
+    scenarioAnswers[key] = {};
+
+    panel.querySelectorAll('.toggle-row').forEach(function(row){
+      const q = row.dataset.q;
+      row.querySelectorAll('.toggle-opt').forEach(function(btn){
+        btn.addEventListener('click', function(){
+          row.querySelectorAll('.toggle-opt').forEach(function(b){ b.classList.remove('on'); });
+          btn.classList.add('on');
+          scenarioAnswers[key][q] = btn.dataset.val;
+          refreshPanel(panel, key);
+        });
+      });
+    });
+  });
+
+  function refreshPanel(panel, key){
+    const answers = scenarioAnswers[key];
+
+    // conditional sub-questions (data-visible-if="q:val")
+    panel.querySelectorAll('.panel-q[data-visible-if]').forEach(function(pq){
+      const [vq, vval] = pq.dataset.visibleIf.split(':');
+      pq.classList.toggle('shown', answers[vq] === vval);
+    });
+
+    // conditional recommendation cards (data-show-if="q1:v1,q2:v2" all-of; supports v1|v2 any-of)
+    panel.querySelectorAll('.rec-card[data-show-if]').forEach(function(card){
+      const conditions = card.dataset.showIf.split(',');
+      const match = conditions.every(function(cond){
+        const [cq, cvals] = cond.split(':');
+        const accepted = cvals.split('|');
+        return accepted.indexOf(answers[cq]) !== -1;
+      });
+      card.classList.toggle('shown', match);
+    });
+  }
+
+  // ================= LANDING / MODULE SWITCHING =================
+  const landingEl = document.getElementById('landing');
+  const classModule = document.getElementById('classificazione');
+  const therapyModule = document.getElementById('terapia');
+  const scorebarEl = document.querySelector('.scorebar');
+
+  function showLanding(){
+    landingEl.classList.remove('hidden');
+    classModule.classList.add('hidden');
+    therapyModule.classList.add('hidden');
+    if(scorebarEl) scorebarEl.style.display = 'none';
+    window.scrollTo({top:0, behavior:'smooth'});
+    history.replaceState(null, '', window.location.pathname);
+  }
+
+  function showModule(target){
+    landingEl.classList.add('hidden');
+    classModule.classList.toggle('hidden', target !== 'classificazione');
+    therapyModule.classList.toggle('hidden', target !== 'terapia');
+    if(scorebarEl) scorebarEl.style.display = (target === 'classificazione') ? 'block' : 'none';
+    window.scrollTo({top:0, behavior:'smooth'});
+    history.replaceState(null, '', '#' + target);
+  }
+
+  document.querySelectorAll('.landing-btn').forEach(function(btn){
+    btn.addEventListener('click', function(){ showModule(btn.dataset.target); });
+  });
+  document.querySelectorAll('[data-back]').forEach(function(btn){
+    btn.addEventListener('click', showLanding);
+  });
+  const ctaBtn = document.getElementById('ctaTherapy');
+  if(ctaBtn){
+    ctaBtn.addEventListener('click', function(){ showModule('terapia'); });
+  }
+
+  // deep-link support: open directly into a module if the URL has #classificazione or #terapia
+  const initialHash = window.location.hash.replace('#', '');
+  if(initialHash === 'classificazione' || initialHash === 'terapia'){
+    showModule(initialHash);
+  } else {
+    showLanding();
+  }
 })();
 </script>
 
