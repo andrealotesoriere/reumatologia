@@ -1,487 +1,579 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Artrite Psoriasica - Guida Rapida</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="https://cdn.tailwindcss.com"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Artrite Psoriasica | RheumaTools</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F6F8F7;
+    --surface:#FFFFFF;
+    --surface-alt:#EEF3F1;
+    --border:#DCE4E1;
+    --text:#25302E;
+    --text-muted:#5B6A66;
+    --text-faint:#8B9793;
 
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300..700&display=swap');
+    --teal:#3E6D69;
+    --teal-dark:#2C504D;
+    --teal-soft:#DDEBE8;
+    --teal-line:#BBD6D2;
 
-        :root {
-            --primary: #8B7FD1;
-            --primary-light: #EFEBFB;
-            --secondary: #5FB8A6;
-            --secondary-light: #E4F5F1;
-            --warning: #D99A5B;
-            --warning-light: #FBF0E4;
-            --alert: #D97C97;
-            --alert-light: #FBEBF0;
-            --ink: #4B4560;
-            --ink-soft: #8783A0;
-            --page-bg: #FAF9FD;
-        }
+    --violet:#7669A0;
+    --violet-dark:#584D80;
+    --violet-soft:#E7E2F3;
+    --violet-line:#CBC0E3;
 
-        body { font-family: 'Inter', sans-serif; background-color: var(--page-bg); color: var(--ink); }
+    --clay:#B15F49;
+    --clay-soft:#F3DED7;
+    --clay-line:#E2B7A8;
 
-        .back-link {
-            background-color: white; color: var(--ink-soft); font-weight: 500;
-            padding: 0.5rem 1.1rem; border-radius: 999px; box-shadow: 0 2px 8px rgba(139, 127, 209, 0.12);
-            transition: all 0.2s;
-        }
-        .back-link:hover { color: var(--primary); box-shadow: 0 4px 12px rgba(139, 127, 209, 0.18); }
+    --sage:#5E8467;
+    --sage-dark:#33503E;
+    --sage-soft:#E1EAE2;
+    --sage-line:#BFD3C4;
 
-        .content-title { font-size: 2rem; font-weight: 600; color: var(--primary); letter-spacing: -0.01em; }
+    --amber:#B99A4A; --amber-dark:#7A6530; --amber-soft:#F1EAD3; --amber-line:#DCC894;
+    --terracotta:#C17D45; --terracotta-dark:#7D501F; --terracotta-soft:#F4E2CE; --terracotta-line:#E3B98C;
 
-        .content-section { padding: 2rem; background-color: white; border-radius: 1.75rem; box-shadow: 0 10px 40px -12px rgba(139, 127, 209, 0.15); }
+    --radius-lg:22px;
+    --radius-md:14px;
+    --radius-sm:9px;
+    --radius-pill:999px;
 
-        .section-title { font-size: 1.5rem; font-weight: 600; color: var(--ink); margin-bottom: 1.5rem; }
-        .section-title .dot { color: var(--primary); }
+    --shadow-card: 0 1px 2px rgba(37,48,46,0.04), 0 6px 20px rgba(37,48,46,0.05);
+  }
 
-        .info-box { background-color: var(--secondary-light); border-radius: 1.25rem; padding: 1.25rem 1.5rem; }
-        .info-box p.label { color: var(--secondary); font-weight: 600; }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--bg); color:var(--text); font-family:'Inter', system-ui, sans-serif;
+    font-size:16px; line-height:1.55; -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,h4{font-family:'Spectral', Georgia, serif; font-weight:600; color:var(--teal-dark); margin:0 0 0.4em 0; line-height:1.3;}
+  a{color:var(--teal-dark);}
 
-        .warning-box { background-color: var(--warning-light); border-radius: 1.25rem; padding: 1.25rem 1.5rem; }
-        .warning-box p.label { color: var(--warning); font-weight: 600; }
+  .wrap{max-width:760px; margin:0 auto; padding:0 20px 60px 20px;}
 
-        .domain-tab {
-            padding: 0.65rem 1.25rem; border-radius: 999px; font-weight: 500; cursor: pointer;
-            transition: all 0.2s; white-space: nowrap; font-size: 0.9rem;
-        }
-        .domain-tab-active { background-color: var(--primary); color: white; box-shadow: 0 4px 14px -4px rgba(139,127,209,0.5); }
-        .domain-tab-inactive { background-color: var(--primary-light); color: var(--primary); }
-        .domain-tab-inactive:hover { background-color: #E3DDF7; }
+  header.site{background:var(--surface); border-bottom:1px solid var(--border);}
+  .site-inner{max-width:760px; margin:0 auto; padding:18px 20px; font-size:14px; color:var(--text-muted);}
+  .site-inner a{text-decoration:none; color:var(--text-muted); border-bottom:1px solid var(--border);}
+  .site-inner a:hover{color:var(--teal-dark);}
+  .site-inner .sep{margin:0 6px; color:var(--text-faint);}
 
-        .domain-content-box { background-color: var(--primary-light); border-radius: 1.5rem; padding: 1.75rem; margin-top: 1rem; min-height: 220px; }
+  .hero{padding:44px 0 8px 0;}
+  .hero h1{font-size:clamp(28px,4vw,38px); letter-spacing:-0.01em;}
+  .hero .sub{color:var(--text-muted); font-size:17px; max-width:58ch; margin-top:10px;}
 
-        .step-list { list-style: none; padding: 0; margin: 0; counter-reset: step-counter; }
-        .step-list li { counter-increment: step-counter; display: flex; align-items: flex-start; margin-bottom: 1.25rem; }
-        .step-list li::before {
-            content: "Step " counter(step-counter); background-color: var(--primary); color: white; font-weight: 600;
-            border-radius: 999px; padding: 0.3rem 0.9rem; margin-right: 1rem; flex-shrink: 0; font-size: 0.8rem; white-space: nowrap;
-        }
-        .step-details { font-size: 0.9rem; color: var(--ink); line-height: 1.65; }
-        .step-details ul { color: #6B6580; margin-top: 0.4rem; }
+  .disclaimer{
+    margin:22px 0 0 0; padding:16px 18px; background:var(--violet-soft); border:1px solid var(--violet-line);
+    border-radius:var(--radius-md); color:#3E3560; font-size:14.5px; line-height:1.55;
+  }
+  .disclaimer strong{color:#2E2650;}
 
-        .calc-card { background-color: white; border-radius: 1.75rem; padding: 2rem; box-shadow: 0 10px 40px -12px rgba(139, 127, 209, 0.15); border: 1px solid #F0EDF9; }
+  .hidden{display:none !important;}
 
-        .criteria-label { display: block; font-weight: 500; color: var(--ink-soft); margin-bottom: 0.5rem; font-size: 0.9rem; }
-        .criteria-select, .criteria-input {
-            width: 100%; padding: 0.75rem 1rem; border: 1px solid #E9E5F5; border-radius: 0.9rem;
-            background-color: #FCFBFE; appearance: none; cursor: pointer; transition: border-color 0.2s, box-shadow 0.2s; font-size: 1rem; color: var(--ink);
-        }
-        .criteria-select:focus, .criteria-input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary-light); outline: none; }
-        .input-group, .input-group-activity { margin-bottom: 1rem; padding: 0.9rem; background-color: #FAF9FD; border-radius: 1rem; }
-        .score-box { padding: 1.25rem; border-radius: 1.25rem; border: 1px solid; transition: background-color 0.3s, border-color 0.3s; }
-    </style>
+  .landing{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin:34px 0 12px 0;}
+  @media(max-width:640px){.landing{grid-template-columns:1fr;}}
+  .landing-btn{
+    font-family:inherit; text-align:left; background:var(--surface); border:1px solid var(--border);
+    border-radius:var(--radius-lg); padding:26px 22px; cursor:pointer; box-shadow:var(--shadow-card);
+    transition:border-color .15s ease, transform .12s ease;
+  }
+  .landing-btn:hover{border-color:var(--teal-line); transform:translateY(-1px);}
+  .landing-btn .lb-title{display:block; font-family:'Spectral',serif; font-weight:600; font-size:18px; color:var(--teal-dark);}
+  .landing-btn .lb-desc{display:block; margin-top:6px; font-size:13px; color:var(--text-muted); line-height:1.5;}
+
+  .back-link{
+    display:inline-flex; align-items:center; gap:6px; font-family:inherit; font-size:13.5px; font-weight:600;
+    color:var(--text-muted); background:none; border:none; cursor:pointer; padding:0; margin-bottom:22px;
+  }
+  .back-link:hover{color:var(--teal-dark);}
+
+  section.block{margin-top:40px;}
+  .block-head{margin-bottom:6px;}
+  .block-head h2{font-size:22px;}
+  .block-note{color:var(--text-muted); font-size:14.5px; margin-bottom:20px;}
+
+  .panel{background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-lg); padding:22px 24px; box-shadow:var(--shadow-card); margin-bottom:16px;}
+  .panel h3{font-size:17px; margin-bottom:14px;}
+
+  .box{padding:16px 18px; border-radius:var(--radius-md); font-size:14.5px; line-height:1.6; margin-bottom:16px; border:1px solid;}
+  .box p{margin:0;}
+  .box.info{background:var(--teal-soft); border-color:var(--teal-line); color:var(--teal-dark); font-weight:600;}
+
+  /* ---- domain sub-tabs ---- */
+  .subtab-row{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:4px;}
+  .subtab{
+    font-family:inherit; font-size:13.5px; font-weight:600; color:var(--text-muted); background:var(--surface-alt);
+    border:1px solid var(--border); border-radius:var(--radius-pill); padding:9px 16px; cursor:pointer; transition:all .15s ease;
+  }
+  .subtab:hover{border-color:var(--teal-line);}
+  .subtab.on{background:var(--teal); border-color:var(--teal); color:#fff;}
+
+  .domain-panel{display:none; margin-top:22px;}
+  .domain-panel.on{display:block;}
+  .domain-panel h3{font-size:18px; margin-bottom:6px;}
+  .domain-panel .intro{color:var(--text-muted); font-size:14px; font-style:italic; margin-bottom:18px; line-height:1.6;}
+
+  .step-list{list-style:none; margin:0; padding:0;}
+  .step-list > li{counter-increment:step; display:flex; gap:14px; margin-bottom:20px;}
+  .step-list{counter-reset:step;}
+  .step-list > li:last-child{margin-bottom:0;}
+  .step-list > li::before{
+    content:counter(step); flex:none; width:28px; height:28px; border-radius:50%;
+    background:var(--teal); color:#fff; font-weight:700; font-size:13px;
+    display:flex; align-items:center; justify-content:center; margin-top:1px;
+  }
+  .step-body{flex:1;}
+  .step-title{font-weight:600; font-size:14.5px; color:var(--text);}
+  .step-detail{font-size:14px; color:var(--text-muted); margin-top:4px; line-height:1.6;}
+  .step-detail ul{margin:8px 0 0 0; padding-left:18px;}
+  .step-detail li{font-size:13.5px; color:var(--text-muted); margin-bottom:4px;}
+
+  /* ---- calculator fields ---- */
+  .field{margin-bottom:12px; padding:14px 16px; background:var(--surface-alt); border-radius:var(--radius-md);}
+  .field label{display:block; font-size:13px; font-weight:600; color:var(--text); margin-bottom:6px;}
+  .field .hint{font-weight:400; color:var(--text-faint); font-size:11.5px; display:block; margin-top:2px;}
+  .field select, .field input[type=number]{
+    width:100%; padding:10px 12px; border:1px solid var(--border); border-radius:var(--radius-sm);
+    background:var(--surface); font-family:inherit; font-size:14.5px; color:var(--text); cursor:pointer;
+  }
+  .field input[type=number]{cursor:text;}
+  .field select:focus, .field input:focus{border-color:var(--teal); box-shadow:0 0 0 3px var(--teal-soft); outline:none;}
+  .fields-grid{display:grid; grid-template-columns:repeat(auto-fill, minmax(200px,1fr)); gap:0;}
+
+  .result{border-radius:var(--radius-lg); padding:22px 24px; border:1px solid var(--border); background:var(--surface-alt); margin-top:18px; text-align:center;}
+  .result.pos{background:var(--sage-soft); border-color:var(--sage-line);}
+  .result .score-line{font-size:14px; color:var(--text-muted);}
+  .result .score-line .v{font-family:'Spectral',serif; font-size:24px; font-weight:700; color:var(--teal-dark); margin:0 4px;}
+  .result.pos .score-line .v{color:var(--sage-dark);}
+  .result .verdict{font-size:15px; margin-top:6px; color:var(--text-muted);}
+  .result.pos .verdict{color:var(--sage-dark); font-weight:600;}
+
+  .sev-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:12px; margin-top:20px; max-width:420px; margin-left:auto; margin-right:auto;}
+  .sev-box{padding:18px; border-radius:var(--radius-md); text-align:center; border:1px solid var(--border); background:var(--surface-alt); transition:all .2s ease;}
+  .sev-box .k{font-size:12.5px; font-weight:700; color:var(--text-muted);}
+  .sev-box .v{font-family:'Spectral',serif; font-size:26px; font-weight:700; margin-top:4px; color:var(--text);}
+  .sev-box .status{font-size:12px; margin-top:4px; color:var(--text-faint); font-weight:600;}
+  .sev-box.remission{background:var(--sage-soft); border-color:var(--sage-line);}
+  .sev-box.remission .v, .sev-box.remission .status{color:var(--sage-dark);}
+  .sev-box.low{background:var(--amber-soft); border-color:var(--amber-line);}
+  .sev-box.low .v, .sev-box.low .status{color:var(--amber-dark);}
+  .sev-box.moderate{background:var(--terracotta-soft); border-color:var(--terracotta-line);}
+  .sev-box.moderate .v, .sev-box.moderate .status{color:var(--terracotta-dark);}
+  .sev-box.high{background:var(--clay-soft); border-color:var(--clay-line);}
+  .sev-box.high .v, .sev-box.high .status{color:#8A4A38;}
+
+  .thresholds{margin-top:22px; font-size:12.5px; color:var(--text-faint); line-height:1.8;}
+  .thresholds strong{color:var(--text-muted);}
+
+  .fonti{margin-top:64px; padding-top:32px; border-top:1px solid var(--border);}
+  .fonti h2{font-size:21px;}
+  .fonti ol{padding-left:20px; margin:16px 0 0 0;}
+  .fonti li{font-size:14px; color:var(--text-muted); margin-bottom:10px; line-height:1.55;}
+  .fonti li .t{color:var(--text); font-weight:600;}
+  footer.site{max-width:760px; margin:40px auto 0 auto; padding:24px 20px 40px 20px; color:var(--text-faint); font-size:12.5px; border-top:1px solid var(--border);}
+</style>
 </head>
-<body class="antialiased">
+<body>
 
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-14 space-y-10">
+<header class="site">
+  <div class="site-inner"><a href="index.html">RheumaTools</a><span class="sep">/</span>Artrite Psoriasica</div>
+</header>
 
-        <header class="mb-2">
-            <div class="flex justify-between items-center">
-                <h1 class="content-title">Artrite Psoriasica</h1>
-                <a href="index.html" class="back-link">&larr; Indietro</a>
-            </div>
-            <p class="text-gray-500 mt-2 text-sm">Guida per la classificazione e la gestione terapeutica per dominio, secondo l'approccio GRAPPA/EULAR.</p>
-        </header>
+<div class="wrap">
 
-        <!-- Terapia per dominio -->
-        <section class="content-section">
-            <h2 class="section-title"><span class="dot">·</span> Terapia per dominio</h2>
-            <p class="text-sm text-gray-500 mb-4">Seleziona il dominio predominante non controllato per vedere la strategia terapeutica. L'obiettivo resta la remissione o la bassa attività di malattia.</p>
+  <div class="hero">
+    <h1>Artrite Psoriasica</h1>
+    <p class="sub">Classificazione e gestione terapeutica per dominio, secondo l'approccio GRAPPA/EULAR.</p>
+    <div class="disclaimer">
+      <strong>Da leggere prima di usarlo.</strong> Schema terapeutico e calcolatori sono un supporto al ragionamento clinico: non sostituiscono la valutazione del reumatologo né la gestione congiunta con dermatologia nei domini cutaneo e ungueale.
+    </div>
+  </div>
 
-            <div class="flex flex-wrap gap-2 mb-2">
-                <div class="domain-tab domain-tab-active" onclick="showTherapyDomain('periferica')" id="tab-periferica">Artrite periferica</div>
-                <div class="domain-tab domain-tab-inactive" onclick="showTherapyDomain('assiale')" id="tab-assiale">Malattia assiale</div>
-                <div class="domain-tab domain-tab-inactive" onclick="showTherapyDomain('entesite')" id="tab-entesite">Entesite</div>
-                <div class="domain-tab domain-tab-inactive" onclick="showTherapyDomain('dattilite')" id="tab-dattilite">Dattilite</div>
-                <div class="domain-tab domain-tab-inactive" onclick="showTherapyDomain('cutanea')" id="tab-cutanea">Psoriasi cutanea/ungueale</div>
-            </div>
+  <div class="landing" id="landing">
+    <button type="button" class="landing-btn" data-target="terapia">
+      <span class="lb-title">Terapia per dominio</span>
+      <span class="lb-desc">Periferica, assiale, entesite, dattilite, cute.</span>
+    </button>
+    <button type="button" class="landing-btn" data-target="caspar">
+      <span class="lb-title">Criteri CASPAR</span>
+      <span class="lb-desc">Classificazione della PsA.</span>
+    </button>
+    <button type="button" class="landing-btn" data-target="attivita">
+      <span class="lb-title">Attività di malattia</span>
+      <span class="lb-desc">DAPSA e DAS28-PCR.</span>
+    </button>
+  </div>
 
-            <div id="therapy-content" class="domain-content-box"></div>
-        </section>
+  <!-- ================= MODULO: TERAPIA PER DOMINIO ================= -->
+  <section class="block hidden" id="terapia">
+    <button type="button" class="back-link" data-back>← Cambia sezione</button>
+    <div class="block-head"><h2>Terapia per dominio</h2></div>
+    <p class="block-note">Seleziona il dominio predominante non controllato per vedere la strategia terapeutica. L'obiettivo resta la remissione o la bassa attività di malattia.</p>
 
-        <!-- Criteri e strumenti -->
-        <section class="content-section">
-            <h2 class="section-title"><span class="dot">·</span> Criteri classificativi e strumenti</h2>
-
-            <div class="space-y-8">
-
-                <!-- CASPAR -->
-                <div class="calc-card">
-                    <h3 class="text-lg font-semibold mb-4">Criteri classificativi CASPAR</h3>
-
-                    <div class="info-box mb-5">
-                        <p class="label text-sm">Un paziente con malattia articolare infiammatoria è classificabile come PsA con un punteggio ≥ 3.</p>
-                    </div>
-
-                    <div class="space-y-3">
-                        <div class="input-group">
-                            <label for="psoriasis_status" class="criteria-label">Psoriasi (max 2 pt)</label>
-                            <select id="psoriasis_status" class="criteria-select" onchange="calculateCASPARScore()">
-                                <option value="0" selected>Assente (0 pt)</option>
-                                <option value="2">Attuale (2 pt)</option>
-                                <option value="1">Anamnestica, non attuale (1 pt)</option>
-                                <option value="1">Familiarità, se non attuale né anamnestica (1 pt)</option>
-                            </select>
-                        </div>
-                        <div class="input-group">
-                            <label for="nail_dystrophy" class="criteria-label">Distrofia ungueale psoriasica (1 pt)</label>
-                            <select id="nail_dystrophy" class="criteria-select" onchange="calculateCASPARScore()">
-                                <option value="0" selected>Assente (0 pt)</option>
-                                <option value="1">Presente (1 pt)</option>
-                            </select>
-                        </div>
-                        <div class="input-group">
-                            <label for="dactylitis" class="criteria-label">Dattilite (1 pt)</label>
-                            <select id="dactylitis" class="criteria-select" onchange="calculateCASPARScore()">
-                                <option value="0" selected>Assente (0 pt)</option>
-                                <option value="1">Presente o anamnestica (1 pt)</option>
-                            </select>
-                        </div>
-                        <div class="input-group">
-                            <label for="radiology" class="criteria-label">Evidenza radiologica (1 pt)</label>
-                            <select id="radiology" class="criteria-select" onchange="calculateCASPARScore()">
-                                <option value="0" selected>Assente (0 pt)</option>
-                                <option value="1">Neoformazione ossea mal definita in sede iuxta-articolare, esclusi gli osteofiti (1 pt)</option>
-                            </select>
-                        </div>
-                        <div class="input-group">
-                            <label for="rheumatoid_factor" class="criteria-label">Fattore reumatoide (1 pt)</label>
-                            <select id="rheumatoid_factor" class="criteria-select" onchange="calculateCASPARScore()">
-                                <option value="0" selected>Positivo (0 pt)</option>
-                                <option value="1">Negativo (1 pt)</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div id="psa_caspar_result_box" class="mt-6 p-5 rounded-2xl text-center transition-all duration-500" style="background-color: #FAF9FD; border: 1px solid #F0EDF9;">
-                        <p>Punteggio totale: <span id="psa_caspar_score" class="text-2xl font-semibold ml-1" style="color: var(--primary);">0</span></p>
-                        <p id="psa_caspar_status" class="text-base mt-2 text-gray-500">Seleziona i criteri per iniziare.</p>
-                    </div>
-                </div>
-
-                <!-- DAPSA e DAS28 -->
-                <div class="calc-card">
-                    <h3 class="text-lg font-semibold mb-4">Attività di malattia — DAPSA e DAS28-PCR</h3>
-
-                    <p class="text-sm text-gray-500 mb-4">Il DAPSA è lo strumento raccomandato da GRAPPA/EULAR per il dominio periferico; il DAS28-PCR è riportato come riferimento aggiuntivo.</p>
-
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-                        <div class="input-group-activity">
-                            <label for="TJC68" class="criteria-label">TJC68 — articolazioni dolenti (0-68) <span class="block text-xs font-normal text-gray-400">DAPSA</span></label>
-                            <input type="number" id="TJC68" min="0" max="68" value="0" class="criteria-input" oninput="runAllActivityCalculationsPsA()">
-                        </div>
-                        <div class="input-group-activity">
-                            <label for="SJC66" class="criteria-label">SJC66 — articolazioni tumefatte (0-66) <span class="block text-xs font-normal text-gray-400">DAPSA</span></label>
-                            <input type="number" id="SJC66" min="0" max="66" value="0" class="criteria-input" oninput="runAllActivityCalculationsPsA()">
-                        </div>
-                        <div class="input-group-activity">
-                            <label for="PGA_DAPSA" class="criteria-label">PGA — attività di malattia, paziente (0-10) <span class="block text-xs font-normal text-gray-400">DAPSA</span></label>
-                            <input type="number" id="PGA_DAPSA" min="0" max="10" step="0.1" value="0" class="criteria-input" oninput="runAllActivityCalculationsPsA()">
-                        </div>
-                        <div class="input-group-activity">
-                            <label for="PAIN_DAPSA" class="criteria-label">Dolore, paziente (0-10) <span class="block text-xs font-normal text-gray-400">DAPSA</span></label>
-                            <input type="number" id="PAIN_DAPSA" min="0" max="10" step="0.1" value="0" class="criteria-input" oninput="runAllActivityCalculationsPsA()">
-                        </div>
-                        <div class="input-group-activity">
-                            <label for="CRP_DAPSA" class="criteria-label">PCR in mg/dL <span class="block text-xs font-normal text-gray-400">DAPSA e DAS28</span></label>
-                            <input type="number" id="CRP_DAPSA" min="0" step="0.1" value="0" class="criteria-input" oninput="runAllActivityCalculationsPsA()">
-                        </div>
-                        <div class="input-group-activity">
-                            <label for="GH_DAS" class="criteria-label">GH — salute generale, paziente (0-10) <span class="block text-xs font-normal text-gray-400">solo DAS28</span></label>
-                            <input type="number" id="GH_DAS" min="0" max="10" step="0.1" value="0" class="criteria-input" oninput="runAllActivityCalculationsPsA()">
-                        </div>
-                        <div class="input-group-activity">
-                            <label for="TJC28_DAS" class="criteria-label">TJC28 — articolazioni dolenti (0-28) <span class="block text-xs font-normal text-gray-400">solo DAS28</span></label>
-                            <input type="number" id="TJC28_DAS" min="0" max="28" value="0" class="criteria-input" oninput="runAllActivityCalculationsPsA()">
-                        </div>
-                        <div class="input-group-activity">
-                            <label for="SJC28_DAS" class="criteria-label">SJC28 — articolazioni tumefatte (0-28) <span class="block text-xs font-normal text-gray-400">solo DAS28</span></label>
-                            <input type="number" id="SJC28_DAS" min="0" max="28" value="0" class="criteria-input" oninput="runAllActivityCalculationsPsA()">
-                        </div>
-                    </div>
-
-                    <hr class="my-6" style="border-color: #F0EDF9;">
-
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-center max-w-md mx-auto">
-                        <div id="dapsa_box" class="score-box" style="background-color: #FAF9FD; border-color: #E9E5F5;">
-                            <p class="text-sm font-medium text-gray-500">DAPSA</p>
-                            <p class="text-3xl font-semibold mt-1" style="color: var(--primary);"><span id="dapsa_score">0.0</span></p>
-                            <p id="dapsa_status" class="text-xs mt-1 text-gray-500">Inserisci i dati</p>
-                        </div>
-                        <div id="das28_psa_box" class="score-box" style="background-color: #FAF9FD; border-color: #E9E5F5;">
-                            <p class="text-sm font-medium text-gray-500">DAS28-PCR</p>
-                            <p class="text-3xl font-semibold mt-1" style="color: var(--primary);"><span id="das28_psa_score">0.00</span></p>
-                            <p id="das28_psa_status" class="text-xs mt-1 text-gray-500">Inserisci i dati</p>
-                        </div>
-                    </div>
-
-                    <div class="mt-8">
-                        <h4 class="text-sm font-medium text-gray-500 mb-2">Soglie di attività</h4>
-                        <ul class="text-xs space-y-1 text-gray-500">
-                            <li>DAPSA: &le; 4 remissione · 4-14 bassa · 14-28 moderata · &gt; 28 alta</li>
-                            <li>DAS28-PCR: &lt; 2.6 remissione · 2.6-3.2 bassa · 3.2-5.1 moderata · &ge; 5.1 alta</li>
-                        </ul>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
+    <div class="subtab-row" id="domainTabs">
+      <button type="button" class="subtab on" data-domain="periferica">Artrite periferica</button>
+      <button type="button" class="subtab" data-domain="assiale">Malattia assiale</button>
+      <button type="button" class="subtab" data-domain="entesite">Entesite</button>
+      <button type="button" class="subtab" data-domain="dattilite">Dattilite</button>
+      <button type="button" class="subtab" data-domain="cutanea">Psoriasi cutanea/ungueale</button>
     </div>
 
-    <script>
-        const therapyContentMap = {
-            periferica: `
-                <h4 class="text-lg font-semibold mb-3" style="color: var(--primary);">Artrite periferica</h4>
-                <ul class="step-list">
-                    <li>
-                        <div>
-                            <span class="font-medium text-gray-800">Prima linea: csDMARD e FANS</span>
-                            <p class="step-details">Si inizia con metotrexato o leflunomide, associando FANS per il controllo del dolore e dell'infiammazione. Si possono valutare infiltrazioni di corticosteroidi. La sulfasalazina ha un'efficacia inferiore nella PsA.</p>
-                        </div>
-                    </li>
-                    <li>
-                        <div>
-                            <span class="font-medium text-gray-800">Fallimento del csDMARD: terapie biologiche o mirate</span>
-                            <p class="step-details">Se non c'è miglioramento entro 3-6 mesi si passa a una terapia avanzata; la scelta dipende anche dalle altre manifestazioni presenti (cute, entesite).</p>
-                            <ul class="list-disc ml-5 mt-1 text-sm">
-                                <li>Anti-TNF (adalimumab, etanercept, e altri)</li>
-                                <li>Inibitori di JAK (tofacitinib, upadacitinib, e altri)</li>
-                                <li>Inibitori IL-17 (secukinumab, ixekizumab)</li>
-                                <li>Inibitori IL-12/23 (ustekinumab, guselkumab, e altri)</li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li>
-                        <div>
-                            <span class="font-medium text-gray-800">Fallimento della terapia biologica</span>
-                            <p class="step-details">Si passa a un altro biologico o farmaco mirato, preferibilmente con meccanismo d'azione diverso — ad esempio da anti-TNF a inibitore IL-17 o JAK-inibitore.</p>
-                        </div>
-                    </li>
-                </ul>
-            `,
-            assiale: `
-                <h4 class="text-lg font-semibold mb-3" style="color: var(--primary);">Malattia assiale</h4>
-                <p class="text-sm text-gray-500 italic mb-4">I csDMARD (metotrexato, leflunomide) non sono efficaci sulla malattia assiale: la terapia si basa su FANS e farmaci biologici.</p>
-                <ul class="step-list">
-                    <li>
-                        <div>
-                            <span class="font-medium text-gray-800">Prima linea: FANS</span>
-                            <p class="step-details">Terapia ottimizzata con FANS, se tollerati, associata a fisioterapia. Si valuta la risposta dopo 4 settimane a dose piena.</p>
-                        </div>
-                    </li>
-                    <li>
-                        <div>
-                            <span class="font-medium text-gray-800">Fallimento dei FANS: terapie biologiche</span>
-                            <p class="step-details">In assenza di risposta, o se persistono sintomi attivi (ad esempio un BASDAI elevato), si passa a:</p>
-                            <ul class="list-disc ml-5 mt-1 text-sm">
-                                <li>Anti-TNF (infliximab, etanercept, e altri)</li>
-                                <li>Inibitori IL-17 (secukinumab, ixekizumab) — indicati per il coinvolgimento assiale</li>
-                                <li>Inibitori di JAK</li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li>
-                        <div>
-                            <span class="font-medium text-gray-800">Switch terapeutico</span>
-                            <p class="step-details">In caso di fallimento si passa a un altro anti-TNF o a una classe diversa (inibitore IL-17 o JAK-inibitore).</p>
-                        </div>
-                    </li>
-                </ul>
-            `,
-            entesite: `
-                <h4 class="text-lg font-semibold mb-3" style="color: var(--primary);">Entesite</h4>
-                <p class="text-sm text-gray-500 italic mb-4">L'entesite risponde in modo limitato ai csDMARD ed è spesso più difficile da trattare rispetto ad altri domini.</p>
-                <ul class="step-list">
-                    <li>
-                        <div>
-                            <span class="font-medium text-gray-800">Prima linea: trattamento locale e FANS</span>
-                            <p class="step-details">Infiltrazione locale di corticosteroidi, con attenzione al rischio di rottura tendinea, associata a FANS e fisioterapia.</p>
-                        </div>
-                    </li>
-                    <li>
-                        <div>
-                            <span class="font-medium text-gray-800">In caso di persistenza: terapie biologiche o mirate</span>
-                            <p class="step-details">Se l'entesite resta sintomatica, si considerano farmaci con evidenza di efficacia in questo dominio:</p>
-                            <ul class="list-disc ml-5 mt-1 text-sm">
-                                <li>Inibitori IL-17 (secukinumab, ixekizumab) — raccomandazione forte nelle linee guida GRAPPA</li>
-                                <li>Anti-TNF (adalimumab, etanercept, e altri)</li>
-                                <li>Inibitori IL-23</li>
-                                <li>Inibitori di JAK</li>
-                            </ul>
-                        </div>
-                    </li>
-                </ul>
-            `,
-            dattilite: `
-                <h4 class="text-lg font-semibold mb-3" style="color: var(--primary);">Dattilite</h4>
-                <p class="text-sm text-gray-500 italic mb-4">La dattilite è spesso associata a un'attività di malattia più elevata e può essere difficile da trattare.</p>
-                <ul class="step-list">
-                    <li>
-                        <div>
-                            <span class="font-medium text-gray-800">Prima linea: terapia anti-infiammatoria</span>
-                            <p class="step-details">FANS e, se la dattilite è localizzata, infiltrazione di corticosteroidi con cautela.</p>
-                        </div>
-                    </li>
-                    <li>
-                        <div>
-                            <span class="font-medium text-gray-800">Progressione terapeutica</span>
-                            <p class="step-details">Se la dattilite si inserisce in un quadro di artrite periferica si inizia con metotrexato. In caso di fallimento, o di dattilite severa isolata, si passa direttamente a:</p>
-                            <ul class="list-disc ml-5 mt-1 text-sm">
-                                <li>Anti-TNF (adalimumab, etanercept, e altri)</li>
-                                <li>Inibitori IL-17 (ixekizumab, secukinumab)</li>
-                                <li>Inibitori di JAK</li>
-                            </ul>
-                        </div>
-                    </li>
-                </ul>
-            `,
-            cutanea: `
-                <h4 class="text-lg font-semibold mb-3" style="color: var(--primary);">Psoriasi cutanea e ungueale</h4>
-                <p class="text-sm text-gray-500 italic mb-4">La gestione va coordinata con la dermatologia; la scelta del farmaco reumatologico tiene conto anche dell'efficacia sulla cute, valutata con il PASI.</p>
-                <ul class="step-list">
-                    <li>
-                        <div>
-                            <span class="font-medium text-gray-800">Prima linea: terapia topica e csDMARD</span>
-                            <p class="step-details">Terapia topica (corticosteroidi, calcipotriolo) associata a metotrexato o leflunomide — il metotrexato è spesso un buon ponte tra il coinvolgimento articolare e quello cutaneo. I corticosteroidi sistemici vanno evitati per il rischio di psoriasi pustolosa alla sospensione.</p>
-                        </div>
-                    </li>
-                    <li>
-                        <div>
-                            <span class="font-medium text-gray-800">Fallimento: farmaci biologici o mirati</span>
-                            <p class="step-details">Per psoriasi moderata-severa e coinvolgimento ungueale:</p>
-                            <ul class="list-disc ml-5 mt-1 text-sm">
-                                <li>Inibitori IL-17 (secukinumab, ixekizumab)</li>
-                                <li>Inibitori IL-23 (guselkumab, risankizumab)</li>
-                                <li>Inibitori IL-12/23 (ustekinumab)</li>
-                                <li>Anti-TNF (adalimumab, e altri)</li>
-                                <li>Inibitori di JAK o apremilast (quest'ultimo con efficacia più contenuta)</li>
-                            </ul>
-                        </div>
-                    </li>
-                </ul>
-            `
-        };
+    <div class="panel">
+      <!-- PERIFERICA -->
+      <div class="domain-panel on" id="domain-periferica">
+        <h3>Artrite periferica</h3>
+        <ol class="step-list">
+          <li><div class="step-body">
+            <div class="step-title">Prima linea: csDMARD e FANS</div>
+            <div class="step-detail">Si inizia con metotrexato o leflunomide, associando FANS per il controllo del dolore e dell'infiammazione. Si possono valutare infiltrazioni di corticosteroidi. La sulfasalazina ha un'efficacia inferiore nella PsA.</div>
+          </div></li>
+          <li><div class="step-body">
+            <div class="step-title">Fallimento del csDMARD: terapie biologiche o mirate</div>
+            <div class="step-detail">Se non c'è miglioramento entro 3–6 mesi si passa a una terapia avanzata; la scelta dipende anche dalle altre manifestazioni presenti (cute, entesite).
+              <ul>
+                <li>Anti-TNF (adalimumab, etanercept, e altri)</li>
+                <li>Inibitori di JAK (tofacitinib, upadacitinib, e altri)</li>
+                <li>Inibitori IL-17 (secukinumab, ixekizumab)</li>
+                <li>Inibitori IL-12/23 (ustekinumab, guselkumab, e altri)</li>
+              </ul>
+            </div>
+          </div></li>
+          <li><div class="step-body">
+            <div class="step-title">Fallimento della terapia biologica</div>
+            <div class="step-detail">Si passa a un altro biologico o farmaco mirato, preferibilmente con meccanismo d'azione diverso — ad esempio da anti-TNF a inibitore IL-17 o JAK-inibitore.</div>
+          </div></li>
+        </ol>
+      </div>
 
-        function showTherapyDomain(domain) {
-            document.querySelectorAll('.domain-tab').forEach(tab => {
-                tab.classList.remove('domain-tab-active');
-                tab.classList.add('domain-tab-inactive');
-            });
-            const activeTab = document.getElementById(`tab-${domain}`);
-            if (activeTab) {
-                activeTab.classList.remove('domain-tab-inactive');
-                activeTab.classList.add('domain-tab-active');
-            }
-            document.getElementById('therapy-content').innerHTML = therapyContentMap[domain] || '<p class="text-center text-gray-400 p-8">Contenuto non disponibile.</p>';
-        }
+      <!-- ASSIALE -->
+      <div class="domain-panel" id="domain-assiale">
+        <h3>Malattia assiale</h3>
+        <p class="intro">I csDMARD (metotrexato, leflunomide) non sono efficaci sulla malattia assiale: la terapia si basa su FANS e farmaci biologici.</p>
+        <ol class="step-list">
+          <li><div class="step-body">
+            <div class="step-title">Prima linea: FANS</div>
+            <div class="step-detail">Terapia ottimizzata con FANS, se tollerati, associata a fisioterapia. Si valuta la risposta dopo 4 settimane a dose piena.</div>
+          </div></li>
+          <li><div class="step-body">
+            <div class="step-title">Fallimento dei FANS: terapie biologiche</div>
+            <div class="step-detail">In assenza di risposta, o se persistono sintomi attivi (ad esempio un BASDAI elevato), si passa a:
+              <ul>
+                <li>Anti-TNF (infliximab, etanercept, e altri)</li>
+                <li>Inibitori IL-17 (secukinumab, ixekizumab) — indicati per il coinvolgimento assiale</li>
+                <li>Inibitori di JAK</li>
+              </ul>
+            </div>
+          </div></li>
+          <li><div class="step-body">
+            <div class="step-title">Switch terapeutico</div>
+            <div class="step-detail">In caso di fallimento si passa a un altro anti-TNF o a una classe diversa (inibitore IL-17 o JAK-inibitore).</div>
+          </div></li>
+        </ol>
+      </div>
 
-        // Palette pastello per i risultati
-        const STATUS_COLORS = {
-            remission: { bg: '#E4F5F1', border: '#5FB8A6', text: '#3D8F7F' },
-            low:       { bg: '#FBF6E4', border: '#D9B95B', text: '#A88835' },
-            moderate:  { bg: '#FBF0E4', border: '#D99A5B', text: '#B0703A' },
-            high:      { bg: '#FBEBF0', border: '#D97C97', text: '#B24F6C' }
-        };
+      <!-- ENTESITE -->
+      <div class="domain-panel" id="domain-entesite">
+        <h3>Entesite</h3>
+        <p class="intro">L'entesite risponde in modo limitato ai csDMARD ed è spesso più difficile da trattare rispetto ad altri domini.</p>
+        <ol class="step-list">
+          <li><div class="step-body">
+            <div class="step-title">Prima linea: trattamento locale e FANS</div>
+            <div class="step-detail">Infiltrazione locale di corticosteroidi, con attenzione al rischio di rottura tendinea, associata a FANS e fisioterapia.</div>
+          </div></li>
+          <li><div class="step-body">
+            <div class="step-title">In caso di persistenza: terapie biologiche o mirate</div>
+            <div class="step-detail">Se l'entesite resta sintomatica, si considerano farmaci con evidenza di efficacia in questo dominio:
+              <ul>
+                <li>Inibitori IL-17 (secukinumab, ixekizumab) — raccomandazione forte nelle linee guida GRAPPA</li>
+                <li>Anti-TNF (adalimumab, etanercept, e altri)</li>
+                <li>Inibitori IL-23</li>
+                <li>Inibitori di JAK</li>
+              </ul>
+            </div>
+          </div></li>
+        </ol>
+      </div>
 
-        function calculateCASPARScore() {
-            const psoriasisScore = parseInt(document.getElementById('psoriasis_status').value) || 0;
-            const nailScore = parseInt(document.getElementById('nail_dystrophy').value) || 0;
-            const dactylitisScore = parseInt(document.getElementById('dactylitis').value) || 0;
-            const radiologyScore = parseInt(document.getElementById('radiology').value) || 0;
-            const rfScore = parseInt(document.getElementById('rheumatoid_factor').value) || 0;
+      <!-- DATTILITE -->
+      <div class="domain-panel" id="domain-dattilite">
+        <h3>Dattilite</h3>
+        <p class="intro">La dattilite è spesso associata a un'attività di malattia più elevata e può essere difficile da trattare.</p>
+        <ol class="step-list">
+          <li><div class="step-body">
+            <div class="step-title">Prima linea: terapia anti-infiammatoria</div>
+            <div class="step-detail">FANS e, se la dattilite è localizzata, infiltrazione di corticosteroidi con cautela.</div>
+          </div></li>
+          <li><div class="step-body">
+            <div class="step-title">Progressione terapeutica</div>
+            <div class="step-detail">Se la dattilite si inserisce in un quadro di artrite periferica si inizia con metotrexato. In caso di fallimento, o di dattilite severa isolata, si passa direttamente a:
+              <ul>
+                <li>Anti-TNF (adalimumab, etanercept, e altri)</li>
+                <li>Inibitori IL-17 (ixekizumab, secukinumab)</li>
+                <li>Inibitori di JAK</li>
+              </ul>
+            </div>
+          </div></li>
+        </ol>
+      </div>
 
-            const totalScore = psoriasisScore + nailScore + dactylitisScore + radiologyScore + rfScore;
+      <!-- CUTANEA -->
+      <div class="domain-panel" id="domain-cutanea">
+        <h3>Psoriasi cutanea e ungueale</h3>
+        <p class="intro">La gestione va coordinata con la dermatologia; la scelta del farmaco reumatologico tiene conto anche dell'efficacia sulla cute, valutata con il PASI.</p>
+        <ol class="step-list">
+          <li><div class="step-body">
+            <div class="step-title">Prima linea: terapia topica e csDMARD</div>
+            <div class="step-detail">Terapia topica (corticosteroidi, calcipotriolo) associata a metotrexato o leflunomide — il metotrexato è spesso un buon ponte tra il coinvolgimento articolare e quello cutaneo. I corticosteroidi sistemici vanno evitati per il rischio di psoriasi pustolosa alla sospensione.</div>
+          </div></li>
+          <li><div class="step-body">
+            <div class="step-title">Fallimento: farmaci biologici o mirati</div>
+            <div class="step-detail">Per psoriasi moderata-severa e coinvolgimento ungueale:
+              <ul>
+                <li>Inibitori IL-17 (secukinumab, ixekizumab)</li>
+                <li>Inibitori IL-23 (guselkumab, risankizumab)</li>
+                <li>Inibitori IL-12/23 (ustekinumab)</li>
+                <li>Anti-TNF (adalimumab, e altri)</li>
+                <li>Inibitori di JAK o apremilast (quest'ultimo con efficacia più contenuta)</li>
+              </ul>
+            </div>
+          </div></li>
+        </ol>
+      </div>
+    </div>
+  </section>
 
-            const resultBox = document.getElementById('psa_caspar_result_box');
-            const scoreSpan = document.getElementById('psa_caspar_score');
-            const statusP = document.getElementById('psa_caspar_status');
+  <!-- ================= MODULO: CASPAR ================= -->
+  <section class="block hidden" id="caspar">
+    <button type="button" class="back-link" data-back>← Cambia sezione</button>
+    <div class="block-head"><h2>Criteri classificativi CASPAR</h2></div>
 
-            scoreSpan.textContent = totalScore;
+    <div class="panel">
+      <div class="box info">
+        <p>Un paziente con malattia articolare infiammatoria è classificabile come PsA con un punteggio ≥3.</p>
+      </div>
 
-            if (totalScore >= 3) {
-                resultBox.style.backgroundColor = STATUS_COLORS.remission.bg;
-                resultBox.style.borderColor = STATUS_COLORS.remission.border;
-                scoreSpan.style.color = STATUS_COLORS.remission.text;
-                statusP.style.color = STATUS_COLORS.remission.text;
-                statusP.textContent = 'Criteri raggiunti (≥ 3). Classificabile come artrite psoriasica.';
-            } else {
-                resultBox.style.backgroundColor = STATUS_COLORS.high.bg;
-                resultBox.style.borderColor = STATUS_COLORS.high.border;
-                scoreSpan.style.color = STATUS_COLORS.high.text;
-                statusP.style.color = STATUS_COLORS.high.text;
-                statusP.textContent = 'Criteri non raggiunti (< 3). Non classificabile come PsA.';
-            }
-        }
+      <div class="field">
+        <label for="psoriasis">Psoriasi (max 2 pt)</label>
+        <select id="psoriasis">
+          <option value="0" selected>Assente (0 pt)</option>
+          <option value="2">Attuale (2 pt)</option>
+          <option value="1">Anamnestica, non attuale (1 pt)</option>
+          <option value="1">Familiarità, se non attuale né anamnestica (1 pt)</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="nail">Distrofia ungueale psoriasica (1 pt)</label>
+        <select id="nail">
+          <option value="0" selected>Assente (0 pt)</option>
+          <option value="1">Presente (1 pt)</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="dactylitis">Dattilite (1 pt)</label>
+        <select id="dactylitis">
+          <option value="0" selected>Assente (0 pt)</option>
+          <option value="1">Presente o anamnestica (1 pt)</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="radiology">Evidenza radiologica (1 pt)</label>
+        <select id="radiology">
+          <option value="0" selected>Assente (0 pt)</option>
+          <option value="1">Neoformazione ossea mal definita in sede iuxta-articolare, esclusi gli osteofiti (1 pt)</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="rf">Fattore reumatoide (1 pt)</label>
+        <select id="rf">
+          <option value="0" selected>Positivo (0 pt)</option>
+          <option value="1">Negativo (1 pt)</option>
+        </select>
+      </div>
 
-        function getStatusPsA(score, thresholds, type) {
-            const [rem, low, mod] = thresholds;
-            let key = 'remission';
-            if (type === 'DAS28') {
-                if (score >= 5.1) key = 'high';
-                else if (score >= 3.2) key = 'moderate';
-                else if (score >= 2.6) key = 'low';
-            } else {
-                if (score > mod) key = 'high';
-                else if (score > low) key = 'moderate';
-                else if (score > rem) key = 'low';
-            }
-            const labels = { remission: 'Remissione', low: 'Bassa attività', moderate: 'Moderata attività', high: 'Alta attività' };
-            const formattedScore = (type === 'DAS28') ? score.toFixed(2) : score.toFixed(1);
-            return { key, label: labels[key], formattedScore };
-        }
+      <div class="result" id="casparResult">
+        <div class="score-line">Punteggio totale <span class="v" id="casparScore">0</span></div>
+        <div class="verdict" id="casparVerdict">Seleziona i criteri per iniziare.</div>
+      </div>
+    </div>
+  </section>
 
-        function updateScoreBoxPsA(id, key, label, formattedScore) {
-            const box = document.getElementById(id + '_box');
-            const scoreEl = document.getElementById(id + '_score');
-            const statusEl = document.getElementById(id + '_status');
-            const c = STATUS_COLORS[key];
+  <!-- ================= MODULO: ATTIVITÀ DI MALATTIA ================= -->
+  <section class="block hidden" id="attivita">
+    <button type="button" class="back-link" data-back>← Cambia sezione</button>
+    <div class="block-head"><h2>Attività di malattia — DAPSA e DAS28-PCR</h2></div>
+    <p class="block-note">Il DAPSA è lo strumento raccomandato da GRAPPA/EULAR per il dominio periferico; il DAS28-PCR è riportato come riferimento aggiuntivo.</p>
 
-            scoreEl.textContent = formattedScore;
-            statusEl.textContent = label;
-            box.style.backgroundColor = c.bg;
-            box.style.borderColor = c.border;
-            scoreEl.style.color = c.text;
-        }
+    <div class="panel">
+      <div class="fields-grid">
+        <div class="field"><label for="TJC68">TJC68 — articolazioni dolenti (0–68)<span class="hint">DAPSA</span></label><input type="number" id="TJC68" min="0" max="68" value="0"></div>
+        <div class="field"><label for="SJC66">SJC66 — articolazioni tumefatte (0–66)<span class="hint">DAPSA</span></label><input type="number" id="SJC66" min="0" max="66" value="0"></div>
+        <div class="field"><label for="PGA_DAPSA">PGA — attività di malattia, paziente (0–10)<span class="hint">DAPSA</span></label><input type="number" id="PGA_DAPSA" min="0" max="10" step="0.1" value="0"></div>
+        <div class="field"><label for="PAIN_DAPSA">Dolore, paziente (0–10)<span class="hint">DAPSA</span></label><input type="number" id="PAIN_DAPSA" min="0" max="10" step="0.1" value="0"></div>
+        <div class="field"><label for="CRP_DAPSA">PCR (mg/dL)<span class="hint">DAPSA e DAS28</span></label><input type="number" id="CRP_DAPSA" min="0" step="0.1" value="0"></div>
+        <div class="field"><label for="GH_DAS">GH — salute generale, paziente (0–10)<span class="hint">solo DAS28</span></label><input type="number" id="GH_DAS" min="0" max="10" step="0.1" value="0"></div>
+        <div class="field"><label for="TJC28_DAS">TJC28 — articolazioni dolenti (0–28)<span class="hint">solo DAS28</span></label><input type="number" id="TJC28_DAS" min="0" max="28" value="0"></div>
+        <div class="field"><label for="SJC28_DAS">SJC28 — articolazioni tumefatte (0–28)<span class="hint">solo DAS28</span></label><input type="number" id="SJC28_DAS" min="0" max="28" value="0"></div>
+      </div>
 
-        function runAllActivityCalculationsPsA() {
-            const TJC68 = parseFloat(document.getElementById('TJC68').value) || 0;
-            const SJC66 = parseFloat(document.getElementById('SJC66').value) || 0;
-            const PGA = parseFloat(document.getElementById('PGA_DAPSA').value) || 0;
-            const PAIN = parseFloat(document.getElementById('PAIN_DAPSA').value) || 0;
-            const CRP_mgdL = parseFloat(document.getElementById('CRP_DAPSA').value) || 0;
-            const GH = parseFloat(document.getElementById('GH_DAS').value) || 0;
-            const TJC28 = parseFloat(document.getElementById('TJC28_DAS').value) || 0;
-            const SJC28 = parseFloat(document.getElementById('SJC28_DAS').value) || 0;
+      <div class="sev-grid">
+        <div class="sev-box" id="dapsa_box">
+          <div class="k">DAPSA</div>
+          <div class="v" id="dapsa_score">0.0</div>
+          <div class="status" id="dapsa_status">Inserisci i dati</div>
+        </div>
+        <div class="sev-box" id="das28_psa_box">
+          <div class="k">DAS28-PCR</div>
+          <div class="v" id="das28_psa_score">0.00</div>
+          <div class="status" id="das28_psa_status">Inserisci i dati</div>
+        </div>
+      </div>
 
-            // DAPSA = TJC68 + SJC66 + PGA(0-10) + Dolore(0-10) + PCR(mg/dL)
-            const DAPSA_score = TJC68 + SJC66 + PGA + PAIN + CRP_mgdL;
-            const dapsa = getStatusPsA(DAPSA_score, [4, 14, 28], 'DAPSA');
-            updateScoreBoxPsA('dapsa', dapsa.key, dapsa.label, dapsa.formattedScore);
+      <div class="thresholds">
+        <div><strong>Soglie di attività</strong></div>
+        <div>DAPSA: ≤4 remissione · 4–14 bassa · 14–28 moderata · &gt;28 alta</div>
+        <div>DAS28-PCR: &lt;2.6 remissione · 2.6–3.2 bassa · 3.2–5.1 moderata · ≥5.1 alta</div>
+      </div>
+    </div>
+  </section>
 
-            // DAS28-CRP: usa GH (0-10 -> 0-100mm), PCR da mg/dL a mg/L
-            const CRP_mgL = CRP_mgdL * 10;
-            const GH_mm = GH * 10;
-            const DAS28_score = (0.56 * Math.sqrt(TJC28)) +
-                                (0.28 * Math.sqrt(SJC28)) +
-                                (0.36 * Math.log(CRP_mgL + 1)) +
-                                (0.014 * GH_mm) + 0.96;
-            const final_DAS28 = isFinite(DAS28_score) ? DAS28_score : 0;
-            const das28 = getStatusPsA(final_DAS28, [2.6, 3.2, 5.1], 'DAS28');
-            updateScoreBoxPsA('das28_psa', das28.key, das28.label, das28.formattedScore);
-        }
+  <div class="fonti">
+    <h2>Fonti</h2>
+    <ol>
+      <li><span class="t">Taylor W, Gladman D, Helliwell P, et al.</span> Classification criteria for psoriatic arthritis: development of new criteria from a large international study — CASPAR.</li>
+      <li><span class="t">Coates LC, Soriano ER, Corp N, et al.</span> Group for Research and Assessment of Psoriasis and Psoriatic Arthritis (GRAPPA): updated treatment recommendations for psoriatic arthritis.</li>
+      <li><span class="t">Gossec L, Baraliakos X, Kerschbaumer A, et al.</span> EULAR recommendations for the management of psoriatic arthritis with pharmacological therapies.</li>
+      <li><span class="t">Schoels MM, Aletaha D, Alasti F, Smolen JS.</span> Disease activity in psoriatic arthritis (PsA): defining remission and treatment success using the DAPSA score.</li>
+    </ol>
+  </div>
 
-        window.onload = function() {
-            calculateCASPARScore();
-            runAllActivityCalculationsPsA();
-            showTherapyDomain('periferica');
-        };
-    </script>
+  <footer class="site">
+    Strumento di supporto clinico, non sostituisce il giudizio del medico.
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  // ---------------- domain tabs ----------------
+  document.querySelectorAll('#domainTabs .subtab').forEach(function(tab){
+    tab.addEventListener('click', function(){
+      document.querySelectorAll('#domainTabs .subtab').forEach(function(t){ t.classList.remove('on'); });
+      tab.classList.add('on');
+      document.querySelectorAll('.domain-panel').forEach(function(p){ p.classList.remove('on'); });
+      document.getElementById('domain-' + tab.dataset.domain).classList.add('on');
+    });
+  });
+
+  // ---------------- CASPAR ----------------
+  function updateCaspar(){
+    const psoriasis = parseInt(document.getElementById('psoriasis').value, 10) || 0;
+    const nail = parseInt(document.getElementById('nail').value, 10) || 0;
+    const dactylitis = parseInt(document.getElementById('dactylitis').value, 10) || 0;
+    const radiology = parseInt(document.getElementById('radiology').value, 10) || 0;
+    const rf = parseInt(document.getElementById('rf').value, 10) || 0;
+    const total = psoriasis + nail + dactylitis + radiology + rf;
+
+    document.getElementById('casparScore').textContent = total;
+    const box = document.getElementById('casparResult');
+    const verdict = document.getElementById('casparVerdict');
+
+    if(total >= 3){
+      box.classList.add('pos');
+      verdict.textContent = 'Criteri raggiunti (≥3). Classificabile come artrite psoriasica.';
+    } else {
+      box.classList.remove('pos');
+      verdict.textContent = 'Criteri non raggiunti (<3). Non classificabile come PsA.';
+    }
+  }
+  ['psoriasis','nail','dactylitis','radiology','rf'].forEach(function(id){
+    document.getElementById(id).addEventListener('change', updateCaspar);
+  });
+  updateCaspar();
+
+  // ---------------- DAPSA / DAS28-PCR ----------------
+  function severityKey(score, rem, low, mod, type){
+    if(type === 'DAS28'){
+      if(score >= 5.1) return 'high';
+      if(score >= 3.2) return 'moderate';
+      if(score >= 2.6) return 'low';
+      return 'remission';
+    }
+    if(score > mod) return 'high';
+    if(score > low) return 'moderate';
+    if(score > rem) return 'low';
+    return 'remission';
+  }
+  const severityLabel = {remission:'Remissione', low:'Bassa attività', moderate:'Moderata attività', high:'Alta attività'};
+
+  function updateSevBox(prefix, key, formattedScore){
+    document.getElementById(prefix + '_box').className = 'sev-box ' + key;
+    document.getElementById(prefix + '_score').textContent = formattedScore;
+    document.getElementById(prefix + '_status').textContent = severityLabel[key];
+  }
+
+  function updateActivity(){
+    const TJC68 = parseFloat(document.getElementById('TJC68').value) || 0;
+    const SJC66 = parseFloat(document.getElementById('SJC66').value) || 0;
+    const PGA = parseFloat(document.getElementById('PGA_DAPSA').value) || 0;
+    const PAIN = parseFloat(document.getElementById('PAIN_DAPSA').value) || 0;
+    const CRP_mgdL = parseFloat(document.getElementById('CRP_DAPSA').value) || 0;
+    const GH = parseFloat(document.getElementById('GH_DAS').value) || 0;
+    const TJC28 = parseFloat(document.getElementById('TJC28_DAS').value) || 0;
+    const SJC28 = parseFloat(document.getElementById('SJC28_DAS').value) || 0;
+
+    // DAPSA = TJC68 + SJC66 + PGA(0-10) + Dolore(0-10) + PCR(mg/dL)
+    const DAPSA = TJC68 + SJC66 + PGA + PAIN + CRP_mgdL;
+    updateSevBox('dapsa', severityKey(DAPSA, 4, 14, 28, 'DAPSA'), DAPSA.toFixed(1));
+
+    // DAS28-CRP: GH da 0-10 a 0-100mm, PCR da mg/dL a mg/L
+    const CRP_mgL = CRP_mgdL * 10;
+    const GH_mm = GH * 10;
+    let DAS28 = (0.56 * Math.sqrt(TJC28)) + (0.28 * Math.sqrt(SJC28)) + (0.36 * Math.log(CRP_mgL + 1)) + (0.014 * GH_mm) + 0.96;
+    if(!isFinite(DAS28)) DAS28 = 0;
+    updateSevBox('das28_psa', severityKey(DAS28, null, null, null, 'DAS28'), DAS28.toFixed(2));
+  }
+  ['TJC68','SJC66','PGA_DAPSA','PAIN_DAPSA','CRP_DAPSA','GH_DAS','TJC28_DAS','SJC28_DAS'].forEach(function(id){
+    document.getElementById(id).addEventListener('input', updateActivity);
+  });
+  updateActivity();
+
+  // ---------------- landing / module switching ----------------
+  const landing = document.getElementById('landing');
+  const modules = {
+    terapia: document.getElementById('terapia'),
+    caspar: document.getElementById('caspar'),
+    attivita: document.getElementById('attivita')
+  };
+
+  function showLanding(){
+    landing.classList.remove('hidden');
+    Object.values(modules).forEach(function(m){ m.classList.add('hidden'); });
+    window.scrollTo({top:0, behavior:'smooth'});
+    history.replaceState(null, '', window.location.pathname);
+  }
+  function showModule(key){
+    landing.classList.add('hidden');
+    Object.keys(modules).forEach(function(k){ modules[k].classList.toggle('hidden', k !== key); });
+    window.scrollTo({top:0, behavior:'smooth'});
+    history.replaceState(null, '', '#' + key);
+  }
+  document.querySelectorAll('.landing-btn').forEach(function(btn){
+    btn.addEventListener('click', function(){ showModule(btn.dataset.target); });
+  });
+  document.querySelectorAll('[data-back]').forEach(function(btn){
+    btn.addEventListener('click', showLanding);
+  });
+
+  const initialHash = window.location.hash.replace('#', '');
+  if(modules[initialHash]) showModule(initialHash);
+  else showLanding();
+})();
+</script>
+
 </body>
 </html>
