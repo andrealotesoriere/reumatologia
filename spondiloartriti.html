@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title> Spondiloartriti | RheumaTools</title>
+<title>Spondiloartriti | RheumaTools</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -174,6 +174,14 @@
   .crit-tabs{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:22px;}
   .criteria-panel{display:none;}
   .criteria-panel.on{display:block;}
+
+  .toggle-row{display:flex; flex-wrap:wrap; gap:8px;}
+  .toggle-opt{
+    font-family:inherit; font-size:13.5px; font-weight:600; color:var(--text-muted); background:var(--surface);
+    border:1px solid var(--border); border-radius:var(--radius-pill); padding:8px 16px; cursor:pointer; transition:all .15s ease;
+  }
+  .toggle-opt:hover{border-color:var(--teal-line);}
+  .toggle-opt.on{background:var(--teal); border-color:var(--teal); color:#fff;}
 
   .entry-gate{
     display:flex; align-items:flex-start; gap:12px; background:var(--surface-alt);
