@@ -1,461 +1,523 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AR: Artrite Reumatoide - Guida Rapida</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="https://cdn.tailwindcss.com"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Artrite Reumatoide | RheumaTools</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F6F8F7;
+    --surface:#FFFFFF;
+    --surface-alt:#EEF3F1;
+    --border:#DCE4E1;
+    --text:#25302E;
+    --text-muted:#5B6A66;
+    --text-faint:#8B9793;
+
+    --teal:#3E6D69;
+    --teal-dark:#2C504D;
+    --teal-soft:#DDEBE8;
+    --teal-line:#BBD6D2;
+
+    --violet:#7669A0;
+    --violet-dark:#584D80;
+    --violet-soft:#E7E2F3;
+    --violet-line:#CBC0E3;
+
+    --clay:#B15F49;
+    --clay-soft:#F3DED7;
+    --clay-line:#E2B7A8;
+
+    --sage:#5E8467;
+    --sage-dark:#33503E;
+    --sage-soft:#E1EAE2;
+    --sage-line:#BFD3C4;
+
+    /* estensione: scala di gravità a 4 livelli (remissione -> bassa -> moderata -> alta),
+       usata dai calcolatori di attività di malattia (DAS28/SDAI/CDAI e futuri equivalenti) */
+    --amber:#B99A4A; --amber-dark:#7A6530; --amber-soft:#F1EAD3; --amber-line:#DCC894;
+    --terracotta:#C17D45; --terracotta-dark:#7D501F; --terracotta-soft:#F4E2CE; --terracotta-line:#E3B98C;
+
+    --radius-lg:22px;
+    --radius-md:14px;
+    --radius-sm:9px;
+    --radius-pill:999px;
+
+    --shadow-card: 0 1px 2px rgba(37,48,46,0.04), 0 6px 20px rgba(37,48,46,0.05);
+  }
+
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--bg); color:var(--text); font-family:'Inter', system-ui, sans-serif;
+    font-size:16px; line-height:1.55; -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,h4{font-family:'Spectral', Georgia, serif; font-weight:600; color:var(--teal-dark); margin:0 0 0.4em 0; line-height:1.3;}
+  a{color:var(--teal-dark);}
+
+  .wrap{max-width:760px; margin:0 auto; padding:0 20px 60px 20px;}
+
+  header.site{background:var(--surface); border-bottom:1px solid var(--border);}
+  .site-inner{max-width:760px; margin:0 auto; padding:18px 20px; font-size:14px; color:var(--text-muted);}
+  .site-inner a{text-decoration:none; color:var(--text-muted); border-bottom:1px solid var(--border);}
+  .site-inner a:hover{color:var(--teal-dark);}
+  .site-inner .sep{margin:0 6px; color:var(--text-faint);}
+
+  .hero{padding:44px 0 8px 0;}
+  .hero h1{font-size:clamp(28px,4vw,38px); letter-spacing:-0.01em;}
+  .hero .sub{color:var(--text-muted); font-size:17px; max-width:58ch; margin-top:10px;}
+
+  .disclaimer{
+    margin:22px 0 0 0; padding:16px 18px; background:var(--violet-soft); border:1px solid var(--violet-line);
+    border-radius:var(--radius-md); color:#3E3560; font-size:14.5px; line-height:1.55;
+  }
+  .disclaimer strong{color:#2E2650;}
+
+  .hidden{display:none !important;}
+
+  .landing{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin:34px 0 12px 0;}
+  @media(max-width:640px){.landing{grid-template-columns:1fr;}}
+  .landing-btn{
+    font-family:inherit; text-align:left; background:var(--surface); border:1px solid var(--border);
+    border-radius:var(--radius-lg); padding:26px 22px; cursor:pointer; box-shadow:var(--shadow-card);
+    transition:border-color .15s ease, transform .12s ease;
+  }
+  .landing-btn:hover{border-color:var(--teal-line); transform:translateY(-1px);}
+  .landing-btn .lb-title{display:block; font-family:'Spectral',serif; font-weight:600; font-size:18px; color:var(--teal-dark);}
+  .landing-btn .lb-desc{display:block; margin-top:6px; font-size:13px; color:var(--text-muted); line-height:1.5;}
+
+  .back-link{
+    display:inline-flex; align-items:center; gap:6px; font-family:inherit; font-size:13.5px; font-weight:600;
+    color:var(--text-muted); background:none; border:none; cursor:pointer; padding:0; margin-bottom:22px;
+  }
+  .back-link:hover{color:var(--teal-dark);}
+
+  section.block{margin-top:40px;}
+  .block-head{margin-bottom:6px;}
+  .block-head h2{font-size:22px;}
+  .block-note{color:var(--text-muted); font-size:14.5px; margin-bottom:20px;}
+
+  .panel{background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-lg); padding:22px 24px; box-shadow:var(--shadow-card); margin-bottom:16px;}
+  .panel h3{font-size:17px; margin-bottom:14px;}
+
+  /* ---- callout boxes ---- */
+  .box{padding:16px 18px; border-radius:var(--radius-md); font-size:14.5px; line-height:1.6; margin-bottom:16px; border:1px solid;}
+  .box h3, .box h4{margin:0 0 6px 0; font-size:14.5px;}
+  .box p{margin:0;}
+  .box.goal{background:var(--teal-soft); border-color:var(--teal-line); color:var(--teal-dark);}
+  .box.goal h3{color:var(--teal-dark); font-size:15px;}
+  .box.warn{background:var(--clay-soft); border-color:var(--clay-line); color:#5A3527;}
+  .box.warn h4{color:#5A3527;}
+  .box.warn ul{margin:0; padding-left:18px;}
+  .box.warn li{margin-bottom:5px;}
+  .box.info{background:var(--violet-soft); border-color:var(--violet-line); color:#3E3560;}
+  .box.info ul{margin:6px 0 0 0; padding-left:18px;}
+  .box.info li{margin-bottom:3px;}
+
+  /* ---- phase sections ---- */
+  .phase{margin-top:32px; padding-top:28px; border-top:1px solid var(--border);}
+  .phase:first-child{margin-top:0; padding-top:0; border-top:none;}
+  .phase h3{font-size:17px;}
+  .phase .lead{color:var(--text-muted); font-size:14px; margin:6px 0 16px 0;}
+
+  .drug-card{background:var(--surface-alt); border:1px solid var(--border); border-radius:var(--radius-md); padding:16px 18px; margin-bottom:12px;}
+  .drug-card h4{font-size:15px; margin-bottom:8px;}
+  .drug-card ul{margin:0; padding-left:18px; font-size:14px; color:var(--text); line-height:1.7;}
+  .drug-card .alert-line{color:#8A4A38; font-weight:600; list-style:none; margin-left:-18px; margin-top:8px;}
+  .drug-card .note{color:var(--text-muted); font-size:13.5px; margin:0;}
+
+  ul.plain{margin:0; padding-left:18px; font-size:14.5px; color:var(--text-muted); line-height:1.7;}
+
+  /* ---- calculator fields ---- */
+  .field{margin-bottom:12px; padding:14px 16px; background:var(--surface-alt); border-radius:var(--radius-md);}
+  .field label{display:block; font-size:13px; font-weight:600; color:var(--text); margin-bottom:6px;}
+  .field .hint{font-weight:400; color:var(--text-faint); font-size:11.5px; display:block; margin-top:2px;}
+  .field select, .field input[type=number]{
+    width:100%; padding:10px 12px; border:1px solid var(--border); border-radius:var(--radius-sm);
+    background:var(--surface); font-family:inherit; font-size:14.5px; color:var(--text); cursor:pointer;
+  }
+  .field input[type=number]{cursor:text;}
+  .field select:focus, .field input:focus{border-color:var(--teal); box-shadow:0 0 0 3px var(--teal-soft); outline:none;}
+  .fields-grid{display:grid; grid-template-columns:repeat(auto-fill, minmax(200px,1fr)); gap:0;}
+  .fields-grid .field{margin-right:0;}
+
+  /* ---- classification result (met / not met) ---- */
+  .result{border-radius:var(--radius-lg); padding:22px 24px; border:1px solid var(--border); background:var(--surface-alt); margin-top:18px; text-align:center;}
+  .result.pos{background:var(--sage-soft); border-color:var(--sage-line);}
+  .result .score-line{font-size:14px; color:var(--text-muted);}
+  .result .score-line .v{font-family:'Spectral',serif; font-size:24px; font-weight:700; color:var(--teal-dark); margin:0 4px;}
+  .result.pos .score-line .v{color:var(--sage-dark);}
+  .result .verdict{font-size:15px; margin-top:6px; color:var(--text-muted);}
+  .result.pos .verdict{color:var(--sage-dark); font-weight:600;}
+
+  /* ---- severity boxes (DAS28/SDAI/CDAI) ---- */
+  .sev-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:20px;}
+  @media(max-width:560px){.sev-grid{grid-template-columns:1fr;}}
+  .sev-box{padding:18px; border-radius:var(--radius-md); text-align:center; border:1px solid var(--border); background:var(--surface-alt); transition:all .2s ease;}
+  .sev-box .k{font-size:12.5px; font-weight:700; color:var(--text-muted);}
+  .sev-box .v{font-family:'Spectral',serif; font-size:26px; font-weight:700; margin-top:4px; color:var(--text);}
+  .sev-box .status{font-size:12px; margin-top:4px; color:var(--text-faint); font-weight:600;}
+  .sev-box.remission{background:var(--sage-soft); border-color:var(--sage-line);}
+  .sev-box.remission .v, .sev-box.remission .status{color:var(--sage-dark);}
+  .sev-box.low{background:var(--amber-soft); border-color:var(--amber-line);}
+  .sev-box.low .v, .sev-box.low .status{color:var(--amber-dark);}
+  .sev-box.moderate{background:var(--terracotta-soft); border-color:var(--terracotta-line);}
+  .sev-box.moderate .v, .sev-box.moderate .status{color:var(--terracotta-dark);}
+  .sev-box.high{background:var(--clay-soft); border-color:var(--clay-line);}
+  .sev-box.high .v, .sev-box.high .status{color:#8A4A38;}
+
+  .thresholds{margin-top:22px; font-size:12.5px; color:var(--text-faint); line-height:1.8;}
+  .thresholds strong{color:var(--text-muted);}
+
+  .fonti{margin-top:64px; padding-top:32px; border-top:1px solid var(--border);}
+  .fonti h2{font-size:21px;}
+  .fonti ol{padding-left:20px; margin:16px 0 0 0;}
+  .fonti li{font-size:14px; color:var(--text-muted); margin-bottom:10px; line-height:1.55;}
+  .fonti li .t{color:var(--text); font-weight:600;}
+  footer.site{max-width:760px; margin:40px auto 0 auto; padding:24px 20px 40px 20px; color:var(--text-faint); font-size:12.5px; border-top:1px solid var(--border);}
+</style>
 </head>
-<body class="antialiased">
+<body>
 
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-14 space-y-10">
+<header class="site">
+  <div class="site-inner"><a href="index.html">RheumaTools</a><span class="sep">/</span>Artrite Reumatoide</div>
+</header>
 
-        <header class="flex justify-between items-center mb-2">
-            <h1 class="content-title">Artrite Reumatoide</h1>
-            <a href="index.html" class="back-link">
-                &larr; Indietro
-            </a>
-        </header>
+<div class="wrap">
 
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300..700&display=swap');
+  <div class="hero">
+    <h1>Artrite Reumatoide</h1>
+    <p class="sub">Strategia terapeutica treat-to-target, criteri classificativi ACR/EULAR 2010 e calcolatori di attività di malattia.</p>
+    <div class="disclaimer">
+      <strong>Da leggere prima di usarlo.</strong> Schema terapeutico e calcolatori sono un supporto al ragionamento clinico: non sostituiscono la valutazione del reumatologo, la scheda tecnica dei farmaci né il monitoraggio delle controindicazioni individuali.
+    </div>
+  </div>
 
-        :root {
-            --primary: #8B7FD1;        /* lavanda */
-            --primary-light: #EFEBFB;
-            --secondary: #5FB8A6;      /* verde salvia/menta */
-            --secondary-light: #E4F5F1;
-            --warning: #D99A5B;        /* pesca */
-            --warning-light: #FBF0E4;
-            --alert: #D97C97;          /* rosa antico, sostituisce il rosso acceso */
-            --alert-light: #FBEBF0;
-            --ink: #4B4560;            /* grigio-prugna al posto del nero puro */
-            --ink-soft: #8783A0;
-            --page-bg: #FAF9FD;
-        }
+  <div class="landing" id="landing">
+    <button type="button" class="landing-btn" data-target="terapia">
+      <span class="lb-title">Terapia</span>
+      <span class="lb-desc">Strategia treat-to-target per fase.</span>
+    </button>
+    <button type="button" class="landing-btn" data-target="criteri">
+      <span class="lb-title">Criteri classificativi</span>
+      <span class="lb-desc">ACR/EULAR 2010.</span>
+    </button>
+    <button type="button" class="landing-btn" data-target="attivita">
+      <span class="lb-title">Attività di malattia</span>
+      <span class="lb-desc">DAS28, SDAI, CDAI.</span>
+    </button>
+  </div>
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--page-bg);
-            color: var(--ink);
-        }
+  <!-- ================= MODULO: TERAPIA ================= -->
+  <section class="block hidden" id="terapia">
+    <button type="button" class="back-link" data-back>← Cambia sezione</button>
+    <div class="block-head"><h2>Terapia: strategia treat-to-target</h2></div>
 
-        .back-link {
-            background-color: white;
-            color: var(--ink-soft);
-            font-weight: 500;
-            padding: 0.5rem 1.1rem;
-            border-radius: 999px;
-            box-shadow: 0 2px 8px rgba(139, 127, 209, 0.12);
-            transition: all 0.2s;
-        }
-        .back-link:hover { color: var(--primary); box-shadow: 0 4px 12px rgba(139, 127, 209, 0.18); }
-
-        .content-title {
-            font-size: 2rem;
-            font-weight: 600;
-            color: var(--primary);
-            letter-spacing: -0.01em;
-        }
-
-        .content-section {
-            padding: 2rem;
-            background-color: white;
-            border-radius: 1.75rem;
-            box-shadow: 0 10px 40px -12px rgba(139, 127, 209, 0.15);
-        }
-
-        .section-title {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: var(--ink);
-            margin-bottom: 1.5rem;
-        }
-        .section-title .dot { color: var(--primary); }
-
-        .goal-box {
-            background-color: var(--primary-light);
-            border-radius: 1.25rem;
-            padding: 1.5rem 1.75rem;
-        }
-        .goal-box h3 { color: var(--primary); font-weight: 600; }
-
-        .warning-box {
-            background-color: var(--warning-light);
-            border-radius: 1.25rem;
-            padding: 1.5rem 1.75rem;
-        }
-        .warning-box h4 { color: var(--warning); font-weight: 600; }
-
-        .drug-card {
-            background-color: white;
-            border: 1px solid #F0EDF9;
-            border-radius: 1.25rem;
-            padding: 1.5rem;
-            box-shadow: 0 4px 16px -8px rgba(139, 127, 209, 0.12);
-        }
-        .drug-card h4 { color: var(--primary); font-weight: 600; margin-bottom: 0.75rem; }
-        .drug-card ul { font-size: 0.9rem; color: var(--ink); line-height: 1.7; }
-        .drug-card .alert-line { color: var(--alert); font-weight: 500; }
-
-        .phase-1 { color: var(--secondary); }
-        .phase-2 { color: var(--alert); }
-        .phase-3 { color: var(--warning); }
-        .phase-maint { color: var(--ink-soft); }
-
-        .phase-divider { border-top: 1px solid #F0EDF9; }
-
-        .calc-card {
-            background-color: white;
-            border-radius: 1.75rem;
-            padding: 2rem;
-            box-shadow: 0 10px 40px -12px rgba(139, 127, 209, 0.15);
-            border: 1px solid #F0EDF9;
-        }
-        .calc-card h3 { color: var(--ink); }
-
-        .criteria-label { display: block; font-weight: 500; color: var(--ink-soft); margin-bottom: 0.5rem; font-size: 0.9rem; }
-        .criteria-select, .criteria-input {
-            width: 100%; padding: 0.75rem 1rem; border: 1px solid #E9E5F5; border-radius: 0.9rem;
-            background-color: #FCFBFE; appearance: none; cursor: pointer; transition: border-color 0.2s, box-shadow 0.2s; font-size: 1rem; color: var(--ink);
-        }
-        .criteria-select:focus, .criteria-input:focus {
-            border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary-light); outline: none;
-        }
-        .input-group, .input-group-activity { margin-bottom: 1rem; padding: 0.9rem; background-color: #FAF9FD; border-radius: 1rem; }
-        .score-box { padding: 1.25rem; border-radius: 1.25rem; border: 1px solid; transition: background-color 0.3s, border-color 0.3s; }
-    </style>
-
-        <!-- Terapia -->
-        <section class="content-section">
-            <h2 class="section-title"><span class="dot">·</span> Terapia: strategia treat-to-target</h2>
-
-            <div class="goal-box">
-                <h3 class="text-lg mb-1">Obiettivo</h3>
-                <p class="text-sm text-gray-600">
-                    Remissione o bassa attività entro 6 mesi. Se il miglioramento è ≤ 50% a 3 mesi, la terapia va rivista.
-                </p>
-            </div>
-
-            <!-- FASE I -->
-            <div class="space-y-4 mt-8">
-                <h3 class="text-lg font-semibold phase-1">Fase I · csDMARD (prima linea)</h3>
-
-                <div class="drug-card">
-                    <h4>Metotrexato</h4>
-                    <ul class="space-y-1.5 pl-0">
-                        <li>Escalation fino a 20-25 mg una volta a settimana (orale o sottocutaneo), circa 0.3 mg/kg.</li>
-                        <li>Supporto con acido folico ≥ 5 mg/settimana, distante dalla somministrazione.</li>
-                        <li>Durata indefinita.</li>
-                    </ul>
-                </div>
-
-                <div class="warning-box">
-                    <h4 class="text-base mb-2">Controindicazioni, alternative, cortisonici</h4>
-                    <ul class="text-sm space-y-1.5 pl-0 text-gray-700">
-                        <li>Controindicazioni al metotrexato: gravidanza, allattamento, insufficienza epatica o renale grave, alcolismo.</li>
-                        <li>Alternative: leflunomide 20 mg/die o sulfasalazina 3000 mg/die.</li>
-                        <li>Terapia ponte con glucocorticoidi: fino a 7.5 mg/die equivalenti di prednisone, per non oltre 3 mesi, da sospendere appena possibile.</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- FASE II -->
-            <div class="space-y-4 pt-8 mt-8 phase-divider">
-                <h3 class="text-lg font-semibold phase-2">Fase II · bDMARD / tsDMARD (dopo fallimento dei csDMARD)</h3>
-                <p class="text-sm text-gray-500">
-                    La scelta dipende dai fattori prognostici sfavorevoli e dalle comorbidità. Si combinano di norma con un csDMARD, tipicamente il metotrexato.
-                </p>
-
-                <div class="drug-card">
-                    <h4>Anti-TNF</h4>
-                    <ul class="pl-0">
-                        <li>Adalimumab</li>
-                        <li>Etanercept</li>
-                        <li>Golimumab</li>
-                        <li>Certolizumab pegol</li>
-                        <li>Infliximab</li>
-                        <li class="alert-line mt-2">Da evitare in insufficienza cardiaca NYHA III/IV o TBC pregressa non trattata.</li>
-                    </ul>
-                </div>
-
-                <div class="drug-card">
-                    <h4>Inibitori di JAK</h4>
-                    <ul class="pl-0">
-                        <li>Baricitinib: 4 mg/die per maggiore efficacia.</li>
-                        <li>Upadacitinib: 15 mg/die standard, 30 mg solo in casi selezionati.</li>
-                        <li>Tofacitinib: 5 mg due volte al giorno.</li>
-                        <li>Filgotinib: 200 mg/die, ridotto a 100 mg in insufficienza renale o età avanzata.</li>
-                        <li class="alert-line mt-2">Rischio di herpes zoster, tromboembolismo venoso ed eventi cardiovascolari, più marcato a dosi alte di tofacitinib o upadacitinib 30 mg.</li>
-                    </ul>
-                </div>
-
-                <div class="drug-card">
-                    <h4>Anti-IL6R</h4>
-                    <ul class="pl-0">
-                        <li>Tocilizumab: se endovenoso, si parte da 8 mg/kg.</li>
-                        <li>Sarilumab: dosaggio sottocutaneo standard.</li>
-                    </ul>
-                </div>
-
-                <div class="drug-card">
-                    <h4>Costimolazione e anti-CD20</h4>
-                    <ul class="pl-0">
-                        <li>Abatacept: in combinazione con metotrexato o in monoterapia se il metotrexato non è tollerato.</li>
-                        <li>Rituximab: due somministrazioni da 500 mg oppure una da 1000 mg.</li>
-                        <li>Anakinra: usato raramente in AR, riservato a forme con sintomi sistemici e resistenti.</li>
-                    </ul>
-                </div>
-
-                <div class="drug-card">
-                    <p class="text-sm text-gray-600">Nella malattia polmonare interstiziale associata ad AR si preferiscono abatacept o rituximab; anti-TNF e rituximab sono da evitare in insufficienza cardiaca grave.</p>
-                </div>
-            </div>
-
-            <!-- FASE III -->
-            <div class="space-y-3 pt-8 mt-8 phase-divider">
-                <h3 class="text-lg font-semibold phase-3">Fase III · terza linea</h3>
-                <p class="text-sm text-gray-500">
-                    Si passa a un bDMARD o tsDMARD con meccanismo d'azione diverso da quello già fallito — ad esempio, dopo un anti-TNF si passa a un JAK-inibitore o a un anti-IL6R.
-                </p>
-            </div>
-
-            <!-- MANTENIMENTO -->
-            <div class="space-y-3 pt-8 mt-8 phase-divider">
-                <h3 class="text-lg font-semibold phase-maint">Mantenimento (remissione da almeno 6 mesi)</h3>
-                <ul class="text-sm space-y-1.5 pl-0 text-gray-600">
-                    <li>Prima si interrompono i glucocorticoidi.</li>
-                    <li>Poi si riduce progressivamente la dose di bDMARD/tsDMARD o csDMARD.</li>
-                    <li>L'interruzione completa non è consigliata: comporta un alto rischio di riacutizzazione.</li>
-                </ul>
-            </div>
-        </section>
-
-        <!-- Criteri e strumenti -->
-        <section class="content-section">
-            <h2 class="section-title"><span class="dot">·</span> Criteri diagnostici e strumenti</h2>
-
-            <div class="space-y-8">
-
-                <div class="calc-card">
-                    <h3 class="text-lg font-semibold mb-4">Criteri classificativi ACR/EULAR 2010</h3>
-
-                    <div class="mb-5 bg-orange-50/50 p-4 rounded-2xl" style="background-color: var(--warning-light);">
-                        <p class="text-sm font-medium" style="color: var(--warning);">Popolazione target</p>
-                        <ul class="text-xs pl-4 mt-1 text-gray-600 list-disc space-y-0.5">
-                            <li>Almeno un'articolazione con sinovite (tumefatta).</li>
-                            <li>La sinovite non deve essere spiegata da un'altra malattia.</li>
-                        </ul>
-                    </div>
-
-                    <div class="space-y-3">
-                        <div class="input-group">
-                            <label for="joint_involvement" class="criteria-label">Coinvolgimento articolare (max 5 pt)</label>
-                            <select id="joint_involvement" class="criteria-select" onchange="calculateACRScore()">
-                                <option value="0" selected>1 grande articolazione (0 pt)</option>
-                                <option value="1">2-10 grandi articolazioni (1 pt)</option>
-                                <option value="2">1-3 piccole articolazioni (2 pt)</option>
-                                <option value="3">4-10 piccole articolazioni (3 pt)</option>
-                                <option value="5">&gt; 10 articolazioni, di cui almeno una piccola (5 pt)</option>
-                            </select>
-                        </div>
-                        <div class="input-group">
-                            <label for="serology" class="criteria-label">Sierologia — FR e anti-CCP (max 3 pt)</label>
-                            <select id="serology" class="criteria-select" onchange="calculateACRScore()">
-                                <option value="0" selected>Entrambi negativi (0 pt)</option>
-                                <option value="2">Uno positivo debole (2 pt)</option>
-                                <option value="3">Uno positivo forte (3 pt)</option>
-                            </select>
-                        </div>
-                        <div class="input-group">
-                            <label for="acute_phase" class="criteria-label">Fase acuta — VES o PCR (max 1 pt)</label>
-                            <select id="acute_phase" class="criteria-select" onchange="calculateACRScore()">
-                                <option value="0" selected>Entrambe normali (0 pt)</option>
-                                <option value="1">Una alterata (1 pt)</option>
-                            </select>
-                        </div>
-                        <div class="input-group">
-                            <label for="duration" class="criteria-label">Durata dei sintomi (max 1 pt)</label>
-                            <select id="duration" class="criteria-select" onchange="calculateACRScore()">
-                                <option value="0" selected>&lt; 6 settimane (0 pt)</option>
-                                <option value="1">&ge; 6 settimane (1 pt)</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div id="ar_result_box" class="mt-6 p-5 rounded-2xl text-center transition-all duration-500" style="background-color: #FAF9FD; border: 1px solid #F0EDF9;">
-                        <p>Punteggio totale: <span id="ar_score" class="text-2xl font-semibold ml-1" style="color: var(--primary);">0</span></p>
-                        <p id="ar_status" class="text-base mt-2 text-gray-500">Seleziona i criteri per iniziare.</p>
-                    </div>
-                </div>
-
-                <div class="calc-card">
-                    <h3 class="text-lg font-semibold mb-4">Attività di malattia — DAS28, SDAI, CDAI</h3>
-
-                    <p class="text-sm text-gray-500 mb-4">GH (salute generale) e PGA (attività di malattia secondo il paziente) sono domande diverse, tenute separate qui sotto.</p>
-
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-                        <div class="input-group-activity">
-                            <label for="TJC28" class="criteria-label">TJC28 — articolazioni dolenti (0-28)</label>
-                            <input type="number" id="TJC28" min="0" max="28" value="0" class="criteria-input" oninput="runAllActivityCalculations()">
-                        </div>
-                        <div class="input-group-activity">
-                            <label for="SJC28" class="criteria-label">SJC28 — articolazioni tumefatte (0-28)</label>
-                            <input type="number" id="SJC28" min="0" max="28" value="0" class="criteria-input" oninput="runAllActivityCalculations()">
-                        </div>
-                        <div class="input-group-activity">
-                            <label for="GH" class="criteria-label">GH — salute generale, paziente (0-10) <span class="block text-xs font-normal text-gray-400">solo DAS28</span></label>
-                            <input type="number" id="GH" min="0" max="10" step="0.1" value="0" class="criteria-input" oninput="runAllActivityCalculations()">
-                        </div>
-                        <div class="input-group-activity">
-                            <label for="PGA" class="criteria-label">PGA — attività di malattia, paziente (0-10) <span class="block text-xs font-normal text-gray-400">CDAI/SDAI</span></label>
-                            <input type="number" id="PGA" min="0" max="10" step="0.1" value="0" class="criteria-input" oninput="runAllActivityCalculations()">
-                        </div>
-                        <div class="input-group-activity">
-                            <label for="PhGA" class="criteria-label">PhGA — attività di malattia, medico (0-10) <span class="block text-xs font-normal text-gray-400">CDAI/SDAI</span></label>
-                            <input type="number" id="PhGA" min="0" max="10" step="0.1" value="0" class="criteria-input" oninput="runAllActivityCalculations()">
-                        </div>
-                        <div class="input-group-activity">
-                            <label for="CRP" class="criteria-label">PCR (mg/dL)</label>
-                            <input type="number" id="CRP" min="0" step="0.1" value="0" class="criteria-input" oninput="runAllActivityCalculations()">
-                        </div>
-                    </div>
-
-                    <hr class="my-6" style="border-color: #F0EDF9;">
-
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
-                        <div id="das28_box" class="score-box" style="background-color: #FAF9FD; border-color: #E9E5F5;">
-                            <p class="text-sm font-medium text-gray-500">DAS28-PCR</p>
-                            <p class="text-3xl font-semibold mt-1" id="das28_score_wrap" style="color: var(--primary);"><span id="das28_score">0.00</span></p>
-                            <p id="das28_status" class="text-xs mt-1 text-gray-500">Inserisci i dati</p>
-                        </div>
-                        <div id="sdai_box" class="score-box" style="background-color: #FAF9FD; border-color: #E9E5F5;">
-                            <p class="text-sm font-medium text-gray-500">SDAI</p>
-                            <p class="text-3xl font-semibold mt-1"><span id="sdai_score">0.0</span></p>
-                            <p id="sdai_status" class="text-xs mt-1 text-gray-500">Inserisci i dati</p>
-                        </div>
-                        <div id="cdai_box" class="score-box" style="background-color: #FAF9FD; border-color: #E9E5F5;">
-                            <p class="text-sm font-medium text-gray-500">CDAI</p>
-                            <p class="text-3xl font-semibold mt-1"><span id="cdai_score">0.0</span></p>
-                            <p id="cdai_status" class="text-xs mt-1 text-gray-500">Inserisci i dati</p>
-                        </div>
-                    </div>
-
-                    <div class="mt-8">
-                        <h4 class="text-sm font-medium text-gray-500 mb-2">Soglie di attività</h4>
-                        <ul class="text-xs space-y-1 text-gray-500">
-                            <li>DAS28-PCR: &lt; 2.6 remissione · 2.6-3.2 bassa · 3.2-5.1 moderata · &ge; 5.1 alta</li>
-                            <li>CDAI: &le; 2.8 remissione · 2.8-10 bassa · 10-22 moderata · &gt; 22 alta</li>
-                            <li>SDAI: &le; 3.3 remissione · 3.3-11 bassa · 11-26 moderata · &gt; 26 alta</li>
-                        </ul>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
+    <div class="box goal">
+      <h3>Obiettivo</h3>
+      <p>Remissione o bassa attività entro 6 mesi. Se il miglioramento è ≤50% a 3 mesi, la terapia va rivista.</p>
     </div>
 
-    <script>
-        // Palette pastello usata per colorare dinamicamente i risultati
-        const STATUS_COLORS = {
-            remission: { bg: '#E4F5F1', border: '#5FB8A6', text: '#3D8F7F' },
-            low:       { bg: '#FBF6E4', border: '#D9B95B', text: '#A88835' },
-            moderate:  { bg: '#FBF0E4', border: '#D99A5B', text: '#B0703A' },
-            high:      { bg: '#FBEBF0', border: '#D97C97', text: '#B24F6C' }
-        };
+    <div class="phase">
+      <h3>Fase I · csDMARD (prima linea)</h3>
+      <div class="drug-card">
+        <h4>Metotrexato</h4>
+        <ul>
+          <li>Escalation fino a 20–25 mg una volta a settimana (orale o sottocutaneo), circa 0.3 mg/kg.</li>
+          <li>Supporto con acido folico ≥5 mg/settimana, distante dalla somministrazione.</li>
+          <li>Durata indefinita.</li>
+        </ul>
+      </div>
+      <div class="box warn">
+        <h4>Controindicazioni, alternative, cortisonici</h4>
+        <ul>
+          <li>Controindicazioni al metotrexato: gravidanza, allattamento, insufficienza epatica o renale grave, alcolismo.</li>
+          <li>Alternative: leflunomide 20 mg/die o sulfasalazina 3000 mg/die.</li>
+          <li>Terapia ponte con glucocorticoidi: fino a 7.5 mg/die equivalenti di prednisone, per non oltre 3 mesi, da sospendere appena possibile.</li>
+        </ul>
+      </div>
+    </div>
 
-        function calculateACRScore() {
-            const jointScore = parseInt(document.getElementById('joint_involvement').value) || 0;
-            const serologyScore = parseInt(document.getElementById('serology').value) || 0;
-            const phaseScore = parseInt(document.getElementById('acute_phase').value) || 0;
-            const durationScore = parseInt(document.getElementById('duration').value) || 0;
-            const totalScore = jointScore + serologyScore + phaseScore + durationScore;
+    <div class="phase">
+      <h3>Fase II · bDMARD / tsDMARD (dopo fallimento dei csDMARD)</h3>
+      <p class="lead">La scelta dipende dai fattori prognostici sfavorevoli e dalle comorbidità. Si combinano di norma con un csDMARD, tipicamente il metotrexato.</p>
 
-            const resultBox = document.getElementById('ar_result_box');
-            const scoreSpan = document.getElementById('ar_score');
-            const statusP = document.getElementById('ar_status');
+      <div class="drug-card">
+        <h4>Anti-TNF</h4>
+        <ul>
+          <li>Adalimumab</li>
+          <li>Etanercept</li>
+          <li>Golimumab</li>
+          <li>Certolizumab pegol</li>
+          <li>Infliximab</li>
+          <li class="alert-line">Da evitare in insufficienza cardiaca NYHA III/IV o TBC pregressa non trattata.</li>
+        </ul>
+      </div>
+      <div class="drug-card">
+        <h4>Inibitori di JAK</h4>
+        <ul>
+          <li>Baricitinib: 4 mg/die per maggiore efficacia.</li>
+          <li>Upadacitinib: 15 mg/die standard, 30 mg solo in casi selezionati.</li>
+          <li>Tofacitinib: 5 mg due volte al giorno.</li>
+          <li>Filgotinib: 200 mg/die, ridotto a 100 mg in insufficienza renale o età avanzata.</li>
+          <li class="alert-line">Rischio di herpes zoster, tromboembolismo venoso ed eventi cardiovascolari, più marcato a dosi alte di tofacitinib o upadacitinib 30 mg.</li>
+        </ul>
+      </div>
+      <div class="drug-card">
+        <h4>Anti-IL6R</h4>
+        <ul>
+          <li>Tocilizumab: se endovenoso, si parte da 8 mg/kg.</li>
+          <li>Sarilumab: dosaggio sottocutaneo standard.</li>
+        </ul>
+      </div>
+      <div class="drug-card">
+        <h4>Costimolazione e anti-CD20</h4>
+        <ul>
+          <li>Abatacept: in combinazione con metotrexato o in monoterapia se il metotrexato non è tollerato.</li>
+          <li>Rituximab: due somministrazioni da 500 mg oppure una da 1000 mg.</li>
+          <li>Anakinra: usato raramente in AR, riservato a forme con sintomi sistemici e resistenti.</li>
+        </ul>
+      </div>
+      <p class="note" style="font-size:13.5px; color:var(--text-muted);">Nella malattia polmonare interstiziale associata ad AR si preferiscono abatacept o rituximab; anti-TNF e rituximab sono da evitare in insufficienza cardiaca grave.</p>
+    </div>
 
-            scoreSpan.textContent = totalScore;
+    <div class="phase">
+      <h3>Fase III · terza linea</h3>
+      <p class="lead" style="margin-bottom:0;">Si passa a un bDMARD o tsDMARD con meccanismo d'azione diverso da quello già fallito — ad esempio, dopo un anti-TNF si passa a un JAK-inibitore o a un anti-IL6R.</p>
+    </div>
 
-            if (totalScore >= 6) {
-                resultBox.style.backgroundColor = STATUS_COLORS.remission.bg;
-                resultBox.style.borderColor = STATUS_COLORS.remission.border;
-                statusP.style.color = STATUS_COLORS.remission.text;
-                statusP.textContent = 'Criteri raggiunti (≥ 6). Malattia classificabile come AR.';
-            } else {
-                resultBox.style.backgroundColor = STATUS_COLORS.high.bg;
-                resultBox.style.borderColor = STATUS_COLORS.high.border;
-                statusP.style.color = STATUS_COLORS.high.text;
-                statusP.textContent = 'Criteri non raggiunti (< 6). Non classificabile come AR.';
-            }
-        }
+    <div class="phase">
+      <h3>Mantenimento (remissione da almeno 6 mesi)</h3>
+      <ul class="plain">
+        <li>Prima si interrompono i glucocorticoidi.</li>
+        <li>Poi si riduce progressivamente la dose di bDMARD/tsDMARD o csDMARD.</li>
+        <li>L'interruzione completa non è consigliata: comporta un alto rischio di riacutizzazione.</li>
+      </ul>
+    </div>
+  </section>
 
-        function getStatus(score, thresholds, type) {
-            const [rem, low, mod] = thresholds;
-            let key = 'remission';
-            if (type === 'DAS28') {
-                if (score >= 5.1) key = 'high';
-                else if (score >= 3.2) key = 'moderate';
-                else if (score >= 2.6) key = 'low';
-            } else {
-                if (score > mod) key = 'high';
-                else if (score > low) key = 'moderate';
-                else if (score > rem) key = 'low';
-            }
-            const labels = { remission: 'Remissione', low: 'Bassa attività', moderate: 'Moderata attività', high: 'Alta attività' };
-            const formattedScore = (type === 'DAS28') ? score.toFixed(2) : score.toFixed(1);
-            return { key, label: labels[key], formattedScore };
-        }
+  <!-- ================= MODULO: CRITERI CLASSIFICATIVI ================= -->
+  <section class="block hidden" id="criteri">
+    <button type="button" class="back-link" data-back>← Cambia sezione</button>
+    <div class="block-head"><h2>Criteri classificativi ACR/EULAR 2010</h2></div>
 
-        function updateScoreBox(id, key, label, formattedScore) {
-            const box = document.getElementById(id + '_box');
-            const scoreEl = document.getElementById(id + '_score');
-            const statusEl = document.getElementById(id + '_status');
-            const c = STATUS_COLORS[key];
+    <div class="panel">
+      <div class="box info">
+        <h4>Popolazione target</h4>
+        <ul>
+          <li>Almeno un'articolazione con sinovite (tumefatta).</li>
+          <li>La sinovite non deve essere spiegata da un'altra malattia.</li>
+        </ul>
+      </div>
 
-            scoreEl.textContent = formattedScore;
-            statusEl.textContent = label;
+      <div class="field">
+        <label for="joint">Coinvolgimento articolare (max 5 pt)</label>
+        <select id="joint">
+          <option value="0" selected>1 grande articolazione (0 pt)</option>
+          <option value="1">2–10 grandi articolazioni (1 pt)</option>
+          <option value="2">1–3 piccole articolazioni (2 pt)</option>
+          <option value="3">4–10 piccole articolazioni (3 pt)</option>
+          <option value="5">&gt; 10 articolazioni, di cui almeno una piccola (5 pt)</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="serology">Sierologia — FR e anti-CCP (max 3 pt)</label>
+        <select id="serology">
+          <option value="0" selected>Entrambi negativi (0 pt)</option>
+          <option value="2">Uno positivo debole (2 pt)</option>
+          <option value="3">Uno positivo forte (3 pt)</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="acute">Fase acuta — VES o PCR (max 1 pt)</label>
+        <select id="acute">
+          <option value="0" selected>Entrambe normali (0 pt)</option>
+          <option value="1">Una alterata (1 pt)</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="acrDuration">Durata dei sintomi (max 1 pt)</label>
+        <select id="acrDuration">
+          <option value="0" selected>&lt; 6 settimane (0 pt)</option>
+          <option value="1">&ge; 6 settimane (1 pt)</option>
+        </select>
+      </div>
 
-            box.style.backgroundColor = c.bg;
-            box.style.borderColor = c.border;
-            scoreEl.style.color = c.text;
-        }
+      <div class="result" id="acrResult">
+        <div class="score-line">Punteggio totale <span class="v" id="acrScore">0</span></div>
+        <div class="verdict" id="acrVerdict">Seleziona i criteri per iniziare.</div>
+      </div>
+    </div>
+  </section>
 
-        function runAllActivityCalculations() {
-            const TJC = parseFloat(document.getElementById('TJC28').value) || 0;
-            const SJC = parseFloat(document.getElementById('SJC28').value) || 0;
-            const GH = parseFloat(document.getElementById('GH').value) || 0;
-            const PGA = parseFloat(document.getElementById('PGA').value) || 0;
-            const PhGA = parseFloat(document.getElementById('PhGA').value) || 0;
-            const CRP_mgdL = parseFloat(document.getElementById('CRP').value) || 0;
+  <!-- ================= MODULO: ATTIVITÀ DI MALATTIA ================= -->
+  <section class="block hidden" id="attivita">
+    <button type="button" class="back-link" data-back>← Cambia sezione</button>
+    <div class="block-head"><h2>Attività di malattia — DAS28, SDAI, CDAI</h2></div>
+    <p class="block-note">GH (salute generale) e PGA (attività di malattia secondo il paziente) sono domande diverse, tenute separate qui sotto.</p>
 
-            // CDAI = TJC + SJC + PGA(0-10) + PhGA(0-10)
-            const CDAI_score = TJC + SJC + PGA + PhGA;
-            const cdai = getStatus(CDAI_score, [2.8, 10, 22], 'CDAI');
-            updateScoreBox('cdai', cdai.key, cdai.label, cdai.formattedScore);
+    <div class="panel">
+      <div class="fields-grid">
+        <div class="field"><label for="TJC28">TJC28 — articolazioni dolenti (0–28)</label><input type="number" id="TJC28" min="0" max="28" value="0"></div>
+        <div class="field"><label for="SJC28">SJC28 — articolazioni tumefatte (0–28)</label><input type="number" id="SJC28" min="0" max="28" value="0"></div>
+        <div class="field"><label for="GH">GH — salute generale, paziente (0–10)<span class="hint">solo DAS28</span></label><input type="number" id="GH" min="0" max="10" step="0.1" value="0"></div>
+        <div class="field"><label for="PGA">PGA — attività di malattia, paziente (0–10)<span class="hint">CDAI/SDAI</span></label><input type="number" id="PGA" min="0" max="10" step="0.1" value="0"></div>
+        <div class="field"><label for="PhGA">PhGA — attività di malattia, medico (0–10)<span class="hint">CDAI/SDAI</span></label><input type="number" id="PhGA" min="0" max="10" step="0.1" value="0"></div>
+        <div class="field"><label for="CRP">PCR (mg/dL)</label><input type="number" id="CRP" min="0" step="0.1" value="0"></div>
+      </div>
 
-            // SDAI = TJC + SJC + PGA(0-10) + PhGA(0-10) + CRP(mg/dL)
-            const SDAI_score = TJC + SJC + PGA + PhGA + CRP_mgdL;
-            const sdai = getStatus(SDAI_score, [3.3, 11, 26], 'SDAI');
-            updateScoreBox('sdai', sdai.key, sdai.label, sdai.formattedScore);
+      <div class="sev-grid">
+        <div class="sev-box" id="das28_box">
+          <div class="k">DAS28-PCR</div>
+          <div class="v" id="das28_score">0.00</div>
+          <div class="status" id="das28_status">Inserisci i dati</div>
+        </div>
+        <div class="sev-box" id="sdai_box">
+          <div class="k">SDAI</div>
+          <div class="v" id="sdai_score">0.0</div>
+          <div class="status" id="sdai_status">Inserisci i dati</div>
+        </div>
+        <div class="sev-box" id="cdai_box">
+          <div class="k">CDAI</div>
+          <div class="v" id="cdai_score">0.0</div>
+          <div class="status" id="cdai_status">Inserisci i dati</div>
+        </div>
+      </div>
 
-            // DAS28-CRP: GH convertito da 0-10 a 0-100mm, PCR da mg/dL a mg/L
-            const CRP_mgL = CRP_mgdL * 10;
-            const GH_mm = GH * 10;
-            const DAS28_score = (0.56 * Math.sqrt(TJC)) +
-                                (0.28 * Math.sqrt(SJC)) +
-                                (0.36 * Math.log(CRP_mgL + 1)) +
-                                (0.014 * GH_mm) + 0.96;
-            const das28 = getStatus(DAS28_score, [2.6, 3.2, 5.1], 'DAS28');
-            updateScoreBox('das28', das28.key, das28.label, das28.formattedScore);
-        }
+      <div class="thresholds">
+        <div><strong>Soglie di attività</strong></div>
+        <div>DAS28-PCR: &lt;2.6 remissione · 2.6–3.2 bassa · 3.2–5.1 moderata · ≥5.1 alta</div>
+        <div>CDAI: ≤2.8 remissione · 2.8–10 bassa · 10–22 moderata · &gt;22 alta</div>
+        <div>SDAI: ≤3.3 remissione · 3.3–11 bassa · 11–26 moderata · &gt;26 alta</div>
+      </div>
+    </div>
+  </section>
 
-        window.onload = function() {
-            calculateACRScore();
-            runAllActivityCalculations();
-        };
-    </script>
+  <div class="fonti">
+    <h2>Fonti</h2>
+    <ol>
+      <li><span class="t">Aletaha D, Neogi T, Silman AJ, et al.</span> 2010 Rheumatoid arthritis classification criteria: an American College of Rheumatology/European League Against Rheumatism collaborative initiative.</li>
+      <li><span class="t">Smolen JS, Landewé RBM, Bijlsma JWJ, et al.</span> EULAR recommendations for the management of rheumatoid arthritis with synthetic and biological disease-modifying antirheumatic drugs.</li>
+      <li><span class="t">Prevoo MLL, van 't Hof MA, Kuper HH, et al.</span> Modified disease activity scores that include twenty-eight-joint counts — DAS28.</li>
+      <li><span class="t">Smolen JS, Breedveld FC, Schiff MH, et al.</span> A simplified disease activity index for rheumatoid arthritis for use in clinical practice — SDAI/CDAI.</li>
+    </ol>
+  </div>
+
+  <footer class="site">
+    Strumento di supporto clinico, non sostituisce il giudizio del medico.
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  // ---------------- ACR/EULAR 2010 ----------------
+  function updateACR(){
+    const joint = parseInt(document.getElementById('joint').value, 10) || 0;
+    const serology = parseInt(document.getElementById('serology').value, 10) || 0;
+    const acute = parseInt(document.getElementById('acute').value, 10) || 0;
+    const duration = parseInt(document.getElementById('acrDuration').value, 10) || 0;
+    const total = joint + serology + acute + duration;
+
+    document.getElementById('acrScore').textContent = total;
+    const box = document.getElementById('acrResult');
+    const verdict = document.getElementById('acrVerdict');
+
+    if(total >= 6){
+      box.classList.add('pos');
+      verdict.textContent = 'Criteri raggiunti (≥6). Malattia classificabile come AR.';
+    } else {
+      box.classList.remove('pos');
+      verdict.textContent = 'Criteri non raggiunti (<6). Non classificabile come AR.';
+    }
+  }
+  ['joint','serology','acute','acrDuration'].forEach(function(id){
+    document.getElementById(id).addEventListener('change', updateACR);
+  });
+  updateACR();
+
+  // ---------------- DAS28 / SDAI / CDAI ----------------
+  function severityKey(score, rem, low, mod, type){
+    if(type === 'DAS28'){
+      if(score >= 5.1) return 'high';
+      if(score >= 3.2) return 'moderate';
+      if(score >= 2.6) return 'low';
+      return 'remission';
+    }
+    if(score > mod) return 'high';
+    if(score > low) return 'moderate';
+    if(score > rem) return 'low';
+    return 'remission';
+  }
+  const severityLabel = {remission:'Remissione', low:'Bassa attività', moderate:'Moderata attività', high:'Alta attività'};
+
+  function updateSevBox(prefix, key, formattedScore){
+    document.getElementById(prefix + '_box').className = 'sev-box ' + key;
+    document.getElementById(prefix + '_score').textContent = formattedScore;
+    document.getElementById(prefix + '_status').textContent = severityLabel[key];
+  }
+
+  function updateActivity(){
+    const TJC = parseFloat(document.getElementById('TJC28').value) || 0;
+    const SJC = parseFloat(document.getElementById('SJC28').value) || 0;
+    const GH = parseFloat(document.getElementById('GH').value) || 0;
+    const PGA = parseFloat(document.getElementById('PGA').value) || 0;
+    const PhGA = parseFloat(document.getElementById('PhGA').value) || 0;
+    const CRP_mgdL = parseFloat(document.getElementById('CRP').value) || 0;
+
+    // CDAI = TJC + SJC + PGA(0-10) + PhGA(0-10)
+    const CDAI = TJC + SJC + PGA + PhGA;
+    updateSevBox('cdai', severityKey(CDAI, 2.8, 10, 22, 'CDAI'), CDAI.toFixed(1));
+
+    // SDAI = TJC + SJC + PGA(0-10) + PhGA(0-10) + CRP(mg/dL)
+    const SDAI = TJC + SJC + PGA + PhGA + CRP_mgdL;
+    updateSevBox('sdai', severityKey(SDAI, 3.3, 11, 26, 'SDAI'), SDAI.toFixed(1));
+
+    // DAS28-CRP: GH da 0-10 a 0-100mm, PCR da mg/dL a mg/L
+    const CRP_mgL = CRP_mgdL * 10;
+    const GH_mm = GH * 10;
+    const DAS28 = (0.56 * Math.sqrt(TJC)) + (0.28 * Math.sqrt(SJC)) + (0.36 * Math.log(CRP_mgL + 1)) + (0.014 * GH_mm) + 0.96;
+    updateSevBox('das28', severityKey(DAS28, null, null, null, 'DAS28'), DAS28.toFixed(2));
+  }
+  ['TJC28','SJC28','GH','PGA','PhGA','CRP'].forEach(function(id){
+    document.getElementById(id).addEventListener('input', updateActivity);
+  });
+  updateActivity();
+
+  // ---------------- landing / module switching ----------------
+  const landing = document.getElementById('landing');
+  const modules = {
+    terapia: document.getElementById('terapia'),
+    criteri: document.getElementById('criteri'),
+    attivita: document.getElementById('attivita')
+  };
+
+  function showLanding(){
+    landing.classList.remove('hidden');
+    Object.values(modules).forEach(function(m){ m.classList.add('hidden'); });
+    window.scrollTo({top:0, behavior:'smooth'});
+    history.replaceState(null, '', window.location.pathname);
+  }
+  function showModule(key){
+    landing.classList.add('hidden');
+    Object.keys(modules).forEach(function(k){ modules[k].classList.toggle('hidden', k !== key); });
+    window.scrollTo({top:0, behavior:'smooth'});
+    history.replaceState(null, '', '#' + key);
+  }
+  document.querySelectorAll('.landing-btn').forEach(function(btn){
+    btn.addEventListener('click', function(){ showModule(btn.dataset.target); });
+  });
+  document.querySelectorAll('[data-back]').forEach(function(btn){
+    btn.addEventListener('click', showLanding);
+  });
+
+  const initialHash = window.location.hash.replace('#', '');
+  if(modules[initialHash]) showModule(initialHash);
+  else showLanding();
+})();
+</script>
+
 </body>
 </html>
