@@ -1,332 +1,931 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fibromialgia: Criteri Diagnostici 2016</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="https://cdn.tailwindcss.com"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fibromialgia | RheumaTools</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F6F8F7;
+    --surface:#FFFFFF;
+    --surface-alt:#EEF3F1;
+    --border:#DCE4E1;
+    --text:#25302E;
+    --text-muted:#5B6A66;
+    --text-faint:#8B9793;
 
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300..700&display=swap');
+    --teal:#3E6D69;
+    --teal-dark:#2C504D;
+    --teal-soft:#DDEBE8;
+    --teal-line:#BBD6D2;
 
-        :root {
-            --primary: #8B7FD1;
-            --primary-light: #EFEBFB;
-            --secondary: #5FB8A6;
-            --secondary-light: #E4F5F1;
-            --warning: #D99A5B;
-            --warning-light: #FBF0E4;
-            --alert: #D97C97;
-            --alert-light: #FBEBF0;
-            --ink: #4B4560;
-            --ink-soft: #8783A0;
-            --page-bg: #FAF9FD;
-        }
+    --violet:#7669A0;
+    --violet-dark:#584D80;
+    --violet-soft:#E7E2F3;
+    --violet-line:#CBC0E3;
 
-        body { font-family: 'Inter', sans-serif; background-color: var(--page-bg); color: var(--ink); }
+    --clay:#B15F49;
+    --clay-soft:#F3DED7;
+    --clay-line:#E2B7A8;
 
-        .back-link {
-            background-color: white; color: var(--ink-soft); font-weight: 500;
-            padding: 0.5rem 1.1rem; border-radius: 999px; box-shadow: 0 2px 8px rgba(139, 127, 209, 0.12);
-            transition: all 0.2s;
-        }
-        .back-link:hover { color: var(--primary); box-shadow: 0 4px 12px rgba(139, 127, 209, 0.18); }
+    --sage:#5E8467;
+    --sage-dark:#33503E;
+    --sage-soft:#E1EAE2;
+    --sage-line:#BFD3C4;
 
-        .content-title { font-size: 2rem; font-weight: 600; color: var(--primary); letter-spacing: -0.01em; }
+    --radius-lg:22px;
+    --radius-md:14px;
+    --radius-sm:9px;
+    --radius-pill:999px;
 
-        .content-section { padding: 2rem; background-color: white; border-radius: 1.75rem; box-shadow: 0 10px 40px -12px rgba(139, 127, 209, 0.15); }
+    --shadow-card: 0 1px 2px rgba(37,48,46,0.04), 0 6px 20px rgba(37,48,46,0.05);
+  }
 
-        .section-title { font-size: 1.2rem; font-weight: 600; color: var(--ink); margin-bottom: 0.5rem; }
-        .section-hint { font-size: 0.85rem; color: var(--ink-soft); margin-bottom: 1.25rem; line-height: 1.5; }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter', system-ui, sans-serif;
+    font-size:16px;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,h4{
+    font-family:'Spectral', Georgia, serif;
+    font-weight:600;
+    color:var(--teal-dark);
+    margin:0 0 0.4em 0;
+    line-height:1.3;
+  }
+  a{color:var(--teal-dark);}
 
-        .region-label { font-size: 0.8rem; font-weight: 600; color: var(--primary); margin-bottom: 0.6rem; margin-top: 1.25rem; text-transform: uppercase; letter-spacing: 0.03em; }
+  .wrap{max-width:760px; margin:0 auto; padding:0 20px 60px 20px;}
 
-        .pain-chip {
-            display: flex; align-items: center; gap: 0.5rem; padding: 0.6rem 0.9rem; border-radius: 1rem;
-            background-color: #FAF9FD; border: 1px solid #E9E5F5; cursor: pointer; font-size: 0.85rem; transition: all 0.15s;
-        }
-        .pain-chip:hover { background-color: var(--primary-light); }
-        .pain-chip:has(input:checked) { background-color: var(--primary-light); border-color: var(--primary); color: var(--primary); font-weight: 500; }
-        .pain-chip input { accent-color: var(--primary); }
+  header.site{background:var(--surface); border-bottom:1px solid var(--border);}
+  .site-inner{max-width:760px; margin:0 auto; padding:18px 20px; font-size:14px; color:var(--text-muted);}
+  .site-inner a{text-decoration:none; color:var(--text-muted); border-bottom:1px solid var(--border);}
+  .site-inner a:hover{color:var(--teal-dark);}
+  .site-inner .sep{margin:0 6px; color:var(--text-faint);}
 
-        .severity-row { padding: 1rem 0; border-bottom: 1px solid #F0EDF9; }
-        .severity-row:last-child { border-bottom: none; }
-        .severity-label { font-size: 0.9rem; font-weight: 500; color: var(--ink); margin-bottom: 0.7rem; }
-        .severity-options { display: flex; gap: 0.5rem; flex-wrap: wrap; }
-        .severity-option {
-            padding: 0.45rem 1rem; border-radius: 999px; background-color: #FAF9FD; border: 1px solid #E9E5F5;
-            font-size: 0.8rem; cursor: pointer; color: var(--ink-soft); transition: all 0.15s;
-        }
-        .severity-option:hover { background-color: var(--primary-light); }
-        .severity-option:has(input:checked) { background-color: var(--primary); color: white; border-color: var(--primary); }
-        .severity-option input { display: none; }
+  .hero{padding:44px 0 8px 0;}
+  .hero h1{font-size:clamp(28px,4vw,38px); letter-spacing:-0.01em;}
+  .hero .sub{color:var(--text-muted); font-size:17px; max-width:58ch; margin-top:10px;}
 
-        .score-readout {
-            display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1.5rem;
-        }
-        .score-pill {
-            background-color: #FAF9FD; border: 1px solid #E9E5F5; border-radius: 1.25rem; padding: 1rem 1.5rem; flex: 1; min-width: 140px; text-align: center;
-        }
-        .score-pill .label { font-size: 0.8rem; color: var(--ink-soft); }
-        .score-pill .value { font-size: 1.75rem; font-weight: 600; color: var(--primary); margin-top: 0.2rem; }
+  .disclaimer{
+    margin:22px 0 0 0; padding:16px 18px; background:var(--violet-soft); border:1px solid var(--violet-line);
+    border-radius:var(--radius-md); color:#3E3560; font-size:14.5px; line-height:1.55;
+  }
+  .disclaimer strong{color:#2E2650;}
 
-        .duration-question { margin-top: 1rem; }
-        .duration-question .severity-options { margin-top: 0.6rem; }
+  .hidden{display:none !important;}
 
-        .diagnosis-box {
-            margin-top: 1.5rem; padding: 1.5rem; border-radius: 1.5rem; text-align: center; transition: all 0.3s;
-            background-color: #FAF9FD; border: 1px solid #E9E5F5;
-        }
-        .diagnosis-box .verdict { font-size: 1.3rem; font-weight: 600; margin-top: 0.3rem; }
+  /* ---- landing ---- */
+  .landing{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin:34px 0 12px 0;}
+  @media(max-width:640px){.landing{grid-template-columns:1fr;}}
+  .landing-btn{
+    font-family:inherit; text-align:left; background:var(--surface); border:1px solid var(--border);
+    border-radius:var(--radius-lg); padding:26px 22px; cursor:pointer; box-shadow:var(--shadow-card);
+    transition:border-color .15s ease, transform .12s ease;
+  }
+  .landing-btn:hover{border-color:var(--teal-line); transform:translateY(-1px);}
+  .landing-btn .lb-title{display:block; font-family:'Spectral',serif; font-weight:600; font-size:18px; color:var(--teal-dark);}
+  .landing-btn .lb-desc{display:block; margin-top:6px; font-size:13px; color:var(--text-muted); line-height:1.5;}
 
-        .pill-button {
-            display: inline-block; padding: 0.7rem 1.4rem; border-radius: 999px; font-weight: 500; font-size: 0.9rem;
-            text-decoration: none; transition: all 0.2s; cursor: pointer; border: none;
-        }
-        .pill-button.primary { background-color: var(--primary); color: white; }
-        .pill-button.primary:hover { background-color: #7A6DC4; }
-        .pill-button.secondary { background-color: var(--secondary-light); color: var(--secondary); }
-        .pill-button.secondary:hover { background-color: #D3EFE8; }
+  .back-link{
+    display:inline-flex; align-items:center; gap:6px; font-family:inherit; font-size:13.5px; font-weight:600;
+    color:var(--text-muted); background:none; border:none; cursor:pointer; padding:0; margin-bottom:22px;
+  }
+  .back-link:hover{color:var(--teal-dark);}
 
-        .signature-section { margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid #F0EDF9; }
-        .signature-line { width: 280px; border-bottom: 1px solid #D6D0EA; margin-top: 2.5rem; }
+  section.block{margin-top:40px;}
+  .block-head{display:flex; align-items:baseline; justify-content:space-between; gap:12px; margin-bottom:6px;}
+  .block-head h2{font-size:22px;}
+  .block-note{color:var(--text-muted); font-size:14.5px; margin-bottom:20px;}
 
-        @media print {
-            body { font-size: 10pt; background: white; }
-            .no-print { display: none !important; }
-            .content-section { box-shadow: none; padding: 0; }
-            @page { margin: 1.5cm; }
-        }
-    </style>
+  /* ---- generic panel card ---- */
+  .panel{background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-lg); padding:22px 24px; box-shadow:var(--shadow-card); margin-bottom:16px;}
+  .panel h3{font-size:17px; margin-bottom:4px;}
+  .panel .hint{color:var(--text-muted); font-size:13.5px; margin-bottom:16px; line-height:1.55;}
+
+  .region-label{font-size:12px; font-weight:700; color:var(--teal-dark); text-transform:uppercase; letter-spacing:.03em; margin:18px 0 8px 0;}
+  .region-label:first-of-type{margin-top:4px;}
+  .region-label .note{text-transform:none; font-weight:400; color:var(--text-faint); letter-spacing:0;}
+
+  .chip-grid{display:grid; grid-template-columns:repeat(auto-fill, minmax(160px,1fr)); gap:8px;}
+  .chip{
+    display:flex; align-items:center; gap:8px; padding:10px 12px; border-radius:var(--radius-md);
+    background:var(--surface-alt); border:1px solid var(--border); cursor:pointer; font-size:13.5px; transition:all .15s ease;
+  }
+  .chip:hover{border-color:var(--teal-line);}
+  .chip input{accent-color:var(--teal);}
+  .chip.on{background:var(--teal-soft); border-color:var(--teal-line); color:var(--teal-dark); font-weight:600;}
+
+  .score-row{display:flex; gap:12px; flex-wrap:wrap; margin-top:18px;}
+  .score-pill{background:var(--surface-alt); border:1px solid var(--border); border-radius:var(--radius-md); padding:12px 18px; flex:1; min-width:130px; text-align:center;}
+  .score-pill .k{font-size:12px; color:var(--text-faint); font-weight:700;}
+  .score-pill .v{font-family:'Spectral',serif; font-size:24px; font-weight:600; color:var(--teal-dark); margin-top:2px;}
+
+  .severity-row{padding:14px 0; border-bottom:1px solid var(--border);}
+  .severity-row:last-child{border-bottom:none;}
+  .severity-label{font-size:14px; font-weight:600; margin-bottom:8px;}
+  .toggle-row{display:flex; flex-wrap:wrap; gap:8px;}
+  .toggle-opt{
+    font-family:inherit; font-size:13.5px; font-weight:600; color:var(--text-muted); background:var(--surface);
+    border:1px solid var(--border); border-radius:var(--radius-pill); padding:8px 16px; cursor:pointer; transition:all .15s ease;
+  }
+  .toggle-opt:hover{border-color:var(--teal-line);}
+  .toggle-opt.on{background:var(--teal); border-color:var(--teal); color:#fff;}
+
+  /* ---- FIQR numeric scale ---- */
+  .scale-q{padding:16px 0; border-bottom:1px solid var(--border);}
+  .scale-q:last-child{border-bottom:none;}
+  .scale-q .n{font-size:14px; font-weight:600; margin-bottom:2px;}
+  .scale-anchors{display:flex; justify-content:space-between; font-size:11.5px; color:var(--text-faint); margin:6px 0 6px 0;}
+  .scale-row{display:flex; flex-wrap:wrap; gap:5px;}
+  .scale-opt{
+    width:34px; height:34px; display:flex; align-items:center; justify-content:center; border-radius:50%;
+    background:var(--surface-alt); border:1px solid var(--border); font-size:12.5px; color:var(--text-muted);
+    cursor:pointer; transition:all .15s ease; flex:none;
+  }
+  .scale-opt:hover{border-color:var(--teal-line);}
+  .scale-opt.on{background:var(--teal); border-color:var(--teal); color:#fff; font-weight:700;}
+
+  .subtotal{margin-top:14px; display:inline-block; background:var(--teal-soft); color:var(--teal-dark); font-weight:700; font-size:13px; padding:7px 16px; border-radius:var(--radius-pill);}
+
+  .total-box{margin-top:24px; padding:26px; border-radius:var(--radius-lg); text-align:center; background:var(--teal-soft); border:1px solid var(--teal-line);}
+  .total-box .k{font-size:13px; color:var(--teal-dark); font-weight:700;}
+  .total-box .v{font-family:'Spectral',serif; font-size:42px; font-weight:700; color:var(--teal-dark); margin-top:2px;}
+  .total-box .note{font-size:12.5px; color:var(--text-muted); margin-top:6px;}
+
+  /* ---- result / verdict ---- */
+  .result{border-radius:var(--radius-lg); padding:24px 26px; border:1px solid var(--border); background:var(--surface-alt); margin-top:22px;}
+  .result.pos{background:var(--sage-soft); border-color:var(--sage-line);}
+  .result h3{font-size:19px; margin-bottom:4px;}
+  .result.pos h3{color:var(--sage-dark);}
+  .result .sub{font-size:14px; color:var(--text-muted);}
+  .result-ctas{margin-top:16px; display:flex; flex-wrap:wrap; gap:10px;}
+  .btn{
+    font-family:inherit; font-size:13.5px; font-weight:700; border-radius:var(--radius-pill); padding:10px 18px;
+    cursor:pointer; border:1px solid transparent; transition:all .15s ease;
+  }
+  .btn.primary{background:var(--teal); color:#fff;}
+  .btn.primary:hover{background:var(--teal-dark);}
+  .btn.ghost{background:var(--surface); border-color:var(--border); color:var(--text-muted);}
+  .btn.ghost:hover{border-color:var(--teal-line); color:var(--teal-dark);}
+
+  .cta-inline{
+    display:inline-block; margin-top:18px; font-family:inherit; font-size:14px; font-weight:700; color:var(--teal-dark);
+    background:none; border:none; border-bottom:1px solid var(--teal-line); padding:0 0 2px 0; cursor:pointer;
+  }
+
+  .signature{margin-top:28px; padding-top:20px; border-top:1px solid var(--border);}
+  .signature .lbl{font-size:13px; font-weight:600; color:var(--text-muted);}
+  .signature .line{width:280px; border-bottom:1px solid var(--border); margin-top:40px;}
+
+  /* ---- therapy sub-nav + content ---- */
+  .subtab-row{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:8px;}
+  .subtab{
+    font-family:inherit; font-size:13.5px; font-weight:600; color:var(--text-muted); background:var(--surface-alt);
+    border:1px solid var(--border); border-radius:var(--radius-pill); padding:9px 16px; cursor:pointer; transition:all .15s ease;
+  }
+  .subtab:hover{border-color:var(--teal-line);}
+  .subtab.on{background:var(--teal); border-color:var(--teal); color:#fff;}
+  .subtab-row.secondary .subtab{background:var(--surface); font-size:13px;}
+  .subtab-row.secondary .subtab.on{background:var(--violet); border-color:var(--violet); color:#fff;}
+
+  .therapy-panel{display:none; margin-top:26px;}
+  .therapy-panel.on{display:block;}
+  .therapy-panel h3{font-size:19px; margin-bottom:8px;}
+  .therapy-panel h4{font-size:15px; margin-top:22px; margin-bottom:6px;}
+  .therapy-panel p{font-size:14.5px; color:var(--text-muted); line-height:1.65;}
+  .therapy-panel ul{margin:8px 0 0 0; padding-left:20px;}
+  .therapy-panel li{font-size:14.5px; margin-bottom:6px; line-height:1.5;}
+  .therapy-panel li ul{margin-top:6px;}
+  .therapy-panel li li{font-size:13.5px; color:var(--text-muted);}
+
+  .tag{
+    display:inline-block; font-size:11px; font-weight:700; padding:2px 9px; border-radius:var(--radius-pill);
+    margin-left:6px; vertical-align:middle; white-space:nowrap;
+  }
+  .tag.sage{background:var(--sage-soft); color:var(--sage-dark);}
+  .tag.clay{background:var(--clay-soft); color:#8A4A38;}
+  .tag.violet{background:var(--violet-soft); color:var(--violet-dark);}
+
+  .detail{background:var(--surface-alt); border-radius:var(--radius-md); padding:14px 18px; margin-top:14px;}
+  .detail h4{margin-top:0; color:var(--teal-dark); font-size:14.5px;}
+
+  /* ---- fonti / footer ---- */
+  .fonti{margin-top:64px; padding-top:32px; border-top:1px solid var(--border);}
+  .fonti h2{font-size:21px;}
+  .fonti ol{padding-left:20px; margin:16px 0 0 0;}
+  .fonti li{font-size:14px; color:var(--text-muted); margin-bottom:10px; line-height:1.55;}
+  .fonti li .t{color:var(--text); font-weight:600;}
+  footer.site{max-width:760px; margin:40px auto 0 auto; padding:24px 20px 40px 20px; color:var(--text-faint); font-size:12.5px; border-top:1px solid var(--border);}
+
+  @media print{
+    header.site, .landing, .back-link, .result-ctas, .cta-inline, .btn, footer.site, .fonti{display:none !important;}
+    body{background:#fff;}
+    .panel, .result{box-shadow:none; border:1px solid #ccc;}
+  }
+</style>
 </head>
-<body class="antialiased">
+<body>
 
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-14 space-y-8">
+<header class="site">
+  <div class="site-inner"><a href="index.html">RheumaTools</a><span class="sep">/</span>Fibromialgia</div>
+</header>
 
-        <header class="flex justify-between items-center mb-2 no-print">
-            <h1 class="content-title">Fibromialgia</h1>
-            <a href="index.html" class="back-link">&larr; Indietro</a>
-        </header>
+<div class="wrap">
 
-        <section class="content-section">
-            <h2 class="text-lg font-semibold mb-1">Criteri diagnostici 2016</h2>
-            <p class="text-sm text-gray-500 mb-6">Revisione ACR 2016 dei criteri 2010/2011 per la fibromialgia.</p>
+  <div class="hero">
+    <h1>Fibromialgia</h1>
+    <p class="sub">Criteri diagnostici ACR 2016, questionario FIQ-R e opzioni terapeutiche.</p>
+    <div class="disclaimer">
+      <strong>Da leggere prima di usarlo.</strong> Criteri diagnostici, FIQ-R e raccomandazioni terapeutiche sono un supporto al ragionamento clinico: non sostituiscono la valutazione del medico né escludono diagnosi alternative o in comorbidità.
+    </div>
+  </div>
 
-            <!-- WPI -->
-            <div>
-                <h3 class="section-title">Indice di diffusione del dolore (WPI)</h3>
-                <p class="section-hint">Segnala le aree in cui hai provato dolore o indolenzimento negli ultimi 7 giorni. 1 punto per area, punteggio 0-19.</p>
+  <div class="landing" id="landing">
+    <button type="button" class="landing-btn" data-target="criteri">
+      <span class="lb-title">Criteri diagnostici</span>
+      <span class="lb-desc">WPI e SSS, revisione ACR 2016.</span>
+    </button>
+    <button type="button" class="landing-btn" data-target="fiqr">
+      <span class="lb-title">FIQ-R</span>
+      <span class="lb-desc">Questionario d'impatto, 21 domande.</span>
+    </button>
+    <button type="button" class="landing-btn" data-target="terapia">
+      <span class="lb-title">Terapia</span>
+      <span class="lb-desc">Non farmacologica, farmacologica, per sintomo.</span>
+    </button>
+  </div>
 
-                <div class="region-label">Regione superiore sinistra</div>
-                <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
-                    <label class="pain-chip"><input type="checkbox" class="wpi-check" data-region="L-upper"> Cingolo scapolare sx</label>
-                    <label class="pain-chip"><input type="checkbox" class="wpi-check" data-region="L-upper"> Braccio sx</label>
-                    <label class="pain-chip"><input type="checkbox" class="wpi-check" data-region="L-upper"> Avambraccio sx</label>
-                </div>
+  <!-- ================= MODULO: CRITERI DIAGNOSTICI ================= -->
+  <section class="block hidden" id="criteri">
+    <button type="button" class="back-link" data-back>← Cambia sezione</button>
+    <div class="block-head"><h2>Criteri diagnostici 2016</h2></div>
+    <p class="block-note">Revisione ACR 2016 dei criteri 2010/2011 per la fibromialgia.</p>
 
-                <div class="region-label">Regione superiore destra</div>
-                <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
-                    <label class="pain-chip"><input type="checkbox" class="wpi-check" data-region="R-upper"> Cingolo scapolare dx</label>
-                    <label class="pain-chip"><input type="checkbox" class="wpi-check" data-region="R-upper"> Braccio dx</label>
-                    <label class="pain-chip"><input type="checkbox" class="wpi-check" data-region="R-upper"> Avambraccio dx</label>
-                </div>
+    <div class="panel">
+      <h3>Indice di diffusione del dolore (WPI)</h3>
+      <p class="hint">Segnala le aree in cui hai provato dolore o indolenzimento negli ultimi 7 giorni. 1 punto per area, punteggio 0–19.</p>
 
-                <div class="region-label">Regione inferiore sinistra</div>
-                <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
-                    <label class="pain-chip"><input type="checkbox" class="wpi-check" data-region="L-lower"> Anca (gluteo, trocantere) sx</label>
-                    <label class="pain-chip"><input type="checkbox" class="wpi-check" data-region="L-lower"> Coscia sx</label>
-                    <label class="pain-chip"><input type="checkbox" class="wpi-check" data-region="L-lower"> Gamba sx</label>
-                </div>
+      <div class="region-label">Regione superiore sinistra</div>
+      <div class="chip-grid">
+        <label class="chip"><input type="checkbox" class="wpi-check" data-region="L-upper"><span>Cingolo scapolare sx</span></label>
+        <label class="chip"><input type="checkbox" class="wpi-check" data-region="L-upper"><span>Braccio sx</span></label>
+        <label class="chip"><input type="checkbox" class="wpi-check" data-region="L-upper"><span>Avambraccio sx</span></label>
+      </div>
 
-                <div class="region-label">Regione inferiore destra</div>
-                <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
-                    <label class="pain-chip"><input type="checkbox" class="wpi-check" data-region="R-lower"> Anca (gluteo, trocantere) dx</label>
-                    <label class="pain-chip"><input type="checkbox" class="wpi-check" data-region="R-lower"> Coscia dx</label>
-                    <label class="pain-chip"><input type="checkbox" class="wpi-check" data-region="R-lower"> Gamba dx</label>
-                </div>
+      <div class="region-label">Regione superiore destra</div>
+      <div class="chip-grid">
+        <label class="chip"><input type="checkbox" class="wpi-check" data-region="R-upper"><span>Cingolo scapolare dx</span></label>
+        <label class="chip"><input type="checkbox" class="wpi-check" data-region="R-upper"><span>Braccio dx</span></label>
+        <label class="chip"><input type="checkbox" class="wpi-check" data-region="R-upper"><span>Avambraccio dx</span></label>
+      </div>
 
-                <div class="region-label">Regione assiale</div>
-                <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
-                    <label class="pain-chip"><input type="checkbox" class="wpi-check" data-region="axial"> Collo</label>
-                    <label class="pain-chip"><input type="checkbox" class="wpi-check" data-region="axial"> Area dorsale</label>
-                    <label class="pain-chip"><input type="checkbox" class="wpi-check" data-region="axial"> Area lombare</label>
-                </div>
+      <div class="region-label">Regione inferiore sinistra</div>
+      <div class="chip-grid">
+        <label class="chip"><input type="checkbox" class="wpi-check" data-region="L-lower"><span>Anca (gluteo, trocantere) sx</span></label>
+        <label class="chip"><input type="checkbox" class="wpi-check" data-region="L-lower"><span>Coscia sx</span></label>
+        <label class="chip"><input type="checkbox" class="wpi-check" data-region="L-lower"><span>Gamba sx</span></label>
+      </div>
 
-                <div class="region-label">Altre aree <span class="normal-case font-normal text-gray-400">(contano nel punteggio WPI, non nel conteggio delle 5 regioni)</span></div>
-                <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
-                    <label class="pain-chip"><input type="checkbox" class="wpi-check" data-region="none"> Mascella sx</label>
-                    <label class="pain-chip"><input type="checkbox" class="wpi-check" data-region="none"> Mascella dx</label>
-                    <label class="pain-chip"><input type="checkbox" class="wpi-check" data-region="none"> Torace</label>
-                    <label class="pain-chip"><input type="checkbox" class="wpi-check" data-region="none"> Addome</label>
-                </div>
+      <div class="region-label">Regione inferiore destra</div>
+      <div class="chip-grid">
+        <label class="chip"><input type="checkbox" class="wpi-check" data-region="R-lower"><span>Anca (gluteo, trocantere) dx</span></label>
+        <label class="chip"><input type="checkbox" class="wpi-check" data-region="R-lower"><span>Coscia dx</span></label>
+        <label class="chip"><input type="checkbox" class="wpi-check" data-region="R-lower"><span>Gamba dx</span></label>
+      </div>
 
-                <div class="score-readout">
-                    <div class="score-pill"><div class="label">Punteggio WPI</div><div class="value"><span id="wpi-score">0</span> / 19</div></div>
-                    <div class="score-pill"><div class="label">Regioni con dolore</div><div class="value"><span id="regions-score">0</span> / 5</div></div>
-                </div>
-            </div>
+      <div class="region-label">Regione assiale</div>
+      <div class="chip-grid">
+        <label class="chip"><input type="checkbox" class="wpi-check" data-region="axial"><span>Collo</span></label>
+        <label class="chip"><input type="checkbox" class="wpi-check" data-region="axial"><span>Area dorsale</span></label>
+        <label class="chip"><input type="checkbox" class="wpi-check" data-region="axial"><span>Area lombare</span></label>
+      </div>
 
-            <hr class="my-8" style="border-color: #F0EDF9;">
+      <div class="region-label">Altre aree <span class="note">(contano nel punteggio WPI, non nel conteggio delle 5 regioni)</span></div>
+      <div class="chip-grid">
+        <label class="chip"><input type="checkbox" class="wpi-check" data-region="none"><span>Mascella sx</span></label>
+        <label class="chip"><input type="checkbox" class="wpi-check" data-region="none"><span>Mascella dx</span></label>
+        <label class="chip"><input type="checkbox" class="wpi-check" data-region="none"><span>Torace</span></label>
+        <label class="chip"><input type="checkbox" class="wpi-check" data-region="none"><span>Addome</span></label>
+      </div>
 
-            <!-- SSS -->
-            <div>
-                <h3 class="section-title">Indice di gravità dei sintomi (SSS)</h3>
-                <p class="section-hint">Per ciascun sintomo, indica la gravità avvertita negli ultimi 7 giorni: 0 = nessun problema, 1 = lieve e intermittente, 2 = moderato, presente spesso, 3 = grave e continuo, ostacola le attività quotidiane. Punteggio 0-12.</p>
-
-                <div class="severity-row">
-                    <div class="severity-label">Astenia, spossatezza</div>
-                    <div class="severity-options">
-                        <label class="severity-option"><input type="radio" name="symptom_A" value="0" checked>0</label>
-                        <label class="severity-option"><input type="radio" name="symptom_A" value="1">1</label>
-                        <label class="severity-option"><input type="radio" name="symptom_A" value="2">2</label>
-                        <label class="severity-option"><input type="radio" name="symptom_A" value="3">3</label>
-                    </div>
-                </div>
-                <div class="severity-row">
-                    <div class="severity-label">Difficoltà di concentrazione, perdita di memoria</div>
-                    <div class="severity-options">
-                        <label class="severity-option"><input type="radio" name="symptom_B" value="0" checked>0</label>
-                        <label class="severity-option"><input type="radio" name="symptom_B" value="1">1</label>
-                        <label class="severity-option"><input type="radio" name="symptom_B" value="2">2</label>
-                        <label class="severity-option"><input type="radio" name="symptom_B" value="3">3</label>
-                    </div>
-                </div>
-                <div class="severity-row">
-                    <div class="severity-label">Stanchezza al risveglio, sonno non ristoratore</div>
-                    <div class="severity-options">
-                        <label class="severity-option"><input type="radio" name="symptom_C" value="0" checked>0</label>
-                        <label class="severity-option"><input type="radio" name="symptom_C" value="1">1</label>
-                        <label class="severity-option"><input type="radio" name="symptom_C" value="2">2</label>
-                        <label class="severity-option"><input type="radio" name="symptom_C" value="3">3</label>
-                    </div>
-                </div>
-
-                <p class="section-hint mt-4">Presenza o assenza negli ultimi 6 mesi:</p>
-
-                <div class="severity-row">
-                    <div class="severity-label">Dolori o crampi addominali</div>
-                    <div class="severity-options">
-                        <label class="severity-option"><input type="radio" name="symptom_D" value="0" checked>Assente</label>
-                        <label class="severity-option"><input type="radio" name="symptom_D" value="1">Presente</label>
-                    </div>
-                </div>
-                <div class="severity-row">
-                    <div class="severity-label">Depressione</div>
-                    <div class="severity-options">
-                        <label class="severity-option"><input type="radio" name="symptom_E" value="0" checked>Assente</label>
-                        <label class="severity-option"><input type="radio" name="symptom_E" value="1">Presente</label>
-                    </div>
-                </div>
-                <div class="severity-row">
-                    <div class="severity-label">Emicrania, cefalea</div>
-                    <div class="severity-options">
-                        <label class="severity-option"><input type="radio" name="symptom_F" value="0" checked>Assente</label>
-                        <label class="severity-option"><input type="radio" name="symptom_F" value="1">Presente</label>
-                    </div>
-                </div>
-
-                <div class="score-readout">
-                    <div class="score-pill"><div class="label">Punteggio SSS</div><div class="value"><span id="sss-score">0</span> / 12</div></div>
-                </div>
-            </div>
-
-            <hr class="my-8" style="border-color: #F0EDF9;">
-
-            <!-- Durata -->
-            <div class="duration-question">
-                <div class="severity-label">I sintomi sono presenti a un livello simile da almeno 3 mesi?</div>
-                <div class="severity-options">
-                    <label class="severity-option"><input type="radio" name="duration" value="Si">Sì</label>
-                    <label class="severity-option"><input type="radio" name="duration" value="No">No</label>
-                </div>
-            </div>
-
-            <!-- Diagnosi -->
-            <div class="diagnosis-box">
-                <p class="text-sm text-gray-500">Criteri soddisfatti</p>
-                <p id="diagnosis-text" class="verdict" style="color: var(--ink-soft);">Completa i campi sopra</p>
-            </div>
-
-            <div class="flex flex-wrap gap-3 mt-6 no-print">
-                <div id="button-container" style="display: none;">
-                    <a href="fiqr_questionnaire.html" class="pill-button primary">Compila questionario FIQ-R</a>
-                </div>
-                <div id="therapy-button-container">
-                    <a href="terapia_fibromialgia.html" target="_blank" class="pill-button secondary">Opzioni terapeutiche</a>
-                </div>
-            </div>
-
-            <div class="signature-section">
-                <p class="text-sm font-medium text-gray-600">Firma del medico</p>
-                <div class="signature-line"></div>
-            </div>
-
-            <div class="no-print mt-6">
-                <button onclick="window.print()" class="pill-button secondary">Stampa referto</button>
-            </div>
-        </section>
-
+      <div class="score-row">
+        <div class="score-pill"><div class="k">Punteggio WPI</div><div class="v"><span id="wpi-score">0</span> / 19</div></div>
+        <div class="score-pill"><div class="k">Regioni con dolore</div><div class="v"><span id="regions-score">0</span> / 5</div></div>
+      </div>
     </div>
 
-    <script>
-        function calculateWPI() {
-            const checkboxes = document.querySelectorAll('.wpi-check');
-            let total = 0;
-            const regions = new Set();
-            checkboxes.forEach(cb => {
-                if (cb.checked) {
-                    total++;
-                    const region = cb.dataset.region;
-                    if (region !== 'none') regions.add(region);
-                }
-            });
-            document.getElementById('wpi-score').textContent = total;
-            document.getElementById('regions-score').textContent = regions.size;
-            checkDiagnosisCriteria();
-        }
+    <div class="panel">
+      <h3>Indice di gravità dei sintomi (SSS)</h3>
+      <p class="hint">Per ciascun sintomo, indica la gravità avvertita negli ultimi 7 giorni: 0 = nessun problema, 1 = lieve e intermittente, 2 = moderato, presente spesso, 3 = grave e continuo, ostacola le attività quotidiane. Punteggio 0–12.</p>
 
-        function calculateSSS() {
-            let score = 0;
-            ['symptom_A', 'symptom_B', 'symptom_C', 'symptom_D', 'symptom_E', 'symptom_F'].forEach(name => {
-                const selected = document.querySelector(`input[name="${name}"]:checked`);
-                if (selected) score += parseInt(selected.value);
-            });
-            document.getElementById('sss-score').textContent = score;
-            checkDiagnosisCriteria();
-        }
+      <div class="severity-row">
+        <div class="severity-label">Astenia, spossatezza</div>
+        <div class="toggle-row" data-sss="symptom_A" data-max="3">
+          <button type="button" class="toggle-opt on" data-val="0">0</button>
+          <button type="button" class="toggle-opt" data-val="1">1</button>
+          <button type="button" class="toggle-opt" data-val="2">2</button>
+          <button type="button" class="toggle-opt" data-val="3">3</button>
+        </div>
+      </div>
+      <div class="severity-row">
+        <div class="severity-label">Difficoltà di concentrazione, perdita di memoria</div>
+        <div class="toggle-row" data-sss="symptom_B" data-max="3">
+          <button type="button" class="toggle-opt on" data-val="0">0</button>
+          <button type="button" class="toggle-opt" data-val="1">1</button>
+          <button type="button" class="toggle-opt" data-val="2">2</button>
+          <button type="button" class="toggle-opt" data-val="3">3</button>
+        </div>
+      </div>
+      <div class="severity-row">
+        <div class="severity-label">Stanchezza al risveglio, sonno non ristoratore</div>
+        <div class="toggle-row" data-sss="symptom_C" data-max="3">
+          <button type="button" class="toggle-opt on" data-val="0">0</button>
+          <button type="button" class="toggle-opt" data-val="1">1</button>
+          <button type="button" class="toggle-opt" data-val="2">2</button>
+          <button type="button" class="toggle-opt" data-val="3">3</button>
+        </div>
+      </div>
 
-        function checkDiagnosisCriteria() {
-            const wpiScore = parseInt(document.getElementById('wpi-score').textContent) || 0;
-            const sssScore = parseInt(document.getElementById('sss-score').textContent) || 0;
-            const regionsCount = parseInt(document.getElementById('regions-score').textContent) || 0;
-            const hasDuration = !!document.querySelector('input[name="duration"][value="Si"]:checked');
-            const generalizedPain = regionsCount >= 4;
+      <p class="hint" style="margin-top:16px;">Presenza o assenza negli ultimi 6 mesi:</p>
 
-            const scoreMet = (wpiScore >= 7 && sssScore >= 5) || (wpiScore >= 4 && wpiScore <= 6 && sssScore >= 9);
-            const criteriaMet = hasDuration && generalizedPain && scoreMet;
+      <div class="severity-row">
+        <div class="severity-label">Dolori o crampi addominali</div>
+        <div class="toggle-row" data-sss="symptom_D" data-max="1">
+          <button type="button" class="toggle-opt on" data-val="0">Assente</button>
+          <button type="button" class="toggle-opt" data-val="1">Presente</button>
+        </div>
+      </div>
+      <div class="severity-row">
+        <div class="severity-label">Depressione</div>
+        <div class="toggle-row" data-sss="symptom_E" data-max="1">
+          <button type="button" class="toggle-opt on" data-val="0">Assente</button>
+          <button type="button" class="toggle-opt" data-val="1">Presente</button>
+        </div>
+      </div>
+      <div class="severity-row">
+        <div class="severity-label">Emicrania, cefalea</div>
+        <div class="toggle-row" data-sss="symptom_F" data-max="1">
+          <button type="button" class="toggle-opt on" data-val="0">Assente</button>
+          <button type="button" class="toggle-opt" data-val="1">Presente</button>
+        </div>
+      </div>
 
-            const diagnosisText = document.getElementById('diagnosis-text');
-            const fiqrButtonContainer = document.getElementById('button-container');
+      <div class="score-row">
+        <div class="score-pill"><div class="k">Punteggio SSS</div><div class="v"><span id="sss-score">0</span> / 12</div></div>
+      </div>
+    </div>
 
-            if (criteriaMet) {
-                diagnosisText.textContent = 'Rispettati';
-                diagnosisText.style.color = '#3D8F7F';
-                fiqrButtonContainer.style.display = 'block';
-            } else {
-                diagnosisText.textContent = 'Non rispettati';
-                diagnosisText.style.color = '#8783A0';
-                fiqrButtonContainer.style.display = 'none';
-            }
-        }
+    <div class="panel">
+      <div class="severity-label">I sintomi sono presenti a un livello simile da almeno 3 mesi?</div>
+      <div class="toggle-row" data-sss="duration" data-max="1">
+        <button type="button" class="toggle-opt" data-val="1">Sì</button>
+        <button type="button" class="toggle-opt" data-val="0">No</button>
+      </div>
+    </div>
 
-        document.querySelectorAll('.wpi-check').forEach(cb => cb.addEventListener('change', calculateWPI));
-        document.querySelectorAll('input[name^="symptom_"]').forEach(r => r.addEventListener('change', calculateSSS));
-        document.querySelectorAll('input[name="duration"]').forEach(r => r.addEventListener('change', checkDiagnosisCriteria));
+    <div class="result" id="diagResult">
+      <h3 id="diagTitle">Completa i campi sopra</h3>
+      <div class="sub" id="diagSub">I criteri richiedono dolore generalizzato (≥4 regioni su 5), un punteggio WPI/SSS sufficiente e una durata di almeno 3 mesi.</div>
+      <div class="result-ctas">
+        <button type="button" class="btn primary hidden" id="ctaFiqr">Compila il FIQ-R →</button>
+        <button type="button" class="btn ghost" id="ctaTerapiaFromCriteri">Vedi le opzioni terapeutiche</button>
+      </div>
+    </div>
 
-        calculateWPI();
-        calculateSSS();
-    </script>
+    <div class="signature">
+      <div class="lbl">Firma del medico</div>
+      <div class="line"></div>
+    </div>
+    <div style="margin-top:20px;">
+      <button type="button" class="btn ghost" onclick="window.print()">Stampa referto</button>
+    </div>
+  </section>
+
+  <!-- ================= MODULO: FIQ-R ================= -->
+  <section class="block hidden" id="fiqr">
+    <button type="button" class="back-link" data-back>← Cambia sezione</button>
+    <div class="block-head"><h2>FIQ-R</h2></div>
+    <p class="block-note">Fibromyalgia Impact Questionnaire – Revised. Per ogni domanda, indica il numero che meglio descrive quanto avvertito nell'ultima settimana a causa della fibromialgia.</p>
+
+    <div class="panel">
+      <h3>Dominio 1 · Funzione fisica</h3>
+      <p class="hint">Nove domande sul grado di difficoltà avvertito nello svolgere le seguenti attività.</p>
+      <div id="fiqr-domain1"></div>
+      <div class="subtotal">Dominio 1 — subtotale: <span id="domain1-score">0</span></div>
+    </div>
+
+    <div class="panel">
+      <h3>Dominio 2 · Impatto globale</h3>
+      <p class="hint">Due domande sull'impatto complessivo della fibromialgia nell'ultima settimana.</p>
+      <div id="fiqr-domain2"></div>
+      <div class="subtotal">Dominio 2 — subtotale: <span id="domain2-score">0</span></div>
+    </div>
+
+    <div class="panel">
+      <h3>Dominio 3 · Sintomi</h3>
+      <p class="hint">Dieci domande sui sintomi avvertiti nell'ultima settimana.</p>
+      <div id="fiqr-domain3"></div>
+      <div class="subtotal">Dominio 3 — subtotale: <span id="domain3-score">0</span></div>
+    </div>
+
+    <div class="total-box">
+      <div class="k">Punteggio totale FIQ-R</div>
+      <div class="v" id="total-fiqr-score">0.00</div>
+      <div class="note">Scala 0–100 · punteggio più alto = impatto maggiore della fibromialgia</div>
+    </div>
+
+    <div style="margin-top:18px;">
+      <button type="button" class="cta-inline" id="ctaTerapiaFromFiqr">Vai alle opzioni terapeutiche →</button>
+    </div>
+
+    <div class="signature">
+      <div class="lbl">Firma del medico</div>
+      <div class="line"></div>
+    </div>
+    <div style="margin-top:20px;">
+      <button type="button" class="btn ghost" onclick="window.print()">Stampa referto FIQ-R</button>
+    </div>
+  </section>
+
+  <!-- ================= MODULO: TERAPIA ================= -->
+  <section class="block hidden" id="terapia">
+    <button type="button" class="back-link" data-back>← Cambia sezione</button>
+    <div class="block-head"><h2>Opzioni terapeutiche</h2></div>
+    <p class="block-note">Approcci non farmacologici e farmacologici, organizzati per grado di evidenza, sintomo predominante, o per linea guida di riferimento.</p>
+
+    <div class="subtab-row" id="mainTabs">
+      <button type="button" class="subtab on" data-panel="nonpharma">Non farmacologica</button>
+      <button type="button" class="subtab" data-panel="pharma">Farmacologica</button>
+      <button type="button" class="subtab" data-panel="symptom">Per sintomo</button>
+    </div>
+    <div class="subtab-row secondary" id="guidelineTabs">
+      <button type="button" class="subtab" data-panel="sir">Linee guida SIR 2021</button>
+      <button type="button" class="subtab" data-panel="eular">Linee guida EULAR 2016</button>
+    </div>
+
+    <!-- NON FARMACOLOGICA -->
+    <div class="therapy-panel on" id="panel-nonpharma">
+      <h3>Approcci terapeutici non farmacologici</h3>
+      <p>Queste terapie puntano al miglioramento dei sintomi attraverso modifiche dello stile di vita e interventi specifici non basati su farmaci.</p>
+
+      <h4>Educazione del paziente</h4>
+      <p>Spiegare la natura della fibromialgia — un disturbo della processazione del dolore — rassicurare il paziente e definire aspettative realistiche è il primo passo.</p>
+
+      <h4>Esercizio fisico <span class="tag sage">forte, a favore</span></h4>
+      <p>È l'unica terapia con raccomandazione forte secondo le linee guida EULAR. Porta miglioramenti nella qualità della vita, nel dolore e nella funzione fisica — aerobico, di resistenza, stretching, o una combinazione. L'esercizio aerobico di intensità moderata ha le prove più solide; si consiglia di iniziare con bassa intensità e frequenza, aumentandole gradualmente.</p>
+
+      <h4>Terapie meditative in movimento</h4>
+      <p>Yoga, Pilates e tai chi hanno mostrato di migliorare la funzione e ridurre il dolore. Il tai chi, in particolare, porta un moderato miglioramento sintomatico.</p>
+
+      <h4>Terapie aggiuntive in caso di risposta insufficiente</h4>
+      <div class="detail">
+        <h4>Terapie psicologiche</h4>
+        <p>La terapia cognitivo-comportamentale porta a modesti miglioramenti del dolore e della disabilità, nel breve e medio termine.</p>
+      </div>
+      <div class="detail">
+        <h4>Terapie fisiche complementari</h4>
+        <ul>
+          <li>Idroterapia/balneoterapia: migliora il dolore e la qualità della vita.</li>
+          <li>Agopuntura: può migliorare il dolore e la rigidità a breve termine.</li>
+          <li>Terapia manuale (rilascio miofasciale): può ridurre i sintomi e migliorare la qualità della vita.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- FARMACOLOGICA -->
+    <div class="therapy-panel" id="panel-pharma">
+      <h3>Schema delle terapie farmacologiche per grado di evidenza</h3>
+
+      <h4>Evidenze solide o moderate <span class="tag sage">debole, a favore</span></h4>
+      <p>Farmaci supportati da revisioni sistematiche di alta qualità, con beneficio riscontrato solo in una parte dei pazienti.</p>
+      <ul>
+        <li><strong>SNRI</strong>
+          <ul>
+            <li>Duloxetina: NNT di 6.4 per un sollievo dal dolore del 30%.</li>
+            <li>Milnacipran: NNT tra 6 e 10 per un sollievo del 30%.</li>
+          </ul>
+        </li>
+        <li><strong>Gabapentinoidi</strong>
+          <ul><li>Pregabalin: riduce dolore e affaticamento, migliora il sonno. NNT di 8 per una risposta al trattamento.</li></ul>
+        </li>
+        <li><strong>Triciclici</strong>
+          <ul><li>Amitriptilina: a basso dosaggio, per ridurre il dolore e migliorare il sonno.</li></ul>
+        </li>
+        <li><strong>Analgesici atipici</strong>
+          <ul><li>Tramadolo: solo per dolore da moderato a severo, sotto stretto monitoraggio.</li></ul>
+        </li>
+      </ul>
+
+      <h4>Evidenze limitate o contrastanti <span class="tag violet">solo per ricerca</span></h4>
+      <p>Le prove sono insufficienti o i risultati incerti per un uso clinico di routine.</p>
+      <ul>
+        <li>Gabapentin: evidenze insufficienti.</li>
+        <li>Ciclobenzaprina: può essere utile per i disturbi del sonno.</li>
+        <li>Mirtazapina: nessun effetto significativo sul dolore, può aiutare con il sonno.</li>
+        <li>Cannabinoidi (es. nabilone): prove attualmente limitate.</li>
+        <li>Naltrexone a basso dosaggio: prove ancora preliminari.</li>
+      </ul>
+
+      <h4>Miorilassanti <span class="tag violet">uso clinico, evidenze limitate</span></h4>
+      <p>Usati nella pratica clinica per l'azione miorilassante, con evidenze limitate o assenti nella fibromialgia.</p>
+      <ul>
+        <li>Tizanidina: dose usuale 2–4 mg, due o tre volte al giorno.</li>
+        <li>Paracetamolo 500 mg + tiocolchicoside 2 mg: 1 compressa fino a 3 volte al giorno, per un massimo di 7 giorni al mese.</li>
+      </ul>
+
+      <h4>Non raccomandati <span class="tag clay">contro</span></h4>
+      <p>Uso sconsigliato per mancanza di efficacia o rischi sfavorevoli.</p>
+      <ul>
+        <li>Oppioidi forti: fortemente sconsigliati.</li>
+        <li>FANS: sconsigliati, non superiori al placebo.</li>
+        <li>SSRI: sconsigliati per i sintomi chiave della fibromialgia.</li>
+        <li>Corticosteroidi: fortemente sconsigliati.</li>
+      </ul>
+    </div>
+
+    <!-- PER SINTOMO -->
+    <div class="therapy-panel" id="panel-symptom">
+      <h3>Terapie farmacologiche per sintomo predominante</h3>
+      <p>Schema semplificato che lega il farmaco al sintomo principale per cui può essere utilizzato, in base alle evidenze più solide.</p>
+
+      <div class="detail">
+        <h4>Per il dolore</h4>
+        <ul>
+          <li>Duloxetina e milnacipran (SNRI) — approvati dalla FDA per la fibromialgia.</li>
+          <li>Pregabalin (gabapentinoide) — approvato dalla FDA per la fibromialgia.</li>
+          <li>Amitriptilina (triciclico) — efficace soprattutto a breve termine.</li>
+          <li>Tramadolo (analgesico) — usato con cautela per dolore severo.</li>
+          <li>Ciclobenzaprina (miorilassante).</li>
+          <li>Tizanidina e paracetamolo + tiocolchicoside — altri miorilassanti usati in pratica clinica.</li>
+        </ul>
+      </div>
+      <div class="detail">
+        <h4>Per ansia e depressione</h4>
+        <ul>
+          <li>Duloxetina e milnacipran (SNRI).</li>
+          <li>Pregabalin (gabapentinoide).</li>
+          <li>Amitriptilina (triciclico).</li>
+          <li>SSRI (es. fluoxetina) — usati solo per i sintomi in comorbilità, non per il dolore.</li>
+        </ul>
+      </div>
+      <div class="detail">
+        <h4>Per i disturbi del sonno</h4>
+        <ul>
+          <li>Pregabalin (gabapentinoide).</li>
+          <li>Amitriptilina (triciclico).</li>
+          <li>Ciclobenzaprina (miorilassante).</li>
+          <li>Cannabinoidi — evidenze limitate.</li>
+          <li>Tizanidina — usata in pratica clinica.</li>
+        </ul>
+      </div>
+      <div class="detail">
+        <h4>Per l'affaticamento</h4>
+        <ul>
+          <li>Milnacipran (SNRI).</li>
+          <li>Pregabalin (gabapentinoide).</li>
+        </ul>
+      </div>
+      <div class="detail">
+        <h4>Per i disturbi cognitivi</h4>
+        <ul><li>Milnacipran (SNRI).</li></ul>
+      </div>
+    </div>
+
+    <!-- SIR 2021 -->
+    <div class="therapy-panel" id="panel-sir">
+      <h3>Raccomandazioni terapeutiche SIR 2021</h3>
+      <p>La Società Italiana di Reumatologia propone un approccio multimodale e personalizzato, che integra diverse strategie di trattamento.</p>
+
+      <h4>Strategie generali</h4>
+      <ul>
+        <li>Approccio multimodale: combinare attività fisica e supporto psicoterapeutico.</li>
+        <li>Partecipazione attiva del paziente: le terapie non farmacologiche con coinvolgimento attivo sono centrali.</li>
+        <li>Personalizzazione: scegliere i farmaci in base ai sintomi predominanti, iniziando a dosi basse.</li>
+      </ul>
+
+      <h4>Terapie non farmacologiche</h4>
+      <div class="detail">
+        <h4>Terapie fisiche <span class="tag sage">livello 1, grado A</span></h4>
+        <ul>
+          <li>Esercizio di resistenza aerobica.</li>
+          <li>Esercizio di potenziamento muscolare.</li>
+          <li>Attività in acqua / acquagym.</li>
+          <li>Terapia termale (balneoterapia).</li>
+        </ul>
+      </div>
+      <div class="detail">
+        <h4>Terapie psicologiche <span class="tag sage">livello 1, grado A</span></h4>
+        <ul>
+          <li>Terapia cognitivo-comportamentale e terapia occupazionale.</li>
+          <li>Ipnosi, immaginazione guidata o scrittura terapeutica <span class="tag violet">livello 3, grado C</span></li>
+        </ul>
+      </div>
+      <div class="detail">
+        <h4>Terapie non convenzionali</h4>
+        <ul>
+          <li>Terapie di movimento meditativo (qigong, yoga, tai chi) <span class="tag sage">livello 1, grado A</span></li>
+          <li>Programma di riduzione dello stress basato sulla mindfulness (MBSR) e training di rilassamento <span class="tag sage">livello 1, grado A</span></li>
+          <li>Agopuntura <span class="tag sage">livello 1, grado A</span></li>
+          <li>Idroterapia <span class="tag violet">livello 1, grado C</span></li>
+        </ul>
+      </div>
+
+      <h4>Terapie farmacologiche</h4>
+      <div class="detail">
+        <h4>Antidepressivi <span class="tag sage">livello 1, grado A</span></h4>
+        <ul>
+          <li>Inibitori della ricaptazione della serotonina (fluoxetina, paroxetina).</li>
+          <li>Inibitori della ricaptazione della serotonina e noradrenalina (duloxetina).</li>
+          <li>Triciclici (amitriptilina).</li>
+        </ul>
+      </div>
+      <div class="detail">
+        <h4>Anticonvulsivanti <span class="tag sage">livello 1, grado A</span></h4>
+        <ul><li>Pregabalin: utile per le proprietà di modulazione del dolore.</li></ul>
+      </div>
+      <div class="detail">
+        <h4>Analgesici</h4>
+        <ul>
+          <li>Tramadolo <span class="tag sage">livello 1, grado A</span> — riservato a dolore da moderato a severo.</li>
+          <li>Paracetamolo <span class="tag violet">livello 5, grado D</span> — utile in alcuni pazienti.</li>
+        </ul>
+      </div>
+      <div class="detail">
+        <h4>Miorilassanti e altri farmaci</h4>
+        <ul>
+          <li>Ciclobenzaprina <span class="tag sage">livello 1, grado A</span> — considerata per i disturbi del sonno.</li>
+          <li>Cannabinoidi <span class="tag violet">livello 3, grado C</span> — considerati per i disturbi del sonno, con scarso supporto in letteratura.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- EULAR 2016 -->
+    <div class="therapy-panel" id="panel-eular">
+      <h3>Raccomandazioni terapeutiche EULAR 2016</h3>
+      <p>Le raccomandazioni EULAR si basano su un'ampia revisione della letteratura e propongono un approccio graduale e personalizzato.</p>
+
+      <h4>Principi generali</h4>
+      <ul>
+        <li>Diagnosi pronta: necessaria per una gestione ottimale.</li>
+        <li>Approccio graduale: personalizzato in base a sintomi, preferenze del paziente e comorbilità.</li>
+        <li>Decisione condivisa: le scelte terapeutiche si prendono insieme al paziente.</li>
+        <li>Priorità non farmacologiche: la gestione iniziale si concentra su terapie non farmacologiche per disponibilità, costi e sicurezza.</li>
+      </ul>
+
+      <h4>Terapie non farmacologiche</h4>
+      <div class="detail">
+        <h4>A favore <span class="tag sage">forte / debole</span></h4>
+        <ul>
+          <li>Esercizio fisico — unica terapia con raccomandazione forte a favore, efficace su dolore e funzione fisica.</li>
+          <li>Agopuntura e idroterapia <span class="tag sage">debole</span></li>
+          <li>Terapie meditative in movimento: qigong, yoga, tai chi e mindfulness (MBSR) <span class="tag sage">debole</span></li>
+          <li>Terapia cognitivo-comportamentale <span class="tag sage">debole</span></li>
+          <li>Terapie multicomponenti: programmi di riabilitazione multimodale <span class="tag sage">debole</span></li>
+        </ul>
+      </div>
+      <div class="detail">
+        <h4>Contro <span class="tag clay">forte / debole</span></h4>
+        <ul>
+          <li>Chiropratica <span class="tag clay">forte contro</span> — per preoccupazioni di sicurezza.</li>
+          <li>Biofeedback, capsaicina, ipnoterapia, massaggio e SAMe <span class="tag clay">debole contro</span></li>
+          <li>Immaginazione guidata e omeopatia <span class="tag clay">forte contro</span></li>
+        </ul>
+      </div>
+
+      <h4>Terapie farmacologiche</h4>
+      <div class="detail">
+        <h4>A favore <span class="tag sage">debole</span></h4>
+        <ul>
+          <li>Per dolore severo: duloxetina, milnacipran, pregabalin, tramadolo.</li>
+          <li>Per disturbi del sonno: amitriptilina, ciclobenzaprina, pregabalin.</li>
+        </ul>
+      </div>
+      <div class="detail">
+        <h4>Contro <span class="tag clay">forte / debole</span></h4>
+        <ul>
+          <li>Forte contro: oppioidi forti, corticosteroidi, ormone della crescita, sodio oxibato.</li>
+          <li>Debole contro: FANS, inibitori delle MAO, SSRI.</li>
+        </ul>
+      </div>
+      <div class="detail">
+        <h4>Solo per ricerca <span class="tag violet">evidenza insufficiente</span></h4>
+        <ul><li>Gabapentin: prove insufficienti per l'uso clinico.</li></ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="fonti">
+    <h2>Fonti</h2>
+    <ol>
+      <li><span class="t">Wolfe F, Clauw DJ, Fitzcharles MA, et al.</span> 2016 Revisions to the 2010/2011 fibromyalgia diagnostic criteria.</li>
+      <li><span class="t">Bennett RM, Friend R, Jones KD, et al.</span> The Revised Fibromyalgia Impact Questionnaire (FIQR): validation and psychometric properties.</li>
+      <li><span class="t">Macfarlane GJ, Kronisch C, Dean LE, et al.</span> EULAR revised recommendations for the management of fibromyalgia.</li>
+      <li><span class="t">Società Italiana di Reumatologia (SIR).</span> Raccomandazioni per la gestione della fibromialgia, 2021.</li>
+    </ol>
+  </div>
+
+  <footer class="site">
+    Strumento di supporto clinico, non sostituisce il giudizio del medico.
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  // ---------------- WPI ----------------
+  function calcWPI(){
+    let total = 0;
+    const regions = new Set();
+    document.querySelectorAll('.wpi-check').forEach(function(cb){
+      cb.closest('.chip').classList.toggle('on', cb.checked);
+      if(cb.checked){
+        total++;
+        const r = cb.dataset.region;
+        if(r !== 'none') regions.add(r);
+      }
+    });
+    document.getElementById('wpi-score').textContent = total;
+    document.getElementById('regions-score').textContent = regions.size;
+    checkDiagnosis();
+  }
+  document.querySelectorAll('.wpi-check').forEach(function(cb){ cb.addEventListener('change', calcWPI); });
+
+  // ---------------- SSS + duration (shared toggle-row pattern) ----------------
+  const sssState = {};
+  document.querySelectorAll('#criteri .toggle-row[data-sss]').forEach(function(row){
+    const key = row.dataset.sss;
+    row.querySelectorAll('.toggle-opt').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        row.querySelectorAll('.toggle-opt').forEach(function(b){ b.classList.remove('on'); });
+        btn.classList.add('on');
+        sssState[key] = parseInt(btn.dataset.val, 10);
+        calcSSS();
+      });
+      if(btn.classList.contains('on')) sssState[key] = parseInt(btn.dataset.val, 10);
+    });
+  });
+
+  function calcSSS(){
+    let score = 0;
+    ['symptom_A','symptom_B','symptom_C','symptom_D','symptom_E','symptom_F'].forEach(function(k){
+      score += (sssState[k] || 0);
+    });
+    document.getElementById('sss-score').textContent = score;
+    checkDiagnosis();
+  }
+
+  function checkDiagnosis(){
+    const wpi = parseInt(document.getElementById('wpi-score').textContent, 10) || 0;
+    const sss = parseInt(document.getElementById('sss-score').textContent, 10) || 0;
+    const regionsCount = parseInt(document.getElementById('regions-score').textContent, 10) || 0;
+    const hasDuration = sssState.duration === 1;
+    const generalizedPain = regionsCount >= 4;
+    const scoreMet = (wpi >= 7 && sss >= 5) || (wpi >= 4 && wpi <= 6 && sss >= 9);
+    const criteriaMet = hasDuration && generalizedPain && scoreMet;
+
+    const box = document.getElementById('diagResult');
+    const title = document.getElementById('diagTitle');
+    const sub = document.getElementById('diagSub');
+    const ctaFiqr = document.getElementById('ctaFiqr');
+
+    if(criteriaMet){
+      box.classList.add('pos');
+      title.textContent = 'Criteri rispettati';
+      sub.textContent = 'Dolore generalizzato, punteggio WPI/SSS sufficiente e durata di almeno 3 mesi, tutti soddisfatti.';
+      ctaFiqr.classList.remove('hidden');
+    } else {
+      box.classList.remove('pos');
+      title.textContent = 'Criteri non rispettati';
+      sub.textContent = 'Dolore generalizzato (≥4 regioni su 5), punteggio WPI/SSS sufficiente e durata di almeno 3 mesi devono essere tutti soddisfatti.';
+      ctaFiqr.classList.add('hidden');
+    }
+  }
+
+  calcWPI();
+  calcSSS();
+
+  // ---------------- FIQ-R ----------------
+  const fiqrQuestions = {
+    1: {domain:1, label:'1. Spazzolare o pettinare i capelli', a1:'Nessuna difficoltà', a2:'Estrema difficoltà'},
+    2: {domain:1, label:'2. Camminare ininterrottamente per 20 minuti', a1:'Nessuna difficoltà', a2:'Estrema difficoltà'},
+    3: {domain:1, label:'3. Preparare i pasti', a1:'Nessuna difficoltà', a2:'Estrema difficoltà'},
+    4: {domain:1, label:'4. Passare l\'aspirapolvere e lavare i pavimenti', a1:'Nessuna difficoltà', a2:'Estrema difficoltà'},
+    5: {domain:1, label:'5. Sollevare e portare le borse della spesa', a1:'Nessuna difficoltà', a2:'Estrema difficoltà'},
+    6: {domain:1, label:'6. Salire un piano di scale', a1:'Nessuna difficoltà', a2:'Estrema difficoltà'},
+    7: {domain:1, label:'7. Cambiare le lenzuola del letto', a1:'Nessuna difficoltà', a2:'Estrema difficoltà'},
+    8: {domain:1, label:'8. Stare seduto su una sedia per almeno 45 minuti', a1:'Nessuna difficoltà', a2:'Estrema difficoltà'},
+    9: {domain:1, label:'9. Andare a fare la spesa', a1:'Nessuna difficoltà', a2:'Estrema difficoltà'},
+    10:{domain:2, label:'10. La fibromialgia mi ha impedito di portare a termine i lavori/compiti della settimana', a1:'Mai', a2:'Sempre'},
+    11:{domain:2, label:'11. Sono stato/a completamente sopraffatto/a dai sintomi della fibromialgia', a1:'Mai', a2:'Sempre'},
+    12:{domain:3, label:'12. Assegni un punteggio al suo livello di dolore', a1:'Nessun dolore', a2:'Estremo dolore'},
+    13:{domain:3, label:'13. Assegni un punteggio al suo livello di stanchezza', a1:'Nessuna stanchezza', a2:'Estrema stanchezza'},
+    14:{domain:3, label:'14. Assegni un punteggio al suo livello di rigidità', a1:'Nessuna rigidità', a2:'Estrema rigidità'},
+    15:{domain:3, label:'15. Assegni un punteggio alla qualità del suo sonno', a1:'Ben riposato/a', a2:'Estremamente stanco/a'},
+    16:{domain:3, label:'16. Assegni un punteggio al suo grado di depressione', a1:'Per nulla depresso/a', a2:'Estremamente depresso/a'},
+    17:{domain:3, label:'17. Assegni un punteggio ai suoi problemi di memoria', a1:'Buona memoria', a2:'Scarsissima memoria'},
+    18:{domain:3, label:'18. Assegni un punteggio al suo grado di ansia', a1:'Per nulla ansioso/a', a2:'Estremamente ansioso/a'},
+    19:{domain:3, label:'19. Assegni un punteggio al suo livello di dolorabilità (dolore percepito al tatto)', a1:'Nessuna dolorabilità', a2:'Estrema dolorabilità'},
+    20:{domain:3, label:'20. Assegni un punteggio al suo grado di equilibrio', a1:'Nessun problema', a2:'Scarsissimo equilibrio'},
+    21:{domain:3, label:'21. Assegni un punteggio al livello della sua sensibilità a rumori, luci, odori e freddo', a1:'Nessuna sensibilità', a2:'Estrema sensibilità'}
+  };
+
+  const fiqrState = {};
+  const containers = {1: document.getElementById('fiqr-domain1'), 2: document.getElementById('fiqr-domain2'), 3: document.getElementById('fiqr-domain3')};
+
+  Object.keys(fiqrQuestions).forEach(function(qid){
+    const q = fiqrQuestions[qid];
+    const wrap = document.createElement('div');
+    wrap.className = 'scale-q';
+    let optsHtml = '';
+    for(let v=0; v<=10; v++){
+      optsHtml += '<button type="button" class="scale-opt" data-q="'+qid+'" data-val="'+v+'">'+v+'</button>';
+    }
+    wrap.innerHTML =
+      '<div class="n">'+q.label+'</div>'+
+      '<div class="scale-anchors"><span>'+q.a1+'</span><span>'+q.a2+'</span></div>'+
+      '<div class="scale-row">'+optsHtml+'</div>';
+    containers[q.domain].appendChild(wrap);
+  });
+
+  document.querySelectorAll('.scale-opt').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      const qid = btn.dataset.q;
+      document.querySelectorAll('.scale-opt[data-q="'+qid+'"]').forEach(function(b){ b.classList.remove('on'); });
+      btn.classList.add('on');
+      fiqrState[qid] = parseInt(btn.dataset.val, 10);
+      updateFiqr();
+    });
+  });
+
+  function updateFiqr(){
+    let d1=0, d2=0, d3=0;
+    for(let i=1;i<=9;i++) d1 += (fiqrState[i]||0);
+    for(let i=10;i<=11;i++) d2 += (fiqrState[i]||0);
+    for(let i=12;i<=21;i++) d3 += (fiqrState[i]||0);
+    document.getElementById('domain1-score').textContent = d1;
+    document.getElementById('domain2-score').textContent = d2;
+    document.getElementById('domain3-score').textContent = d3;
+    const total = (d1/3) + d2 + (d3/2);
+    document.getElementById('total-fiqr-score').textContent = total.toFixed(2);
+  }
+  updateFiqr();
+
+  // ---------------- Terapia sub-tabs ----------------
+  const allTabs = document.querySelectorAll('#mainTabs .subtab, #guidelineTabs .subtab');
+  allTabs.forEach(function(tab){
+    tab.addEventListener('click', function(){
+      allTabs.forEach(function(t){ t.classList.remove('on'); });
+      tab.classList.add('on');
+      document.querySelectorAll('.therapy-panel').forEach(function(p){ p.classList.remove('on'); });
+      document.getElementById('panel-' + tab.dataset.panel).classList.add('on');
+    });
+  });
+
+  // ---------------- landing / module switching ----------------
+  const landing = document.getElementById('landing');
+  const modules = {
+    criteri: document.getElementById('criteri'),
+    fiqr: document.getElementById('fiqr'),
+    terapia: document.getElementById('terapia')
+  };
+
+  function showLanding(){
+    landing.classList.remove('hidden');
+    Object.values(modules).forEach(function(m){ m.classList.add('hidden'); });
+    window.scrollTo({top:0, behavior:'smooth'});
+    history.replaceState(null, '', window.location.pathname);
+  }
+  function showModule(key){
+    landing.classList.add('hidden');
+    Object.keys(modules).forEach(function(k){ modules[k].classList.toggle('hidden', k !== key); });
+    window.scrollTo({top:0, behavior:'smooth'});
+    history.replaceState(null, '', '#' + key);
+  }
+
+  document.querySelectorAll('.landing-btn').forEach(function(btn){
+    btn.addEventListener('click', function(){ showModule(btn.dataset.target); });
+  });
+  document.querySelectorAll('[data-back]').forEach(function(btn){
+    btn.addEventListener('click', showLanding);
+  });
+  document.getElementById('ctaFiqr').addEventListener('click', function(){ showModule('fiqr'); });
+  document.getElementById('ctaTerapiaFromCriteri').addEventListener('click', function(){ showModule('terapia'); });
+  document.getElementById('ctaTerapiaFromFiqr').addEventListener('click', function(){ showModule('terapia'); });
+
+  const initialHash = window.location.hash.replace('#', '');
+  if(modules[initialHash]) showModule(initialHash);
+  else showLanding();
+})();
+</script>
 
 </body>
 </html>
