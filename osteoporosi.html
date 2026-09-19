@@ -112,6 +112,8 @@
   .check-item{display:flex; align-items:flex-start; gap:10px; padding:10px 14px; background:var(--surface-alt); border-radius:var(--radius-sm); cursor:pointer; font-size:13.5px; line-height:1.4;}
   .check-item:hover{background:var(--teal-soft);}
   .check-item input{margin-top:2px; width:16px; height:16px; accent-color:var(--teal); flex:none;}
+  .check-item.disabled{cursor:default; opacity:.55;}
+  .check-item.disabled:hover{background:var(--surface-alt);}
 
   .fx-row{display:flex; align-items:center; justify-content:space-between; gap:10px; padding:10px 14px; background:var(--surface-alt); border-radius:var(--radius-sm); margin-bottom:8px;}
   .fx-row:last-child{margin-bottom:0;}
@@ -568,7 +570,7 @@
     <div class="pgroup">
       <h3 style="margin-bottom:14px;">Due condizioni aggiuntive specifiche di Nota 79</h3>
       <div class="check-list">
-        <label class="check-item"><input type="checkbox" id="n79nuovaFx"><span>Nuova frattura vertebrale o femorale nonostante trattamento in Nota 79 da almeno 1 anno</span></label>
+        <label class="check-item" id="n79nuovaFxLabel"><input type="checkbox" id="n79nuovaFx"><span>Nuova frattura vertebrale o femorale nonostante trattamento in Nota 79 da almeno 1 anno<span class="fine" id="n79nuovaFxHint" style="display:block; color:var(--text-faint); font-weight:400; margin-top:2px;"></span></span></label>
         <label class="check-item"><input type="checkbox" id="n79blocco"><span>Blocco ormonale adiuvante in corso (carcinoma mammario nella donna, carcinoma prostatico nell'uomo)</span></label>
       </div>
     </div>
@@ -620,9 +622,11 @@
     <p class="profile-note" style="margin-bottom:18px;">Target, molecola, dose e via di somministrazione — personalizzati sullo stesso profilo (obesità, IRC, epatopatia, GIOP, malassorbimento).</p>
 
     <div class="pgroup">
-      <h3 style="margin-bottom:14px;">Un dato in più per questo modulo</h3>
+      <h3 style="margin-bottom:14px;">Dati in più per questo modulo</h3>
       <div class="check-list">
         <label class="check-item"><input type="checkbox" id="vdMalass"><span>Malassorbimento intestinale (oltre a MICI già indicata nel profilo) o chirurgia bariatrica pregressa</span></label>
+        <label class="check-item"><input type="checkbox" id="vdIpp"><span>Uso cronico di inibitori di pompa protonica (IPP) o gastrite atrofica</span></label>
+        <label class="check-item"><input type="checkbox" id="vdCalcolosi"><span>Storia di calcolosi renale (nefrolitiasi)</span></label>
       </div>
       <div class="prow" style="margin-top:12px;">
         <span class="lbl">Apporto alimentare di calcio (opzionale)</span>
@@ -637,7 +641,13 @@
     </div>
 
     <div class="out-card">
-      <h3>Vitamina D — dose e molecola consigliate</h3>
+      <h3>Vitamina D — quale molecola</h3>
+      <div class="big" id="vdMoleculeBig">—</div>
+      <div class="sub" id="vdMoleculeSub"></div>
+    </div>
+
+    <div class="out-card">
+      <h3>Vitamina D — dose consigliata</h3>
       <div id="vdDoseBody"></div>
     </div>
 
@@ -655,6 +665,12 @@
         <div class="src">NOGG 2024 — raccomandazione forte</div>
         <div class="txt">Correggi la carenza di vitamina D <strong>prima</strong> di iniziare un farmaco anti-osteoporotico per via parenterale (zoledronato, denosumab). Per i farmaci orali, la correzione può procedere in parallelo all'avvio della terapia.</div>
       </div>
+    </div>
+
+    <div class="out-card">
+      <h3>Calcio — quale molecola</h3>
+      <div class="big" id="caMoleculeBig">—</div>
+      <ul class="crit-list" id="caMoleculeReasons"></ul>
     </div>
 
     <div class="out-card">
@@ -692,6 +708,8 @@
       <li><span class="t">Role of bone turnover markers in the diagnosis and management of osteoporosis.</span> Osteoporos Int 2025.</li>
       <li><span class="t">Denosumab and fracture prevention in primary care practice.</span> JAMA 2025.</li>
       <li><span class="t">Bilezikian JP, Formenti AM, Adler RA, et al.</span> Vitamin D: dosing, levels, form, and route of administration: does one approach fit all? Rev Endocr Metab Disord 2021.</li>
+      <li><span class="t">Sakhaee K, Bhuket T, Adams-Huet B, Rao DS.</span> Meta-analysis of calcium bioavailability: a comparison of calcium citrate with calcium carbonate. Am J Ther 1999. <em>(non tra i PDF caricati — reperita per la scelta carbonato/citrato)</em></li>
+      <li><span class="t">Tondapu P, Provost D, Adams-Huet B, et al.</span> Comparison of the absorption of calcium carbonate and calcium citrate after Roux-en-Y gastric bypass. Obes Surg 2009. <em>(non tra i PDF caricati)</em></li>
     </ol>
   </div>
 
@@ -718,6 +736,8 @@
     fxOnTx:null,
     n79:{nuovaFx:false, blocco:false},
     vdMalass:false,
+    vdIpp:false,
+    vdCalcolosi:false,
     caIntake:null
   };
 
@@ -759,6 +779,8 @@
   document.getElementById('n79nuovaFx').addEventListener('change', function(e){ P.n79.nuovaFx = e.target.checked; renderNota79(); });
   document.getElementById('n79blocco').addEventListener('change', function(e){ P.n79.blocco = e.target.checked; renderNota79(); });
   document.getElementById('vdMalass').addEventListener('change', function(e){ P.vdMalass = e.target.checked; renderVitD(); });
+  document.getElementById('vdIpp').addEventListener('change', function(e){ P.vdIpp = e.target.checked; renderVitD(); });
+  document.getElementById('vdCalcolosi').addEventListener('change', function(e){ P.vdCalcolosi = e.target.checked; renderVitD(); });
   document.getElementById('caIntake').addEventListener('input', function(e){ P.caIntake = e.target.value === '' ? null : parseFloat(e.target.value); renderVitD(); });
 
   ['age','weight','height','tsSpine','tsHip','zsSpine','zsHip','egfr'].forEach(function(id){
@@ -1432,7 +1454,23 @@
     return {cat:'nessuna', title:'Nessuna condizione della Nota 79 risulta soddisfatta', I:[], II:[], III:[], caveats:[]};
   }
 
+  function updateN79NuovaFxAvailability(){
+    const cb = document.getElementById('n79nuovaFx');
+    const label = document.getElementById('n79nuovaFxLabel');
+    const hint = document.getElementById('n79nuovaFxHint');
+    const eligible = (P.fx.vertebrale + P.fx.femore) > 0;
+    cb.disabled = !eligible;
+    label.classList.toggle('disabled', !eligible);
+    if(!eligible){
+      if(P.n79.nuovaFx){ P.n79.nuovaFx = false; cb.checked = false; }
+      hint.textContent = 'Disponibile solo se nel profilo è registrata almeno una frattura vertebrale o femorale — non può essere una "nuova" frattura se non ce n\'è mai stata una.';
+    } else {
+      hint.textContent = '';
+    }
+  }
+
   function renderNota79(){
+    updateN79NuovaFxAvailability();
     const titleEl = document.getElementById('n79Title');
     const bodyEl = document.getElementById('n79Body');
     const s = computeNota79();
@@ -1471,27 +1509,53 @@
     return {target:target, reasons:reasons};
   }
 
+  function computeVdMolecule(){
+    const hepSevere = P.cx.epatopatia;
+    const renalDialysis = P.egfr !== null && P.egfr < 15;
+    const renalSevereNoDialysis = P.egfr !== null && P.egfr >= 15 && P.egfr < 30;
+
+    if(renalDialysis){
+      return {molecule:'Calcitriolo (o alfacalcidolo)', src:'Bilezikian 2021 · KDIGO', reason:'IRC stadio 5 / dialisi: la produzione renale della forma attiva è compromessa in modo severo. Il calcitriolo diventa lo standard, spesso associato a calcimimetici (es. cinacalcet) per riportare calcio, fosforo e PTH nei range target.'};
+    }
+    if(hepSevere){
+      return {molecule:'Calcifediolo, se disponibile — altrimenti colecalciferolo', src:'Bilezikian 2021', reason:'Epatopatia severa: il calcifediolo (25-OH-vitamina D) bypassa il passaggio epatico di 25-idrossilazione, quindi è la scelta più diretta quando disponibile. Se non lo è, il colecalciferolo standard resta adeguato nella maggior parte dei pazienti — ma monitora la calcemia ionizzata o corretta per l\'albumina, non solo il 25(OH)D.'};
+    }
+    if(renalSevereNoDialysis){
+      return {molecule:'Colecalciferolo standard', src:'Bilezikian 2021 · KDIGO', reason:'IRC severa non ancora in dialisi: il colecalciferolo resta indicato come substrato per la produzione extra-renale di calcitriolo. Calcitriolo e alfacalcidolo sono sconsigliati in questa fascia, salvo iperparatiroidismo secondario severo documentato — in quel caso, valutazione specialistica.'};
+    }
+    return {molecule:'Colecalciferolo (vitamina D3)', src:'Bilezikian 2021', reason:'Scelta di riferimento per la popolazione generale e per la maggior parte delle condizioni cliniche, preferita all\'ergocalciferolo (D2).'};
+  }
+
   function computeVdDose(){
     const bmi = (P.weight && P.height) ? P.weight / Math.pow(P.height/100, 2) : null;
     const obese = bmi !== null && bmi >= 30;
     const malabs = P.vdMalass || P.cm.mici;
-    const renalSevere = P.egfr !== null && P.egfr < 30;
     const renalModerate = P.egfr !== null && P.egfr >= 30 && P.egfr < 60;
-    const hepSevere = P.cx.epatopatia;
     const giop = isGIOPany();
 
-    let headline = '800–2000 UI/die di colecalciferolo (vitamina D3)';
-    if(malabs) headline = 'Dosi elevate di colecalciferolo (spesso &gt;2000 UI/die)';
+    let headline = '800–2000 UI/die';
+    if(malabs) headline = 'Dosi elevate (spesso &gt;2000 UI/die)';
 
     const cards = [];
     if(obese) cards.push(['Obesità (BMI ≥30)', 'Bilezikian 2021', 'Il tessuto adiposo sequestra vitamina D e riduce la risposta alla supplementazione standard. Dopo sleeve gastrectomy sono spesso necessarie almeno 3000 UI/die per raggiungere 28 ng/mL; dopo bypass gastrico (RYGB), fino a 5000 UI/die — 800 UI/die è risultato inadeguato in questi pazienti.']);
     if(giop) cards.push(['Terapia cortisonica in corso', 'Bilezikian 2021', '2000 UI/die raggiungono e mantengono spesso il target più alto (≥32 ng/mL) richiesto in questo contesto.']);
     if(malabs) cards.push(['Malassorbimento', 'Bilezikian 2021', 'MICI, insufficienza pancreatica, intestino corto, chirurgia bariatrica o nutrizione parenterale totale: servono dosi più alte, e nei casi severi la via intramuscolare può essere preferibile a quella orale.']);
-    if(renalSevere) cards.push(['IRC severa (eGFR &lt;30)', 'Bilezikian 2021 · KDIGO', 'Il colecalciferolo standard resta indicato come substrato per la produzione extra-renale di calcitriolo. Gli analoghi 1-alfa-idrossilati (calcitriolo, alfacalcidolo) sono sconsigliati in CKD 3–5 non in dialisi, salvo iperparatiroidismo secondario severo; in dialisi, il calcitriolo diventa lo standard, spesso associato a calcimimetici.']);
-    else if(renalModerate) cards.push(['IRC moderata (eGFR 30–59)', 'Bilezikian 2021', 'Colecalciferolo standard, monitorando la funzione renale nel tempo.']);
-    if(hepSevere) cards.push(['Epatopatia severa', 'Bilezikian 2021', 'Il colecalciferolo resta di solito adeguato per la maggior parte dei pazienti. Nei casi più compromessi, il calcidiolo (bypassa il passaggio epatico) è preferibile se disponibile, altrimenti il calcitriolo. Monitora la calcemia ionizzata o corretta per l\'albumina, non solo il 25(OH)D.']);
+    if(renalModerate) cards.push(['IRC moderata (eGFR 30–59)', 'Bilezikian 2021', 'Colecalciferolo a dose standard, monitorando la funzione renale nel tempo.']);
 
     return {headline:headline, cards:cards};
+  }
+
+  function computeCaMolecule(){
+    const reasons = [];
+    const favorsCitrate = P.vdIpp || P.vdMalass || P.vdCalcolosi;
+    if(favorsCitrate){
+      if(P.vdIpp) reasons.push(['Uso cronico di IPP o gastrite atrofica: il carbonato richiede acidità gastrica per sciogliersi e assorbirsi, il citrato no', 'farmacologia clinica']);
+      if(P.vdMalass) reasons.push(['Malassorbimento o chirurgia bariatrica: stesso motivo — l\'assorbimento del citrato non dipende dal pH gastrico', 'farmacologia clinica']);
+      if(P.vdCalcolosi) reasons.push(['Storia di calcolosi renale: il citrato inibisce la formazione di calcoli di ossalato di calcio, il carbonato non ha questo effetto', 'farmacologia clinica']);
+      return {molecule:'Citrato', reasons:reasons};
+    }
+    reasons.push(['Nessun fattore che lo sconsigli: il carbonato resta la scelta di riferimento — più economico, più calcio elementare per compressa (40% contro il 21% del citrato). Va assunto ai pasti, perché richiede acidità gastrica per sciogliersi.', 'farmacologia clinica']);
+    return {molecule:'Carbonato', reasons:reasons};
   }
 
   function computeCaTarget(){
@@ -1504,6 +1568,7 @@
   }
 
   function renderVitD(){
+
     const t = computeVdTarget();
     document.getElementById('vdTargetBig').textContent = t.target;
     const trList = document.getElementById('vdTargetReasons');
@@ -1514,13 +1579,27 @@
       trList.appendChild(li);
     });
 
+    const vm = computeVdMolecule();
+    document.getElementById('vdMoleculeBig').textContent = vm.molecule;
+    document.getElementById('vdMoleculeSub').innerHTML = '<span class="src" style="display:inline-block; margin-bottom:4px;">' + vm.src + '</span><br>' + vm.reason;
+
     const d = computeVdDose();
     const doseBody = document.getElementById('vdDoseBody');
-    let html = '<div class="rec-card"><div class="src">Dose di partenza</div><div class="txt"><strong>' + d.headline + '</strong> — colecalciferolo preferito rispetto all\'ergocalciferolo.</div></div>';
+    let html = '<div class="rec-card"><div class="src">Dose di partenza</div><div class="txt"><strong>' + d.headline + '</strong></div></div>';
     d.cards.forEach(function(c){
       html += '<div class="rec-card note"><div class="src">' + c[0] + ' — ' + c[1] + '</div><div class="txt">' + c[2] + '</div></div>';
     });
     doseBody.innerHTML = html;
+
+    const cm = computeCaMolecule();
+    document.getElementById('caMoleculeBig').textContent = cm.molecule;
+    const cmList = document.getElementById('caMoleculeReasons');
+    cmList.innerHTML = '';
+    cm.reasons.forEach(function(r){
+      const li = document.createElement('li');
+      li.innerHTML = '<span class="src">' + r[1] + '</span><span>' + r[0] + '</span>';
+      cmList.appendChild(li);
+    });
 
     const ca = computeCaTarget();
     const caBig = document.getElementById('caTargetBig');
