@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Artropatie microcristalline | RheumaTools</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F6F8F7; --surface:#FFFFFF; --surface-alt:#EEF3F1; --border:#DCE4E1;
+    --text:#25302E; --text-muted:#5B6A66; --text-faint:#8B9793;
+    --teal:#3E6D69; --teal-dark:#2C504D; --teal-soft:#DDEBE8; --teal-line:#BBD6D2;
+    --violet:#7669A0; --violet-dark:#584D80; --violet-soft:#E7E2F3; --violet-line:#CBC0E3;
+    --clay:#B15F49; --clay-soft:#F3DED7; --clay-line:#E2B7A8;
+    --sage:#5E8467; --sage-dark:#33503E; --sage-soft:#E1EAE2; --sage-line:#BFD3C4;
+    --amber:#B99A4A; --amber-dark:#7A6530; --amber-soft:#F1EAD3; --amber-line:#DCC894;
+    --terracotta:#C17D45; --terracotta-dark:#7D501F; --terracotta-soft:#F4E2CE; --terracotta-line:#E3B98C;
+    --radius-lg:22px; --radius-md:14px; --radius-sm:9px; --radius-pill:999px;
+    --shadow-card: 0 1px 2px rgba(37,48,46,0.04), 0 6px 20px rgba(37,48,46,0.05);
+  }
+  *{box-sizing:border-box;}
+  body{margin:0; background:var(--bg); color:var(--text); font-family:'Inter', system-ui, sans-serif; font-size:16px; line-height:1.55; -webkit-font-smoothing:antialiased;}
+  h1,h2,h3,h4{font-family:'Spectral', Georgia, serif; font-weight:600; color:var(--teal-dark); margin:0 0 0.4em 0; line-height:1.3;}
+  a{color:var(--teal-dark);}
+  .wrap{max-width:760px; margin:0 auto; padding:0 20px 60px 20px;}
+  header.site{background:var(--surface); border-bottom:1px solid var(--border);}
+  .site-inner{max-width:760px; margin:0 auto; padding:18px 20px; font-size:14px; color:var(--text-muted);}
+  .site-inner a{text-decoration:none; color:var(--text-muted); border-bottom:1px solid var(--border);}
+  .site-inner a:hover{color:var(--teal-dark);}
+  .site-inner .sep{margin:0 6px; color:var(--text-faint);}
+  .hero{padding:44px 0 8px 0;}
+  .hero h1{font-size:clamp(28px,4vw,38px); letter-spacing:-0.01em;}
+  .hero .sub{color:var(--text-muted); font-size:17px; max-width:58ch; margin-top:10px;}
+  .disclaimer{margin:22px 0 0 0; padding:16px 18px; background:var(--violet-soft); border:1px solid var(--violet-line); border-radius:var(--radius-md); color:#3E3560; font-size:14.5px; line-height:1.55;}
+  .disclaimer strong{color:#2E2650;}
+  .disclaimer + .disclaimer{margin-top:12px;}
+  .hidden{display:none !important;}
+
+  .landing{display:grid; grid-template-columns:repeat(2,1fr); gap:16px; margin:34px 0 12px 0;}
+  @media(max-width:640px){.landing{grid-template-columns:1fr;}}
+  .landing-btn{
+    font-family:inherit; text-align:left; background:var(--surface); border:1px solid var(--border);
+    border-radius:var(--radius-lg); padding:26px 22px; cursor:pointer; box-shadow:var(--shadow-card);
+    transition:border-color .15s ease, transform .12s ease;
+  }
+  .landing-btn:hover:not(.soon){border-color:var(--teal-line); transform:translateY(-1px);}
+  .landing-btn .lb-title{display:block; font-family:'Spectral',serif; font-weight:600; font-size:18px; color:var(--teal-dark);}
+  .landing-btn .lb-desc{display:block; margin-top:6px; font-size:13px; color:var(--text-muted); line-height:1.5;}
+  .landing-btn.soon{color:var(--text-faint); cursor:default; background:var(--surface-alt);}
+  .landing-btn.soon .lb-title{color:var(--text-faint);}
+  .tag-soon{font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.03em; margin-left:6px; opacity:.8; color:var(--text-faint);}
+
+  .back-link{display:inline-flex; align-items:center; gap:6px; font-family:inherit; font-size:13.5px; font-weight:600; color:var(--text-muted); background:none; border:none; cursor:pointer; padding:0; margin-bottom:22px;}
+  .back-link:hover{color:var(--teal-dark);}
+
+  section.block{margin-top:20px;}
+  .block-head{margin-bottom:6px;}
+  .block-head h2{font-size:22px;}
+  .block-note{color:var(--text-muted); font-size:14.5px; margin-bottom:20px;}
+
+  .panel{background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-lg); padding:22px 24px; box-shadow:var(--shadow-card); margin-bottom:16px;}
+  .panel h3{font-size:17px; margin-bottom:14px;}
+
+  .box{padding:16px 18px; border-radius:var(--radius-md); font-size:14.5px; line-height:1.6; margin-bottom:16px; border:1px solid;}
+  .box p{margin:0;}
+  .box.info{background:var(--teal-soft); border-color:var(--teal-line); color:var(--teal-dark); font-weight:600;}
+
+  .toggle-row{display:flex; flex-wrap:wrap; gap:8px;}
+  .toggle-opt{font-family:inherit; font-size:13.5px; font-weight:600; color:var(--text-muted); background:var(--surface-alt); border:1px solid var(--border); border-radius:var(--radius-pill); padding:8px 16px; cursor:pointer; transition:all .15s ease;}
+  .toggle-opt:hover{border-color:var(--teal-line);}
+  .toggle-opt.on{background:var(--teal); border-color:var(--teal); color:#fff;}
+
+  .prow{display:flex; flex-wrap:wrap; align-items:center; gap:10px 14px; margin-bottom:12px;}
+  .prow:last-child{margin-bottom:0;}
+  .prow .lbl{font-size:13.5px; font-weight:600; color:var(--text); flex:none; min-width:170px;}
+  .prow .inline-field{display:flex; align-items:center; gap:6px;}
+  .prow input[type=number]{width:78px; padding:8px 10px; border:1px solid var(--border); border-radius:var(--radius-sm); background:var(--surface-alt); font-family:inherit; font-size:14px; color:var(--text);}
+  .prow input[type=number]:focus{border-color:var(--teal); box-shadow:0 0 0 3px var(--teal-soft); outline:none;}
+  .prow .unit{font-size:12.5px; color:var(--text-faint);}
+  .prow select{padding:9px 12px; border:1px solid var(--border); border-radius:var(--radius-sm); background:var(--surface); font-family:inherit; font-size:14px; color:var(--text);}
+
+  .check-list{display:flex; flex-direction:column; gap:7px; margin-top:8px;}
+  .check-item{display:flex; align-items:flex-start; gap:10px; padding:10px 14px; background:var(--surface-alt); border-radius:var(--radius-sm); cursor:pointer; font-size:13.5px; line-height:1.4;}
+  .check-item:hover{background:var(--teal-soft);}
+  .check-item input{margin-top:2px; width:16px; height:16px; accent-color:var(--teal); flex:none;}
+
+  .mod-tabs{display:flex; flex-wrap:wrap; gap:8px; margin:24px 0 22px 0;}
+  .mod-tab{font-family:inherit; font-size:13.5px; font-weight:600; color:var(--text-muted); background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-pill); padding:10px 18px; cursor:pointer; transition:all .15s ease;}
+  .mod-tab:hover:not(.soon){border-color:var(--teal-line);}
+  .mod-tab.on{background:var(--teal); border-color:var(--teal); color:#fff;}
+  .mod-tab.soon{color:var(--text-faint); cursor:default; background:var(--surface-alt);}
+  .pheno-panel{display:none;}
+  .pheno-panel.on{display:block;}
+  .soon-panel{padding:40px 30px; text-align:center; border:1px dashed var(--border); border-radius:var(--radius-lg); color:var(--text-faint);}
+  .soon-panel h3{color:var(--text-muted); font-size:17px;}
+  .soon-panel p{font-size:14px; margin-top:6px;}
+
+  .out-card{background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-lg); padding:22px 24px; box-shadow:var(--shadow-card); margin-bottom:16px;}
+  .out-card h3{font-size:16.5px; margin-bottom:4px;}
+  .out-card .big{font-family:'Spectral',serif; font-size:21px; font-weight:600; color:var(--teal-dark); margin:8px 0 4px 0;}
+  .out-card .sub{font-size:13.5px; color:var(--text-muted);}
+  .out-card.pos{border-left:4px solid var(--sage);}
+  .out-card.pos .big{color:var(--sage-dark);}
+  .out-card.neg{border-left:4px solid var(--text-faint);}
+
+  .crit-list{list-style:none; margin:14px 0 0 0; padding:0;}
+  .crit-list li{display:flex; gap:10px; align-items:flex-start; padding:9px 0; border-top:1px solid var(--border); font-size:13.5px;}
+  .crit-list li:first-child{border-top:none;}
+  .crit-list .src{flex:none; font-size:10.5px; font-weight:700; color:var(--text-faint); text-transform:uppercase; letter-spacing:.02em; background:var(--surface-alt); border-radius:var(--radius-pill); padding:3px 9px; margin-top:1px;}
+
+  .rec-card{border-left:3px solid var(--teal); background:var(--surface-alt); border-radius:0 var(--radius-sm) var(--radius-sm) 0; padding:12px 16px; margin-bottom:10px;}
+  .rec-card .src{font-size:11px; font-weight:700; color:var(--text-faint); text-transform:uppercase; letter-spacing:.03em;}
+  .rec-card .txt{font-size:14px; color:var(--text); margin-top:4px; line-height:1.55;}
+  .rec-card.warn{border-left-color:var(--clay); background:var(--clay-soft);}
+  .rec-card.warn .src{color:#8A4A38;}
+  .rec-card.note{border-left-color:var(--violet); background:var(--violet-soft);}
+  .rec-card.note .src{color:var(--violet-dark);}
+
+  .drug-row{display:flex; align-items:flex-start; justify-content:space-between; gap:14px; padding:14px 16px; border-radius:var(--radius-md); margin-bottom:10px; border:1px solid var(--border); background:var(--surface-alt);}
+  .drug-row .dinfo{flex:1;}
+  .drug-row .dname{font-family:'Spectral',serif; font-weight:600; font-size:15px; color:var(--text);}
+  .drug-row .dclass{font-size:12px; color:var(--text-faint); margin-top:1px;}
+  .drug-row .ddose{font-size:13px; color:var(--text-muted); margin-top:6px; line-height:1.5;}
+  .drug-row .dissues{margin-top:8px; display:flex; flex-direction:column; gap:5px;}
+  .drug-row .dissue{font-size:12.5px; line-height:1.5; padding:6px 10px; border-radius:var(--radius-sm);}
+  .drug-row .dissue .src-tag{font-weight:700; text-transform:uppercase; font-size:10px; letter-spacing:.02em; opacity:.75; display:block; margin-bottom:2px;}
+  .drug-row .dissue.block{background:var(--clay-soft); color:#5A3527;}
+  .drug-row .dissue.caution{background:var(--amber-soft); color:var(--amber-dark);}
+  .drug-row .dissue.prefer{background:var(--sage-soft); color:var(--sage-dark);}
+  .drug-row .dstatus{flex:none; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.02em; padding:4px 10px; border-radius:var(--radius-pill); white-space:nowrap; margin-top:2px;}
+  .drug-row.eligible{border-left:3px solid var(--sage);}
+  .drug-row.eligible .dstatus{background:var(--sage-soft); color:var(--sage-dark);}
+  .drug-row.eligible.preferred{border-left:3px solid var(--sage-dark);}
+  .drug-row.eligible.preferred .dstatus{background:var(--sage-dark); color:#fff;}
+  .drug-row.caution-row{border-left:3px solid var(--amber);}
+  .drug-row.caution-row .dstatus{background:var(--amber-soft); color:var(--amber-dark);}
+  .drug-row.blocked{border-left:3px solid var(--clay); opacity:.88;}
+  .drug-row.blocked .dstatus{background:var(--clay-soft); color:#8A4A38;}
+
+  .fonti{margin-top:64px; padding-top:32px; border-top:1px solid var(--border);}
+  .fonti h2{font-size:21px;}
+  .fonti ol{padding-left:20px; margin:16px 0 0 0;}
+  .fonti li{font-size:14px; color:var(--text-muted); margin-bottom:10px; line-height:1.55;}
+  .fonti li .t{color:var(--text); font-weight:600;}
+  .fonti li em{font-style:italic; color:var(--text-faint);}
+  footer.site{max-width:760px; margin:40px auto 0 auto; padding:24px 20px 40px 20px; color:var(--text-faint); font-size:12.5px; border-top:1px solid var(--border);}
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="site-inner"><a href="index.html">RheumaTools</a><span class="sep">/</span>Artropatie microcristalline</div>
+</header>
+
+<div class="wrap">
+
+  <div class="hero">
+    <h1>Artropatie microcristalline</h1>
+    <p class="sub">Gotta e malattia da deposito di pirofosfato di calcio diidrato (CPPD): diagnosi e terapia, per fenotipo di malattia.</p>
+    <div class="disclaimer">
+      <strong>Da leggere prima di usarlo.</strong> Supporto al ragionamento clinico, non sostituisce la valutazione dello specialista né la scheda tecnica dei farmaci. Alcuni dettagli farmacologici (dosaggi, controindicazioni combinate) integrano le fonti principali con schede tecniche e letteratura farmacologica generale.
+    </div>
+  </div>
+
+  <!-- ================= LIVELLO 1: PATOLOGIA ================= -->
+  <div class="landing" id="diseaseLanding">
+    <button type="button" class="landing-btn" data-disease="gotta">
+      <span class="lb-title">Gotta</span>
+    </button>
+    <button type="button" class="landing-btn soon" disabled>
+      <span class="lb-title">CPPD<span class="tag-soon">presto</span></span>
+    </button>
+  </div>
+
+  <!-- ================= GOTTA ================= -->
+  <div class="hidden" id="disease-gotta">
+    <button type="button" class="back-link" data-back="diseaseLanding">← Cambia patologia</button>
+    <div class="block-head"><h2>Gotta</h2></div>
+
+    <!-- LIVELLO 2: sezione -->
+    <div class="landing" id="gottaLanding">
+      <button type="button" class="landing-btn" data-section="diagnosi">
+        <span class="lb-title">Diagnosi</span>
+      </button>
+      <button type="button" class="landing-btn" data-section="terapia">
+        <span class="lb-title">Terapia</span>
+      </button>
+    </div>
+
+    <!-- ===== GOTTA > DIAGNOSI ===== -->
+    <div class="hidden" id="gotta-diagnosi">
+      <button type="button" class="back-link" data-back="gottaLanding">← Torna alla gotta</button>
+      <div class="block-head"><h2>Diagnosi — criteri ACR/EULAR 2015</h2></div>
+      <p class="block-note">Punteggio ≥8 richiesto per la classificazione, salvo criterio sufficiente già soddisfatto.</p>
+
+      <div class="panel">
+        <h3>Criterio d'ingresso</h3>
+        <div class="toggle-row" data-p="entry">
+          <button type="button" class="toggle-opt" data-val="si">Sì — almeno un episodio di tumefazione, dolore o dolorabilità di un'articolazione o borsa periferica</button>
+          <button type="button" class="toggle-opt" data-val="no">No</button>
+        </div>
+      </div>
+
+      <div class="panel hidden" id="sufficientPanel">
+        <h3>Criterio sufficiente</h3>
+        <div class="toggle-row" data-p="sufficient">
+          <button type="button" class="toggle-opt" data-val="si">Sì — cristalli di MSU in un'articolazione/borsa sintomatica o in un tofo</button>
+          <button type="button" class="toggle-opt" data-val="no">No / non eseguito</button>
+        </div>
+      </div>
+
+      <div class="hidden" id="scoredCriteria">
+        <div class="panel">
+          <h3>Clinici</h3>
+          <div class="prow">
+            <span class="lbl">Sede coinvolta (mai)</span>
+            <select id="q_pattern">
+              <option value="0">Altra sede (o solo come parte di quadro poliarticolare)</option>
+              <option value="1">Caviglia o mesopiede (mono/oligoarticolare, senza 1ª MTF)</option>
+              <option value="2">1ª articolazione metatarso-falangea (mono/oligoarticolare)</option>
+            </select>
+          </div>
+          <p class="block-note" style="margin:16px 0 6px 0;">Caratteristiche dell'episodio (mai): eritema, non tollera il tocco/pressione, difficoltà a camminare o a usare l'articolazione.</p>
+          <div class="check-list">
+            <label class="check-item"><input type="checkbox" data-char="1"><span>Eritema sovrastante l'articolazione colpita</span></label>
+            <label class="check-item"><input type="checkbox" data-char="1"><span>Non tollera il tocco o la pressione sull'articolazione colpita</span></label>
+            <label class="check-item"><input type="checkbox" data-char="1"><span>Grande difficoltà a camminare o incapacità di usare l'articolazione colpita</span></label>
+          </div>
+          <p class="block-note" style="margin:16px 0 6px 0;">Andamento temporale (mai): tempo al dolore massimo &lt;24h, risoluzione dei sintomi entro 14 giorni, risoluzione completa tra un episodio e l'altro.</p>
+          <div class="check-list">
+            <label class="check-item"><input type="checkbox" data-time="1"><span>Tempo al dolore massimo &lt;24 ore</span></label>
+            <label class="check-item"><input type="checkbox" data-time="1"><span>Risoluzione dei sintomi entro 14 giorni</span></label>
+            <label class="check-item"><input type="checkbox" data-time="1"><span>Risoluzione completa (torna al livello basale) tra un episodio e l'altro</span></label>
+          </div>
+          <div class="prow hidden" id="typicalFreqRow" style="margin-top:12px;">
+            <span class="lbl">Quanti episodi con queste caratteristiche?</span>
+            <select id="q_typicalfreq">
+              <option value="1">Uno</option>
+              <option value="2">Ricorrenti (≥2)</option>
+            </select>
+          </div>
+          <div class="prow" style="margin-top:16px;">
+            <span class="lbl">Tofo clinico</span>
+            <div class="toggle-row" data-p="tofo">
+              <button type="button" class="toggle-opt" data-val="0">Assente</button>
+              <button type="button" class="toggle-opt" data-val="4">Presente</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h3>Laboratorio</h3>
+          <div class="prow">
+            <span class="lbl">Uricemia più alta registrata</span>
+            <select id="q_urate">
+              <option value="-4">&lt; 4 mg/dL</option>
+              <option value="0" selected>4 – &lt;6 mg/dL</option>
+              <option value="2">6 – &lt;8 mg/dL</option>
+              <option value="3">8 – &lt;10 mg/dL</option>
+              <option value="4">≥ 10 mg/dL</option>
+            </select>
+          </div>
+          <div class="prow">
+            <span class="lbl">Analisi del liquido sinoviale</span>
+            <select id="q_synovial">
+              <option value="0">Non eseguita</option>
+              <option value="-2">Eseguita, MSU negativi</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h3>Imaging</h3>
+          <div class="prow">
+            <span class="lbl">Ecografia (doppio contorno/tofi) o DECT</span>
+            <div class="toggle-row" data-p="imgUrate">
+              <button type="button" class="toggle-opt" data-val="0">Assente o non eseguita</button>
+              <button type="button" class="toggle-opt" data-val="4">Presente</button>
+            </div>
+          </div>
+          <div class="prow">
+            <span class="lbl">Rx mani/piedi con erosione tipica</span>
+            <div class="toggle-row" data-p="imgErosion">
+              <button type="button" class="toggle-opt" data-val="0">Assente o non eseguita</button>
+              <button type="button" class="toggle-opt" data-val="4">Presente</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="out-card" id="gottaDiagResult">
+        <h3>Risultato</h3>
+        <div class="big" id="gottaDiagBig">Rispondi al criterio d'ingresso per iniziare.</div>
+        <div class="sub" id="gottaDiagSub"></div>
+      </div>
+    </div>
+
+    <!-- ===== GOTTA > TERAPIA ===== -->
+    <div class="hidden" id="gotta-terapia">
+      <button type="button" class="back-link" data-back="gottaLanding">← Torna alla gotta</button>
+      <div class="block-head"><h2>Terapia</h2></div>
+
+      <div class="mod-tabs" id="phenoTabs">
+        <button type="button" class="mod-tab on" data-pheno="acuto">Attacco acuto</button>
+        <button type="button" class="mod-tab soon" disabled>Gestione dell'urato<span class="tag-soon">presto</span></button>
+        <button type="button" class="mod-tab soon" disabled>Stile di vita<span class="tag-soon">presto</span></button>
+        <button type="button" class="mod-tab soon" disabled>Gotta refrattaria<span class="tag-soon">presto</span></button>
+      </div>
+
+      <!-- ATTACCO ACUTO -->
+      <div class="pheno-panel on" id="pheno-acuto">
+        <div class="panel">
+          <h3>Profilo per la scelta del farmaco</h3>
+          <div class="prow">
+            <span class="lbl">Impossibilità ad assumere farmaci per os</span>
+            <div class="toggle-row" data-p="npo">
+              <button type="button" class="toggle-opt" data-val="no">No</button>
+              <button type="button" class="toggle-opt" data-val="si">Sì (NPO)</button>
+            </div>
+          </div>
+          <div class="prow">
+            <span class="lbl">Insorgenza del flare</span>
+            <div class="toggle-row" data-p="onset">
+              <button type="button" class="toggle-opt" data-val="early">Meno di 36 ore fa</button>
+              <button type="button" class="toggle-opt" data-val="late">36 ore o più</button>
+            </div>
+          </div>
+          <div class="prow">
+            <span class="lbl">Articolazioni coinvolte</span>
+            <div class="toggle-row" data-p="joints">
+              <button type="button" class="toggle-opt" data-val="mono">Mono/oligoarticolare, accessibile</button>
+              <button type="button" class="toggle-opt" data-val="poly">Poliarticolare o non accessibile</button>
+            </div>
+          </div>
+          <div class="prow">
+            <span class="lbl">eGFR / clearance creatinina</span>
+            <div class="inline-field"><input type="number" id="ac_egfr" min="0" max="150" placeholder="es. 45"><span class="unit">mL/min</span></div>
+          </div>
+          <div class="check-list">
+            <label class="check-item"><input type="checkbox" id="ac_epatopatia"><span>Epatopatia significativa (es. cirrosi)</span></label>
+            <label class="check-item"><input type="checkbox" id="ac_diabete"><span>Diabete mellito scarsamente controllato</span></label>
+            <label class="check-item"><input type="checkbox" id="ac_anticoag"><span>Terapia anticoagulante in corso</span></label>
+            <label class="check-item"><input type="checkbox" id="ac_cvd"><span>Scompenso cardiaco o cardiopatia significativa</span></label>
+            <label class="check-item"><input type="checkbox" id="ac_gi"><span>Storia di ulcera peptica o sanguinamento gastrointestinale</span></label>
+            <label class="check-item"><input type="checkbox" id="ac_gisevere"><span>Grave patologia gastrointestinale (es. malassorbimento severo, subocclusione, MICI severa)</span></label>
+            <label class="check-item"><input type="checkbox" id="ac_pregnancy"><span>Gravidanza in corso</span></label>
+            <label class="check-item"><input type="checkbox" id="ac_nsaidhs"><span>Storia di asma o reazione allergica a FANS/aspirina</span></label>
+            <label class="check-item"><input type="checkbox" id="ac_infection"><span>Infezione sistemica non controllata (esclusa un'artrite settica)</span></label>
+            <label class="check-item"><input type="checkbox" id="ac_cyp"><span>Uso di inibitore duale CYP3A4/P-gp (es. claritromicina, ciclosporina)</span></label>
+          </div>
+        </div>
+
+        <div id="ac_npoBlock"></div>
+
+        <div class="out-card">
+          <h3>Opzioni per questo profilo</h3>
+          <p class="sub" style="margin-bottom:12px;">Ordinate mettendo prima le idonee (preferenziali quando c'è un motivo specifico), poi quelle da usare con cautela, infine le controindicate.</p>
+          <div id="ac_allDrugsList"></div>
+        </div>
+
+        <div class="rec-card note">
+          <div class="src">Gout Nature Primer 2023</div>
+          <div class="txt">I flare non trattati si risolvono tipicamente in 7–10 giorni. La durata del trattamento è guidata dalla risoluzione dei sintomi, non da un numero fisso di giorni: NSAID e corticosteroidi vanno usati per il tempo più breve necessario.</div>
+        </div>
+        <div class="rec-card">
+          <div class="src">Ghiaccio topico — ACR 2020</div>
+          <div class="txt">Il ghiaccio locale come adiuvante è sempre proponibile, in aggiunta alla terapia farmacologica scelta.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="fonti">
+    <h2>Fonti</h2>
+    <ol>
+      <li><span class="t">Neogi T, Jansen TLTA, Dalbeth N, et al.</span> 2015 Gout Classification Criteria: an ACR/EULAR collaborative initiative. Arthritis Rheumatol 2015.</li>
+      <li><span class="t">FitzGerald JD, Dalbeth N, Mikuls T, et al.</span> 2020 American College of Rheumatology Guideline for the Management of Gout. Arthritis Care Res 2020.</li>
+      <li><span class="t">Dalbeth N, Gosling AL, Gaffo A, Abhishek A.</span> Gout. Nature Reviews Disease Primers 2019 (cit. "Gout" Nature 2023).</li>
+      <li><span class="t">Colchicina (Colchicina Lirca).</span> Riassunto delle caratteristiche del prodotto.</li>
+      <li><span class="t">Ketorolac.</span> Riassunto delle caratteristiche del prodotto.</li>
+      <li><span class="t">Prednisone (Deltacortene).</span> Riassunto delle caratteristiche del prodotto.</li>
+      <li><span class="t">FANS (es. ibuprofene, ketoprofene) — schede tecniche comparate.</span> Controindicazioni di classe.</li>
+      <li><span class="t">Narum S, Westergren T, Klemp M.</span> Corticosteroids and risk of gastrointestinal bleeding: a systematic review and meta-analysis. BMJ Open 2014.</li>
+      <li><span class="t">Rahme E, et al.; Pain management in cirrhosis, letteratura di gastroenterologia clinica.</span> Uso dei FANS in epatopatia/cirrosi.</li>
+    </ol>
+  </div>
+
+  <footer class="site">
+    Strumento di supporto clinico, non sostituisce il giudizio del medico.
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  // ================= NAVIGATION =================
+  function show(id){ document.getElementById(id).classList.remove('hidden'); }
+  function hide(id){ document.getElementById(id).classList.add('hidden'); }
+
+  document.querySelectorAll('.landing-btn[data-disease]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      hide('diseaseLanding');
+      show('disease-' + btn.dataset.disease);
+      window.scrollTo({top:0, behavior:'smooth'});
+    });
+  });
+  document.querySelectorAll('.landing-btn[data-section]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      hide('gottaLanding');
+      show('gotta-' + btn.dataset.section);
+      window.scrollTo({top:0, behavior:'smooth'});
+    });
+  });
+  document.querySelectorAll('[data-back]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      const target = btn.dataset.back;
+      if(target === 'diseaseLanding'){
+        hide('disease-gotta');
+        show('diseaseLanding');
+      } else if(target === 'gottaLanding'){
+        hide('gotta-diagnosi'); hide('gotta-terapia');
+        show('gottaLanding');
+      }
+      window.scrollTo({top:0, behavior:'smooth'});
+    });
+  });
+  document.querySelectorAll('.mod-tab:not(.soon)').forEach(function(tab){
+    tab.addEventListener('click', function(){
+      document.querySelectorAll('.mod-tab').forEach(function(t){ t.classList.remove('on'); });
+      tab.classList.add('on');
+      document.querySelectorAll('.pheno-panel').forEach(function(p){ p.classList.remove('on'); });
+      document.getElementById('pheno-' + tab.dataset.pheno).classList.add('on');
+    });
+  });
+
+  function bindToggleRow(selector, onChange){
+    document.querySelectorAll(selector + ' .toggle-opt').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        const row = btn.closest('.toggle-row');
+        row.querySelectorAll('.toggle-opt').forEach(function(b){ b.classList.remove('on'); });
+        btn.classList.add('on');
+        onChange(btn.dataset.val);
+      });
+    });
+  }
+
+  // ================= DIAGNOSI GOTTA (ACR/EULAR 2015) =================
+  const D = { entry:null, sufficient:null, tofo:0, imgUrate:0, imgErosion:0 };
+
+  bindToggleRow('[data-p="entry"]', function(val){
+    D.entry = val;
+    if(val === 'si') show('sufficientPanel'); else hide('sufficientPanel');
+    hide('scoredCriteria');
+    D.sufficient = null;
+    document.querySelectorAll('[data-p="sufficient"] .toggle-opt').forEach(function(b){ b.classList.remove('on'); });
+    renderGottaDiag();
+  });
+  bindToggleRow('[data-p="sufficient"]', function(val){
+    D.sufficient = val;
+    if(val === 'no') show('scoredCriteria'); else hide('scoredCriteria');
+    renderGottaDiag();
+  });
+  bindToggleRow('[data-p="tofo"]', function(val){ D.tofo = parseInt(val,10); renderGottaDiag(); });
+  bindToggleRow('[data-p="imgUrate"]', function(val){ D.imgUrate = parseInt(val,10); renderGottaDiag(); });
+  bindToggleRow('[data-p="imgErosion"]', function(val){ D.imgErosion = parseInt(val,10); renderGottaDiag(); });
+
+  document.getElementById('q_pattern').addEventListener('change', renderGottaDiag);
+  document.getElementById('q_urate').addEventListener('change', renderGottaDiag);
+  document.getElementById('q_synovial').addEventListener('change', renderGottaDiag);
+  document.getElementById('q_typicalfreq').addEventListener('change', renderGottaDiag);
+
+  document.querySelectorAll('input[data-char]').forEach(function(cb){
+    cb.addEventListener('change', renderGottaDiag);
+  });
+  document.querySelectorAll('input[data-time]').forEach(function(cb){
+    cb.addEventListener('change', function(){
+      const n = document.querySelectorAll('input[data-time]:checked').length;
+      document.getElementById('typicalFreqRow').classList.toggle('hidden', n < 2);
+      renderGottaDiag();
+    });
+  });
+
+  function renderGottaDiag(){
+    const big = document.getElementById('gottaDiagBig');
+    const sub = document.getElementById('gottaDiagSub');
+    const card = document.getElementById('gottaDiagResult');
+
+    if(D.entry === null){ big.textContent = 'Rispondi al criterio d\'ingresso per iniziare.'; sub.textContent=''; card.className='out-card'; return; }
+    if(D.entry === 'no'){ big.textContent = 'Criterio d\'ingresso non soddisfatto: i criteri non sono applicabili.'; sub.textContent=''; card.className='out-card'; return; }
+    if(D.sufficient === null){ big.textContent = 'Rispondi al criterio sufficiente.'; sub.textContent=''; card.className='out-card'; return; }
+    if(D.sufficient === 'si'){
+      big.textContent = 'Classificabile come gotta';
+      sub.textContent = 'Criterio sufficiente soddisfatto (cristalli di MSU identificati) — non serve applicare il punteggio.';
+      card.className = 'out-card pos';
+      return;
+    }
+
+    // scored criteria
+    const pattern = parseInt(document.getElementById('q_pattern').value, 10);
+    const nChar = document.querySelectorAll('input[data-char]:checked').length;
+    const nTime = document.querySelectorAll('input[data-time]:checked').length;
+    let timeScore = 0;
+    if(nTime >= 2){
+      timeScore = parseInt(document.getElementById('q_typicalfreq').value, 10);
+    }
+    const urate = parseInt(document.getElementById('q_urate').value, 10);
+    const synovial = parseInt(document.getElementById('q_synovial').value, 10);
+
+    const total = pattern + nChar + timeScore + D.tofo + urate + synovial + D.imgUrate + D.imgErosion;
+
+    if(total >= 8){
+      big.textContent = 'Classificabile come gotta (punteggio ' + total + '/≥8)';
+      card.className = 'out-card pos';
+    } else {
+      big.textContent = 'Non classificabile come gotta con questi criteri (punteggio ' + total + ', serve ≥8)';
+      card.className = 'out-card neg';
+    }
+    sub.textContent = 'Sede ' + pattern + ' · Caratteristiche ' + nChar + ' · Andamento ' + timeScore + ' · Tofo ' + D.tofo + ' · Uricemia ' + urate + ' · Liquido sinoviale ' + synovial + ' · Imaging deposito ' + D.imgUrate + ' · Imaging erosione ' + D.imgErosion;
+  }
+  renderGottaDiag();
+
+  // ================= TERAPIA GOTTA — ATTACCO ACUTO =================
+  const A = { npo:'no', onset:null, joints:null, egfr:null, epatopatia:false, diabete:false, anticoag:false, cvd:false, gi:false, gisevere:false, pregnancy:false, nsaidhs:false, infection:false, cyp:false };
+
+  bindToggleRow('[data-p="npo"]', function(val){ A.npo = val; renderAcuto(); });
+  bindToggleRow('[data-p="onset"]', function(val){ A.onset = val; renderAcuto(); });
+  bindToggleRow('[data-p="joints"]', function(val){ A.joints = val; renderAcuto(); });
+  document.getElementById('ac_egfr').addEventListener('input', function(e){ A.egfr = e.target.value === '' ? null : parseFloat(e.target.value); renderAcuto(); });
+  document.getElementById('ac_epatopatia').addEventListener('change', function(e){ A.epatopatia = e.target.checked; renderAcuto(); });
+  document.getElementById('ac_diabete').addEventListener('change', function(e){ A.diabete = e.target.checked; renderAcuto(); });
+  document.getElementById('ac_anticoag').addEventListener('change', function(e){ A.anticoag = e.target.checked; renderAcuto(); });
+  document.getElementById('ac_cvd').addEventListener('change', function(e){ A.cvd = e.target.checked; renderAcuto(); });
+  document.getElementById('ac_gi').addEventListener('change', function(e){ A.gi = e.target.checked; renderAcuto(); });
+  document.getElementById('ac_gisevere').addEventListener('change', function(e){ A.gisevere = e.target.checked; renderAcuto(); });
+  document.getElementById('ac_pregnancy').addEventListener('change', function(e){ A.pregnancy = e.target.checked; renderAcuto(); });
+  document.getElementById('ac_nsaidhs').addEventListener('change', function(e){ A.nsaidhs = e.target.checked; renderAcuto(); });
+  document.getElementById('ac_infection').addEventListener('change', function(e){ A.infection = e.target.checked; renderAcuto(); });
+  document.getElementById('ac_cyp').addEventListener('change', function(e){ A.cyp = e.target.checked; renderAcuto(); });
+
+  const ACUTE_DRUGS = [
+    { id:'colchicina', name:'Colchicina', classe:'Antinfiammatorio (inibitore dei microtubuli) — solo per os',
+      dose:'1.2 mg al primo segno di flare, poi 0.6 mg dopo 1 ora (max 1.8 mg nella prima ora). Non ripetere il ciclo da carico prima di 3 giorni. Il proseguimento a 0.6 mg 1–2 volte/die fino a risoluzione è a discrezione clinica.',
+      check:function(A){
+        const iss = [], prefers = [];
+        if(A.npo === 'si'){
+          iss.push({sev:'block', src:'scheda tecnica', text:'Esiste solo per via orale: la formulazione endovenosa è stata ritirata dal commercio per rischio di tossicità fatale. Non utilizzabile se il paziente non può assumere farmaci per os.'});
+          return {issues:iss, prefers:prefers};
+        }
+        if(A.cvd) iss.push({sev:'block', src:'scheda tecnica', text:'Grave insufficienza cardiaca: controindicazione assoluta a sé stante, non solo in combinazione con altri fattori.'});
+        if(A.egfr !== null && A.egfr < 30) iss.push({sev:'block', src:'scheda tecnica', text:'Grave insufficienza renale: controindicazione assoluta.'});
+        if(A.gisevere) iss.push({sev:'block', src:'scheda tecnica', text:'Grave insufficienza gastrointestinale: controindicazione assoluta.'});
+        if(A.pregnancy) iss.push({sev:'block', src:'scheda tecnica', text:'Gravidanza: controindicazione assoluta (vale anche per l\'allattamento).'});
+        if(A.epatopatia && A.cyp) iss.push({sev:'block', src:'scheda tecnica', text:'Epatopatia + inibitore duale CYP3A4/P-gp: controindicato, rischio di tossicità fatale.'});
+        else if(A.epatopatia) iss.push({sev:'caution', src:'scheda tecnica', text:'Epatopatia: ridurre la dose e monitorare.'});
+        else if(A.cyp) iss.push({sev:'caution', src:'scheda tecnica', text:'Inibitore duale CYP3A4/P-gp senza epatopatia: ridurre comunque la dose e monitorare.'});
+        if(A.onset === 'early' && !iss.some(function(i){return i.sev==='block';})) prefers.push({src:'farmacologia clinica', text:'Flare iniziato da meno di 36 ore: la colchicina è più efficace se iniziata precocemente, con beneficio che si riduce oltre questa finestra.'});
+        return {issues:iss, prefers:prefers};
+      }},
+    { id:'fans', name:'FANS',
+      classe:function(A){ return A.npo === 'si' ? 'Ketorolac — endovena o intramuscolo' : 'Es. naprossene, indometacina, etoricoxib — per os'; },
+      dose:function(A){ return A.npo === 'si'
+        ? 'Ketorolac 30 mg EV/IM (15 mg se età ≥65, peso &lt;50 kg, o IRC lieve-moderata), poi 15–30 mg ogni 6 ore. Durata massima complessiva (EV/IM + eventuale prosecuzione orale) 5 giorni.'
+        : 'Naprossene 500 mg x2/die, indometacina 50 mg x3/die, o etoricoxib 120 mg/die — per il tempo più breve necessario a risolvere il flare.'; },
+      check:function(A){
+        const iss = [];
+        if(A.egfr !== null && A.egfr < 60) iss.push({sev:'block', src:'Gout Primer 2023', text:'Da evitare in insufficienza renale cronica.'});
+        if(A.epatopatia) iss.push({sev:'block', src:'letteratura su epatopatia/cirrosi', text:'Epatopatia significativa: da evitare — rischio di sindrome epatorenale, sanguinamento gastrointestinale, peggioramento dell\'ascite.'});
+        if(A.gi) iss.push({sev:'block', src:'scheda tecnica / letteratura', text:'Storia di ulcera peptica o sanguinamento GI: rischio di un nuovo sanguinamento aumentato di oltre 10 volte — controindicazione, vale anche per la forma EV/IM.'});
+        if(A.cvd) iss.push({sev:'block', src:'scheda tecnica', text:'Grave insufficienza cardiaca: controindicazione assoluta secondo la maggior parte delle schede tecniche dei FANS.'});
+        if(A.pregnancy) iss.push({sev:'block', src:'scheda tecnica', text:'Gravidanza: controindicati nel terzo trimestre, generalmente da evitare anche nei primi due salvo stretta necessità.'});
+        if(A.nsaidhs) iss.push({sev:'block', src:'scheda tecnica', text:'Storia di asma o reazione allergica a FANS/aspirina: controindicazione assoluta, rischio di reazione anafilattoide.'});
+        if(A.anticoag) iss.push({sev:'caution', src:'Gout Primer 2023', text:'Terapia anticoagulante in corso: aumenta il rischio di sanguinamento, valuta alternative.'});
+        return {issues:iss, prefers:[]};
+      }},
+    { id:'corticosteroide', name:'Corticosteroide', classe:'Orale, intramuscolo, endovena o intra-articolare',
+      dose:'Prednisone 30–35 mg/die per os, oppure intramuscolo/endovena/intra-articolare — per il tempo più breve necessario.',
+      check:function(A){
+        const iss = [], prefers = [];
+        if(A.infection) iss.push({sev:'block', src:'scheda tecnica', text:'Infezione sistemica non controllata: controindicazione assoluta — i corticosteroidi mascherano i segni di infezione e ne favoriscono la diffusione. Escludi sempre un\'artrite settica prima di trattare come gotta.'});
+        if(A.diabete) iss.push({sev:'caution', src:'Gout Primer 2023', text:'Diabete scarsamente controllato: può peggiorare il controllo glicemico, monitorare (il diabete instabile è controindicazione assoluta secondo scheda tecnica).'});
+        if(A.gi) iss.push({sev:'caution', src:'Narum 2014 (BMJ Open)', text:'Storia di ulcera peptica o sanguinamento GI: anche il corticosteroide da solo aumenta il rischio di sanguinamento (circa 2-4 volte), pur meno di un FANS — un\'ulcera peptica attiva è invece controindicazione assoluta.'});
+        if(A.pregnancy) iss.push({sev:'caution', src:'letteratura', text:'Gravidanza: generalmente più maneggevole rispetto a FANS e colchicina, ma da usare alla dose minima efficace e per il tempo più breve possibile.'});
+        if(A.joints === 'mono') prefers.push({src:'pratica clinica', text:'Coinvolgimento mono/oligoarticolare di un\'articolazione accessibile: la via intra-articolare tratta in modo mirato con minore esposizione sistemica.'});
+        if(A.npo === 'si') prefers.push({src:'ACR 2020', text:'Impossibilità ad assumere farmaci per os: scelta raccomandata per via intramuscolare o endovenosa, preferita a inibitori IL-1 o ACTH.'});
+        return {issues:iss, prefers:prefers};
+      }}
+  ];
+
+
+  function classifyAcuteDrug(drug){
+    const r = drug.check(A);
+    const hasBlock = r.issues.some(function(i){ return i.sev === 'block'; });
+    const hasCaution = r.issues.some(function(i){ return i.sev === 'caution'; });
+    const status = hasBlock ? 'blocked' : (hasCaution ? 'caution-row' : 'eligible');
+    const preferred = status === 'eligible' && r.prefers.length > 0;
+    return {drug:drug, issues:r.issues, prefers:r.prefers, status:status, preferred:preferred};
+  }
+  function acuteDrugRowHtml(res){
+    const statusLabel = res.preferred ? 'preferenziale' : {eligible:'idoneo', 'caution-row':'con cautela', blocked:'controindicato'}[res.status];
+    const classe = typeof res.drug.classe === 'function' ? res.drug.classe(A) : res.drug.classe;
+    const dose = typeof res.drug.dose === 'function' ? res.drug.dose(A) : res.drug.dose;
+    let html = '<div class="drug-row ' + res.status + (res.preferred ? ' preferred' : '') + '">';
+    html += '<div class="dinfo"><div class="dname">' + res.drug.name + '</div><div class="dclass">' + classe + '</div>';
+    html += '<div class="ddose">' + dose + '</div>';
+    if(res.prefers.length || res.issues.length){
+      html += '<div class="dissues">';
+      res.prefers.forEach(function(p){ html += '<div class="dissue prefer"><span class="src-tag">' + p.src + '</span>' + p.text + '</div>'; });
+      res.issues.forEach(function(i){ html += '<div class="dissue ' + i.sev + '"><span class="src-tag">' + i.src + '</span>' + i.text + '</div>'; });
+      html += '</div>';
+    }
+    html += '</div><span class="dstatus">' + statusLabel + '</span></div>';
+    return html;
+  }
+
+  function renderAcuto(){
+    const npoBlock = document.getElementById('ac_npoBlock');
+    const allList = document.getElementById('ac_allDrugsList');
+
+    if(A.npo === 'si'){
+      npoBlock.innerHTML = '<div class="rec-card warn"><div class="src">Impossibilità ad assumere farmaci per os — ACR 2020</div><div class="txt">Glucocorticoidi per via intramuscolare, endovenosa o intra-articolare sono la scelta raccomandata, preferiti a inibitori IL-1 o ACTH.</div></div>';
+    } else {
+      npoBlock.innerHTML = '';
+    }
+
+    const order = {eligible:0, 'caution-row':1, blocked:2};
+    const results = ACUTE_DRUGS.map(classifyAcuteDrug).sort(function(a,b){
+      const oa = order[a.status] - (a.preferred ? 0.5 : 0);
+      const ob = order[b.status] - (b.preferred ? 0.5 : 0);
+      return oa - ob;
+    });
+
+    allList.innerHTML = '';
+    if(results.every(function(r){ return r.status === 'blocked'; })){
+      allList.insertAdjacentHTML('beforeend', '<p class="block-note" style="margin-bottom:14px;">Nessuna delle tre opzioni di prima linea è libera da controindicazioni con questo profilo — valuta un inibitore IL-1 (es. anakinra), raccomandazione condizionale ACR 2020 per intolleranza/controindicazione a tutte le alternative convenzionali.</p>');
+    }
+    results.forEach(function(r){ allList.insertAdjacentHTML('beforeend', acuteDrugRowHtml(r)); });
+  }
+  renderAcuto();
+
+})();
+</script>
+
+</body>
+</html>
