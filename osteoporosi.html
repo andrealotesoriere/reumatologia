@@ -384,6 +384,7 @@
     <button type="button" class="mod-tab" data-mod="sequenziale">Terapia sequenziale</button>
     <button type="button" class="mod-tab" data-mod="lungotermine">Gestione a lungo termine</button>
     <button type="button" class="mod-tab" data-mod="nota79">Nota 79</button>
+    <button type="button" class="mod-tab" data-mod="vitd">Vitamina D e calcio</button>
   </div>
 
   <!-- ================= MODULO: RISCHIO E DIAGNOSI ================= -->
@@ -548,7 +549,7 @@
       <h3>Eventi avversi rari che impongono la sospensione</h3>
       <div class="rec-card warn">
         <div class="src">NOGG 2024 — frattura atipica di femore (AFF)</div>
-        <div class="txt">Dolore prodromico in coscia, inguine o anca va indagato con imaging (radiografia dell'intero femore, scintigrafia o RM). Se confermata: sospendi bisfosfonato o denosumab, esegui imaging del femore controlaterale, riferisci a uno specialista. La successiva scelta terapeutica dipende dal rischio residuo di frattura: se basso, si può evitare un nuovo trattamento farmacologico; se alto con fissazione chirurgica bilaterale, considera teriparatide; se unilaterale o non operata, considera teriparatide, romosozumab, raloxifene o terapia ormonale sostitutiva.</div>
+        <div class="txt">Dolore prodromico in coscia, inguine o anca va indagato con imaging (radiografia dell'intero femore, scintigrafia o RM). Se confermata: sospendi bisfosfonato o denosumab, immagina il femore controlaterale, riferisci a uno specialista. La successiva scelta terapeutica dipende dal rischio residuo di frattura: se basso, si può evitare un nuovo trattamento farmacologico; se alto con fissazione chirurgica bilaterale, considera teriparatide; se unilaterale o non operata, considera teriparatide, romosozumab, raloxifene o terapia ormonale sostitutiva.</div>
       </div>
       <div class="rec-card note">
         <div class="src">NOGG 2024 — osteonecrosi della mandibola (ONJ)</div>
@@ -614,6 +615,68 @@
     </div>
   </div>
 
+  <!-- ================= MODULO: VITAMINA D E CALCIO ================= -->
+  <div class="mod-panel" id="mod-vitd">
+    <p class="profile-note" style="margin-bottom:18px;">Target, molecola, dose e via di somministrazione — personalizzati sullo stesso profilo (obesità, IRC, epatopatia, GIOP, malassorbimento).</p>
+
+    <div class="pgroup">
+      <h3 style="margin-bottom:14px;">Un dato in più per questo modulo</h3>
+      <div class="check-list">
+        <label class="check-item"><input type="checkbox" id="vdMalass"><span>Malassorbimento intestinale (oltre a MICI già indicata nel profilo) o chirurgia bariatrica pregressa</span></label>
+      </div>
+      <div class="prow" style="margin-top:12px;">
+        <span class="lbl">Apporto alimentare di calcio (opzionale)</span>
+        <div class="inline-field"><input type="number" id="caIntake" min="0" max="3000" placeholder="es. 500"><span class="unit">mg/die</span></div>
+      </div>
+    </div>
+
+    <div class="out-card">
+      <h3>Vitamina D — target di 25(OH)D</h3>
+      <div class="big" id="vdTargetBig">—</div>
+      <ul class="crit-list" id="vdTargetReasons"></ul>
+    </div>
+
+    <div class="out-card">
+      <h3>Vitamina D — dose e molecola consigliate</h3>
+      <div id="vdDoseBody"></div>
+    </div>
+
+    <div class="out-card">
+      <h3>Vitamina D — regime posologico e via di somministrazione</h3>
+      <div class="rec-card">
+        <div class="src">Bilezikian 2021</div>
+        <div class="txt">Giornaliero, settimanale o mensile sono ugualmente efficaci a parità di dose cumulativa (con una variabilità leggermente maggiore nel regime mensile). La via orale è preferibile sia per il carico iniziale — raggiunge livelli più alti più rapidamente della via intramuscolare — sia per il mantenimento. La via intramuscolare/parenterale è da considerare nel malassorbimento severo (MICI, insufficienza pancreatica, intestino corto, chirurgia bariatrica, nutrizione parenterale totale).</div>
+      </div>
+      <div class="rec-card warn">
+        <div class="src">NOGG 2024 · Lancet 2021</div>
+        <div class="txt">Evita boli intermittenti molto alti (≥60&#8201;000 UI/mese o 500&#8201;000 UI/anno): sono stati associati ad aumento di cadute e fratture, non a beneficio aggiuntivo. La dose giornaliera equivalente non dovrebbe superare 4000 UI/die, salvo malassorbimento documentato.</div>
+      </div>
+      <div class="rec-card note">
+        <div class="src">NOGG 2024 — raccomandazione forte</div>
+        <div class="txt">Correggi la carenza di vitamina D <strong>prima</strong> di iniziare un farmaco anti-osteoporotico per via parenterale (zoledronato, denosumab). Per i farmaci orali, la correzione può procedere in parallelo all'avvio della terapia.</div>
+      </div>
+    </div>
+
+    <div class="out-card">
+      <h3>Calcio — apporto totale target</h3>
+      <div class="big" id="caTargetBig">—</div>
+      <div class="sub" id="caTargetSub"></div>
+      <div id="caGapBody" style="margin-top:12px;"></div>
+    </div>
+
+    <div class="out-card">
+      <h3>Calcio — principi di supplementazione</h3>
+      <div class="rec-card">
+        <div class="src">JAMA 2025 · Lancet 2021 · N Engl J Med 2023</div>
+        <div class="txt">Preferisci le fonti alimentari (latticini, bevande fortificate, salmone in scatola con lische) e supplementa solo la differenza tra apporto dietetico e target — non l'intera dose target. Nei soggetti già calcio-repleti, la supplementazione non offre benefici aggiuntivi.</div>
+      </div>
+      <div class="rec-card warn">
+        <div class="src">Lancet 2021 · JAMA 2025</div>
+        <div class="txt">Non superare 1500 mg/die di calcio totale (dieta + supplementi): oltre questa soglia aumenta il rischio di calcolosi renale, e con minore certezza il rischio cardiovascolare.</div>
+      </div>
+    </div>
+  </div>
+
   <div class="fonti">
     <h2>Fonti</h2>
     <ol>
@@ -628,6 +691,7 @@
       <li><span class="t">Cosman F, Lewiecki EM, Eastell R, et al.</span> Goal-directed osteoporosis treatment: ASBMR/BHOF task force position statement. J Bone Miner Res 2024.</li>
       <li><span class="t">Role of bone turnover markers in the diagnosis and management of osteoporosis.</span> Osteoporos Int 2025.</li>
       <li><span class="t">Denosumab and fracture prevention in primary care practice.</span> JAMA 2025.</li>
+      <li><span class="t">Bilezikian JP, Formenti AM, Adler RA, et al.</span> Vitamin D: dosing, levels, form, and route of administration: does one approach fit all? Rev Endocr Metab Disord 2021.</li>
     </ol>
   </div>
 
@@ -652,7 +716,9 @@
     cx:{epatopatia:false, ima:false, ictus:false, tev:false, ipocalcemia:false, ipercalcemia:false, dentale:false, neoplasiaossea:false, gravidanza:false},
     fase:null,
     fxOnTx:null,
-    n79:{nuovaFx:false, blocco:false}
+    n79:{nuovaFx:false, blocco:false},
+    vdMalass:false,
+    caIntake:null
   };
 
   function usesTscore(){
@@ -692,6 +758,8 @@
   bindToggleRow('[data-p="fxOnTx"]', function(val){ P.fxOnTx = val; renderFxOnTx(); });
   document.getElementById('n79nuovaFx').addEventListener('change', function(e){ P.n79.nuovaFx = e.target.checked; renderNota79(); });
   document.getElementById('n79blocco').addEventListener('change', function(e){ P.n79.blocco = e.target.checked; renderNota79(); });
+  document.getElementById('vdMalass').addEventListener('change', function(e){ P.vdMalass = e.target.checked; renderVitD(); });
+  document.getElementById('caIntake').addEventListener('input', function(e){ P.caIntake = e.target.value === '' ? null : parseFloat(e.target.value); renderVitD(); });
 
   ['age','weight','height','tsSpine','tsHip','zsSpine','zsHip','egfr'].forEach(function(id){
     document.getElementById(id).addEventListener('input', function(e){
@@ -816,6 +884,7 @@
     renderTerapia();
     renderSequenziale();
     renderNota79();
+    renderVitD();
   }
 
   function renderDiagnosis(){
@@ -999,7 +1068,7 @@
         if(P.sex === 'M') iss.push({sev:'block', src:'NOGG 2024', text:'Non indicato nell\'uomo.'});
         if(P.sex === 'F' && P.meno === 'pre') iss.push({sev:'block', src:'NOGG 2024', text:'Indicato solo in post-menopausa.'});
         if(P.cx.tev) iss.push({sev:'block', src:'NOGG 2024', text:'Storia di tromboembolismo venoso: controindicazione assoluta.'});
-        if(P.cx.ictus) iss.push({sev:'block', src:'NOGG 2024', text:'Storia di ictus: controindicazione assoluta.'});
+        if(P.cx.ictus) iss.push({sev:'caution', src:'NOGG 2024', text:'Storia di ictus o fattori di rischio per ictus: da usare con cautela — piccolo aumento del rischio di ictus fatale segnalato negli studi di fase III, non una controindicazione assoluta.'});
         if(P.cx.epatopatia) iss.push({sev:'block', src:'NOGG 2024', text:'Epatopatia severa: controindicazione assoluta.'});
         if(P.egfr !== null && P.egfr <= 30) iss.push({sev:'block', src:'NOGG 2024', text:'Insufficienza renale severa: controindicazione.'});
         return iss;
@@ -1352,13 +1421,11 @@
         return {cat:'primaria', title:'Terapia cortisonica >3 mesi, prednisone eq. ≥5 mg/die', I:std1, II:['Denosumab'], III:[], caveats:caveats};
       }
       if(P.n79.blocco){
-        return {cat:'primaria', title:'Blocco ormonale adiuvante in corso', I:std1, II:[], III:[], caveats:[]};
+        return {cat:'primaria', title:'Blocco ormonale adiuvante in corso', I:std1.concat(['Denosumab']), II:[], III:[], caveats:[]};
       }
-      if(ts !== null && ts <= -4){
-        return {cat:'primaria', title:'T-score colonna o femore ≤ −4', I:['Denosumab'], II:[], III:[], caveats:[]};
-      }
-      if(ts !== null && ts <= -3 && (P.rf.familiarita || anyComorbidity())){
-        return {cat:'primaria', title:'T-score ≤ −3 + familiarità o comorbidità a rischio', I:['Alendronato (± vit. D)', 'Risedronato'], II:['Denosumab', 'Zoledronato', 'Ibandronato', 'Raloxifene', 'Bazedoxifene'], III:[], caveats:[]};
+      if(ts !== null && (ts <= -4 || (ts <= -3 && (P.rf.familiarita || anyComorbidity())))){
+        const title = ts <= -4 ? 'T-score colonna o femore ≤ −4' : 'T-score ≤ −3 + familiarità o comorbidità a rischio';
+        return {cat:'primaria', title:title, I:['Alendronato (± vit. D)', 'Risedronato'], II:['Denosumab', 'Zoledronato', 'Ibandronato', 'Raloxifene', 'Bazedoxifene'], III:[], caveats:[]};
       }
     }
 
@@ -1391,8 +1458,95 @@
     bodyEl.innerHTML = html;
   }
 
+  // ================= VITAMINA D E CALCIO =================
+  function computeVdTarget(){
+    const reasons = [];
+    let target = '≥30 ng/mL (75 nmol/L)';
+    if(isGIOPany()){
+      target = '≥32 ng/mL (80 nmol/L)';
+      reasons.push(['Terapia cortisonica: la resistenza alla vitamina D indotta dai glucocorticoidi richiede un target più alto', 'Bilezikian 2021']);
+    } else {
+      reasons.push(['Target per ottimizzare l\'efficacia della terapia anti-osteoporotica (i 20–50 ng/mL restano "sufficienti" per la popolazione generale, ma nel trattamento dell\'osteoporosi si punta più in alto)', 'Lancet 2021 · Bilezikian 2021']);
+    }
+    return {target:target, reasons:reasons};
+  }
+
+  function computeVdDose(){
+    const bmi = (P.weight && P.height) ? P.weight / Math.pow(P.height/100, 2) : null;
+    const obese = bmi !== null && bmi >= 30;
+    const malabs = P.vdMalass || P.cm.mici;
+    const renalSevere = P.egfr !== null && P.egfr < 30;
+    const renalModerate = P.egfr !== null && P.egfr >= 30 && P.egfr < 60;
+    const hepSevere = P.cx.epatopatia;
+    const giop = isGIOPany();
+
+    let headline = '800–2000 UI/die di colecalciferolo (vitamina D3)';
+    if(malabs) headline = 'Dosi elevate di colecalciferolo (spesso &gt;2000 UI/die)';
+
+    const cards = [];
+    if(obese) cards.push(['Obesità (BMI ≥30)', 'Bilezikian 2021', 'Il tessuto adiposo sequestra vitamina D e riduce la risposta alla supplementazione standard. Dopo sleeve gastrectomy sono spesso necessarie almeno 3000 UI/die per raggiungere 28 ng/mL; dopo bypass gastrico (RYGB), fino a 5000 UI/die — 800 UI/die è risultato inadeguato in questi pazienti.']);
+    if(giop) cards.push(['Terapia cortisonica in corso', 'Bilezikian 2021', '2000 UI/die raggiungono e mantengono spesso il target più alto (≥32 ng/mL) richiesto in questo contesto.']);
+    if(malabs) cards.push(['Malassorbimento', 'Bilezikian 2021', 'MICI, insufficienza pancreatica, intestino corto, chirurgia bariatrica o nutrizione parenterale totale: servono dosi più alte, e nei casi severi la via intramuscolare può essere preferibile a quella orale.']);
+    if(renalSevere) cards.push(['IRC severa (eGFR &lt;30)', 'Bilezikian 2021 · KDIGO', 'Il colecalciferolo standard resta indicato come substrato per la produzione extra-renale di calcitriolo. Gli analoghi 1-alfa-idrossilati (calcitriolo, alfacalcidolo) sono sconsigliati in CKD 3–5 non in dialisi, salvo iperparatiroidismo secondario severo; in dialisi, il calcitriolo diventa lo standard, spesso associato a calcimimetici.']);
+    else if(renalModerate) cards.push(['IRC moderata (eGFR 30–59)', 'Bilezikian 2021', 'Colecalciferolo standard, monitorando la funzione renale nel tempo.']);
+    if(hepSevere) cards.push(['Epatopatia severa', 'Bilezikian 2021', 'Il colecalciferolo resta di solito adeguato per la maggior parte dei pazienti. Nei casi più compromessi, il calcidiolo (bypassa il passaggio epatico) è preferibile se disponibile, altrimenti il calcitriolo. Monitora la calcemia ionizzata o corretta per l\'albumina, non solo il 25(OH)D.']);
+
+    return {headline:headline, cards:cards};
+  }
+
+  function computeCaTarget(){
+    if(P.sex === null || P.age === null) return null;
+    let target = 1000;
+    let reason = P.sex === 'F' ? 'donna 19–50 anni' : 'uomo 19–70 anni';
+    if(P.sex === 'F' && P.age > 50){ target = 1200; reason = 'donna oltre i 50 anni'; }
+    else if(P.sex === 'M' && P.age > 70){ target = 1200; reason = 'uomo oltre i 70 anni'; }
+    return {target:target, reason:reason};
+  }
+
+  function renderVitD(){
+    const t = computeVdTarget();
+    document.getElementById('vdTargetBig').textContent = t.target;
+    const trList = document.getElementById('vdTargetReasons');
+    trList.innerHTML = '';
+    t.reasons.forEach(function(r){
+      const li = document.createElement('li');
+      li.innerHTML = '<span class="src">' + r[1] + '</span><span>' + r[0] + '</span>';
+      trList.appendChild(li);
+    });
+
+    const d = computeVdDose();
+    const doseBody = document.getElementById('vdDoseBody');
+    let html = '<div class="rec-card"><div class="src">Dose di partenza</div><div class="txt"><strong>' + d.headline + '</strong> — colecalciferolo preferito rispetto all\'ergocalciferolo.</div></div>';
+    d.cards.forEach(function(c){
+      html += '<div class="rec-card note"><div class="src">' + c[0] + ' — ' + c[1] + '</div><div class="txt">' + c[2] + '</div></div>';
+    });
+    doseBody.innerHTML = html;
+
+    const ca = computeCaTarget();
+    const caBig = document.getElementById('caTargetBig');
+    const caSub = document.getElementById('caTargetSub');
+    const caGap = document.getElementById('caGapBody');
+    if(!ca){
+      caBig.textContent = 'Completa il profilo per iniziare';
+      caSub.textContent = '';
+      caGap.innerHTML = '';
+    } else {
+      caBig.textContent = ca.target + ' mg/die';
+      caSub.textContent = 'Apporto totale (dieta + eventuali supplementi) — ' + ca.reason + '.';
+      if(P.caIntake !== null && !isNaN(P.caIntake)){
+        const gap = Math.max(0, ca.target - P.caIntake);
+        caGap.innerHTML = gap > 0
+          ? '<div class="rec-card"><div class="src">Con apporto dietetico dichiarato di ' + P.caIntake + ' mg/die</div><div class="txt">Supplemento indicativo: <strong>circa ' + gap + ' mg/die</strong> per raggiungere il target — non l\'intera dose target.</div></div>'
+          : '<div class="rec-card"><div class="src">Con apporto dietetico dichiarato di ' + P.caIntake + ' mg/die</div><div class="txt">L\'apporto dietetico da solo copre già il target: nessun supplemento di calcio indicato.</div></div>';
+      } else {
+        caGap.innerHTML = '';
+      }
+    }
+  }
+
   refreshDxaFields();
   compute();
+
 
   // ================= TABS (module switching) =================
   document.querySelectorAll('.mod-tab:not(.soon)').forEach(function(tab){
