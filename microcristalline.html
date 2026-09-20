@@ -304,9 +304,9 @@
 
       <div class="mod-tabs" id="phenoTabs">
         <button type="button" class="mod-tab on" data-pheno="acuto">Attacco acuto</button>
-        <button type="button" class="mod-tab soon" disabled>Gestione dell'urato<span class="tag-soon">presto</span></button>
-        <button type="button" class="mod-tab soon" disabled>Stile di vita<span class="tag-soon">presto</span></button>
-        <button type="button" class="mod-tab soon" disabled>Gotta refrattaria<span class="tag-soon">presto</span></button>
+        <button type="button" class="mod-tab" data-pheno="urato">Gestione dell'urato</button>
+        <button type="button" class="mod-tab" data-pheno="vita">Stile di vita</button>
+        <button type="button" class="mod-tab" data-pheno="refrattaria">Gotta refrattaria</button>
       </div>
 
       <!-- ATTACCO ACUTO -->
@@ -317,7 +317,7 @@
             <span class="lbl">Impossibilità ad assumere farmaci per os</span>
             <div class="toggle-row" data-p="npo">
               <button type="button" class="toggle-opt" data-val="no">No</button>
-              <button type="button" class="toggle-opt" data-val="si">Sì</button>
+              <button type="button" class="toggle-opt" data-val="si">Sì (NPO)</button>
             </div>
           </div>
           <div class="prow">
@@ -369,6 +369,210 @@
           <div class="txt">Il ghiaccio locale come adiuvante è sempre proponibile, in aggiunta alla terapia farmacologica scelta.</div>
         </div>
       </div>
+
+      <!-- GESTIONE DELL'URATO -->
+      <div class="pheno-panel" id="pheno-urato">
+        <div class="panel">
+          <h3>Quando iniziare la terapia ipouricemizzante (ULT)</h3>
+          <div class="prow">
+            <span class="lbl">Iperuricemia senza mai un flare di gotta</span>
+            <div class="toggle-row" data-p="uAsymp">
+              <button type="button" class="toggle-opt" data-val="no">No</button>
+              <button type="button" class="toggle-opt" data-val="si">Sì</button>
+            </div>
+          </div>
+
+          <div id="uNonAsympBlock">
+            <p class="block-note" style="margin:14px 0 6px 0;">Presenti a prescindere dal numero di flare:</p>
+            <div class="check-list">
+              <label class="check-item"><input type="checkbox" id="u_tofi"><span>≥1 tofo sottocutaneo</span></label>
+              <label class="check-item"><input type="checkbox" id="u_rad"><span>Danno radiografico da gotta (qualunque metodica)</span></label>
+              <label class="check-item"><input type="checkbox" id="u_chronic"><span>Artrite gottosa cronica</span></label>
+              <label class="check-item"><input type="checkbox" id="u_diuretic"><span>Terapia diuretica in corso</span></label>
+              <label class="check-item"><input type="checkbox" id="u_ckd3"><span>IRC moderata-severa (stadio 3-5)</span></label>
+            </div>
+
+            <div class="prow" style="margin-top:14px;">
+              <span class="lbl">Numero e frequenza dei flare avuti finora</span>
+              <div class="toggle-row" data-p="uFlareCount">
+                <button type="button" class="toggle-opt" data-val="first">Primo flare</button>
+                <button type="button" class="toggle-opt" data-val="infrequent">Più di uno, ma &lt;2/anno</button>
+                <button type="button" class="toggle-opt" data-val="frequent">≥2 all'anno (frequenti)</button>
+              </div>
+            </div>
+            <div class="check-list hidden" id="u_firstFactors" style="margin-top:10px;">
+              <label class="check-item"><input type="checkbox" id="u_suhigh"><span>Uricemia &gt;9 mg/dL</span></label>
+              <label class="check-item"><input type="checkbox" id="u_stones"><span>Storia di urolitiasi</span></label>
+            </div>
+          </div>
+        </div>
+
+        <div class="out-card" id="uIndicationCard">
+          <h3>Indicazione all'avvio</h3>
+          <div class="big" id="uIndicationBig">Completa i campi sopra.</div>
+          <div class="sub" id="uIndicationSub"></div>
+          <ul class="crit-list" id="uIndicationCrit"></ul>
+        </div>
+
+        <div class="panel">
+          <h3>Profilo per la scelta del farmaco</h3>
+          <div class="prow">
+            <span class="lbl">eGFR / clearance creatinina</span>
+            <div class="inline-field"><input type="number" id="u_egfr" min="0" max="150" placeholder="es. 45"><span class="unit">mL/min</span></div>
+          </div>
+          <div class="prow">
+            <span class="lbl">Origine etnica</span>
+            <div class="toggle-row" data-p="uEth">
+              <button type="button" class="toggle-opt" data-val="other">Altra</button>
+              <button type="button" class="toggle-opt" data-val="risk">Sud-est asiatico (Han cinese, coreana, thailandese) o afroamericana</button>
+            </div>
+          </div>
+          <div class="check-list">
+            <label class="check-item"><input type="checkbox" id="u_cvd"><span>Cardiopatia ischemica o scompenso cardiaco congestizio</span></label>
+            <label class="check-item"><input type="checkbox" id="u_allohs"><span>Storia di ipersensibilità/reazione cutanea grave (SJS/TEN) ad allopurinolo</span></label>
+            <label class="check-item"><input type="checkbox" id="u_stones2"><span>Storia di calcolosi da acido urico</span></label>
+            <label class="check-item"><input type="checkbox" id="u_pregnancy"><span>Gravidanza in corso</span></label>
+          </div>
+        </div>
+
+        <div class="out-card">
+          <h3>Opzioni per questo profilo</h3>
+          <div id="uDrugsList"></div>
+        </div>
+
+        <div class="rec-card note">
+          <div class="src">ACR 2020 · NICE 2022 · SIR 2019 — target</div>
+          <div class="txt">Tutte e tre concordano su un target generale &lt;6 mg/dL (360 μmol/L), mantenuto indefinitamente con strategia treat-to-target. NICE e SIR raccomandano un target più stringente, &lt;5 mg/dL (300 μmol/L), se sono presenti tofi, artrite gottosa cronica o flare che restano frequenti nonostante un'uricemia già &lt;6 mg/dL. <strong>L'ACR 2020 non adotta questa distinzione</strong>: usa &lt;6 mg/dL per tutti i pazienti, dichiarando esplicitamente di non avere evidenza sufficiente per un target differenziato. SIR segnala inoltre che un'uricemia &lt;3 mg/dL non va ricercata a lungo termine, per il rischio teorico di effetti avversi da uricemia troppo bassa.</div>
+        </div>
+        <div class="rec-card note">
+          <div class="src">NICE 2022 — quando iniziare rispetto al flare</div>
+          <div class="txt">Iniziare la ULT 2–4 settimane dopo la risoluzione del flare acuto. Se i flare sono frequenti, la ULT può essere iniziata anche durante il flare stesso, con una copertura antinfiammatoria di accompagnamento (es. colchicina a basso dosaggio).</div>
+        </div>
+        <div class="rec-card note">
+          <div class="src">NICE 2022 — una divergenza da segnalare</div>
+          <div class="txt">ACR 2020 e SIR 2019 preferiscono sempre l'allopurinolo come prima scelta rispetto al febuxostat. NICE 2022 li considera invece opzioni di prima linea equivalenti, da scegliere in base a comorbidità e preferenze del paziente — con un'eccezione: in presenza di cardiovasculopatia maggiore (pregresso infarto, ictus, angina instabile), anche NICE raccomanda l'allopurinolo come prima scelta. Questo strumento segue la linea più prudente (ACR/SIR), proponendo comunque l'allopurinolo per primo salvo controindicazioni specifiche.</div>
+        </div>
+      </div>
+
+      <!-- STILE DI VITA E FARMACI CONCOMITANTI -->
+      <div class="pheno-panel" id="pheno-vita">
+        <div class="rec-card note">
+          <div class="src">ACR 2020</div>
+          <div class="txt">Le modifiche dietetiche producono in genere variazioni piccole dell'uricemia — non sostituiscono la ULT quando indicata. Vanno comunque discusse, perché alcuni fattori dietetici possono scatenare un flare; allo stesso tempo, meglio evitare che il paziente si senta colpevolizzato per la propria condizione, che ha anche una forte componente genetica.</div>
+        </div>
+
+        <div class="panel">
+          <h3>Alimentazione e alcol</h3>
+          <div class="rec-card">
+            <div class="src">ACR 2020</div>
+            <div class="txt">Limitare l'alcol è condizionalmente raccomandato, a prescindere dall'attività di malattia. Chi limita o si astiene ha un'uricemia media di 1.6 mg/dL più bassa; consumare &gt;1–2 bevande alcoliche nelle 24 ore precedenti si associa a un rischio di flare maggiore del 40%; chi beve pesantemente (≥30 unità/settimana) continua a fare flare più spesso anche in ULT.</div>
+          </div>
+          <div class="rec-card">
+            <div class="src">SIR 2019</div>
+            <div class="txt">Per "consumo eccessivo" si intendono più di 2 unità/die nell'uomo e più di 1 unità/die nella donna, in particolare birra ma anche vino e superalcolici. Da evitare del tutto durante i periodi di flare frequenti o gotta scarsamente controllata.</div>
+          </div>
+          <div class="rec-card">
+            <div class="src">ACR 2020 · SIR 2019</div>
+            <div class="txt">Limitare gli alimenti ricchi di purine è condizionalmente raccomandato (ACR 2020): frattaglie (animelle, fegato, rognone), sardine, crostacei e frutti di mare (SIR 2019). Un piccolo RCT con solo educazione dietetica non ha però ridotto l'uricemia rispetto alla dieta abituale, pur migliorando le conoscenze dei pazienti.</div>
+          </div>
+          <div class="rec-card">
+            <div class="src">ACR 2020</div>
+            <div class="txt">Limitare le bevande zuccherate contenenti fruttosio è condizionalmente raccomandato: 1 g di fruttosio/kg di peso corporeo alza l'uricemia di 1–2 mg/dL entro 2 ore dall'assunzione.</div>
+          </div>
+          <div class="rec-card note">
+            <div class="src">NICE 2022 — posizione più cauta</div>
+            <div class="txt">Non c'è evidenza sufficiente che una dieta specifica prevenga i flare o abbassi l'uricemia: NICE consiglia di seguire una dieta sana ed equilibrata in generale, senza raccomandazioni dietetiche specifiche come quelle di ACR/SIR sopra.</div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h3>Peso, esercizio, fumo</h3>
+          <div class="rec-card">
+            <div class="src">ACR 2020</div>
+            <div class="txt">Un programma di perdita di peso (nessun programma specifico raccomandato su un altro) è condizionalmente raccomandato se sovrappeso/obesi. Una perdita di 5 kg si è associata a un calo medio di uricemia di 1.1 mg/dL; un aumento di BMI &gt;5% si associa a un rischio di flare ricorrente maggiore del 60%, una riduzione di BMI &gt;5% a un rischio minore del 40%.</div>
+          </div>
+          <div class="rec-card">
+            <div class="src">SIR 2019</div>
+            <div class="txt">Attività fisica regolare e cessazione del fumo sono raccomandate come parte di uno stile di vita sano nella gotta, insieme alla riduzione del peso in eccesso.</div>
+          </div>
+          <div class="rec-card note">
+            <div class="src">NICE 2022</div>
+            <div class="txt">Il sovrappeso/obesità e il consumo eccessivo di alcol possono peggiorare i flare e i sintomi — NICE rimanda alla propria linea guida generale sul controllo del peso, senza un programma specifico per la gotta.</div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h3>Vitamina C</h3>
+          <div class="rec-card warn">
+            <div class="src">ACR 2020</div>
+            <div class="txt">La supplementazione di vitamina C è condizionalmente sconsigliata: due piccoli RCT hanno mostrato variazioni dell'uricemia clinicamente non significative.</div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h3>Farmaci concomitanti</h3>
+          <div class="rec-card">
+            <div class="src">ACR 2020</div>
+            <div class="txt">Passare da idroclorotiazide a un altro antiipertensivo, quando fattibile, è condizionalmente raccomandato.</div>
+          </div>
+          <div class="rec-card">
+            <div class="src">ACR 2020</div>
+            <div class="txt">Preferire il losartan come antiipertensivo, quando fattibile, è condizionalmente raccomandato — passare da un ACE-inibitore al losartan comporta un rischio ritenuto sufficientemente basso da giustificare il cambio nella maggior parte dei pazienti.</div>
+          </div>
+          <div class="rec-card warn">
+            <div class="src">ACR 2020</div>
+            <div class="txt">Sospendere l'aspirina a basso dosaggio (se già indicata per un'altra ragione) al solo scopo di abbassare l'uricemia è condizionalmente sconsigliato — esistono poche alternative pratiche all'aspirina a basso dosaggio.</div>
+          </div>
+          <div class="rec-card warn">
+            <div class="src">ACR 2020</div>
+            <div class="txt">Aggiungere o passare a fenofibrato come ipolipemizzante al solo scopo di sfruttarne l'effetto ipouricemizzante è condizionalmente sconsigliato — i rischi del farmaco superano il beneficio, che resta comunque modesto.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- GOTTA REFRATTARIA -->
+      <div class="pheno-panel" id="pheno-refrattaria">
+        <div class="rec-card note">
+          <div class="src">Da tenere distinti</div>
+          <div class="txt">"Refrattaria" copre due problemi diversi, con farmaci diversi: il <strong>flare acuto</strong> che non risponde alle terapie convenzionali, e la <strong>gotta cronica tofacea</strong> che non risponde alla ULT orale. Li tratto separatamente.</div>
+        </div>
+
+        <div class="panel">
+          <h3>Flare acuto refrattario alle terapie convenzionali</h3>
+          <div class="rec-card">
+            <div class="src">ACR 2020</div>
+            <div class="txt">Un inibitore dell'IL-1 è condizionalmente raccomandato, rispetto a nessuna terapia oltre il supporto/analgesia, quando colchicina, FANS e corticosteroidi sono inefficaci, mal tollerati o controindicati.</div>
+          </div>
+          <div class="rec-card">
+            <div class="src">EMA 2013</div>
+            <div class="txt">In Europa (Italia inclusa) l'unico farmaco di questa classe autorizzato per la gotta è il <strong>canakinumab</strong>, con un'indicazione specifica: pazienti con ≥3 flare/anno che non possono essere trattati con FANS, colchicina o cicli ripetuti di corticosteroidi. Dose: 150 mg per via sottocutanea, iniezione singola.</div>
+          </div>
+          <div class="rec-card warn">
+            <div class="src">scheda tecnica canakinumab</div>
+            <div class="txt">Controindicato in caso di ipersensibilità nota. Aumenta il rischio di infezioni: va usato con cautela in presenza di infezioni in atto o ricorrenti, ed è richiesto lo screening per tubercolosi attiva o latente prima di iniziare.</div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h3>Gotta cronica tofacea refrattaria alla ULT orale</h3>
+          <div class="rec-card">
+            <div class="src">ACR 2020</div>
+            <div class="txt">Il passaggio a pegloticase è fortemente raccomandato quando xantina-ossidasi inibitori, uricosurici e altri interventi hanno fallito nel raggiungere il target di uricemia, E il paziente continua ad avere flare frequenti (≥2/anno) o tofi sottocutanei che non si risolvono. Con malattia lieve (flare infrequenti e nessun tofo), la stessa linea guida raccomanda fortemente il contrario: i costi e i rischi superano il beneficio.</div>
+          </div>
+          <div class="rec-card warn">
+            <div class="src">EMA — revoca 2016</div>
+            <div class="txt">La pegloticase <strong>non è autorizzata in Europa</strong>: l'autorizzazione EMA, concessa nel 2013, è stata revocata nel 2016 su richiesta dell'azienda produttrice. Non è quindi un'opzione praticabile in Italia oggi, anche se i criteri sopra restano il modo in cui la letteratura definisce questo scenario clinico.</div>
+          </div>
+          <div class="rec-card">
+            <div class="src">ACR 2020</div>
+            <div class="txt">Prima di considerare questo scenario "refrattario", va confermato il tentativo con un secondo inibitore della xantina-ossidasi (febuxostat dopo fallimento di allopurinolo, o viceversa) e va rivalutata l'aderenza alla terapia.</div>
+          </div>
+          <div class="rec-card note">
+            <div class="src">Gout — Nature Reviews Rheumatology 2023</div>
+            <div class="txt">Sono in sviluppo altre opzioni per questo scenario (tigulixostat, un nuovo inibitore della xantina-ossidasi; SEL-212, un'uricasi di nuova generazione) — nessuna delle due è a oggi approvata o disponibile nella pratica clinica.</div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -383,6 +587,14 @@
       <li><span class="t">Prednisone (Deltacortene).</span> Riassunto delle caratteristiche del prodotto.</li>
       <li><span class="t">FANS (es. ibuprofene, ketoprofene) — schede tecniche comparate.</span> Controindicazioni di classe.</li>
       <li><span class="t">Narum S, Westergren T, Klemp M.</span> Corticosteroids and risk of gastrointestinal bleeding: a systematic review and meta-analysis. BMJ Open 2014.</li>
+      <li><span class="t">Allopurinolo, Febuxostat, Probenecid.</span> Riassunto delle caratteristiche del prodotto.</li>
+      <li><span class="t">AIFA — Nota 91.</span> Febuxostat: criteri di rimborsabilità.</li>
+      <li><span class="t">Ughi N, Prevete I, Ramonda R, et al.</span> The Italian Society of Rheumatology (SIR) clinical practice guidelines for the diagnosis and management of gout. Reumatismo 2019.</li>
+      <li><span class="t">National Institute for Health and Care Excellence (NICE).</span> Gout: diagnosis and management (NG219), 2022.</li>
+      <li><span class="t">Richette P, Doherty M, Pascual E, et al.</span> Updated EULAR evidence-based recommendations for the diagnosis of gout. Ann Rheum Dis 2020 (pubblicato online 2018).</li>
+      <li><span class="t">Jatuworapruk K, Louthrenoo W.</span> Emerging therapeutic options for refractory gout. Nat Rev Rheumatol 2023.</li>
+      <li><span class="t">EMA — Ilaris (canakinumab).</span> EPAR e scheda tecnica; approvazione per la gotta 2013.</li>
+      <li><span class="t">EMA — Krystexxa (pegloticase).</span> Revoca dell'autorizzazione europea, 2016.</li>
       <li><span class="t">Rahme E, et al.; Pain management in cirrhosis, letteratura di gastroenterologia clinica.</span> Uso dei FANS in epatopatia/cirrosi.</li>
     </ol>
   </div>
@@ -638,6 +850,147 @@
     results.forEach(function(r){ allList.insertAdjacentHTML('beforeend', acuteDrugRowHtml(r)); });
   }
   renderAcuto();
+
+  // ================= GESTIONE DELL'URATO =================
+  const U = { tofi:false, rad:false, chronic:false, diuretic:false, ckd3:false, flareCount:null,
+    suhigh:false, stones:false, asymp:'no',
+    egfr:null, eth:'other', cvd:false, allohs:false, stones2:false, pregnancy:false };
+
+  ['u_tofi','u_rad','u_chronic','u_diuretic','u_ckd3','u_suhigh','u_stones','u_cvd','u_allohs','u_stones2','u_pregnancy'].forEach(function(id){
+    document.getElementById(id).addEventListener('change', function(e){
+      U[id.replace('u_','')] = e.target.checked;
+      renderUrato();
+    });
+  });
+  bindToggleRow('[data-p="uFlareCount"]', function(val){
+    U.flareCount = val;
+    document.getElementById('u_firstFactors').classList.toggle('hidden', val !== 'first');
+    renderUrato();
+  });
+  bindToggleRow('[data-p="uAsymp"]', function(val){
+    U.asymp = val;
+    document.getElementById('uNonAsympBlock').classList.toggle('hidden', val === 'si');
+    renderUrato();
+  });
+  bindToggleRow('[data-p="uEth"]', function(val){ U.eth = val; renderUrato(); });
+  document.getElementById('u_egfr').addEventListener('input', function(e){ U.egfr = e.target.value === '' ? null : parseFloat(e.target.value); renderUrato(); });
+
+  function computeULTIndication(){
+    if(U.asymp === 'si') return {level:'contro', title:'Condizionale contro l\'avvio', text:'Iperuricemia asintomatica, senza mai un flare di gotta: l\'avvio della ULT non è raccomandato in questo scenario.', crit:[]};
+
+    const triggers = [];
+    if(U.tofi) triggers.push(['≥1 tofo sottocutaneo', 'ACR 2020 · NICE 2022 · SIR 2019']);
+    if(U.rad) triggers.push(['Danno radiografico da gotta', 'ACR 2020']);
+    if(U.chronic) triggers.push(['Artrite gottosa cronica', 'NICE 2022 · SIR 2019']);
+    if(U.flareCount === 'frequent') triggers.push(['Flare frequenti (≥2/anno)', 'ACR 2020 · NICE 2022 · SIR 2019']);
+    if(U.diuretic) triggers.push(['Terapia diuretica in corso', 'NICE 2022']);
+    if(U.ckd3) triggers.push(['IRC moderata-severa (stadio 3-5)', 'NICE 2022']);
+
+    if(triggers.length) return {level:'forte', title:'Indicazione a offrire la ULT', text:'', crit:triggers};
+
+    if(U.flareCount === 'infrequent') return {level:'favore', title:'Condizionale a favore', text:'Più di un flare pregresso, anche se infrequenti (&lt;2/anno): l\'avvio della ULT è condizionalmente raccomandato.', crit:[], src:'ACR 2020'};
+    if(U.flareCount === 'first'){
+      if(U.suhigh || U.stones) return {level:'favore', title:'Condizionale a favore, anche al primo flare', text:'Primo flare, ma con uricemia &gt;9 mg/dL o storia di urolitiasi: l\'avvio della ULT è condizionalmente raccomandato già da ora, per il maggior rischio di progressione.', crit:[], src:'ACR 2020'};
+      return {level:'contro-cond', title:'Condizionale contro l\'avvio, per ora', text:'Primo flare di gotta "non complicato", senza altri fattori di rischio: l\'ACR 2020 non raccomanda l\'avvio di routine. NICE 2022 consiglia comunque di discuterne l\'opzione con il paziente — resta una decisione condivisa.', crit:[], src:'ACR 2020 · NICE 2022'};
+    }
+    return null;
+  }
+
+  function renderUrato(){
+    const big = document.getElementById('uIndicationBig');
+    const sub = document.getElementById('uIndicationSub');
+    const card = document.getElementById('uIndicationCard');
+    const critList = document.getElementById('uIndicationCrit');
+    const ind = computeULTIndication();
+    critList.innerHTML = '';
+    if(!ind){
+      big.textContent = 'Completa i campi sopra.';
+      sub.textContent = '';
+      card.className = 'out-card';
+    } else {
+      big.textContent = ind.title;
+      if(ind.crit && ind.crit.length){
+        sub.textContent = '';
+        ind.crit.forEach(function(c){
+          const li = document.createElement('li');
+          li.innerHTML = '<span class="src">' + c[1] + '</span><span>' + c[0] + '</span>';
+          critList.appendChild(li);
+        });
+      } else {
+        sub.innerHTML = ind.text + (ind.src ? ' <span style="color:var(--text-faint); font-size:12px;">(' + ind.src + ')</span>' : '');
+      }
+      card.className = 'out-card' + (ind.level === 'forte' || ind.level === 'favore' ? ' pos' : '');
+    }
+
+    const eGFRsevere = U.egfr !== null && U.egfr < 30;
+    const ULT_DRUGS = [
+      { name:'Allopurinolo', classe:'Inibitore della xantina ossidasi — prima scelta',
+        dose: eGFRsevere ? 'Dose iniziale ≤50 mg/die (IRC severa), titolazione lenta fino a target — può comunque richiedere >300 mg/die per raggiungere il target.' : (U.egfr !== null && U.egfr < 60 ? 'Dose iniziale ridotta (IRC stadio ≥3), es. ≤50–100 mg/die, titolazione lenta.' : 'Dose iniziale ≤100 mg/die, titolazione fino a target — spesso servono &gt;300 mg/die, max 800 mg/die.'),
+        issues:(function(){
+          const iss = [];
+          if(U.allohs) iss.push({sev:'block', src:'scheda tecnica', text:'Storia di ipersensibilità grave (SJS/TEN) ad allopurinolo: non va reintrodotto, rischio di reazione grave o fatale.'});
+          if(U.pregnancy) iss.push({sev:'caution', src:'scheda tecnica', text:'Gravidanza: uso non raccomandato, valutare alternative più sicure con il ginecologo.'});
+          if(eGFRsevere) iss.push({sev:'caution', src:'ACR 2020', text:'IRC severa: iniziare a dose molto bassa (≤50 mg/die) e titolare con cautela.'});
+          if(U.eth === 'risk') iss.push({sev:'caution', src:'ACR 2020', text:'Origine sud-est asiatica o afroamericana: test per l\'allele HLA-B*5801 condizionalmente raccomandato prima di iniziare (prevalenza 7.4% e 3.8% rispettivamente, rischio di sindrome da ipersensibilità triplicato rispetto ai bianchi).'});
+          return iss;
+        })(),
+        prefers:(!U.allohs ? [{src:'ACR 2020', text:'Prima scelta forte per tutti i pazienti, inclusa IRC moderata-severa, per efficacia, tollerabilità e costo.'}] : [])
+      },
+      { name:'Febuxostat', classe:'Inibitore della xantina ossidasi — seconda scelta',
+        dose:'≤40 mg/die all\'avvio, titolazione fino a target.',
+        issues:(function(){
+          const iss = [];
+          if(U.cvd) iss.push({sev:'caution', src:'scheda tecnica · ACR 2020', text:'Cardiopatia ischemica o scompenso cardiaco: uso non raccomandato — nello studio CARES, associato a maggiore mortalità cardiovascolare rispetto ad allopurinolo. Se già in trattamento e si verifica un evento CV, passare ad altro ULT.'});
+          if(U.pregnancy) iss.push({sev:'caution', src:'scheda tecnica', text:'Gravidanza: dati insufficienti, evitare se possibile.'});
+          return iss;
+        })(),
+        prefers:[]
+      },
+      { name:'Probenecid', classe:'Uricosurico — terza scelta',
+        dose:'500 mg 1–2 volte/die, titolazione lenta. Richiede idratazione abbondante.',
+        issues:(function(){
+          const iss = [];
+          if(U.stones2) iss.push({sev:'block', src:'scheda tecnica', text:'Storia di calcolosi da acido urico: controindicato — aumenta l\'escrezione urinaria di acido urico, con rischio di nuovi calcoli.'});
+          if(eGFRsevere || (U.egfr !== null && U.egfr < 50)) iss.push({sev:'block', src:'ACR 2020', text:'IRC: inefficace con funzione renale ridotta, e allopurinolo/febuxostat sono comunque preferiti su probenecid in IRC moderata-severa.'});
+          iss.push({sev:'caution', src:'SIR 2019', text:'In Italia il probenecid risulta non commercializzato (fonte 2019, verifica la disponibilità attuale prima di prescriverlo) — la benzbromarone è ugualmente assente dal mercato italiano, e il sulfinpirazone è utilizzabile solo off-label.'});
+          return iss;
+        })(),
+        prefers:[]
+      }
+    ];
+
+    const drugsList = document.getElementById('uDrugsList');
+    drugsList.innerHTML = '';
+    const classified = ULT_DRUGS.map(function(d, idx){
+      const hasBlock = d.issues.some(function(i){ return i.sev === 'block'; });
+      const hasCaution = d.issues.some(function(i){ return i.sev === 'caution'; });
+      const status = hasBlock ? 'blocked' : (hasCaution ? 'caution-row' : 'eligible');
+      const preferred = status !== 'blocked' && d.prefers.length > 0;
+      return {d:d, status:status, preferred:preferred, tier:idx};
+    }).sort(function(a,b){
+      // Il farmaco bloccato scende sempre in fondo; a parità, resta l'ordine di linea guida (allopurinolo, febuxostat, probenecid) — una semplice cautela (es. test HLA-B*5801) non fa scavalcare l'allopurinolo dalle scelte successive.
+      const ba = a.status === 'blocked' ? 1 : 0;
+      const bb = b.status === 'blocked' ? 1 : 0;
+      if(ba !== bb) return ba - bb;
+      return a.tier - b.tier;
+    });
+
+    classified.forEach(function(c){
+      const statusLabel = c.preferred ? 'preferenziale' : {eligible:'idoneo', 'caution-row':'con cautela', blocked:'controindicato'}[c.status];
+      let html = '<div class="drug-row ' + c.status + (c.preferred ? ' preferred' : '') + '">';
+      html += '<div class="dinfo"><div class="dname">' + c.d.name + '</div><div class="dclass">' + c.d.classe + '</div>';
+      html += '<div class="ddose">' + c.d.dose + '</div>';
+      if(c.d.prefers.length || c.d.issues.length){
+        html += '<div class="dissues">';
+        c.d.prefers.forEach(function(p){ html += '<div class="dissue prefer"><span class="src-tag">' + p.src + '</span>' + p.text + '</div>'; });
+        c.d.issues.forEach(function(i){ html += '<div class="dissue ' + i.sev + '"><span class="src-tag">' + i.src + '</span>' + i.text + '</div>'; });
+        html += '</div>';
+      }
+      html += '</div><span class="dstatus">' + statusLabel + '</span></div>';
+      drugsList.insertAdjacentHTML('beforeend', html);
+    });
+  }
+  renderUrato();
 
 })();
 </script>
