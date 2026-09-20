@@ -7,13 +7,13 @@
   "theme_color": "#3E6D69",
   "icons": [
     {
-      "src": "BDE6B657-BEF2-4550-91F1-02B6112872D8.png",
+      "src": "android.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "BDE6B657-BEF2-4550-91F1-02B6112872D8.png",
+      "src": "android.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
