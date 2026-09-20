@@ -8,7 +8,7 @@
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
 
-<title>Artropatie microcristalline | RheumaDoc</title>
+<title>Artropatie microcristalline | RheumaTools</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -156,7 +156,7 @@
 <body>
 
 <header class="site">
-  <div class="site-inner"><a href="index.html">RheumaDoc</a><span class="sep">/</span>Artropatie microcristalline</div>
+  <div class="site-inner"><a href="index.html">RheumaTools</a><span class="sep">/</span>Artropatie microcristalline</div>
 </header>
 
 <div class="wrap">
@@ -174,8 +174,8 @@
     <button type="button" class="landing-btn" data-disease="gotta">
       <span class="lb-title">Gotta</span>
     </button>
-    <button type="button" class="landing-btn soon" disabled>
-      <span class="lb-title">CPPD<span class="tag-soon">presto</span></span>
+    <button type="button" class="landing-btn" data-disease="cppd">
+      <span class="lb-title">CPPD</span>
     </button>
   </div>
 
@@ -581,6 +581,199 @@
     </div>
   </div>
 
+  <!-- ================= CPPD ================= -->
+  <div class="hidden" id="disease-cppd">
+    <button type="button" class="back-link" data-back="diseaseLanding">← Cambia patologia</button>
+    <div class="block-head"><h2>CPPD</h2></div>
+
+    <div class="landing" id="cppdLanding">
+      <button type="button" class="landing-btn" data-disease="cppd" data-section="diagnosi">
+        <span class="lb-title">Diagnosi</span>
+      </button>
+      <button type="button" class="landing-btn" data-disease="cppd" data-section="terapia">
+        <span class="lb-title">Terapia</span>
+      </button>
+    </div>
+
+    <!-- ===== CPPD > DIAGNOSI ===== -->
+    <div class="hidden" id="cppd-diagnosi">
+      <button type="button" class="back-link" data-back="cppdLanding">← Torna alla CPPD</button>
+      <div class="block-head"><h2>Diagnosi</h2></div>
+
+      <div class="box info">
+        <p>A differenza della gotta, per la CPPD non esistono criteri classificativi moderni validati. I criteri di Ryan-McCarty (1976) sono datati e informali. Quella che segue è una guida al ragionamento diagnostico, non un punteggio.</p>
+      </div>
+
+      <div class="panel">
+        <h3>Fenotipi clinici</h3>
+        <div class="rec-card">
+          <div class="src">Parperis 2021 · McCarthy 2018 (Nat Rev Rheumatol)</div>
+          <div class="txt">Quattro fenotipi: <strong>CPPD asintomatica</strong> (reperto radiografico incidentale), <strong>CPPD con osteoartrosi</strong> (pseudo-artrosi), <strong>artrite acuta da cristalli CPP</strong> (pseudogotta — attacco mono/oligoarticolare acuto, spesso al ginocchio), <strong>artrite infiammatoria cronica da cristalli CPP</strong> (quadro poliarticolare che può mimare l'artrite reumatoide).</div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h3>Identificazione dei cristalli</h3>
+        <div class="rec-card">
+          <div class="src">McCarthy 2018 (Nat Rev Rheumatol)</div>
+          <div class="txt">I cristalli CPP sono <strong>romboidali</strong>, a debole birifrangenza <strong>positiva</strong> alla luce polarizzata compensata (blu se paralleli all'asse del polarizzatore, gialli se perpendicolari). All'opposto, i cristalli di urato monosodico della gotta sono aghiformi, a birifrangenza <strong>negativa</strong> forte — la direzione dei colori è invertita rispetto ai cristalli CPP.</div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h3>Imaging</h3>
+        <div class="rec-card">
+          <div class="src">McCarthy 2018 (Nat Rev Rheumatol)</div>
+          <div class="txt">La condrocalcinosi alla radiografia è il reperto più caratteristico. Sedi tipiche: cartilagine e menischi del ginocchio, labbro acetabolare dell'anca, sinfisi pubica, fibrocartilagine triangolare del polso, anulus fibroso intervertebrale.</div>
+        </div>
+        <div class="rec-card">
+          <div class="src">McCarthy 2018 · EULAR 2023</div>
+          <div class="txt">L'ecografia aiuta a distinguere la CPPD dalla gotta: i cristalli CPP si localizzano nella parte centrale ("midzone") della cartilagine, quelli di urato sulla superficie. La TC è utile nelle forme assiali (es. crowned dens syndrome, calcificazioni intorno al dente dell'epistrofeo). L'EULAR 2023 raccomanda radiografia convenzionale ed ecografia (TC se sospetta forma assiale) per la diagnosi, e sconsiglia imaging seriato di routine salvo un cambiamento clinico inatteso.</div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h3>Cause secondarie da ricercare</h3>
+        <div class="rec-card">
+          <div class="src">Parperis 2021 · McCarthy 2018</div>
+          <div class="txt">Emocromatosi, iperparatiroidismo, ipomagnesiemia (inclusa la variante Gitelman della sindrome di Bartter). Esistono anche forme familiari, autosomiche dominanti, legate a mutazioni in due distinti loci genetici (CCAL1, CCAL2).</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== CPPD > TERAPIA ===== -->
+    <div class="hidden" id="cppd-terapia">
+      <button type="button" class="back-link" data-back="cppdLanding">← Torna alla CPPD</button>
+      <div class="block-head"><h2>Terapia</h2></div>
+
+      <div class="rec-card warn">
+        <div class="src">Parperis 2021</div>
+        <div class="txt">A differenza della gotta, per la CPPD non esiste un farmaco capace di dissolvere i cristalli già depositati. Inoltre l'evidenza terapeutica è nettamente più debole: colchicina, FANS e corticosteroidi non sono mai stati valutati da RCT specifici per la CPPD, e il loro uso è in gran parte estrapolato dalla gotta.</div>
+      </div>
+
+      <div class="mod-tabs" id="cppdPhenoTabs">
+        <button type="button" class="mod-tab on" data-pheno="cppd-acuto">Attacco acuto</button>
+        <button type="button" class="mod-tab" data-pheno="cppd-cronica">Gestione cronica</button>
+      </div>
+
+      <!-- ATTACCO ACUTO CPPD -->
+      <div class="pheno-panel on" id="pheno-cppd-acuto">
+        <div class="panel">
+          <h3>Profilo per la scelta del farmaco</h3>
+          <div class="prow">
+            <span class="lbl">Impossibilità ad assumere farmaci per os</span>
+            <div class="toggle-row" data-p="cnpo">
+              <button type="button" class="toggle-opt" data-val="no">No</button>
+              <button type="button" class="toggle-opt" data-val="si">Sì (NPO)</button>
+            </div>
+          </div>
+          <div class="prow">
+            <span class="lbl">Insorgenza del flare</span>
+            <div class="toggle-row" data-p="conset">
+              <button type="button" class="toggle-opt" data-val="early">Meno di 36 ore fa</button>
+              <button type="button" class="toggle-opt" data-val="late">36 ore o più</button>
+            </div>
+          </div>
+          <div class="prow">
+            <span class="lbl">Articolazioni coinvolte</span>
+            <div class="toggle-row" data-p="cjoints">
+              <button type="button" class="toggle-opt" data-val="mono">Mono/oligoarticolare, accessibile</button>
+              <button type="button" class="toggle-opt" data-val="poly">Poliarticolare o non accessibile</button>
+            </div>
+          </div>
+          <div class="prow">
+            <span class="lbl">eGFR / clearance creatinina</span>
+            <div class="inline-field"><input type="number" id="c_egfr" min="0" max="150" placeholder="es. 45"><span class="unit">mL/min</span></div>
+          </div>
+          <div class="check-list">
+            <label class="check-item"><input type="checkbox" id="c_epatopatia"><span>Epatopatia significativa (es. cirrosi)</span></label>
+            <label class="check-item"><input type="checkbox" id="c_diabete"><span>Diabete mellito scarsamente controllato</span></label>
+            <label class="check-item"><input type="checkbox" id="c_anticoag"><span>Terapia anticoagulante in corso</span></label>
+            <label class="check-item"><input type="checkbox" id="c_cvd"><span>Scompenso cardiaco o cardiopatia significativa</span></label>
+            <label class="check-item"><input type="checkbox" id="c_gi"><span>Storia di ulcera peptica o sanguinamento gastrointestinale</span></label>
+            <label class="check-item"><input type="checkbox" id="c_gisevere"><span>Grave patologia gastrointestinale (es. malassorbimento severo, subocclusione, MICI severa)</span></label>
+            <label class="check-item"><input type="checkbox" id="c_pregnancy"><span>Gravidanza in corso</span></label>
+            <label class="check-item"><input type="checkbox" id="c_nsaidhs"><span>Storia di asma o reazione allergica a FANS/aspirina</span></label>
+            <label class="check-item"><input type="checkbox" id="c_infection"><span>Infezione sistemica non controllata (esclusa un'artrite settica)</span></label>
+            <label class="check-item"><input type="checkbox" id="c_cyp"><span>Uso di inibitore duale CYP3A4/P-gp (es. claritromicina, ciclosporina)</span></label>
+          </div>
+        </div>
+
+        <div id="c_npoBlock"></div>
+
+        <div class="out-card">
+          <h3>Opzioni per questo profilo</h3>
+          <div id="c_allDrugsList"></div>
+        </div>
+
+        <div class="rec-card note">
+          <div class="src">Parperis 2021</div>
+          <div class="txt">L'ACTH (tetracosactide) è un'alternativa quando FANS, corticosteroidi e colchicina sono tutti controindicati: in una serie di 14 pazienti, 13 hanno avuto una riduzione significativa dei segni infiammatori entro 24 ore.</div>
+        </div>
+        <div class="rec-card note">
+          <div class="src">Parperis 2021</div>
+          <div class="txt">L'anakinra (anti-IL-1) è un'opzione per gli attacchi refrattari alle terapie convenzionali: in più serie retrospettive, l'81–87% dei pazienti ha risposto, con un tempo medio di recupero del flare di circa 3 giorni. Dose tipica 100 mg sottocute, ripetibile a 72 ore se necessario.</div>
+        </div>
+      </div>
+
+      <!-- GESTIONE CRONICA CPPD -->
+      <div class="pheno-panel" id="pheno-cppd-cronica">
+        <div class="rec-card warn">
+          <div class="src">Parperis 2021</div>
+          <div class="txt">Anche qui l'evidenza è limitata: nessun farmaco, ad eccezione del metotrexato, è stato valutato con RCT specifici per la CPPD cronica — e proprio l'unico RCT disponibile (metotrexato) ha dato risultato negativo, come vedrai sotto.</div>
+        </div>
+
+        <div class="panel">
+          <h3>Colchicina a basso dosaggio (profilassi)</h3>
+          <div class="rec-card">
+            <div class="src">Parperis 2021</div>
+            <div class="txt">0.6 mg una o due volte al giorno. In due studi prospettici, ha ridotto la frequenza dei flare da 3.2 a 1 all'anno in uno, e da 9.3 a 2.4 all'anno nell'altro. Si applicano le stesse controindicazioni della colchicina viste per l'attacco acuto (grave insufficienza cardiaca, renale o gastrointestinale; cautela in epatopatia o con inibitori duali CYP3A4/P-gp).</div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h3>Idrossiclorochina</h3>
+          <div class="rec-card">
+            <div class="src">Parperis 2021 (RCT di Rothschild)</div>
+            <div class="txt">L'unico farmaco di questa sezione, oltre alla colchicina, con un RCT positivo: 76% di risposta (riduzione ≥30% di articolazioni tumefatte/dolenti) contro 32% con placebo (p&lt;0.01). Dose iniziale 100 mg/die, aumentata a intervalli mensili nei non-responder fino a un massimo di 400 mg/die.</div>
+          </div>
+          <div class="rec-card warn">
+            <div class="src">scheda tecnica</div>
+            <div class="txt">Controindicata in: retinopatia preesistente, deficit di G6PD, prolungamento del tratto QT, porfiria, epilessia, miastenia gravis, miopatie, gravidanza e allattamento (attraversa la placenta). Richiede un esame oculistico basale e poi annuale per il rischio di retinopatia, dose- e durata-dipendente.</div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h3>Metotrexato</h3>
+          <div class="rec-card warn">
+            <div class="src">Parperis 2021 — evidenza negativa</div>
+            <div class="txt">Alcune serie di casi hanno riportato beneficio, ma l'unico RCT in doppio cieco (Finckh 2014, crossover, alto rischio di bias) non ha mostrato differenza significativa rispetto al placebo, né su DAS44 né sul dolore, a 3 mesi. Dose usata nello studio: 7.5 mg/settimana, aumentabile a 15 mg/settimana se tollerato.</div>
+          </div>
+          <div class="rec-card warn">
+            <div class="src">scheda tecnica</div>
+            <div class="txt">Controindicato in: epatopatia, abuso di alcol, insufficienza renale (clearance della creatinina inferiore a 20–30 mL/min a seconda del prodotto), discrasie ematiche preesistenti, infezioni gravi acute o croniche (tubercolosi, HIV), ulcera gastrointestinale attiva, gravidanza e allattamento, vaccinazione concomitante con vaccini vivi.</div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h3>Forme refrattarie: anakinra e tocilizumab</h3>
+          <div class="rec-card">
+            <div class="src">Parperis 2021</div>
+            <div class="txt">Anakinra, oltre che per l'attacco acuto, è stata utilizzata anche nella gestione cronica dei casi refrattari alle altre opzioni.</div>
+          </div>
+          <div class="rec-card warn">
+            <div class="src">scheda tecnica anakinra</div>
+            <div class="txt">Non iniziare in caso di neutropenia (conta assoluta neutrofili &lt;1.5×10⁹/L). Cautela in caso di infezioni ricorrenti o condizioni predisponenti; sicurezza non nota in tubercolosi latente — è raccomandato lo screening prima di iniziare. Non associare ad anti-TNF (aumento delle infezioni gravi senza beneficio clinico aggiuntivo). Uso in gravidanza non raccomandato.</div>
+          </div>
+          <div class="rec-card note">
+            <div class="src">Parperis 2021 (studio pilota in aperto, 11 pazienti)</div>
+            <div class="txt">Il tocilizumab (anti-IL-6) ha mostrato un miglioramento significativo della valutazione globale del paziente (da 60 mm a 15 mm su VAS, p=0.006), mantenuto a un follow-up mediano di 10 mesi. Dosi utilizzate: 4–8 mg/kg EV mensile, oppure 162 mg SC settimanale, per 3 mesi. Evidenza preliminare, da uno studio piccolo e non randomizzato.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="fonti">
     <h2>Fonti</h2>
     <ol>
@@ -600,6 +793,9 @@
       <li><span class="t">Jatuworapruk K, Louthrenoo W.</span> Emerging therapeutic options for refractory gout. Nat Rev Rheumatol 2023.</li>
       <li><span class="t">EMA — Ilaris (canakinumab).</span> EPAR e scheda tecnica; approvazione per la gotta 2013.</li>
       <li><span class="t">EMA — Krystexxa (pegloticase).</span> Revoca dell'autorizzazione europea, 2016.</li>
+      <li><span class="t">Parperis K, Papachristodoulou E, Kakoullis L, Rosenthal AK.</span> Management of calcium pyrophosphate crystal deposition disease: a systematic review. Semin Arthritis Rheum 2021.</li>
+      <li><span class="t">McCarthy GM, Dunne A.</span> Calcium crystal deposition diseases — beyond gout. Nat Rev Rheumatol 2018.</li>
+      <li><span class="t">Idrossiclorochina, metotrexato, anakinra (Kineret).</span> Riassunto delle caratteristiche del prodotto.</li>
       <li><span class="t">Rahme E, et al.; Pain management in cirrhosis, letteratura di gastroenterologia clinica.</span> Uso dei FANS in epatopatia/cirrosi.</li>
     </ol>
   </div>
@@ -616,7 +812,7 @@
   function show(id){ document.getElementById(id).classList.remove('hidden'); }
   function hide(id){ document.getElementById(id).classList.add('hidden'); }
 
-  document.querySelectorAll('.landing-btn[data-disease]').forEach(function(btn){
+  document.querySelectorAll('.landing-btn[data-disease]:not([data-section])').forEach(function(btn){
     btn.addEventListener('click', function(){
       hide('diseaseLanding');
       show('disease-' + btn.dataset.disease);
@@ -625,8 +821,9 @@
   });
   document.querySelectorAll('.landing-btn[data-section]').forEach(function(btn){
     btn.addEventListener('click', function(){
-      hide('gottaLanding');
-      show('gotta-' + btn.dataset.section);
+      const disease = btn.dataset.disease || 'gotta';
+      hide(disease + 'Landing');
+      show(disease + '-' + btn.dataset.section);
       window.scrollTo({top:0, behavior:'smooth'});
     });
   });
@@ -634,21 +831,25 @@
     btn.addEventListener('click', function(){
       const target = btn.dataset.back;
       if(target === 'diseaseLanding'){
-        hide('disease-gotta');
+        hide('disease-gotta'); hide('disease-cppd');
         show('diseaseLanding');
       } else if(target === 'gottaLanding'){
         hide('gotta-diagnosi'); hide('gotta-terapia');
         show('gottaLanding');
+      } else if(target === 'cppdLanding'){
+        hide('cppd-diagnosi'); hide('cppd-terapia');
+        show('cppdLanding');
       }
       window.scrollTo({top:0, behavior:'smooth'});
     });
   });
   document.querySelectorAll('.mod-tab:not(.soon)').forEach(function(tab){
     tab.addEventListener('click', function(){
-      document.querySelectorAll('.mod-tab').forEach(function(t){ t.classList.remove('on'); });
+      const container = tab.closest('.mod-tabs').parentElement;
+      container.querySelectorAll('.mod-tab').forEach(function(t){ t.classList.remove('on'); });
       tab.classList.add('on');
-      document.querySelectorAll('.pheno-panel').forEach(function(p){ p.classList.remove('on'); });
-      document.getElementById('pheno-' + tab.dataset.pheno).classList.add('on');
+      container.querySelectorAll('.pheno-panel').forEach(function(p){ p.classList.remove('on'); });
+      container.querySelector('#pheno-' + tab.dataset.pheno).classList.add('on');
     });
   });
 
@@ -856,6 +1057,115 @@
   }
   renderAcuto();
 
+  // ================= CPPD — ATTACCO ACUTO =================
+  const C = { npo:'no', onset:null, joints:null, egfr:null, epatopatia:false, diabete:false, anticoag:false, cvd:false, gi:false, gisevere:false, pregnancy:false, nsaidhs:false, infection:false, cyp:false };
+
+  bindToggleRow('[data-p="cnpo"]', function(val){ C.npo = val; renderCppdAcuto(); });
+  bindToggleRow('[data-p="conset"]', function(val){ C.onset = val; renderCppdAcuto(); });
+  bindToggleRow('[data-p="cjoints"]', function(val){ C.joints = val; renderCppdAcuto(); });
+  ['c_egfr'].forEach(function(id){
+    document.getElementById(id).addEventListener('input', function(e){ C.egfr = e.target.value === '' ? null : parseFloat(e.target.value); renderCppdAcuto(); });
+  });
+  ['c_epatopatia','c_diabete','c_anticoag','c_cvd','c_gi','c_gisevere','c_pregnancy','c_nsaidhs','c_infection','c_cyp'].forEach(function(id){
+    document.getElementById(id).addEventListener('change', function(e){ C[id.replace('c_','')] = e.target.checked; renderCppdAcuto(); });
+  });
+
+  const CPPD_ACUTE_DRUGS = [
+    { id:'colchicina', name:'Colchicina', classe:'Antinfiammatorio (inibitore dei microtubuli) — solo per os',
+      dose:'1.2 mg al primo segno di flare, poi 0.6 mg dopo 1 ora (max 1.8 mg nella prima ora). Non ripetere il ciclo da carico prima di 3 giorni. Il proseguimento a 0.6 mg 1–2 volte/die fino a risoluzione è a discrezione clinica.',
+      check:function(C){
+        const iss = [], prefers = [];
+        if(C.npo === 'si'){
+          iss.push({sev:'block', src:'scheda tecnica', text:'Esiste solo per via orale: la formulazione endovenosa è stata ritirata dal commercio per rischio di tossicità fatale. Non utilizzabile se il paziente non può assumere farmaci per os.'});
+          return {issues:iss, prefers:prefers};
+        }
+        if(C.cvd) iss.push({sev:'block', src:'scheda tecnica', text:'Grave insufficienza cardiaca: controindicazione assoluta a sé stante.'});
+        if(C.egfr !== null && C.egfr < 30) iss.push({sev:'block', src:'scheda tecnica', text:'Grave insufficienza renale: controindicazione assoluta.'});
+        if(C.gisevere) iss.push({sev:'block', src:'scheda tecnica', text:'Grave insufficienza gastrointestinale: controindicazione assoluta.'});
+        if(C.pregnancy) iss.push({sev:'block', src:'scheda tecnica', text:'Gravidanza: controindicazione assoluta (vale anche per l\'allattamento).'});
+        if(C.epatopatia && C.cyp) iss.push({sev:'block', src:'scheda tecnica', text:'Epatopatia + inibitore duale CYP3A4/P-gp: controindicato, rischio di tossicità fatale.'});
+        else if(C.epatopatia) iss.push({sev:'caution', src:'scheda tecnica', text:'Epatopatia: ridurre la dose e monitorare.'});
+        else if(C.cyp) iss.push({sev:'caution', src:'scheda tecnica', text:'Inibitore duale CYP3A4/P-gp senza epatopatia: ridurre comunque la dose e monitorare.'});
+        if(C.onset === 'early' && !iss.some(function(i){return i.sev==='block';})) prefers.push({src:'farmacologia clinica', text:'Flare iniziato da meno di 36 ore: la colchicina è più efficace se iniziata precocemente, con beneficio che si riduce oltre questa finestra.'});
+        return {issues:iss, prefers:prefers};
+      }},
+    { id:'fans', name:'FANS',
+      classe:function(C){ return C.npo === 'si' ? 'Ketorolac — endovena o intramuscolo' : 'Es. naprossene, indometacina, etoricoxib — per os'; },
+      dose:function(C){ return C.npo === 'si'
+        ? 'Ketorolac 30 mg EV/IM (15 mg se età ≥65, peso &lt;50 kg, o IRC lieve-moderata), poi 15–30 mg ogni 6 ore. Durata massima complessiva (EV/IM + eventuale prosecuzione orale) 5 giorni.'
+        : 'Naprossene 500 mg x2/die, indometacina 50 mg x3/die, o etoricoxib 120 mg/die — per il tempo più breve necessario a risolvere il flare.'; },
+      check:function(C){
+        const iss = [];
+        if(C.egfr !== null && C.egfr < 60) iss.push({sev:'block', src:'estrapolato da Gout Primer 2023', text:'Da evitare in insufficienza renale cronica.'});
+        if(C.epatopatia) iss.push({sev:'block', src:'letteratura su epatopatia/cirrosi', text:'Epatopatia significativa: da evitare — rischio di sindrome epatorenale, sanguinamento gastrointestinale, peggioramento dell\'ascite.'});
+        if(C.gi) iss.push({sev:'block', src:'scheda tecnica / letteratura', text:'Storia di ulcera peptica o sanguinamento GI: rischio di un nuovo sanguinamento aumentato di oltre 10 volte — controindicazione, vale anche per la forma EV/IM.'});
+        if(C.cvd) iss.push({sev:'block', src:'scheda tecnica', text:'Grave insufficienza cardiaca: controindicazione assoluta secondo la maggior parte delle schede tecniche dei FANS.'});
+        if(C.pregnancy) iss.push({sev:'block', src:'scheda tecnica', text:'Gravidanza: controindicati nel terzo trimestre, generalmente da evitare anche nei primi due salvo stretta necessità.'});
+        if(C.nsaidhs) iss.push({sev:'block', src:'scheda tecnica', text:'Storia di asma o reazione allergica a FANS/aspirina: controindicazione assoluta, rischio di reazione anafilattoide.'});
+        if(C.anticoag) iss.push({sev:'caution', src:'estrapolato da Gout Primer 2023', text:'Terapia anticoagulante in corso: aumenta il rischio di sanguinamento, valuta alternative.'});
+        return {issues:iss, prefers:[]};
+      }},
+    { id:'corticosteroide', name:'Corticosteroide', classe:'Orale, intramuscolo, endovena o intra-articolare',
+      dose:'Prednisone 30–35 mg/die per os, oppure intramuscolo/endovena/intra-articolare — per il tempo più breve necessario.',
+      check:function(C){
+        const iss = [], prefers = [];
+        if(C.infection) iss.push({sev:'block', src:'scheda tecnica', text:'Infezione sistemica non controllata: controindicazione assoluta — i corticosteroidi mascherano i segni di infezione e ne favoriscono la diffusione. Escludi sempre un\'artrite settica prima di trattare come CPPD.'});
+        if(C.diabete) iss.push({sev:'caution', src:'estrapolato da Gout Primer 2023', text:'Diabete scarsamente controllato: può peggiorare il controllo glicemico, monitorare (il diabete instabile è controindicazione assoluta secondo scheda tecnica).'});
+        if(C.gi) iss.push({sev:'caution', src:'Narum 2014 (BMJ Open)', text:'Storia di ulcera peptica o sanguinamento GI: anche il corticosteroide da solo aumenta il rischio di sanguinamento (circa 2-4 volte), pur meno di un FANS — un\'ulcera peptica attiva è invece controindicazione assoluta.'});
+        if(C.pregnancy) iss.push({sev:'caution', src:'letteratura', text:'Gravidanza: generalmente più maneggevole rispetto a FANS e colchicina, ma da usare alla dose minima efficace e per il tempo più breve possibile.'});
+        if(C.joints === 'mono') prefers.push({src:'pratica clinica', text:'Coinvolgimento mono/oligoarticolare di un\'articolazione accessibile: la via intra-articolare tratta in modo mirato con minore esposizione sistemica.'});
+        if(C.npo === 'si') prefers.push({src:'estrapolato da ACR 2020 (gotta)', text:'Impossibilità ad assumere farmaci per os: scelta generalmente preferita per via intramuscolare o endovenosa quando i farmaci orali non sono praticabili.'});
+        return {issues:iss, prefers:prefers};
+      }}
+  ];
+
+  function classifyCppdDrug(drug){
+    const r = drug.check(C);
+    const hasBlock = r.issues.some(function(i){ return i.sev === 'block'; });
+    const hasCaution = r.issues.some(function(i){ return i.sev === 'caution'; });
+    const status = hasBlock ? 'blocked' : (hasCaution ? 'caution-row' : 'eligible');
+    const preferred = status === 'eligible' && r.prefers.length > 0;
+    return {drug:drug, issues:r.issues, prefers:r.prefers, status:status, preferred:preferred};
+  }
+  function cppdDrugRowHtml(res){
+    const statusLabel = res.preferred ? 'preferenziale' : {eligible:'idoneo', 'caution-row':'con cautela', blocked:'controindicato'}[res.status];
+    const classe = typeof res.drug.classe === 'function' ? res.drug.classe(C) : res.drug.classe;
+    const dose = typeof res.drug.dose === 'function' ? res.drug.dose(C) : res.drug.dose;
+    let html = '<div class="drug-row ' + res.status + (res.preferred ? ' preferred' : '') + '">';
+    html += '<div class="dinfo"><div class="dname">' + res.drug.name + '</div><div class="dclass">' + classe + '</div>';
+    html += '<div class="ddose">' + dose + '</div>';
+    if(res.prefers.length || res.issues.length){
+      html += '<div class="dissues">';
+      res.prefers.forEach(function(p){ html += '<div class="dissue prefer"><span class="src-tag">' + p.src + '</span>' + p.text + '</div>'; });
+      res.issues.forEach(function(i){ html += '<div class="dissue ' + i.sev + '"><span class="src-tag">' + i.src + '</span>' + i.text + '</div>'; });
+      html += '</div>';
+    }
+    html += '</div><span class="dstatus">' + statusLabel + '</span></div>';
+    return html;
+  }
+
+  function renderCppdAcuto(){
+    const npoBlock = document.getElementById('c_npoBlock');
+    const allList = document.getElementById('c_allDrugsList');
+
+    if(C.npo === 'si'){
+      npoBlock.innerHTML = '<div class="rec-card warn"><div class="src">Impossibilità ad assumere farmaci per os — estrapolato da ACR 2020</div><div class="txt">Glucocorticoidi per via intramuscolare o endovenosa sono generalmente la scelta preferita quando la via orale non è praticabile.</div></div>';
+    } else {
+      npoBlock.innerHTML = '';
+    }
+
+    const results = CPPD_ACUTE_DRUGS.map(classifyCppdDrug);
+    const order = {eligible:0, 'caution-row':1, blocked:2};
+    results.sort(function(a,b){ return (order[a.status]-(a.preferred?0.5:0)) - (order[b.status]-(b.preferred?0.5:0)); });
+
+    allList.innerHTML = '';
+    if(results.every(function(r){ return r.status === 'blocked'; })){
+      allList.insertAdjacentHTML('beforeend', '<p class="block-note" style="margin-bottom:14px;">Nessuna delle tre opzioni di prima linea è libera da controindicazioni con questo profilo — valuta ACTH o un inibitore IL-1 (es. anakinra), vedi le note sotto.</p>');
+    }
+    results.forEach(function(r){ allList.insertAdjacentHTML('beforeend', cppdDrugRowHtml(r)); });
+  }
+  renderCppdAcuto();
+
   // ================= GESTIONE DELL'URATO =================
   const U = { tofi:false, rad:false, chronic:false, diuretic:false, ckd3:false, flareCount:null,
     suhigh:false, stones:false, asymp:'no',
@@ -1000,6 +1310,6 @@
 })();
 </script>
 
-<!-- v1.0.0 -->
+<!-- v1.0.1 -->
 </body>
 </html>
