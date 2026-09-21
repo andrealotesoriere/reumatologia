@@ -8,7 +8,7 @@
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
 
-<title>Fibromialgia | RheumaDoc</title>
+<title>Fibromialgia | RheumaTools</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -40,6 +40,8 @@
     --sage-dark:#33503E;
     --sage-soft:#E1EAE2;
     --sage-line:#BFD3C4;
+
+    --amber:#B99A4A; --amber-dark:#7A6530; --amber-soft:#F1EAD3; --amber-line:#DCC894;
 
     --radius-lg:22px;
     --radius-md:14px;
@@ -191,7 +193,7 @@
   .signature .lbl{font-size:13px; font-weight:600; color:var(--text-muted);}
   .signature .line{width:280px; border-bottom:1px solid var(--border); margin-top:40px;}
 
-  /* ---- therapy sub-nav + content ---- */
+  /* ---- therapy sub-nav ---- */
   .subtab-row{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:8px;}
   .subtab{
     font-family:inherit; font-size:13.5px; font-weight:600; color:var(--text-muted); background:var(--surface-alt);
@@ -199,18 +201,24 @@
   }
   .subtab:hover{border-color:var(--teal-line);}
   .subtab.on{background:var(--teal); border-color:var(--teal); color:#fff;}
-  .subtab-row.secondary .subtab{background:var(--surface); font-size:13px;}
-  .subtab-row.secondary .subtab.on{background:var(--violet); border-color:var(--violet); color:#fff;}
 
   .therapy-panel{display:none; margin-top:26px;}
   .therapy-panel.on{display:block;}
-  .therapy-panel h3{font-size:19px; margin-bottom:8px;}
-  .therapy-panel h4{font-size:15px; margin-top:22px; margin-bottom:6px;}
-  .therapy-panel p{font-size:14.5px; color:var(--text-muted); line-height:1.65;}
-  .therapy-panel ul{margin:8px 0 0 0; padding-left:20px;}
-  .therapy-panel li{font-size:14.5px; margin-bottom:6px; line-height:1.5;}
-  .therapy-panel li ul{margin-top:6px;}
-  .therapy-panel li li{font-size:13.5px; color:var(--text-muted);}
+
+  /* ---- rec-card / src-tag (shared pattern across RheumaTools) ---- */
+  .rec-card{border-left:3px solid var(--teal); background:var(--surface-alt); border-radius:0 var(--radius-sm) var(--radius-sm) 0; padding:12px 16px; margin-bottom:10px;}
+  .rec-card .src{font-size:11px; font-weight:700; color:var(--text-faint); text-transform:uppercase; letter-spacing:.03em;}
+  .rec-card .txt{font-size:14px; color:var(--text); margin-top:4px; line-height:1.55;}
+  .rec-card.warn{border-left-color:var(--clay); background:var(--clay-soft);}
+  .rec-card.warn .src{color:#8A4A38;}
+  .rec-card.note{border-left-color:var(--violet); background:var(--violet-soft);}
+  .rec-card.note .src{color:var(--violet-dark);}
+  .rec-card.sage{border-left-color:var(--sage); background:var(--sage-soft);}
+  .rec-card.sage .src{color:var(--sage-dark);}
+
+  .out-card{background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-lg); padding:22px 24px; box-shadow:var(--shadow-card); margin-bottom:16px;}
+  .out-card h3{font-size:16.5px; margin-bottom:4px;}
+  .out-card .sub{font-size:13.5px; color:var(--text-muted); margin-bottom:14px;}
 
   .tag{
     display:inline-block; font-size:11px; font-weight:700; padding:2px 9px; border-radius:var(--radius-pill);
@@ -219,6 +227,25 @@
   .tag.sage{background:var(--sage-soft); color:var(--sage-dark);}
   .tag.clay{background:var(--clay-soft); color:#8A4A38;}
   .tag.violet{background:var(--violet-soft); color:var(--violet-dark);}
+  .tag.amber{background:var(--amber-soft); color:var(--amber-dark);}
+
+  /* ---- symptom picker ---- */
+  .symptom-grid{display:grid; grid-template-columns:repeat(auto-fill, minmax(150px,1fr)); gap:10px; margin:14px 0 6px 0;}
+  .symptom-chip{
+    display:flex; align-items:center; justify-content:center; gap:8px; padding:14px 12px; border-radius:var(--radius-md);
+    background:var(--surface-alt); border:1px solid var(--border); cursor:pointer; font-size:14px; font-weight:600;
+    color:var(--text-muted); transition:all .15s ease; text-align:center;
+  }
+  .symptom-chip:hover{border-color:var(--teal-line);}
+  .symptom-chip.on{background:var(--teal); border-color:var(--teal); color:#fff;}
+
+  .match-row{display:flex; align-items:flex-start; justify-content:space-between; gap:14px; padding:13px 16px; border-radius:var(--radius-md); margin-bottom:9px; border:1px solid var(--border); background:var(--surface-alt);}
+  .match-row .mname{font-family:'Spectral',serif; font-weight:600; font-size:15px; color:var(--text);}
+  .match-row .mmeta{font-size:12.5px; color:var(--text-muted); margin-top:5px; line-height:1.5;}
+  .match-row .mmeta b{color:var(--text);}
+  .match-row.core{border-left:3px solid var(--sage);}
+  .match-row .mbadge{flex:none; font-size:10.5px; font-weight:700; text-transform:uppercase; letter-spacing:.02em; padding:4px 9px; border-radius:var(--radius-pill); background:var(--sage-soft); color:var(--sage-dark); white-space:nowrap;}
+  .match-row.adjunct .mbadge{background:var(--surface); color:var(--text-faint); border:1px solid var(--border);}
 
   .detail{background:var(--surface-alt); border-radius:var(--radius-md); padding:14px 18px; margin-top:14px;}
   .detail h4{margin-top:0; color:var(--teal-dark); font-size:14.5px;}
@@ -229,6 +256,7 @@
   .fonti ol{padding-left:20px; margin:16px 0 0 0;}
   .fonti li{font-size:14px; color:var(--text-muted); margin-bottom:10px; line-height:1.55;}
   .fonti li .t{color:var(--text); font-weight:600;}
+  .fonti li em{font-style:italic; color:var(--text-faint);}
   footer.site{max-width:760px; margin:40px auto 0 auto; padding:24px 20px 40px 20px; color:var(--text-faint); font-size:12.5px; border-top:1px solid var(--border);}
 
   @media print{
@@ -241,7 +269,7 @@
 <body>
 
 <header class="site">
-  <div class="site-inner"><a href="index.html">RheumaDoc</a><span class="sep">/</span>Fibromialgia</div>
+  <div class="site-inner"><a href="index.html">RheumaTools</a><span class="sep">/</span>Fibromialgia</div>
 </header>
 
 <div class="wrap">
@@ -274,6 +302,10 @@
     <button type="button" class="back-link" data-back>← Cambia sezione</button>
     <div class="block-head"><h2>Criteri diagnostici 2016</h2></div>
     <p class="block-note">Revisione ACR 2016 dei criteri 2010/2011 per la fibromialgia.</p>
+    <div class="rec-card" style="margin-bottom:18px;">
+      <div class="src">Wolfe 2016</div>
+      <div class="txt">2016 Revisions to the 2010/2011 fibromyalgia diagnostic criteria — Seminars in Arthritis and Rheumatism.</div>
+    </div>
 
     <div class="panel">
       <h3>Indice di diffusione del dolore (WPI)</h3>
@@ -420,6 +452,10 @@
     <button type="button" class="back-link" data-back>← Cambia sezione</button>
     <div class="block-head"><h2>FIQ-R</h2></div>
     <p class="block-note">Fibromyalgia Impact Questionnaire – Revised. Per ogni domanda, indica il numero che meglio descrive quanto avvertito nell'ultima settimana a causa della fibromialgia.</p>
+    <div class="rec-card" style="margin-bottom:18px;">
+      <div class="src">Bennett 2009</div>
+      <div class="txt">The Revised Fibromyalgia Impact Questionnaire (FIQR): validation and psychometric properties — Arthritis Research & Therapy.</div>
+    </div>
 
     <div class="panel">
       <h3>Dominio 1 · Funzione fisica</h3>
@@ -465,265 +501,207 @@
   <section class="block hidden" id="terapia">
     <button type="button" class="back-link" data-back>← Cambia sezione</button>
     <div class="block-head"><h2>Opzioni terapeutiche</h2></div>
-    <p class="block-note">Approcci non farmacologici e farmacologici, organizzati per grado di evidenza, sintomo predominante, o per linea guida di riferimento.</p>
+    <p class="block-note">Approcci non farmacologici e farmacologici, e una vista per sintomo predominante.</p>
 
     <div class="subtab-row" id="mainTabs">
       <button type="button" class="subtab on" data-panel="nonpharma">Non farmacologica</button>
       <button type="button" class="subtab" data-panel="pharma">Farmacologica</button>
       <button type="button" class="subtab" data-panel="symptom">Per sintomo</button>
     </div>
-    <div class="subtab-row secondary" id="guidelineTabs">
-      <button type="button" class="subtab" data-panel="sir">Linee guida SIR 2021</button>
-      <button type="button" class="subtab" data-panel="eular">Linee guida EULAR 2016</button>
-    </div>
 
     <!-- NON FARMACOLOGICA -->
     <div class="therapy-panel on" id="panel-nonpharma">
-      <h3>Approcci terapeutici non farmacologici</h3>
-      <p>Queste terapie puntano al miglioramento dei sintomi attraverso modifiche dello stile di vita e interventi specifici non basati su farmaci.</p>
-
-      <h4>Educazione del paziente</h4>
-      <p>Spiegare la natura della fibromialgia — un disturbo della processazione del dolore — rassicurare il paziente e definire aspettative realistiche è il primo passo.</p>
-
-      <h4>Esercizio fisico <span class="tag sage">forte, a favore</span></h4>
-      <p>È l'unica terapia con raccomandazione forte secondo le linee guida EULAR. Porta miglioramenti nella qualità della vita, nel dolore e nella funzione fisica — aerobico, di resistenza, stretching, o una combinazione. L'esercizio aerobico di intensità moderata ha le prove più solide; si consiglia di iniziare con bassa intensità e frequenza, aumentandole gradualmente.</p>
-
-      <h4>Terapie meditative in movimento</h4>
-      <p>Yoga, Pilates e tai chi hanno mostrato di migliorare la funzione e ridurre il dolore. Il tai chi, in particolare, porta un moderato miglioramento sintomatico.</p>
-
-      <h4>Terapie aggiuntive in caso di risposta insufficiente</h4>
-      <div class="detail">
-        <h4>Terapie psicologiche</h4>
-        <p>La terapia cognitivo-comportamentale porta a modesti miglioramenti del dolore e della disabilità, nel breve e medio termine.</p>
+      <div class="rec-card note">
+        <div class="src">EULAR 2017 · SIR 2021</div>
+        <div class="txt">La gestione iniziale dovrebbe concentrarsi sulle terapie non farmacologiche, per disponibilità, costi e sicurezza (EULAR 2017). SIR 2021 raccomanda un approccio multimodale con partecipazione attiva del paziente (racc. 12, livello 1, grado A).</div>
       </div>
-      <div class="detail">
-        <h4>Terapie fisiche complementari</h4>
-        <ul>
-          <li>Idroterapia/balneoterapia: migliora il dolore e la qualità della vita.</li>
-          <li>Agopuntura: può migliorare il dolore e la rigidità a breve termine.</li>
-          <li>Terapia manuale (rilascio miofasciale): può ridurre i sintomi e migliorare la qualità della vita.</li>
-        </ul>
+
+      <div class="out-card">
+        <h3>Raccomandazione forte</h3>
+        <div class="rec-card sage">
+          <div class="src">EULAR 2017 — Ia, grado A, forte a favore (100%)</div>
+          <div class="txt">Esercizio aerobico e di rinforzo muscolare: l'unica terapia, farmacologica o meno, con raccomandazione forte a favore nelle linee guida EULAR. SIR 2021 la colloca tra le terapie fisiche di livello 1, grado A (racc. 13), insieme ad attività in acqua e terapia termale.</div>
+        </div>
+        <div class="detail">
+          <h4>Come prescriverla</h4>
+          <p style="font-size:13.5px; color:var(--text-muted); line-height:1.6; margin:0 0 8px 0;"><span class="tag sage" style="margin:0 6px 0 0;">Frontiers 2026</span>l'esercizio aerobico è il tipo più efficace sul dolore; servono almeno 8 settimane di pratica continuativa per un effetto significativo (sotto le 8 settimane l'effetto non è significativo). Sessioni di 60–90 minuti hanno mostrato un effetto superiore a sessioni più brevi. Una frequenza inferiore a 3 volte/settimana si è associata a una riduzione del dolore migliore rispetto a ≥3 volte/settimana in questa analisi — un dato che va contro l'intuizione "più è meglio" e supporta l'inizio a bassa intensità/frequenza.</p>
+          <p style="font-size:13.5px; color:var(--text-muted); line-height:1.6; margin:0;"><span class="tag sage" style="margin:0 6px 0 0;">EULAR 2017</span>si consiglia di iniziare con bassa intensità e frequenza, aumentandole gradualmente, per evitare la riacutizzazione dei sintomi.</p>
+        </div>
+      </div>
+
+      <div class="out-card">
+        <h3>Raccomandazioni deboli a favore</h3>
+        <div class="rec-card">
+          <div class="src">EULAR 2017 — Ia, grado A, debole a favore (100%)</div>
+          <div class="txt">Terapia cognitivo-comportamentale (CBT): riduzione modesta ma consistente di dolore e disabilità, mantenuta nel lungo termine. SIR 2021 la colloca a livello 1, grado A insieme alla terapia occupazionale (racc. 14).</div>
+        </div>
+        <div class="rec-card">
+          <div class="src">EULAR 2017 — debole a favore (93%)</div>
+          <div class="txt">Terapie multicomponenti (programmi che combinano più modalità): nel confronto con le terapie singole, i programmi multicomponente migliorano un maggior numero di esiti nel breve termine.</div>
+        </div>
+        <div class="rec-card">
+          <div class="src">EULAR 2017 · SIR 2021</div>
+          <div class="txt">Agopuntura: debole a favore (93%, EULAR); livello 1, grado A (SIR, racc. 15). Idroterapia: debole a favore (93%, EULAR); livello 1, grado C (SIR).</div>
+        </div>
+        <div class="rec-card">
+          <div class="src">EULAR 2017 · SIR 2021</div>
+          <div class="txt">Terapie di movimento meditativo (qigong, yoga, tai chi) e mindfulness/riduzione dello stress basata sulla mindfulness (MBSR): debole a favore (71–73%, EULAR). SIR le colloca a livello 1, grado A insieme al training di rilassamento (racc. 15).</div>
+        </div>
+        <div class="rec-card">
+          <div class="src">EULAR 2017 — debole a favore (93%)</div>
+          <div class="txt">Biofeedback: efficace nel migliorare il dolore rispetto a un gruppo di controllo con biofeedback simulato, attenzione, farmaci e trattamento abituale.</div>
+        </div>
+      </div>
+
+      <div class="out-card">
+        <h3>Evidenza limitata o divergente tra le linee guida</h3>
+        <div class="rec-card note">
+          <div class="src">SIR 2021 vs EULAR 2017 — divergenza</div>
+          <div class="txt">Ipnosi, immaginazione guidata o scrittura terapeutica: SIR le colloca a livello 3, grado C, "da considerare" (racc. 14). EULAR è più cauto: valuta l'ipnoterapia debole contro (86%, risultati contrastanti tra gli studi), e immaginazione guidata insieme a omeopatia come forte contro (93%). Le due linee guida non sono allineate su questo punto — lo segnaliamo esplicitamente invece di sceglierne una.</div>
+        </div>
+        <div class="rec-card note">
+          <div class="src">EULAR 2017 — debole contro (86%)</div>
+          <div class="txt">Massaggio: un sottogruppo di sedute di durata ≥5 settimane ha mostrato un effetto positivo, ma basato solo su studi di qualità inferiore — nel complesso la valutazione resta debole contro.</div>
+        </div>
+        <div class="rec-card note">
+          <div class="src">EULAR 2017 — debole contro (86%)</div>
+          <div class="txt">Capsaicina topica: dati limitati, effetti avversi transitori (bruciore, pizzicore) frequenti.</div>
+        </div>
+      </div>
+
+      <div class="out-card">
+        <h3>Sconsigliate</h3>
+        <div class="rec-card warn">
+          <div class="src">EULAR 2017 — forte contro (93%)</div>
+          <div class="txt">Chiropratica: la raccomandazione iniziale era debole contro, poi declassata a forte contro per le preoccupazioni di sicurezza (circa il 50% dei pazienti riporta effetti avversi transitori lieve-moderati).</div>
+        </div>
+        <div class="rec-card warn">
+          <div class="src">EULAR 2017 — forte contro (93%)</div>
+          <div class="txt">Omeopatia: valutata insieme all'immaginazione guidata, forte contro nonostante alcuni singoli trial con qualche beneficio riportato — nessuno dei trial era privo di difetti metodologici seri.</div>
+        </div>
+        <div class="rec-card warn">
+          <div class="src">EULAR 2017 — debole contro (93%)</div>
+          <div class="txt">S-adenosilmetionina (SAMe): dati insufficienti su tossicità e sicurezza.</div>
+        </div>
       </div>
     </div>
 
     <!-- FARMACOLOGICA -->
     <div class="therapy-panel" id="panel-pharma">
-      <h3>Schema delle terapie farmacologiche per grado di evidenza</h3>
+      <div class="rec-card note">
+        <div class="src">SIR 2021 — racc. 7</div>
+        <div class="txt">La scelta del farmaco va fatta in base ai sintomi predominanti, con attenzione alle interazioni. Iniziare a dosi basse, con aumento progressivo e prudente, per ridurre la scarsa tollerabilità e gli effetti collaterali. Nei casi più complessi, un approccio multimodale (farmaco + supporto psicoterapeutico) è da preferire (livello 1, grado A).</div>
+      </div>
 
-      <h4>Evidenze solide o moderate <span class="tag sage">debole, a favore</span></h4>
-      <p>Farmaci supportati da revisioni sistematiche di alta qualità, con beneficio riscontrato solo in una parte dei pazienti.</p>
-      <ul>
-        <li><strong>SNRI</strong>
-          <ul>
-            <li>Duloxetina: NNT di 6.4 per un sollievo dal dolore del 30%.</li>
-            <li>Milnacipran: NNT tra 6 e 10 per un sollievo del 30%.</li>
-          </ul>
-        </li>
-        <li><strong>Gabapentinoidi</strong>
-          <ul><li>Pregabalin: riduce dolore e affaticamento, migliora il sonno. NNT di 8 per una risposta al trattamento.</li></ul>
-        </li>
-        <li><strong>Triciclici</strong>
-          <ul><li>Amitriptilina: a basso dosaggio, per ridurre il dolore e migliorare il sonno.</li></ul>
-        </li>
-        <li><strong>Analgesici atipici</strong>
-          <ul><li>Tramadolo: solo per dolore da moderato a severo, sotto stretto monitoraggio.</li></ul>
-        </li>
-      </ul>
+      <div class="out-card">
+        <h3>Farmaci con maggiore supporto di evidenza</h3>
+        <p class="sub">Dimensione dell'effetto (SMD) per esito, dalla meta-analisi di rete più recente. Trascurabile &lt;0.20 · piccolo 0.20–0.49 · medio 0.50–0.79 · ampio ≥0.80.</p>
 
-      <h4>Evidenze limitate o contrastanti <span class="tag violet">solo per ricerca</span></h4>
-      <p>Le prove sono insufficienti o i risultati incerti per un uso clinico di routine.</p>
-      <ul>
-        <li>Gabapentin: evidenze insufficienti.</li>
-        <li>Ciclobenzaprina: può essere utile per i disturbi del sonno.</li>
-        <li>Mirtazapina: nessun effetto significativo sul dolore, può aiutare con il sonno.</li>
-        <li>Cannabinoidi (es. nabilone): prove attualmente limitate.</li>
-        <li>Naltrexone a basso dosaggio: prove ancora preliminari.</li>
-      </ul>
+        <div class="rec-card">
+          <div class="src">NEJM 2026 · SIR 2021 (livello 1, grado A) · EULAR 2017 (debole a favore, a basso dosaggio)</div>
+          <div class="txt"><strong>Amitriptilina</strong> — non approvata dalla FDA per la fibromialgia, ma con gli effetti più marcati misurati: sonno <span class="tag sage">ampio, −0.97</span>, affaticamento <span class="tag amber">medio, −0.64</span>, qualità di vita <span class="tag sage">ampio, −0.80</span>.</div>
+        </div>
+        <div class="rec-card">
+          <div class="src">NEJM 2026 · SIR 2021 (livello 1, grado A) · EULAR 2017 (debole a favore)</div>
+          <div class="txt"><strong>Duloxetina</strong> — approvata dalla FDA. Dolore <span class="tag violet">piccolo, −0.33</span>, sonno <span class="tag violet">piccolo, −0.21</span>, umore <span class="tag violet">piccolo, −0.25</span>, affaticamento <span class="tag violet">piccolo, −0.12</span>, qualità di vita <span class="tag violet">piccolo, −0.39</span>.</div>
+        </div>
+        <div class="rec-card">
+          <div class="src">NEJM 2026 · EULAR 2017 (debole a favore)</div>
+          <div class="txt"><strong>Milnacipran</strong> — approvato dalla FDA. Effetti più contenuti di duloxetina sugli stessi esiti: dolore <span class="tag" style="background:var(--surface); color:var(--text-faint); border:1px solid var(--border);">trascurabile, −0.17</span>, umore <span class="tag" style="background:var(--surface); color:var(--text-faint); border:1px solid var(--border);">trascurabile, −0.10</span>, affaticamento <span class="tag" style="background:var(--surface); color:var(--text-faint); border:1px solid var(--border);">trascurabile, −0.10</span>.</div>
+        </div>
+        <div class="rec-card">
+          <div class="src">NEJM 2026 · SIR 2021 (livello 1, grado A) · EULAR 2017 (debole a favore)</div>
+          <div class="txt"><strong>Pregabalin</strong> — approvato dalla FDA. Sonno <span class="tag amber">medio, −0.60</span>, dolore <span class="tag violet">piccolo, −0.30</span>, affaticamento <span class="tag violet">piccolo, −0.27</span>, umore <span class="tag violet">piccolo, −0.22</span>, qualità di vita <span class="tag" style="background:var(--surface); color:var(--text-faint); border:1px solid var(--border);">trascurabile, −0.18</span>. Utile per le proprietà di modulazione del dolore (SIR, racc. 9): iniziare alla dose minima, aumentando gradualmente.</div>
+        </div>
+        <div class="rec-card">
+          <div class="src">NEJM 2026 · SIR 2021 (livello 1, grado A) · EULAR 2017 (debole a favore, 75%)</div>
+          <div class="txt"><strong>Ciclobenzaprina</strong> — approvata dalla FDA. Dolore <span class="tag violet">piccolo, −0.25</span>, sonno <span class="tag violet">piccolo, −0.21</span>. Considerata soprattutto in presenza di disturbi del sonno significativi (SIR, racc. 11).</div>
+        </div>
+        <div class="rec-card note">
+          <div class="src">NEJM 2026</div>
+          <div class="txt">Un gabapentinoide assunto alla sera abbinato a un SNRI al mattino si è mostrato più efficace della monoterapia: nello studio citato, il 46% dei pazienti in combinazione ha ottenuto un miglioramento moderato o superiore, contro il 42% con la sola duloxetina, il 39% con il solo pregabalin, e il 18% con placebo.</div>
+        </div>
+      </div>
 
-      <h4>Miorilassanti <span class="tag violet">uso clinico, evidenze limitate</span></h4>
-      <p>Usati nella pratica clinica per l'azione miorilassante, con evidenze limitate o assenti nella fibromialgia.</p>
-      <ul>
-        <li>Tizanidina: dose usuale 2–4 mg, due o tre volte al giorno.</li>
-        <li>Paracetamolo 500 mg + tiocolchicoside 2 mg: 1 compressa fino a 3 volte al giorno, per un massimo di 7 giorni al mese.</li>
-      </ul>
+      <div class="out-card">
+        <h3>Analgesici</h3>
+        <div class="rec-card">
+          <div class="src">EULAR 2017 (Ib, grado A, debole a favore, 100%) · SIR 2021 (livello 1, grado A, racc. 8)</div>
+          <div class="txt">Tramadolo: riservato al dolore da moderato a severo non responsivo ad altri trattamenti, sotto stretto monitoraggio per effetti collaterali dose-dipendenti e rischio di comportamenti di dipendenza (SIR). Da sospendere se non c'è miglioramento dei sintomi.</div>
+        </div>
+        <div class="rec-card warn">
+          <div class="src">NEJM 2026</div>
+          <div class="txt">Paracetamolo, FANS e oppioidi classici generalmente non sono utili nella fibromialgia. Gli oppioidi andrebbero evitati: la mortalità per tutte le cause aumenta di circa il doppio con il loro uso, per il maggior rischio di infarto, cadute, suicidio e incidenti stradali — probabilmente anche per un peggioramento del dolore stesso legato al loro meccanismo d'azione. Se un oppioide risulta comunque necessario, un agonista misto (tramadolo, buprenorfina, tapentadolo) è preferibile a un agonista puro. SIR ammette il paracetamolo secondo la scala analgesica OMS in alcuni pazienti, con attenzione alla dose tossica (livello 5, grado D).</div>
+        </div>
+      </div>
 
-      <h4>Non raccomandati <span class="tag clay">contro</span></h4>
-      <p>Uso sconsigliato per mancanza di efficacia o rischi sfavorevoli.</p>
-      <ul>
-        <li>Oppioidi forti: fortemente sconsigliati.</li>
-        <li>FANS: sconsigliati, non superiori al placebo.</li>
-        <li>SSRI: sconsigliati per i sintomi chiave della fibromialgia.</li>
-        <li>Corticosteroidi: fortemente sconsigliati.</li>
-      </ul>
+      <div class="out-card">
+        <h3>Evidenza emergente</h3>
+        <div class="rec-card note">
+          <div class="src">NEJM 2026</div>
+          <div class="txt">Naltrexone a basso dosaggio: alcune evidenze indicano che possa essere utile, ma i dati sono ancora limitati.</div>
+        </div>
+        <div class="rec-card note">
+          <div class="src">NEJM 2026 · SIR 2021 (livello 3, grado C)</div>
+          <div class="txt">Cannabinoidi: possono essere utili, ma non è ancora chiaro se il cannabidiolo da solo sia sufficiente o se serva una piccola quota di tetraidrocannabinolo. SIR li considera principalmente per i disturbi del sonno, con supporto limitato in letteratura.</div>
+        </div>
+      </div>
+
+      <div class="out-card">
+        <h3>Non raccomandati</h3>
+        <div class="rec-card warn">
+          <div class="src">EULAR 2017 — forte contro (94%)</div>
+          <div class="txt">Ormone della crescita: non approvato per la fibromialgia in Europa; preoccupazioni di sicurezza (apnea del sonno, sindrome del tunnel carpale).</div>
+        </div>
+        <div class="rec-card warn">
+          <div class="src">EULAR 2017 — forte contro (94%)</div>
+          <div class="txt">Sodio oxibato: la Food and Drug Administration ne ha rifiutato l'approvazione per la fibromialgia per preoccupazioni di sicurezza; approvato solo per la narcolessia. Potenziale d'abuso.</div>
+        </div>
+        <div class="rec-card warn">
+          <div class="src">EULAR 2017 — forte contro · NEJM 2026</div>
+          <div class="txt">Oppioidi forti e corticosteroidi: entrambi sconsigliati con decisione forte.</div>
+        </div>
+        <div class="rec-card warn">
+          <div class="src">EULAR 2017 — debole contro (100%)</div>
+          <div class="txt">FANS: nessuna differenza dimostrata rispetto al placebo sui sintomi chiave della fibromialgia.</div>
+        </div>
+        <div class="rec-card warn">
+          <div class="src">EULAR 2017 — debole contro (81%)</div>
+          <div class="txt">Inibitori delle monoaminossidasi (IMAO): interazioni potenzialmente fatali documentate.</div>
+        </div>
+        <div class="rec-card note">
+          <div class="src">EULAR 2017 vs SIR 2021 — divergenza</div>
+          <div class="txt">SSRI: EULAR li valuta debole contro (94%) per i sintomi chiave della fibromialgia. SIR 2021 include invece fluoxetina e paroxetina tra i farmaci di livello 1, grado A (racc. 10). Anche qui le due linee guida divergono — utili probabilmente più sui sintomi psichiatrici in comorbidità che sul dolore stesso.</div>
+        </div>
+      </div>
     </div>
 
     <!-- PER SINTOMO -->
     <div class="therapy-panel" id="panel-symptom">
-      <h3>Terapie farmacologiche per sintomo predominante</h3>
-      <p>Schema semplificato che lega il farmaco al sintomo principale per cui può essere utilizzato, in base alle evidenze più solide.</p>
+      <p class="block-note" style="margin-bottom:14px;">Seleziona uno o più sintomi predominanti: gli interventi sotto si aggiornano in base a quanto trovato in letteratura per quella combinazione.</p>
 
-      <div class="detail">
-        <h4>Per il dolore</h4>
-        <ul>
-          <li>Duloxetina e milnacipran (SNRI) — approvati dalla FDA per la fibromialgia.</li>
-          <li>Pregabalin (gabapentinoide) — approvato dalla FDA per la fibromialgia.</li>
-          <li>Amitriptilina (triciclico) — efficace soprattutto a breve termine.</li>
-          <li>Tramadolo (analgesico) — usato con cautela per dolore severo.</li>
-          <li>Ciclobenzaprina (miorilassante).</li>
-          <li>Tizanidina e paracetamolo + tiocolchicoside — altri miorilassanti usati in pratica clinica.</li>
-        </ul>
-      </div>
-      <div class="detail">
-        <h4>Per ansia e depressione</h4>
-        <ul>
-          <li>Duloxetina e milnacipran (SNRI).</li>
-          <li>Pregabalin (gabapentinoide).</li>
-          <li>Amitriptilina (triciclico).</li>
-          <li>SSRI (es. fluoxetina) — usati solo per i sintomi in comorbilità, non per il dolore.</li>
-        </ul>
-      </div>
-      <div class="detail">
-        <h4>Per i disturbi del sonno</h4>
-        <ul>
-          <li>Pregabalin (gabapentinoide).</li>
-          <li>Amitriptilina (triciclico).</li>
-          <li>Ciclobenzaprina (miorilassante).</li>
-          <li>Cannabinoidi — evidenze limitate.</li>
-          <li>Tizanidina — usata in pratica clinica.</li>
-        </ul>
-      </div>
-      <div class="detail">
-        <h4>Per l'affaticamento</h4>
-        <ul>
-          <li>Milnacipran (SNRI).</li>
-          <li>Pregabalin (gabapentinoide).</li>
-        </ul>
-      </div>
-      <div class="detail">
-        <h4>Per i disturbi cognitivi</h4>
-        <ul><li>Milnacipran (SNRI).</li></ul>
-      </div>
-    </div>
-
-    <!-- SIR 2021 -->
-    <div class="therapy-panel" id="panel-sir">
-      <h3>Raccomandazioni terapeutiche SIR 2021</h3>
-      <p>La Società Italiana di Reumatologia propone un approccio multimodale e personalizzato, che integra diverse strategie di trattamento.</p>
-
-      <h4>Strategie generali</h4>
-      <ul>
-        <li>Approccio multimodale: combinare attività fisica e supporto psicoterapeutico.</li>
-        <li>Partecipazione attiva del paziente: le terapie non farmacologiche con coinvolgimento attivo sono centrali.</li>
-        <li>Personalizzazione: scegliere i farmaci in base ai sintomi predominanti, iniziando a dosi basse.</li>
-      </ul>
-
-      <h4>Terapie non farmacologiche</h4>
-      <div class="detail">
-        <h4>Terapie fisiche <span class="tag sage">livello 1, grado A</span></h4>
-        <ul>
-          <li>Esercizio di resistenza aerobica.</li>
-          <li>Esercizio di potenziamento muscolare.</li>
-          <li>Attività in acqua / acquagym.</li>
-          <li>Terapia termale (balneoterapia).</li>
-        </ul>
-      </div>
-      <div class="detail">
-        <h4>Terapie psicologiche <span class="tag sage">livello 1, grado A</span></h4>
-        <ul>
-          <li>Terapia cognitivo-comportamentale e terapia occupazionale.</li>
-          <li>Ipnosi, immaginazione guidata o scrittura terapeutica <span class="tag violet">livello 3, grado C</span></li>
-        </ul>
-      </div>
-      <div class="detail">
-        <h4>Terapie non convenzionali</h4>
-        <ul>
-          <li>Terapie di movimento meditativo (qigong, yoga, tai chi) <span class="tag sage">livello 1, grado A</span></li>
-          <li>Programma di riduzione dello stress basato sulla mindfulness (MBSR) e training di rilassamento <span class="tag sage">livello 1, grado A</span></li>
-          <li>Agopuntura <span class="tag sage">livello 1, grado A</span></li>
-          <li>Idroterapia <span class="tag violet">livello 1, grado C</span></li>
-        </ul>
+      <div class="symptom-grid" id="symptomPicker">
+        <button type="button" class="symptom-chip" data-sym="pain">Dolore</button>
+        <button type="button" class="symptom-chip" data-sym="fatigue">Affaticamento</button>
+        <button type="button" class="symptom-chip" data-sym="sleep">Sonno</button>
+        <button type="button" class="symptom-chip" data-sym="mood">Umore (ansia/depressione)</button>
       </div>
 
-      <h4>Terapie farmacologiche</h4>
-      <div class="detail">
-        <h4>Antidepressivi <span class="tag sage">livello 1, grado A</span></h4>
-        <ul>
-          <li>Inibitori della ricaptazione della serotonina (fluoxetina, paroxetina).</li>
-          <li>Inibitori della ricaptazione della serotonina e noradrenalina (duloxetina).</li>
-          <li>Triciclici (amitriptilina).</li>
-        </ul>
-      </div>
-      <div class="detail">
-        <h4>Anticonvulsivanti <span class="tag sage">livello 1, grado A</span></h4>
-        <ul><li>Pregabalin: utile per le proprietà di modulazione del dolore.</li></ul>
-      </div>
-      <div class="detail">
-        <h4>Analgesici</h4>
-        <ul>
-          <li>Tramadolo <span class="tag sage">livello 1, grado A</span> — riservato a dolore da moderato a severo.</li>
-          <li>Paracetamolo <span class="tag violet">livello 5, grado D</span> — utile in alcuni pazienti.</li>
-        </ul>
-      </div>
-      <div class="detail">
-        <h4>Miorilassanti e altri farmaci</h4>
-        <ul>
-          <li>Ciclobenzaprina <span class="tag sage">livello 1, grado A</span> — considerata per i disturbi del sonno.</li>
-          <li>Cannabinoidi <span class="tag violet">livello 3, grado C</span> — considerati per i disturbi del sonno, con scarso supporto in letteratura.</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- EULAR 2016 -->
-    <div class="therapy-panel" id="panel-eular">
-      <h3>Raccomandazioni terapeutiche EULAR 2016</h3>
-      <p>Le raccomandazioni EULAR si basano su un'ampia revisione della letteratura e propongono un approccio graduale e personalizzato.</p>
-
-      <h4>Principi generali</h4>
-      <ul>
-        <li>Diagnosi pronta: necessaria per una gestione ottimale.</li>
-        <li>Approccio graduale: personalizzato in base a sintomi, preferenze del paziente e comorbilità.</li>
-        <li>Decisione condivisa: le scelte terapeutiche si prendono insieme al paziente.</li>
-        <li>Priorità non farmacologiche: la gestione iniziale si concentra su terapie non farmacologiche per disponibilità, costi e sicurezza.</li>
-      </ul>
-
-      <h4>Terapie non farmacologiche</h4>
-      <div class="detail">
-        <h4>A favore <span class="tag sage">forte / debole</span></h4>
-        <ul>
-          <li>Esercizio fisico — unica terapia con raccomandazione forte a favore, efficace su dolore e funzione fisica.</li>
-          <li>Agopuntura e idroterapia <span class="tag sage">debole</span></li>
-          <li>Terapie meditative in movimento: qigong, yoga, tai chi e mindfulness (MBSR) <span class="tag sage">debole</span></li>
-          <li>Terapia cognitivo-comportamentale <span class="tag sage">debole</span></li>
-          <li>Terapie multicomponenti: programmi di riabilitazione multimodale <span class="tag sage">debole</span></li>
-        </ul>
-      </div>
-      <div class="detail">
-        <h4>Contro <span class="tag clay">forte / debole</span></h4>
-        <ul>
-          <li>Chiropratica <span class="tag clay">forte contro</span> — per preoccupazioni di sicurezza.</li>
-          <li>Biofeedback, capsaicina, ipnoterapia, massaggio e SAMe <span class="tag clay">debole contro</span></li>
-          <li>Immaginazione guidata e omeopatia <span class="tag clay">forte contro</span></li>
-        </ul>
+      <div class="out-card" style="margin-top:20px;">
+        <h3>Interventi non farmacologici più indicati</h3>
+        <p class="sub">Consenso Delphi internazionale, 17 esperti — percentuale di accordo per sintomo. "Core" = raccomandato come trattamento di prima battuta per quel sintomo specifico da almeno metà del panel; gli altri sono trattamenti accettati ma di supporto.</p>
+        <div id="nonpharmaMatches"></div>
       </div>
 
-      <h4>Terapie farmacologiche</h4>
-      <div class="detail">
-        <h4>A favore <span class="tag sage">debole</span></h4>
-        <ul>
-          <li>Per dolore severo: duloxetina, milnacipran, pregabalin, tramadolo.</li>
-          <li>Per disturbi del sonno: amitriptilina, ciclobenzaprina, pregabalin.</li>
-        </ul>
+      <div class="out-card">
+        <h3>Farmaci più indicati</h3>
+        <p class="sub">Dimensione dell'effetto (SMD) sul sintomo selezionato, dalla meta-analisi di rete più recente.</p>
+        <div id="pharmaMatches"></div>
       </div>
-      <div class="detail">
-        <h4>Contro <span class="tag clay">forte / debole</span></h4>
-        <ul>
-          <li>Forte contro: oppioidi forti, corticosteroidi, ormone della crescita, sodio oxibato.</li>
-          <li>Debole contro: FANS, inibitori delle MAO, SSRI.</li>
-        </ul>
-      </div>
-      <div class="detail">
-        <h4>Solo per ricerca <span class="tag violet">evidenza insufficiente</span></h4>
-        <ul><li>Gabapentin: prove insufficienti per l'uso clinico.</li></ul>
+
+      <div class="rec-card note">
+        <div class="src">Kundakci 2022 (Sem Arthritis Rheum)</div>
+        <div class="txt">Esercizio aerobico, educazione del paziente, igiene del sonno e terapia cognitivo-comportamentale sono risultati raccomandazioni "core" per tutti e quattro i sintomi principali — restano il punto di partenza più solido indipendentemente dal sintomo predominante.</div>
       </div>
     </div>
   </section>
@@ -731,10 +709,14 @@
   <div class="fonti">
     <h2>Fonti</h2>
     <ol>
-      <li><span class="t">Wolfe F, Clauw DJ, Fitzcharles MA, et al.</span> 2016 Revisions to the 2010/2011 fibromyalgia diagnostic criteria.</li>
-      <li><span class="t">Bennett RM, Friend R, Jones KD, et al.</span> The Revised Fibromyalgia Impact Questionnaire (FIQR): validation and psychometric properties.</li>
-      <li><span class="t">Macfarlane GJ, Kronisch C, Dean LE, et al.</span> EULAR revised recommendations for the management of fibromyalgia.</li>
-      <li><span class="t">Società Italiana di Reumatologia (SIR).</span> Raccomandazioni per la gestione della fibromialgia, 2021.</li>
+      <li><span class="t">Wolfe F, Clauw DJ, Fitzcharles MA, et al.</span> 2016 Revisions to the 2010/2011 fibromyalgia diagnostic criteria. Semin Arthritis Rheum 2016.</li>
+      <li><span class="t">Bennett RM, Friend R, Jones KD, et al.</span> The Revised Fibromyalgia Impact Questionnaire (FIQR): validation and psychometric properties. Arthritis Res Ther 2009.</li>
+      <li><span class="t">Macfarlane GJ, Kronisch C, Dean LE, et al.</span> EULAR revised recommendations for the management of fibromyalgia. Ann Rheum Dis 2017 (online 2016).</li>
+      <li><span class="t">Ariani A, Bazzichi L, Sarzi-Puttini P, et al.</span> The Italian Society for Rheumatology clinical practice guidelines for the diagnosis and management of fibromyalgia. Reumatismo 2021.</li>
+      <li><span class="t">Moore RA, Fisher E, Häuser W, et al.</span> Pharmacological therapies for fibromyalgia (fibromyalgia syndrome) in adults — an overview of Cochrane Reviews. Cochrane Rheumatology, 2021.</li>
+      <li><span class="t">Kundakci B, Hall M, Atzeni F, et al.</span> International, multidisciplinary Delphi consensus recommendations on non-pharmacological interventions for fibromyalgia. Semin Arthritis Rheum 2022.</li>
+      <li><span class="t">Wang et al.</span> Effect of exercise in fibromyalgia. Frontiers in Medicine 2026.</li>
+      <li><span class="t">Fibromyalgia.</span> N Engl J Med 2026.</li>
     </ol>
   </div>
 
@@ -884,16 +866,120 @@
   }
   updateFiqr();
 
-  // ---------------- Terapia sub-tabs ----------------
-  const allTabs = document.querySelectorAll('#mainTabs .subtab, #guidelineTabs .subtab');
-  allTabs.forEach(function(tab){
+  // ---------------- Terapia main tabs ----------------
+  document.querySelectorAll('#mainTabs .subtab').forEach(function(tab){
     tab.addEventListener('click', function(){
-      allTabs.forEach(function(t){ t.classList.remove('on'); });
+      document.querySelectorAll('#mainTabs .subtab').forEach(function(t){ t.classList.remove('on'); });
       tab.classList.add('on');
       document.querySelectorAll('.therapy-panel').forEach(function(p){ p.classList.remove('on'); });
       document.getElementById('panel-' + tab.dataset.panel).classList.add('on');
     });
   });
+
+  // ---------------- Per sintomo: dati (Kundakci 2022, Delphi) ----------------
+  const SYM_LABELS = {pain:'dolore', fatigue:'affaticamento', sleep:'sonno', mood:'umore'};
+
+  const NONPHARMA = [
+    {name:'Esercizio aerobico', sym:{pain:94,fatigue:94,sleep:88,mood:94}, core:['pain','fatigue','sleep','mood']},
+    {name:'Educazione del paziente', sym:{pain:94,fatigue:94,sleep:88,mood:76}, core:['pain','fatigue','sleep','mood']},
+    {name:'Igiene del sonno', sym:{pain:94,fatigue:100,sleep:100,mood:76}, core:['pain','fatigue','sleep','mood']},
+    {name:'Terapia cognitivo-comportamentale', sym:{pain:94,fatigue:88,sleep:88,mood:88}, core:['pain','fatigue','sleep','mood']},
+    {name:'Gestione dello stress', sym:{pain:94,fatigue:88,sleep:94,mood:88}, core:['fatigue','sleep','mood']},
+    {name:'Esercizio mente-corpo (qigong, yoga, tai chi)', sym:{pain:94,fatigue:88,sleep:76,mood:82}, core:['pain','fatigue','sleep']},
+    {name:'Esercizio di rinforzo muscolare', sym:{pain:88,fatigue:71}, core:[]},
+    {name:'Periodi di relax/svago', sym:{pain:88,sleep:76,mood:76}, core:[]},
+    {name:'Definizione di obiettivi', sym:{pain:82,fatigue:76,mood:71}, core:[]},
+    {name:'Bagno caldo e calore locale', sym:{pain:82,sleep:71}, core:[]},
+    {name:'Mindfulness', sym:{pain:82,fatigue:76,sleep:76,mood:71}, core:['mood']},
+    {name:'Pacing (gestione del ritmo delle attività)', sym:{pain:82,fatigue:76,sleep:82}, core:['fatigue','sleep']},
+    {name:'Esercizio di flessibilità', sym:{pain:71}, core:['pain']},
+    {name:'Musica', sym:{sleep:76}, core:[]}
+  ];
+
+  const PHARMA = [
+    {name:'Amitriptilina', sym:{sleep:{smd:-0.97,mag:'ampio'}, fatigue:{smd:-0.64,mag:'medio'}}, note:'non approvata FDA per FM, uso a basso dosaggio'},
+    {name:'Duloxetina', sym:{pain:{smd:-0.33,mag:'piccolo'}, sleep:{smd:-0.21,mag:'piccolo'}, mood:{smd:-0.25,mag:'piccolo'}, fatigue:{smd:-0.12,mag:'piccolo'}}},
+    {name:'Milnacipran', sym:{pain:{smd:-0.17,mag:'trascurabile'}, mood:{smd:-0.10,mag:'trascurabile'}, fatigue:{smd:-0.10,mag:'trascurabile'}}},
+    {name:'Pregabalin', sym:{sleep:{smd:-0.60,mag:'medio'}, pain:{smd:-0.30,mag:'piccolo'}, fatigue:{smd:-0.27,mag:'piccolo'}, mood:{smd:-0.22,mag:'piccolo'}}},
+    {name:'Ciclobenzaprina', sym:{pain:{smd:-0.25,mag:'piccolo'}, sleep:{smd:-0.21,mag:'piccolo'}}}
+  ];
+  const MAG_ORDER = {ampio:4, medio:3, piccolo:2, trascurabile:1};
+  const MAG_TAG = {ampio:'sage', medio:'amber', piccolo:'violet', trascurabile:''};
+
+  const selectedSymptoms = new Set();
+  document.querySelectorAll('.symptom-chip').forEach(function(chip){
+    chip.addEventListener('click', function(){
+      const s = chip.dataset.sym;
+      if(selectedSymptoms.has(s)){ selectedSymptoms.delete(s); chip.classList.remove('on'); }
+      else { selectedSymptoms.add(s); chip.classList.add('on'); }
+      renderSymptomMatches();
+    });
+  });
+
+  function renderSymptomMatches(){
+    const npBox = document.getElementById('nonpharmaMatches');
+    const phBox = document.getElementById('pharmaMatches');
+    const syms = Array.from(selectedSymptoms);
+
+    if(syms.length === 0){
+      npBox.innerHTML = '<p class="sub" style="margin:0;">Seleziona almeno un sintomo per vedere gli interventi più indicati.</p>';
+      phBox.innerHTML = '<p class="sub" style="margin:0;">Seleziona almeno un sintomo per vedere i farmaci più indicati.</p>';
+      return;
+    }
+
+    // non-pharma
+    const npResults = NONPHARMA
+      .map(function(item){
+        const matched = syms.filter(function(s){ return item.sym[s] !== undefined; });
+        const coreMatched = syms.filter(function(s){ return item.core.indexOf(s) !== -1; });
+        const avgPct = matched.length ? matched.reduce(function(a,s){ return a + item.sym[s]; }, 0) / matched.length : 0;
+        return {item:item, matched:matched, coreCount:coreMatched.length, avgPct:avgPct};
+      })
+      .filter(function(r){ return r.matched.length > 0; })
+      .sort(function(a,b){ return (b.coreCount - a.coreCount) || (b.avgPct - a.avgPct); });
+
+    npBox.innerHTML = '';
+    if(npResults.length === 0){
+      npBox.innerHTML = '<p class="sub" style="margin:0;">Nessun intervento con consenso specifico per questa combinazione di sintomi.</p>';
+    } else {
+      npResults.forEach(function(r){
+        const isCore = r.coreCount > 0;
+        const pctTxt = r.matched.map(function(s){ return SYM_LABELS[s] + ' ' + r.item.sym[s] + '%'; }).join(' · ');
+        let html = '<div class="match-row ' + (isCore ? 'core' : 'adjunct') + '">';
+        html += '<div><div class="mname">' + r.item.name + '</div><div class="mmeta">' + pctTxt + '</div></div>';
+        html += '<span class="mbadge">' + (isCore ? 'core' : 'di supporto') + '</span></div>';
+        npBox.insertAdjacentHTML('beforeend', html);
+      });
+    }
+
+    // pharma
+    const phResults = PHARMA
+      .map(function(drug){
+        const matched = syms.filter(function(s){ return drug.sym[s] !== undefined; });
+        const bestMag = matched.reduce(function(m,s){ return Math.max(m, MAG_ORDER[drug.sym[s].mag]); }, 0);
+        return {drug:drug, matched:matched, bestMag:bestMag};
+      })
+      .filter(function(r){ return r.matched.length > 0; })
+      .sort(function(a,b){ return b.bestMag - a.bestMag; });
+
+    phBox.innerHTML = '';
+    if(phResults.length === 0){
+      phBox.innerHTML = '<p class="sub" style="margin:0;">Nessun farmaco con dato specifico per questa combinazione di sintomi nella fonte usata.</p>';
+    } else {
+      phResults.forEach(function(r){
+        let html = '<div class="match-row"><div><div class="mname">' + r.drug.name + (r.drug.note ? ' <span style="font-size:11.5px; color:var(--text-faint); font-weight:400;">(' + r.drug.note + ')</span>' : '') + '</div><div class="mmeta">';
+        html += r.matched.map(function(s){
+          const e = r.drug.sym[s];
+          const tagClass = MAG_TAG[e.mag] ? 'tag ' + MAG_TAG[e.mag] : 'tag';
+          const tagStyle = MAG_TAG[e.mag] ? '' : ' style="background:var(--surface); color:var(--text-faint); border:1px solid var(--border);"';
+          return SYM_LABELS[s] + ' <span class="' + tagClass + '"' + tagStyle + '>' + e.mag + ', ' + e.smd + '</span>';
+        }).join(' &nbsp; ');
+        html += '</div></div></div>';
+        phBox.insertAdjacentHTML('beforeend', html);
+      });
+    }
+  }
+  renderSymptomMatches();
 
   // ---------------- landing / module switching ----------------
   const landing = document.getElementById('landing');
@@ -932,8 +1018,6 @@
 })();
 </script>
 
-<!-- v1.0.0 -->
+<!-- v1.0.1 -->
 </body>
 </html>
-
-
