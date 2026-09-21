@@ -619,7 +619,7 @@
         </div>
         <div class="rec-card note">
           <div class="src">NEJM 2026</div>
-          <div class="txt">Un gabapentinoide assunto alla sera abbinato a un SNRI al mattino si è mostrato più efficace della monoterapia: nello studio citato, il 46% dei pazienti in combinazione ha ottenuto un miglioramento moderato o superiore, contro il 42% con la sola duloxetina, il 39% con il solo pregabalin, e il 18% con placebo.</div>
+          <div class="txt">Un gabapentinoide assunto alla sera abbinato a un SNRI al mattino si è mostrato più efficace della monoterapia: nello studio citato, il 68% dei pazienti in combinazione ha raggiunto un sollievo globale dal dolore a 6 settimane, contro il 42% con la sola duloxetina, il 39% con il solo pregabalin, e il 18% con placebo.</div>
         </div>
       </div>
 
@@ -890,14 +890,15 @@
     {name:'Terapia cognitivo-comportamentale', sym:{pain:94,fatigue:88,sleep:88,mood:88}, core:['pain','fatigue','sleep','mood']},
     {name:'Gestione dello stress', sym:{pain:94,fatigue:88,sleep:94,mood:88}, core:['fatigue','sleep','mood']},
     {name:'Esercizio mente-corpo (qigong, yoga, tai chi)', sym:{pain:94,fatigue:88,sleep:76,mood:82}, core:['pain','fatigue','sleep']},
-    {name:'Esercizio di rinforzo muscolare', sym:{pain:88,fatigue:71}, core:[]},
+    {name:'Esercizio di rinforzo muscolare', sym:{pain:88,fatigue:71}, core:['pain','fatigue']},
     {name:'Periodi di relax/svago', sym:{pain:88,sleep:76,mood:76}, core:[]},
-    {name:'Definizione di obiettivi', sym:{pain:82,fatigue:76,mood:71}, core:[]},
+    {name:'Definizione di obiettivi', sym:{pain:82,fatigue:76,mood:71}, core:['pain','fatigue','mood']},
     {name:'Bagno caldo e calore locale', sym:{pain:82,sleep:71}, core:[]},
     {name:'Mindfulness', sym:{pain:82,fatigue:76,sleep:76,mood:71}, core:['mood']},
     {name:'Pacing (gestione del ritmo delle attività)', sym:{pain:82,fatigue:76,sleep:82}, core:['fatigue','sleep']},
     {name:'Esercizio di flessibilità', sym:{pain:71}, core:['pain']},
-    {name:'Musica', sym:{sleep:76}, core:[]}
+    {name:'Musica', sym:{sleep:76}, core:[]},
+    {name:'Determinazione a costruire benessere/felicità', sym:{mood:71}, core:['mood']}
   ];
 
   const PHARMA = [
@@ -1022,6 +1023,6 @@
 })();
 </script>
 
-<!-- v1.0.2 -->
+<!-- v1.0.3 -->
 </body>
 </html>
