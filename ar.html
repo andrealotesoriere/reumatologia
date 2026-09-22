@@ -8,7 +8,7 @@
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
 
-<title>Artrite Reumatoide | RheumaDoc</title>
+<title>Artrite Reumatoide | RheumaTools</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -41,8 +41,6 @@
     --sage-soft:#E1EAE2;
     --sage-line:#BFD3C4;
 
-    /* estensione: scala di gravità a 4 livelli (remissione -> bassa -> moderata -> alta),
-       usata dai calcolatori di attività di malattia (DAS28/SDAI/CDAI e futuri equivalenti) */
     --amber:#B99A4A; --amber-dark:#7A6530; --amber-soft:#F1EAD3; --amber-line:#DCC894;
     --terracotta:#C17D45; --terracotta-dark:#7D501F; --terracotta-soft:#F4E2CE; --terracotta-line:#E3B98C;
 
@@ -107,19 +105,27 @@
   .panel{background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-lg); padding:22px 24px; box-shadow:var(--shadow-card); margin-bottom:16px;}
   .panel h3{font-size:17px; margin-bottom:14px;}
 
-  /* ---- callout boxes ---- */
   .box{padding:16px 18px; border-radius:var(--radius-md); font-size:14.5px; line-height:1.6; margin-bottom:16px; border:1px solid;}
   .box h3, .box h4{margin:0 0 6px 0; font-size:14.5px;}
   .box p{margin:0;}
   .box.goal{background:var(--teal-soft); border-color:var(--teal-line); color:var(--teal-dark);}
   .box.goal h3{color:var(--teal-dark); font-size:15px;}
-  .box.warn{background:var(--clay-soft); border-color:var(--clay-line); color:#5A3527;}
-  .box.warn h4{color:#5A3527;}
-  .box.warn ul{margin:0; padding-left:18px;}
-  .box.warn li{margin-bottom:5px;}
   .box.info{background:var(--violet-soft); border-color:var(--violet-line); color:#3E3560;}
   .box.info ul{margin:6px 0 0 0; padding-left:18px;}
   .box.info li{margin-bottom:3px;}
+
+  /* ---- rec-card / src-tag (pattern condiviso in RheumaTools) ---- */
+  .rec-card{border-left:3px solid var(--teal); background:var(--surface-alt); border-radius:0 var(--radius-sm) var(--radius-sm) 0; padding:12px 16px; margin-bottom:10px;}
+  .rec-card .src{font-size:11px; font-weight:700; color:var(--text-faint); text-transform:uppercase; letter-spacing:.03em;}
+  .rec-card .txt{font-size:14px; color:var(--text); margin-top:4px; line-height:1.55;}
+  .rec-card.warn{border-left-color:var(--clay); background:var(--clay-soft);}
+  .rec-card.warn .src{color:#8A4A38;}
+  .rec-card.note{border-left-color:var(--violet); background:var(--violet-soft);}
+  .rec-card.note .src{color:var(--violet-dark);}
+
+  .out-card{background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-lg); padding:22px 24px; box-shadow:var(--shadow-card); margin-bottom:16px;}
+  .out-card h3{font-size:16.5px; margin-bottom:4px;}
+  .out-card .sub{font-size:13.5px; color:var(--text-muted); margin-bottom:14px;}
 
   /* ---- phase sections ---- */
   .phase{margin-top:32px; padding-top:28px; border-top:1px solid var(--border);}
@@ -127,11 +133,55 @@
   .phase h3{font-size:17px;}
   .phase .lead{color:var(--text-muted); font-size:14px; margin:6px 0 16px 0;}
 
-  .drug-card{background:var(--surface-alt); border:1px solid var(--border); border-radius:var(--radius-md); padding:16px 18px; margin-bottom:12px;}
-  .drug-card h4{font-size:15px; margin-bottom:8px;}
-  .drug-card ul{margin:0; padding-left:18px; font-size:14px; color:var(--text); line-height:1.7;}
-  .drug-card .alert-line{color:#8A4A38; font-weight:600; list-style:none; margin-left:-18px; margin-top:8px;}
-  .drug-card .note{color:var(--text-muted); font-size:13.5px; margin:0;}
+  /* ---- calcolatore: toggle, check-list, drug-row (pattern condiviso RheumaTools) ---- */
+  .toggle-row{display:flex; flex-wrap:wrap; gap:8px;}
+  .toggle-opt{
+    font-family:inherit; font-size:13.5px; font-weight:600; color:var(--text-muted); background:var(--surface);
+    border:1px solid var(--border); border-radius:var(--radius-pill); padding:8px 16px; cursor:pointer; transition:all .15s ease;
+  }
+  .toggle-opt:hover{border-color:var(--teal-line);}
+  .toggle-opt.on{background:var(--teal); border-color:var(--teal); color:#fff;}
+
+  .check-list{display:flex; flex-direction:column; gap:7px; margin-top:8px;}
+  .check-item{display:flex; align-items:flex-start; gap:10px; padding:10px 14px; background:var(--surface-alt); border-radius:var(--radius-sm); cursor:pointer; font-size:13.5px; line-height:1.4;}
+  .check-item:hover{background:var(--teal-soft);}
+  .check-item input{margin-top:2px; width:16px; height:16px; accent-color:var(--teal); flex:none;}
+
+  .prow{display:flex; flex-wrap:wrap; align-items:center; gap:10px 14px; margin-bottom:12px;}
+  .prow:last-child{margin-bottom:0;}
+  .prow .lbl{font-size:13.5px; font-weight:600; color:var(--text); flex:none; min-width:170px;}
+
+  .drug-row{display:flex; align-items:flex-start; justify-content:space-between; gap:14px; padding:14px 16px; border-radius:var(--radius-md); margin-bottom:10px; border:1px solid var(--border); background:var(--surface-alt);}
+  .drug-row .dinfo{flex:1;}
+  .drug-row .dname{font-family:'Spectral',serif; font-weight:600; font-size:15px; color:var(--text);}
+  .drug-row .dclass{font-size:12px; color:var(--text-faint); margin-top:1px;}
+  .drug-row .dissues{margin-top:8px; display:flex; flex-direction:column; gap:5px;}
+  .drug-row .dissue{font-size:12.5px; line-height:1.5; padding:6px 10px; border-radius:var(--radius-sm);}
+  .drug-row .dissue .src-tag{font-weight:700; text-transform:uppercase; font-size:10px; letter-spacing:.02em; opacity:.75; display:block; margin-bottom:2px;}
+  .drug-row .dissue.block{background:var(--clay-soft); color:#5A3527;}
+  .drug-row .dissue.caution{background:var(--amber-soft); color:var(--amber-dark);}
+  .drug-row .dissue.prefer{background:var(--sage-soft); color:var(--sage-dark);}
+  .drug-row .dissue.info{background:var(--surface); color:var(--text-muted); border:1px solid var(--border);}
+  .drug-row .dstatus{flex:none; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.02em; padding:4px 10px; border-radius:var(--radius-pill); white-space:nowrap; margin-top:2px;}
+  .drug-row.eligible{border-left:3px solid var(--sage);}
+  .drug-row.eligible .dstatus{background:var(--sage-soft); color:var(--sage-dark);}
+  .drug-row.eligible.preferred{border-left:3px solid var(--sage-dark);}
+  .drug-row.eligible.preferred .dstatus{background:var(--sage-dark); color:#fff;}
+  .drug-row.caution-row{border-left:3px solid var(--amber);}
+  .drug-row.caution-row .dstatus{background:var(--amber-soft); color:var(--amber-dark);}
+  .drug-row.blocked{border-left:3px solid var(--clay); opacity:.88;}
+  .drug-row.blocked .dstatus{background:var(--clay-soft); color:#8A4A38;}
+
+  /* ---- collassabile per il testo narrativo esteso ---- */
+  .narrative-toggle{
+    display:block; width:100%; text-align:left; font-family:inherit; font-size:14px; font-weight:700;
+    color:var(--teal-dark); background:var(--teal-soft); border:1px solid var(--teal-line); border-radius:var(--radius-md);
+    padding:14px 18px; cursor:pointer; margin:32px 0 20px 0;
+  }
+  .narrative-toggle:hover{background:var(--teal-line);}
+  .narrative-toggle .arrow{float:right; transition:transform .2s ease;}
+  .narrative-body{display:none;}
+  .narrative-body.open{display:block;}
 
   ul.plain{margin:0; padding-left:18px; font-size:14.5px; color:var(--text-muted); line-height:1.7;}
 
@@ -148,7 +198,6 @@
   .fields-grid{display:grid; grid-template-columns:repeat(auto-fill, minmax(200px,1fr)); gap:0;}
   .fields-grid .field{margin-right:0;}
 
-  /* ---- classification result (met / not met) ---- */
   .result{border-radius:var(--radius-lg); padding:22px 24px; border:1px solid var(--border); background:var(--surface-alt); margin-top:18px; text-align:center;}
   .result.pos{background:var(--sage-soft); border-color:var(--sage-line);}
   .result .score-line{font-size:14px; color:var(--text-muted);}
@@ -157,7 +206,6 @@
   .result .verdict{font-size:15px; margin-top:6px; color:var(--text-muted);}
   .result.pos .verdict{color:var(--sage-dark); font-weight:600;}
 
-  /* ---- severity boxes (DAS28/SDAI/CDAI) ---- */
   .sev-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:20px;}
   @media(max-width:560px){.sev-grid{grid-template-columns:1fr;}}
   .sev-box{padding:18px; border-radius:var(--radius-md); text-align:center; border:1px solid var(--border); background:var(--surface-alt); transition:all .2s ease;}
@@ -187,7 +235,7 @@
 <body>
 
 <header class="site">
-  <div class="site-inner"><a href="index.html">RheumaDoc</a><span class="sep">/</span>Artrite Reumatoide</div>
+  <div class="site-inner"><a href="index.html">RheumaTools</a><span class="sep">/</span>Artrite Reumatoide</div>
 </header>
 
 <div class="wrap">
@@ -219,84 +267,200 @@
 
     <div class="box goal">
       <h3>Obiettivo</h3>
-      <p>Remissione o bassa attività entro 6 mesi. Se il miglioramento è ≤50% a 3 mesi, la terapia va rivista.</p>
+      <p>Remissione, o almeno bassa attività di malattia, in ogni paziente. Se il miglioramento è &lt;50% a 3 mesi dall'inizio o dal cambio di terapia, o il target non è raggiunto a 6 mesi, la terapia va rivista. Monitoraggio frequente (ogni 1–3 mesi) finché la malattia è attiva; meno frequente una volta che il target è mantenuto.</p>
     </div>
+    <div class="rec-card" style="margin-bottom:24px;">
+      <div class="src">EULAR 2025</div>
+      <div class="txt">Raccomandazioni 2, 3 e nota 3 alla Figura dell'algoritmo — target: remissione clinica secondo le definizioni ACR/EULAR, o se non ragionevolmente raggiungibile almeno bassa attività di malattia.</div>
+    </div>
+
+    <!-- ================= CALCOLATORE DI SCELTA ================= -->
+    <div class="panel">
+      <h3>Calcolatore di scelta del farmaco</h3>
+      <p class="block-note" style="margin-bottom:16px;">Basato sulle caratteristiche del singolo paziente. Non sostituisce il giudizio clinico né la scheda tecnica del farmaco scelto.</p>
+
+      <div class="prow">
+        <span class="lbl">Controindicazione/intolleranza al metotrexato</span>
+        <div class="toggle-row" data-p="mtxci">
+          <button type="button" class="toggle-opt" data-val="no">No</button>
+          <button type="button" class="toggle-opt" data-val="si">Sì</button>
+        </div>
+      </div>
+      <div class="prow">
+        <span class="lbl">PCR/VES persistentemente molto elevate</span>
+        <div class="toggle-row" data-p="normcrp">
+          <button type="button" class="toggle-opt" data-val="no">No / nella norma</button>
+          <button type="button" class="toggle-opt" data-val="si">Sì</button>
+        </div>
+      </div>
+      <div class="prow">
+        <span class="lbl">Gravidanza in corso o programmata a breve</span>
+        <div class="toggle-row" data-p="pregnancy">
+          <button type="button" class="toggle-opt" data-val="no">No</button>
+          <button type="button" class="toggle-opt" data-val="si">Sì</button>
+        </div>
+      </div>
+      <div class="prow">
+        <span class="lbl">Epatite B</span>
+        <div class="toggle-row" data-p="hbv">
+          <button type="button" class="toggle-opt" data-val="neg">Negativa</button>
+          <button type="button" class="toggle-opt" data-val="occult">Pregressa (HBcAb+, HBsAg−)</button>
+          <button type="button" class="toggle-opt" data-val="active">Attiva (HBsAg+)</button>
+        </div>
+      </div>
+
+      <p class="block-note" style="margin:16px 0 6px 0;">Fattori di rischio cardiovascolare/neoplastico (rilevanti soprattutto per i JAK-inibitori):</p>
+      <div class="check-list">
+        <label class="check-item"><input type="checkbox" id="rx_age65"><span>Età &gt;65 anni</span></label>
+        <label class="check-item"><input type="checkbox" id="rx_smoke"><span>Fumo attuale o pregresso</span></label>
+        <label class="check-item"><input type="checkbox" id="rx_cvrisk"><span>Altri fattori di rischio cardiovascolare (diabete, obesità, ipertensione)</span></label>
+        <label class="check-item"><input type="checkbox" id="rx_cancer"><span>Storia di neoplasia attuale o pregressa (esclusi tumori cutanei non melanoma trattati)</span></label>
+        <label class="check-item"><input type="checkbox" id="rx_vte"><span>Storia di infarto miocardico, scompenso cardiaco, o eventi tromboembolici/disturbi della coagulazione</span></label>
+        <label class="check-item"><input type="checkbox" id="rx_hz"><span>Storia di herpes zoster</span></label>
+        <label class="check-item"><input type="checkbox" id="rx_hormones"><span>Uso di contraccettivi ormonali combinati o terapia ormonale sostitutiva</span></label>
+        <label class="check-item"><input type="checkbox" id="rx_surgery"><span>Chirurgia maggiore imminente o immobilizzazione</span></label>
+      </div>
+
+      <p class="block-note" style="margin:16px 0 6px 0;">Altre condizioni:</p>
+      <div class="check-list">
+        <label class="check-item"><input type="checkbox" id="rx_chf"><span>Scompenso cardiaco NYHA III/IV</span></label>
+        <label class="check-item"><input type="checkbox" id="rx_ild"><span>Malattia polmonare interstiziale associata ad AR</span></label>
+        <label class="check-item"><input type="checkbox" id="rx_autoab"><span>Comparsa di autoanticorpi indotti da farmaco (ANA, anti-dsDNA) durante una precedente terapia</span></label>
+        <label class="check-item"><input type="checkbox" id="rx_lymph"><span>Storia di malattia linfoproliferativa</span></label>
+        <label class="check-item"><input type="checkbox" id="rx_divert"><span>Storia di diverticolite (non semplice diverticolosi)</span></label>
+        <label class="check-item"><input type="checkbox" id="rx_tb"><span>TBC latente non trattata o TBC attiva</span></label>
+        <label class="check-item"><input type="checkbox" id="rx_demyel"><span>Storia di malattia demielinizzante (sclerosi multipla, neurite ottica)</span></label>
+        <label class="check-item"><input type="checkbox" id="rx_infection"><span>Infezione grave nei 12 mesi precedenti</span></label>
+        <label class="check-item"><input type="checkbox" id="rx_ntm"><span>Malattia polmonare da micobatteri non tubercolari</span></label>
+        <label class="check-item"><input type="checkbox" id="rx_hypogamma"><span>Ipogammaglobulinemia persistente, senza infezioni, già in rituximab a target</span></label>
+      </div>
+    </div>
+
+    <div class="out-card">
+      <h3>csDMARD — Fase I</h3>
+      <div id="rx_csList"></div>
+    </div>
+
+    <div class="out-card">
+      <h3>bDMARD / JAK-inibitore — Fase II-III</h3>
+      <div id="rx_bList"></div>
+    </div>
+
+    <button type="button" class="narrative-toggle" id="narrativeToggle">Testo completo delle raccomandazioni, per approfondire <span class="arrow">▾</span></button>
+    <div class="narrative-body" id="narrativeBody">
 
     <div class="phase">
       <h3>Fase I · csDMARD (prima linea)</h3>
-      <div class="drug-card">
-        <h4>Metotrexato</h4>
-        <ul>
-          <li>Escalation fino a 20–25 mg una volta a settimana (orale o sottocutaneo), circa 0.3 mg/kg.</li>
-          <li>Supporto con acido folico ≥5 mg/settimana, distante dalla somministrazione.</li>
-          <li>Durata indefinita.</li>
-        </ul>
+      <div class="rec-card">
+        <div class="src">EULAR 2025 — racc. 1, 4</div>
+        <div class="txt">La terapia con DMARD va iniziata non appena la diagnosi di AR è posta. Il metotrexato deve far parte della prima strategia terapeutica; in caso di controindicazione o intolleranza precoce, si considerano leflunomide o sulfasalazina.</div>
       </div>
-      <div class="box warn">
-        <h4>Controindicazioni, alternative, cortisonici</h4>
-        <ul>
-          <li>Controindicazioni al metotrexato: gravidanza, allattamento, insufficienza epatica o renale grave, alcolismo.</li>
-          <li>Alternative: leflunomide 20 mg/die o sulfasalazina 3000 mg/die.</li>
-          <li>Terapia ponte con glucocorticoidi: fino a 7.5 mg/die equivalenti di prednisone, per non oltre 3 mesi, da sospendere appena possibile.</li>
-        </ul>
+      <div class="rec-card">
+        <div class="src">ACR 2021</div>
+        <div class="txt">Per i pazienti con attività di malattia bassa, la linea guida statunitense suggerisce di poter iniziare con idrossiclorochina o sulfasalazina invece del metotrexato direttamente; per attività moderata-alta, il metotrexato resta la prima scelta.</div>
+      </div>
+      <div class="rec-card">
+        <div class="src">EULAR 2025 (rif. Wang 2022, meta-analisi citata in bibliografia)</div>
+        <div class="txt">Il metotrexato orale a dosi di 15–25 mg/settimana risulta non inferiore alla via parenterale per efficacia e sicurezza.</div>
+      </div>
+      <div class="rec-card">
+        <div class="src">EULAR 2025 — racc. 5</div>
+        <div class="txt">I glucocorticoidi a breve termine vanno considerati quando si inizia o si cambia un csDMARD, con schemi di dose e vie di somministrazione diversi, ma vanno ridotti e sospesi il più rapidamente possibile dal punto di vista clinico.</div>
+      </div>
+      <div class="rec-card warn">
+        <div class="src">EULAR 2025 — nota 2 alla Figura</div>
+        <div class="txt">La combinazione di più csDMARD fin dall'inizio non è preferita dalla task force, sebbene con più effetti avversi non ci fosse beneficio aggiuntivo rispetto alla monoterapia con metotrexato in alcuni studi.</div>
+      </div>
+      <div class="rec-card warn">
+        <div class="src">farmacologia clinica — metotrexato e leflunomide in gravidanza</div>
+        <div class="txt">Metotrexato e leflunomide sono entrambi controindicati in gravidanza (teratogeni). Per il metotrexato si raccomanda un periodo di washout di almeno 3 mesi prima del concepimento. Per la leflunomide, data l'emivita molto lunga del metabolita attivo, il produttore raccomanda un'attesa di 2 anni dalla sospensione, ridotta a circa 3 mesi se si esegue una procedura di washout con colestiramina. La sulfasalazina è considerata un'alternativa utilizzabile in gravidanza.</div>
       </div>
     </div>
 
     <div class="phase">
-      <h3>Fase II · bDMARD / tsDMARD (dopo fallimento dei csDMARD)</h3>
-      <p class="lead">La scelta dipende dai fattori prognostici sfavorevoli e dalle comorbidità. Si combinano di norma con un csDMARD, tipicamente il metotrexato.</p>
-
-      <div class="drug-card">
-        <h4>Anti-TNF</h4>
-        <ul>
-          <li>Adalimumab</li>
-          <li>Etanercept</li>
-          <li>Golimumab</li>
-          <li>Certolizumab pegol</li>
-          <li>Infliximab</li>
-          <li class="alert-line">Da evitare in insufficienza cardiaca NYHA III/IV o TBC pregressa non trattata.</li>
-        </ul>
+      <h3>Fase II · bDMARD / JAK-inibitore (dopo fallimento del csDMARD)</h3>
+      <div class="rec-card">
+        <div class="src">EULAR 2025 — racc. 6</div>
+        <div class="txt">Se il target non è raggiunto con la strategia csDMARD, va aggiunto un bDMARD; un JAK-inibitore può essere considerato, ma vanno presi in considerazione i fattori di rischio pertinenti (vedi sotto). Il fallimento stesso della prima strategia è già considerato un segno prognostico sfavorevole — l'aggiunta di un altro csDMARD non è più una raccomandazione principale, per la minore persistenza rispetto all'aggiunta di un bDMARD.</div>
       </div>
-      <div class="drug-card">
-        <h4>Inibitori di JAK</h4>
-        <ul>
-          <li>Baricitinib: 4 mg/die per maggiore efficacia.</li>
-          <li>Upadacitinib: 15 mg/die standard, 30 mg solo in casi selezionati.</li>
-          <li>Tofacitinib: 5 mg due volte al giorno.</li>
-          <li>Filgotinib: 200 mg/die, ridotto a 100 mg in insufficienza renale o età avanzata.</li>
-          <li class="alert-line">Rischio di herpes zoster, tromboembolismo venoso ed eventi cardiovascolari, più marcato a dosi alte di tofacitinib o upadacitinib 30 mg.</li>
-        </ul>
+      <div class="rec-card">
+        <div class="src">EULAR 2025 — racc. 7</div>
+        <div class="txt">bDMARD e JAK-inibitori vanno combinati con un csDMARD; nei pazienti che non possono assumere un csDMARD come terapia di associazione, gli inibitori della via dell'IL-6 e i JAK-inibitori possono avere qualche vantaggio rispetto agli altri bDMARD.</div>
       </div>
-      <div class="drug-card">
-        <h4>Anti-IL6R</h4>
-        <ul>
-          <li>Tocilizumab: se endovenoso, si parte da 8 mg/kg.</li>
-          <li>Sarilumab: dosaggio sottocutaneo standard.</li>
-        </ul>
+      <div class="rec-card">
+        <div class="src">EULAR 2025 — nota 5 alla Figura</div>
+        <div class="txt">Farmaci considerati: anti-TNF (adalimumab, certolizumab pegol, etanercept, golimumab, infliximab), abatacept, inibitori del recettore dell'IL-6, o rituximab (in condizioni specifiche) — approvati da EMA/FDA. Vanno sempre valutate controindicazioni e rischi individuali.</div>
       </div>
-      <div class="drug-card">
-        <h4>Costimolazione e anti-CD20</h4>
-        <ul>
-          <li>Abatacept: in combinazione con metotrexato o in monoterapia se il metotrexato non è tollerato.</li>
-          <li>Rituximab: due somministrazioni da 500 mg oppure una da 1000 mg.</li>
-          <li>Anakinra: usato raramente in AR, riservato a forme con sintomi sistemici e resistenti.</li>
-        </ul>
+      <div class="rec-card">
+        <div class="src">van Mulligen 2021 (BMJ) — dosi dei JAK-inibitori nei trial</div>
+        <div class="txt">Baricitinib 4 mg/die (2 mg/die la dose ridotta), upadacitinib 15 mg/die (30 mg/die in casi selezionati), tofacitinib 5 mg due volte al giorno (10 mg × 2 la dose più alta), filgotinib 200 mg/die (100 mg/die la dose ridotta). Tocilizumab, se usato per via endovenosa, alla dose di 8 mg/kg.</div>
       </div>
-      <p class="note" style="font-size:13.5px; color:var(--text-muted);">Nella malattia polmonare interstiziale associata ad AR si preferiscono abatacept o rituximab; anti-TNF e rituximab sono da evitare in insufficienza cardiaca grave.</p>
+      <div class="rec-card warn">
+        <div class="src">EULAR 2025 — nota 6 alla Figura (fattori di rischio JAK-inibitori)</div>
+        <div class="txt">Prima di prescrivere un JAK-inibitore vanno considerati: età &gt;65 anni; storia di fumo attuale o pregresso; altri fattori di rischio cardiovascolare (diabete, obesità, ipertensione); fattori di rischio per neoplasia (storia di neoplasia attuale o pregressa, esclusi i tumori cutanei non melanoma trattati con successo); fattori di rischio tromboembolico (storia di infarto miocardico o scompenso cardiaco, disturbi ereditari della coagulazione o storia di trombosi); uso di contraccettivi ormonali combinati o terapia ormonale sostitutiva; chirurgia maggiore imminente o immobilizzazione.</div>
+      </div>
+      <div class="rec-card note">
+        <div class="src">EULAR 2025 — discussione racc. 6</div>
+        <div class="txt">La cautela sui JAK-inibitori deriva dallo studio ORAL Surveillance; i dati osservazionali successivi non hanno confermato in modo coerente lo stesso livello di rischio, ma la task force ha mantenuto la raccomandazione invariata per assenza di nuovi trial controllati. Un'analisi post-hoc più recente suggerisce che l'uso di statine possa attenuare il rischio cardiovascolare del tofacitinib osservato nello studio originale.</div>
+      </div>
+      <div class="rec-card warn">
+        <div class="src">Rempenault 2022 (Rheumatology) · scheda tecnica tocilizumab (FDA) · Xie 2016</div>
+        <div class="txt">Tocilizumab è associato a un aumento del rischio di diverticolite e di perforazione gastrointestinale, in particolare da diverticolite (HR 3.8 verso rituximab/abatacept in una coorte francese) — non con la semplice diverticolosi asintomatica. Il rischio aumenta con l'uso concomitante di corticosteroidi ad alte dosi e con l'età avanzata. Non è una controindicazione assoluta, ma un fattore da soppesare nella scelta. Un'analisi su dati amministrativi USA (Xie 2016) ha mostrato un rischio di perforazione GI del tratto inferiore elevato anche per il tofacitinib (HR 3.24), non solo per tocilizumab (HR 2.55), entrambi rispetto agli anti-TNF.</div>
+      </div>
+      <div class="rec-card note">
+        <div class="src">Sendaydiego 2024 (JAMA Netw Open)</div>
+        <div class="txt">In una coorte statunitense, rituximab (HR 1.91, IC 95% 1.17–3.14) e abatacept (HR 1.47, IC 95% 1.03–2.11) hanno mostrato un aumento statisticamente significativo di neoplasie incidenti rispetto agli anti-TNF; i JAK-inibitori hanno mostrato un aumento numerico minore, non statisticamente significativo in questa analisi (HR 1.36, IC 95% 0.94–1.96). Gli autori stessi segnalano che il dato su rituximab/abatacept è probabilmente influenzato da "channeling bias": chi inizia questi farmaci spesso ha già un carico di malattia più alto o controindicazioni ad altre opzioni, non necessariamente un effetto diretto del farmaco.</div>
+      </div>
+      <div class="rec-card">
+        <div class="src">ACR 2021 — Tabella 6, popolazioni specifiche</div>
+        <div class="txt">Scompenso cardiaco NYHA III/IV: un bDMARD non anti-TNF è preferito rispetto a un anti-TNF (anche in chi sviluppa scompenso durante una terapia anti-TNF già in corso). Malattia linfoproliferativa pregressa: rituximab è preferito (è esso stesso un trattamento approvato per alcuni linfomi, quindi non ci si aspetta un aumento del rischio di recidiva). Ipogammaglobulinemia persistente senza infezioni: continuare rituximab se il target è raggiunto, invece di cambiare farmaco solo per l'alterazione di laboratorio. Infezione grave nei 12 mesi precedenti: preferire l'aggiunta di un csDMARD rispetto a un bDMARD/JAK-inibitore. Malattia da micobatteri non tubercolari: preferire un csDMARD; se serve un bDMARD/JAK-inibitore, abatacept è preferito sugli altri.</div>
+      </div>
+      <div class="rec-card">
+        <div class="src">ACR 2021 — Tabella 6, epatite B</div>
+        <div class="txt">HBcAb+/HBsAg+ (infezione attiva): profilassi antivirale fortemente raccomandata con qualunque bDMARD/JAK-inibitore. HBcAb+/HBsAg− (infezione pregressa/occulta): profilassi antivirale fortemente raccomandata specificamente con rituximab; con altri bDMARD o JAK-inibitori, il solo monitoraggio frequente è un'alternativa accettabile.</div>
+      </div>
+      <div class="rec-card warn">
+        <div class="src">farmacologia clinica — anti-TNF</div>
+        <div class="txt">Gli anti-TNF richiedono lo screening per tubercolosi latente prima dell'avvio (se presente, trattarla prima di iniziare) e sono da evitare in caso di malattia demielinizzante (sclerosi multipla, neurite ottica), che possono indurre o peggiorare.</div>
+      </div>
+      <div class="rec-card warn">
+        <div class="src">farmacologia clinica — biologici in gravidanza</div>
+        <div class="txt">Se un bDMARD è necessario in gravidanza, gli anti-TNF sono i più studiati e considerati preferibili nel primo/secondo trimestre (con sospensione entro la 20esima-32esima settimana a seconda della molecola, secondo il produttore). Per gli altri bDMARD e per i JAK-inibitori, i dati su gravidanza e allattamento sono insufficienti: la sospensione prima di una gravidanza programmata è raccomandata.</div>
+      </div>
+      <div class="rec-card note">
+        <div class="src">ACR 2021 — una divergenza da segnalare</div>
+        <div class="txt">La linea guida statunitense (2021) dà ancora rilievo alla "triple therapy" (idrossiclorochina + sulfasalazina + metotrexato) come alternativa condizionata a un bDMARD/JAK-inibitore dopo fallimento del metotrexato in monoterapia. EULAR 2025, più recente, ha esplicitamente ridimensionato questo approccio, sulla base di dati che mostrano una persistenza terapeutica minore delle combinazioni di csDMARD rispetto all'aggiunta di un bDMARD.</div>
+      </div>
     </div>
 
     <div class="phase">
-      <h3>Fase III · terza linea</h3>
-      <p class="lead" style="margin-bottom:0;">Si passa a un bDMARD o tsDMARD con meccanismo d'azione diverso da quello già fallito — ad esempio, dopo un anti-TNF si passa a un JAK-inibitore o a un anti-IL6R.</p>
+      <h3>Fase III · dopo fallimento di un bDMARD o JAK-inibitore</h3>
+      <div class="rec-card">
+        <div class="src">EULAR 2025 — racc. 8</div>
+        <div class="txt">Va considerato un altro bDMARD o un JAK-inibitore; se è fallita una terapia anti-TNF o anti-recettore IL-6, il paziente può ricevere un farmaco con un diverso meccanismo d'azione, oppure un secondo anti-TNF o anti-IL-6R. Un farmaco della stessa classe non va impiegato una terza volta.</div>
+      </div>
+      <div class="rec-card note">
+        <div class="src">van Mulligen 2021 (BMJ) — AR difficile da trattare</div>
+        <div class="txt">Si parla di "AR difficile da trattare" (D2T RA) dopo il fallimento di almeno due bDMARD/JAK-inibitori con meccanismo d'azione diverso, con sintomi ancora percepiti come problematici dal paziente e/o dal reumatologo — riguarda il 5–20% dei pazienti con AR a seconda della definizione usata. Prima di cambiare ulteriormente farmaco, va accertato che i sintomi residui derivino davvero da attività infiammatoria e non da cause non infiammatorie coesistenti (es. fibromialgia, artrosi), da mancata aderenza, o da un disallineamento tra gli obiettivi di paziente e reumatologo.</div>
+      </div>
     </div>
 
     <div class="phase">
-      <h3>Mantenimento (remissione da almeno 6 mesi)</h3>
-      <ul class="plain">
-        <li>Prima si interrompono i glucocorticoidi.</li>
-        <li>Poi si riduce progressivamente la dose di bDMARD/tsDMARD o csDMARD.</li>
-        <li>L'interruzione completa non è consigliata: comporta un alto rischio di riacutizzazione.</li>
-      </ul>
+      <h3>Mantenimento (remissione sostenuta)</h3>
+      <div class="rec-card">
+        <div class="src">EULAR 2025 — racc. 9, nota 4 e nota 7 alla Figura</div>
+        <div class="txt">Remissione sostenuta = almeno 6 mesi secondo un indice composito ACR/EULAR (CDAI o SDAI) o la definizione Booleana. Prima si sospendono i glucocorticoidi. Poi si può ridurre la dose o aumentare l'intervallo tra le somministrazioni di bDMARD/JAK-inibitore o csDMARD — con basso rischio di riacutizzazione se fatto correttamente.</div>
+      </div>
+      <div class="rec-card warn">
+        <div class="src">EULAR 2025 — nota 7 alla Figura</div>
+        <div class="txt">La sospensione completa del DMARD, a differenza della sola riduzione di dose, è associata ad alto tasso di riacutizzazione: la maggior parte, ma non tutti, i pazienti recupera il buono stato di malattia reintroducendo lo stesso farmaco.</div>
+      </div>
+      <div class="rec-card note">
+        <div class="src">NEJM 2024</div>
+        <div class="txt">In pazienti con malattia sieropositiva in cui anti-TNF e metotrexato erano stati ridotti fino alla sospensione, il tasso cumulativo di riacutizzazione a 2 anni è stato del 61%, e solo il 15% ha mantenuto una remissione libera da farmaci — a conferma della cautela raccomandata da EULAR sulla sospensione completa.</div>
+      </div>
+    </div>
+
     </div>
   </section>
 
@@ -304,6 +468,10 @@
   <section class="block hidden" id="criteri">
     <button type="button" class="back-link" data-back>← Cambia sezione</button>
     <div class="block-head"><h2>Criteri classificativi ACR/EULAR 2010</h2></div>
+    <div class="rec-card" style="margin-bottom:18px;">
+      <div class="src">Aletaha 2010</div>
+      <div class="txt">2010 Rheumatoid arthritis classification criteria: an American College of Rheumatology/European League Against Rheumatism collaborative initiative.</div>
+    </div>
 
     <div class="panel">
       <div class="box info">
@@ -359,6 +527,10 @@
     <button type="button" class="back-link" data-back>← Cambia sezione</button>
     <div class="block-head"><h2>Attività di malattia — DAS28, SDAI, CDAI</h2></div>
     <p class="block-note">GH (salute generale) e PGA (attività di malattia secondo il paziente) sono domande diverse, tenute separate qui sotto.</p>
+    <div class="rec-card" style="margin-bottom:18px;">
+      <div class="src">Prevoo 1995 · Smolen 2003</div>
+      <div class="txt">Modified disease activity scores that include twenty-eight-joint counts (DAS28) — A simplified disease activity index for rheumatoid arthritis for use in clinical practice (SDAI/CDAI).</div>
+    </div>
 
     <div class="panel">
       <div class="fields-grid">
@@ -401,9 +573,14 @@
     <h2>Fonti</h2>
     <ol>
       <li><span class="t">Aletaha D, Neogi T, Silman AJ, et al.</span> 2010 Rheumatoid arthritis classification criteria: an American College of Rheumatology/European League Against Rheumatism collaborative initiative.</li>
-      <li><span class="t">Smolen JS, Landewé RBM, Bijlsma JWJ, et al.</span> EULAR recommendations for the management of rheumatoid arthritis with synthetic and biological disease-modifying antirheumatic drugs.</li>
       <li><span class="t">Prevoo MLL, van 't Hof MA, Kuper HH, et al.</span> Modified disease activity scores that include twenty-eight-joint counts — DAS28.</li>
       <li><span class="t">Smolen JS, Breedveld FC, Schiff MH, et al.</span> A simplified disease activity index for rheumatoid arthritis for use in clinical practice — SDAI/CDAI.</li>
+      <li><span class="t">Smolen JS, Kerschbaumer A, et al.</span> Management of rheumatoid arthritis: 2025 update of the EULAR recommendations. Ann Rheum Dis 2025.</li>
+      <li><span class="t">Fraenkel L, Bathon JM, England BR, et al.</span> 2021 American College of Rheumatology Guideline for the Treatment of Rheumatoid Arthritis. Arthritis Rheumatol 2021.</li>
+      <li><span class="t">van Mulligen E, Weel AEAM, Kuijper TM, et al.</span> Therapeutic strategies in difficult-to-treat rheumatoid arthritis: a systematic literature review informing the EULAR recommendations. BMJ 2021.</li>
+      <li><span class="t">Sendaydiego X, Gold LS, Dubreuil M, et al.</span> Use of biologic or targeted synthetic disease-modifying antirheumatic drugs and cancer risk. JAMA Netw Open 2024.</li>
+      <li><span class="t">Rheumatoid arthritis: common origins, divergent mechanisms.</span> N Engl J Med 2024.</li>
+      <li><span class="t">Aletaha D.</span> Management strategies in rheumatoid arthritis: the therapeutic matchmaking approach to precision tuning. Nature Reviews Rheumatology 2024.</li>
     </ol>
   </div>
 
@@ -415,6 +592,175 @@
 
 <script>
 (function(){
+  function bindToggleRow(selector, onChange){
+    document.querySelectorAll(selector + ' .toggle-opt').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        const row = btn.closest('.toggle-row');
+        row.querySelectorAll('.toggle-opt').forEach(function(b){ b.classList.remove('on'); });
+        btn.classList.add('on');
+        onChange(btn.dataset.val);
+      });
+    });
+  }
+
+  // ---------------- Testo narrativo collassabile ----------------
+  const narrToggle = document.getElementById('narrativeToggle');
+  const narrBody = document.getElementById('narrativeBody');
+  narrToggle.addEventListener('click', function(){
+    const open = narrBody.classList.toggle('open');
+    narrToggle.querySelector('.arrow').style.transform = open ? 'rotate(180deg)' : 'rotate(0deg)';
+    narrToggle.lastChild.textContent = open ? ' Nascondi il testo completo delle raccomandazioni ' : ' Testo completo delle raccomandazioni, per approfondire ';
+  });
+
+  // ---------------- Calcolatore di scelta del farmaco ----------------
+  const RX = { mtxci:'no', normcrp:'no', pregnancy:'no', hbv:'neg',
+    age65:false, smoke:false, cvrisk:false, cancer:false, vte:false, hz:false, hormones:false, surgery:false,
+    chf:false, ild:false, autoab:false, lymph:false, divert:false, tb:false, demyel:false, infection:false, ntm:false, hypogamma:false };
+
+  bindToggleRow('[data-p="mtxci"]', function(v){ RX.mtxci = v; renderRx(); });
+  bindToggleRow('[data-p="normcrp"]', function(v){ RX.normcrp = v; renderRx(); });
+  bindToggleRow('[data-p="pregnancy"]', function(v){ RX.pregnancy = v; renderRx(); });
+  bindToggleRow('[data-p="hbv"]', function(v){ RX.hbv = v; renderRx(); });
+  ['age65','smoke','cvrisk','cancer','vte','hz','hormones','surgery','chf','ild','autoab','lymph','divert','tb','demyel','infection','ntm','hypogamma'].forEach(function(k){
+    document.getElementById('rx_' + k).addEventListener('change', function(e){ RX[k] = e.target.checked; renderRx(); });
+  });
+
+  function jakRiskCount(){
+    return ['age65','smoke','cvrisk','cancer','vte','hz','hormones','surgery'].filter(function(k){ return RX[k]; }).length;
+  }
+
+  const CS_DRUGS = [
+    { name:'Metotrexato', classe:'csDMARD — prima scelta',
+      check:function(R){
+        const iss=[];
+        if(R.pregnancy==='si') iss.push({sev:'block', src:'farmacologia clinica', text:'Gravidanza/concepimento programmato: controindicazione assoluta (teratogeno). Washout di almeno 3 mesi prima del concepimento.'});
+        if(R.mtxci==='si') iss.push({sev:'block', src:'EULAR 2025', text:'Controindicazione o intolleranza precoce dichiarata: considerare leflunomide o sulfasalazina.'});
+        return {issues:iss, prefers: (R.mtxci!=='si' && R.pregnancy!=='si') ? [{src:'EULAR 2025', text:'Deve far parte della prima strategia terapeutica.'}] : []};
+      }},
+    { name:'Leflunomide', classe:'csDMARD — alternativa al metotrexato',
+      check:function(R){
+        const iss=[];
+        if(R.pregnancy==='si') iss.push({sev:'block', src:'farmacologia clinica', text:'Gravidanza/concepimento programmato: controindicazione assoluta. Emivita del metabolita molto lunga — attesa di 2 anni dalla sospensione, o washout con colestiramina (~3 mesi).'});
+        return {issues:iss, prefers: (R.mtxci==='si' && R.pregnancy!=='si') ? [{src:'EULAR 2025', text:'Alternativa di prima linea in caso di controindicazione/intolleranza al metotrexato.'}] : []};
+      }},
+    { name:'Sulfasalazina', classe:'csDMARD — alternativa al metotrexato, opzione in gravidanza',
+      check:function(R){
+        const pre=[];
+        if(R.mtxci==='si') pre.push({src:'EULAR 2025', text:'Alternativa di prima linea in caso di controindicazione/intolleranza al metotrexato — EULAR 2025 tratta leflunomide e sulfasalazina come equivalenti su questo punto, senza preferire l\'una sull\'altra.'});
+        if(R.pregnancy==='si') pre.push({src:'farmacologia clinica', text:'Considerata un\'opzione utilizzabile in gravidanza, a differenza di metotrexato e leflunomide.'});
+        return {issues:[], prefers:pre};
+      }}
+  ];
+
+  const B_DRUGS = [
+    { name:'Anti-TNF', classe:'adalimumab, certolizumab, etanercept, golimumab, infliximab', tier:0,
+      check:function(R){
+        const iss=[];
+        if(R.chf) iss.push({sev:'block', src:'ACR 2021 · Nature 2024 (Fig. 2, punto 1)', text:'Scompenso cardiaco NYHA III/IV: un bDMARD non anti-TNF è preferito — evitare l\'anti-TNF. Nature 2024 segnala che questa raccomandazione, pur ripresa da più linee guida, si basa su un\'evidenza non forte di un reale rischio di aggravamento nell\'AR.'});
+        if(R.demyel) iss.push({sev:'block', src:'Nature 2024 (Fig. 2, punto 5)', text:'Storia di malattia demielinizzante (SM, sindrome di Guillain-Barré): da evitare — è stata osservata in pazienti in terapia anti-TNF, anche se non è certo che il farmaco ne aumenti il rischio in chi la ha già.'});
+        if(R.autoab) iss.push({sev:'caution', src:'Nature 2024 (Fig. 2, punto 5)', text:'Storia di autoanticorpi indotti da farmaco (ANA, anti-dsDNA): la formazione di questi autoanticorpi è stata osservata specificamente con gli anti-TNF.'});
+        if(R.tb) iss.push({sev:'block', src:'farmacologia clinica', text:'TBC latente non trattata o attiva: trattarla prima di iniziare qualunque anti-TNF.'});
+        if(R.infection) iss.push({sev:'caution', src:'ACR 2021', text:'Infezione grave nei 12 mesi precedenti: si preferisce l\'aggiunta di un csDMARD; se serve comunque un bDMARD/JAK-inibitore, la cautela vale per tutta la classe, non solo per l\'anti-TNF.'});
+        return {issues:iss, prefers: (R.pregnancy==='si' && !R.chf && !R.demyel && !R.tb) ? [{src:'farmacologia clinica', text:'Se un bDMARD è necessario in gravidanza, gli anti-TNF sono i più studiati e generalmente preferiti (sospensione a settimane variabili secondo la molecola).'}] : []};
+      }},
+    { name:'Anti-IL6(R)', classe:'tocilizumab, sarilumab', tier:0,
+      check:function(R){
+        const iss=[], pre=[];
+        if(R.divert) iss.push({sev:'caution', src:'Nature 2024 (Fig. 2, punto 4) · Rempenault 2022 · FDA', text:'Storia di diverticolite: rischio aumentato di perforazione gastrointestinale (HR 3.8 vs rituximab/abatacept) — non è una controindicazione assoluta ma un fattore da soppesare, specie con corticosteroidi ad alte dosi concomitanti.'});
+        iss.push({sev:'info', src:'EULAR 2025', text:'Una volta in trattamento, gli indici di flogosi possono normalizzarsi indipendentemente dal miglioramento clinico, e la risposta della PCR in corso di infezione può risultare attenuata: utile saperlo per il monitoraggio successivo, non è un motivo per evitare il farmaco.'});
+        if(R.normcrp==='si') pre.push({src:'EULAR 2025 (dati post-hoc/osservazionali, non confermati da trial controllati)', text:'PCR molto elevata persistente: alcuni dati suggeriscono che possa predire una buona risposta agli anti-IL6R specificamente — EULAR 2025 stessa segnala però che questo dato è ancora da confermare con studi controllati, e lo elenca tra le domande di ricerca aperte.'});
+        if(R.infection) iss.push({sev:'caution', src:'ACR 2021', text:'Infezione grave nei 12 mesi precedenti: si preferisce l\'aggiunta di un csDMARD; se serve comunque un bDMARD/JAK-inibitore, la cautela vale per tutta la classe.'});
+        if(R.mtxci==='si') pre.push({src:'EULAR 2025', text:'Può avere qualche vantaggio quando il paziente non può assumere un csDMARD come terapia di associazione.'});
+        if(R.chf) pre.push({src:'ACR 2021 · Nature 2024', text:'Un bDMARD non anti-TNF (come questo) è preferito rispetto a un anti-TNF in caso di scompenso cardiaco NYHA III/IV.'});
+        if(R.pregnancy==='si') iss.push({sev:'caution', src:'farmacologia clinica', text:'Dati su gravidanza/allattamento insufficienti: sospendere prima di una gravidanza programmata.'});
+        return {issues:iss, prefers:pre};
+      }},
+    { name:'Abatacept', classe:'costimolazione', tier:0,
+      check:function(R){
+        const iss=[], pre=[];
+        if(R.infection) iss.push({sev:'caution', src:'ACR 2021 · scheda tecnica', text:'Infezione grave nei 12 mesi precedenti: si preferisce l\'aggiunta di un csDMARD; il trattamento non va comunque iniziato con un\'infezione attiva in corso.'});
+        if(R.cancer) iss.push({sev:'caution', src:'Nature 2024 (Fig. 2, punto 3) · scheda tecnica (EMA) · Sendaydiego 2024', text:'Storia di neoplasia: abatacept potrebbe aumentare il rischio di neoplasie, pur senza un aumento certo del rischio di recidiva in chi ha già una storia di neoplasia — i pazienti con neoplasie note erano comunque esclusi dagli studi registrativi. Non è una controindicazione assoluta ma un fattore da soppesare, idealmente con il parere dell\'oncologo.'});
+        if(R.ntm) pre.push({src:'ACR 2021', text:'Preferito sugli altri bDMARD/JAK-inibitori in caso di malattia polmonare da micobatteri non tubercolari, se un csDMARD da solo non basta.'});
+        if(R.chf) pre.push({src:'ACR 2021 · Nature 2024', text:'Un bDMARD non anti-TNF (come questo) è preferito rispetto a un anti-TNF in caso di scompenso cardiaco NYHA III/IV.'});
+        if(R.ild) pre.push({src:'Nature 2024 (Fig. 2, punto 7)', text:'Nella malattia polmonare interstiziale associata ad AR, abatacept (insieme a rituximab) può essere preferito su TNF-inibitori, anti-IL6 e JAK-inibitori, per un possibile effetto extra-articolare specifico.'});
+        if(R.pregnancy==='si') iss.push({sev:'caution', src:'farmacologia clinica', text:'Dati su gravidanza/allattamento insufficienti: sospendere prima di una gravidanza programmata.'});
+        return {issues:iss, prefers:pre};
+      }},
+    { name:'JAK-inibitore', classe:'baricitinib, upadacitinib, tofacitinib, filgotinib', tier:0,
+      check:function(R){
+        const iss=[], pre=[];
+        const n = jakRiskCount();
+        if(n > 0){
+          const labels = {age65:'età >65', smoke:'fumo attuale/pregresso', cvrisk:'altri fattori di rischio CV', cancer:'storia di neoplasia', vte:'storia di IMA/scompenso/eventi tromboembolici', hz:'storia di herpes zoster', hormones:'contraccettivi ormonali/TOS', surgery:'chirurgia maggiore imminente/immobilizzazione'};
+          const present = Object.keys(labels).filter(function(k){ return R[k]; }).map(function(k){ return labels[k]; });
+          iss.push({sev: n>=2 ? 'block' : 'caution', src:'EULAR 2025 — nota 6 alla Figura · Nature 2024 (Fig. 2, punto 2)', text:'Fattori di rischio presenti (' + present.join(', ') + '): da valutare attentamente prima di prescrivere; con più fattori insieme la cautela è maggiore.'});
+        }
+        if(R.divert) iss.push({sev:'caution', src:'Nature 2024 (Fig. 2, punto 4) · Xie 2016', text:'Storia di diverticolite: anche i JAK-inibitori (in particolare tofacitinib) hanno mostrato un rischio aumentato di perforazione gastrointestinale del tratto inferiore.'});
+        iss.push({sev:'info', src:'EULAR 2025', text:'Come per gli anti-IL6, una volta in trattamento gli indici di flogosi possono normalizzarsi indipendentemente dal miglioramento clinico, e la risposta della PCR in corso di infezione può risultare attenuata.'});
+        if(R.infection) iss.push({sev:'caution', src:'ACR 2021', text:'Infezione grave nei 12 mesi precedenti: si preferisce l\'aggiunta di un csDMARD; se serve comunque un bDMARD/JAK-inibitore, la cautela vale per tutta la classe.'});
+        if(R.pregnancy==='si') iss.push({sev:'block', src:'farmacologia clinica', text:'Gravidanza/concepimento programmato: sospendere, dati insufficienti.'});
+        if(R.mtxci==='si') pre.push({src:'EULAR 2025', text:'Può avere qualche vantaggio quando il paziente non può assumere un csDMARD come terapia di associazione.'});
+        if(R.chf && n===0) pre.push({src:'ACR 2021 · Nature 2024', text:'Un tsDMARD non anti-TNF (come questo) è preferito rispetto a un anti-TNF in caso di scompenso cardiaco NYHA III/IV — ma resta comunque tra i fattori di rischio CV da soppesare per i JAK-inibitori in generale.'});
+        return {issues:iss, prefers:pre};
+      }},
+    { name:'Rituximab', classe:'anti-CD20 — indicato tipicamente dopo risposta inadeguata a un anti-TNF', tier:1,
+      check:function(R){
+        const iss=[], pre=[];
+        if(R.chf) iss.push({sev:'block', src:'scheda tecnica (RCP MabThera) · Nature 2024 (Fig. 2, punto 1)', text:'Controindicazione assoluta specifica: scompenso cardiaco grave (classe NYHA IV) o malattia cardiaca grave non controllata.'});
+        if(R.infection) iss.push({sev:'caution', src:'ACR 2021 · scheda tecnica', text:'Infezione grave nei 12 mesi precedenti: la scheda tecnica controindica rituximab in caso di infezione attiva grave — se l\'infezione indicata non è più attiva, resta comunque una cautela importante, con controllo dei livelli di immunoglobuline prima di iniziare.'});
+        if(R.lymph) pre.push({src:'ACR 2021', text:'Preferito in caso di storia di malattia linfoproliferativa: è esso stesso un trattamento approvato per alcuni linfomi, quindi non ci si aspetta un aumento del rischio di recidiva.'});
+        if(R.ild) pre.push({src:'Nature 2024 (Fig. 2, punto 7)', text:'Nella malattia polmonare interstiziale associata ad AR, rituximab (insieme ad abatacept) può essere preferito su TNF-inibitori, anti-IL6 e JAK-inibitori, per un possibile effetto extra-articolare specifico.'});
+        if(R.hypogamma) iss.push({sev:'caution', src:'scheda tecnica (RCP MabThera) · Nature 2024 (Fig. 2, punto 6)', text:'Ipogammaglobulinemia persistente: sfavorisce rituximab — la scheda tecnica raccomanda di controllare i livelli di immunoglobuline prima del trattamento, per il maggior rischio di infezioni gravi.'});
+        if(R.hbv==='active') iss.push({sev:'caution', src:'ACR 2021', text:'Epatite B attiva (HBsAg+): profilassi antivirale fortemente raccomandata prima e durante il trattamento.'});
+        if(R.hbv==='occult') iss.push({sev:'caution', src:'ACR 2021', text:'Epatite B pregressa/occulta (HBcAb+, HBsAg−): con rituximab la profilassi antivirale è fortemente raccomandata (a differenza degli altri bDMARD, dove il solo monitoraggio può bastare).'});
+        if(R.pregnancy==='si') iss.push({sev:'caution', src:'farmacologia clinica', text:'Dati su gravidanza/allattamento insufficienti: sospendere prima di una gravidanza programmata. Contraccezione efficace raccomandata fino a 12 mesi dopo l\'ultima somministrazione.'});
+        return {issues:iss, prefers:pre};
+      }}
+  ];
+
+  function classify(drug, profile){
+    const r = drug.check(profile);
+    const hasBlock = r.issues.some(function(i){ return i.sev==='block'; });
+    const hasCaution = r.issues.some(function(i){ return i.sev==='caution'; });
+    const status = hasBlock ? 'blocked' : (hasCaution ? 'caution-row' : 'eligible');
+    const preferred = status !== 'blocked' && r.prefers.length > 0;
+    return {drug:drug, issues:r.issues, prefers:r.prefers, status:status, preferred:preferred};
+  }
+  function rowHtml(res){
+    const statusLabel = res.preferred ? 'preferenziale' : {eligible:'idoneo', 'caution-row':'con cautela', blocked:'controindicato'}[res.status];
+    const showPrefers = res.status !== 'blocked' && res.prefers.length; // un motivo per preferirlo non ha senso mostrato accanto a una controindicazione assoluta sullo stesso farmaco
+    let html = '<div class="drug-row ' + res.status + (res.preferred ? ' preferred' : '') + '">';
+    html += '<div class="dinfo"><div class="dname">' + res.drug.name + '</div><div class="dclass">' + res.drug.classe + '</div>';
+    if(showPrefers || res.issues.length){
+      html += '<div class="dissues">';
+      if(showPrefers) res.prefers.forEach(function(p){ html += '<div class="dissue prefer"><span class="src-tag">' + p.src + '</span>' + p.text + '</div>'; });
+      res.issues.forEach(function(i){ html += '<div class="dissue ' + i.sev + '"><span class="src-tag">' + i.src + '</span>' + i.text + '</div>'; });
+      html += '</div>';
+    }
+    html += '</div><span class="dstatus">' + statusLabel + '</span></div>';
+    return html;
+  }
+  function renderList(containerId, drugs){
+    const el = document.getElementById(containerId);
+    const order = {eligible:0, 'caution-row':1};
+    const results = drugs.map(function(d){ return classify(d, RX); })
+      .sort(function(a,b){
+        const ba = a.status==='blocked' ? 1 : 0, bb = b.status==='blocked' ? 1 : 0;
+        if(ba !== bb) return ba - bb;
+        const ta = a.drug.tier || 0, tb = b.drug.tier || 0;
+        if(ta !== tb) return ta - tb;
+        if(ba === 1) return 0;
+        return (order[a.status]-(a.preferred?0.5:0)) - (order[b.status]-(b.preferred?0.5:0));
+      });
+    el.innerHTML = '';
+    results.forEach(function(r){ el.insertAdjacentHTML('beforeend', rowHtml(r)); });
+  }
+  function renderRx(){
+    renderList('rx_csList', CS_DRUGS);
+    renderList('rx_bList', B_DRUGS);
+  }
+  renderRx();
+
   // ---------------- ACR/EULAR 2010 ----------------
   function updateACR(){
     const joint = parseInt(document.getElementById('joint').value, 10) || 0;
@@ -469,15 +815,12 @@
     const PhGA = parseFloat(document.getElementById('PhGA').value) || 0;
     const CRP_mgdL = parseFloat(document.getElementById('CRP').value) || 0;
 
-    // CDAI = TJC + SJC + PGA(0-10) + PhGA(0-10)
     const CDAI = TJC + SJC + PGA + PhGA;
     updateSevBox('cdai', severityKey(CDAI, 2.8, 10, 22, 'CDAI'), CDAI.toFixed(1));
 
-    // SDAI = TJC + SJC + PGA(0-10) + PhGA(0-10) + CRP(mg/dL)
     const SDAI = TJC + SJC + PGA + PhGA + CRP_mgdL;
     updateSevBox('sdai', severityKey(SDAI, 3.3, 11, 26, 'SDAI'), SDAI.toFixed(1));
 
-    // DAS28-CRP: GH da 0-10 a 0-100mm, PCR da mg/dL a mg/L
     const CRP_mgL = CRP_mgdL * 10;
     const GH_mm = GH * 10;
     const DAS28 = (0.56 * Math.sqrt(TJC)) + (0.28 * Math.sqrt(SJC)) + (0.36 * Math.log(CRP_mgL + 1)) + (0.014 * GH_mm) + 0.96;
@@ -521,6 +864,6 @@
 })();
 </script>
 
-<!-- v1.0.0 -->
+<!-- v1.0.5 -->
 </body>
 </html>
