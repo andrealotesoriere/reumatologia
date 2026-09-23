@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title>Eritema nodoso | RheumaDoc</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --teal:#5E9E9A; --teal-soft:#E3F0EE; --teal-deep:#2F6663;
+  --violet:#8C7BB8; --violet-soft:#EEEAF6;
+  --clay:#C08A6B; --clay-soft:#F6EAE2;
+  --sage:#8FAF8B; --sage-soft:#EAF2E8;
+  --amber:#D6A248; --amber-soft:#FBF1DC;
+  --ink:#27323A; --muted:#66737C; --line:#DDE5E3;
+  --bg:#F3F7F6; --card:#FFFFFF;
+  --serif:'Spectral', Georgia, 'Times New Roman', serif;
+  --sans:'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:860px;margin:0 auto;padding:24px 20px 64px}
+a{color:var(--teal-deep)}
+.back{display:inline-block;font-size:.9rem;text-decoration:none;color:var(--muted);margin-bottom:18px}
+.back:hover{color:var(--teal-deep)}
+h1{font-family:var(--serif);font-weight:500;font-size:2.4rem;line-height:1.15;margin:0 0 6px}
+.lead{color:var(--muted);max-width:62ch;margin:0 0 26px}
+h2{font-family:var(--serif);font-weight:500;font-size:1.5rem;margin:40px 0 12px}
+h3{font-family:var(--serif);font-weight:500;font-size:1.15rem;margin:0 0 6px}
+p{margin:0 0 10px}
+
+/* tab */
+.tabs{display:flex;gap:6px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:5px;max-width:360px}
+.tab{flex:1;border:0;background:transparent;font:500 .95rem var(--sans);color:var(--muted);padding:10px 12px;border-radius:10px;cursor:pointer}
+.tab[aria-selected="true"]{background:var(--teal-soft);color:var(--teal-deep)}
+.tab:focus-visible,.opt:focus-within,.chk:focus-within{outline:2px solid var(--teal);outline-offset:2px}
+.panel[hidden]{display:none}
+
+/* card */
+.rec-card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin:10px 0}
+.rec-card ul{margin:6px 0 8px;padding-left:20px}
+.rec-card li{margin:3px 0}
+.src{font-size:.78rem;color:var(--muted);margin-top:8px}
+.src::before{content:"Fonte: "}
+.rec-card.teal{border-left:4px solid var(--teal)}
+.rec-card.violet{border-left:4px solid var(--violet)}
+.rec-card.clay{border-left:4px solid var(--clay)}
+.rec-card.sage{border-left:4px solid var(--sage)}
+.rec-card.amber{border-left:4px solid var(--amber)}
+.note{font-size:.9rem;color:var(--muted);background:var(--violet-soft);border-radius:12px;padding:12px 14px;margin:14px 0}
+
+/* checklist */
+.check-list{display:grid;gap:8px;margin:10px 0}
+.chk{display:flex;gap:12px;align-items:flex-start;background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 14px;cursor:pointer}
+.chk input{margin-top:4px;accent-color:var(--teal);width:18px;height:18px;flex:none}
+.chk small{display:block;color:var(--muted);font-size:.85rem}
+.chk:has(input:checked){background:var(--teal-soft);border-color:var(--teal)}
+
+.result{border-radius:14px;padding:14px 18px;margin:12px 0;font-weight:500}
+.result.ok{background:var(--sage-soft);color:#3E5E3B}
+.result.warn{background:var(--amber-soft);color:#7A5A1C}
+.result.idle{background:#fff;border:1px dashed var(--line);color:var(--muted);font-weight:400}
+
+/* opzioni terapia */
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:8px;margin:12px 0 6px}
+.opt{position:relative;background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 14px;cursor:pointer;font-size:.95rem}
+.opt input{position:absolute;opacity:0}
+.opt:has(input:checked){background:var(--teal-soft);border-color:var(--teal);color:var(--teal-deep);font-weight:500}
+
+/* tabella */
+.table-wrap{overflow-x:auto;background:#fff;border:1px solid var(--line);border-radius:14px}
+table{border-collapse:collapse;width:100%;min-width:720px;font-size:.88rem}
+th,td{text-align:left;vertical-align:top;padding:10px 12px;border-bottom:1px solid var(--line)}
+th{font-weight:600;color:var(--muted);background:#FAFCFB}
+tr:last-child td{border-bottom:0}
+td .src{margin-top:4px}
+
+details{background:#fff;border:1px solid var(--line);border-radius:14px;padding:4px 18px;margin:10px 0}
+summary{cursor:pointer;padding:12px 0;font-weight:500}
+details[open] summary{border-bottom:1px solid var(--line);margin-bottom:8px}
+.dd{padding:8px 0;border-bottom:1px solid var(--line)}
+.dd:last-of-type{border-bottom:0}
+.dd b{font-weight:600}
+
+.refs{font-size:.85rem;color:var(--muted)}
+.refs li{margin:6px 0}
+footer{margin-top:40px;font-size:.8rem;color:var(--muted)}
+
+@media (max-width:560px){h1{font-size:1.9rem}.wrap{padding:18px 14px 48px}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<!-- v1.0.0 -->
+<body>
+<div class="wrap">
+  <a class="back" href="index.html">‹ Tutti gli strumenti</a>
+  <h1>Eritema nodoso</h1>
+  <p class="lead">Inquadramento diagnostico e opzioni terapeutiche. Le indicazioni della pagina provengono da due revisioni narrative, citate accanto a ogni punto.</p>
+
+  <div class="tabs" role="tablist">
+    <button class="tab" role="tab" id="t-dia" aria-controls="p-dia" aria-selected="true">Diagnosi</button>
+    <button class="tab" role="tab" id="t-ter" aria-controls="p-ter" aria-selected="false">Terapia</button>
+  </div>
+
+  <!-- ===================== DIAGNOSI ===================== -->
+  <section class="panel" id="p-dia" role="tabpanel" aria-labelledby="t-dia">
+
+    <h2>Quadro clinico</h2>
+    <div class="rec-card teal">
+      <p>Noduli e placche eritematosi, dolenti, di 1–6 cm, bilaterali e simmetrici, tipicamente in sede pretibiale; possibili anche caviglie, cosce e avambracci. Evolvono in 1–6 settimane dal rosso vivo a un colore giallo-bruno o verdastro simile a un'ecchimosi (eritema contusiforme) e guariscono senza ulcerazione, cicatrice o atrofia. Le recidive non sono rare.</p>
+      <div class="src">Pérez-Garza 2021, §4</div>
+    </div>
+    <div class="rec-card teal">
+      <p>Sintomi sistemici frequenti: febbre, malessere, cefalea, disturbi gastrointestinali, tosse, linfoadenopatia, calo ponderale, artralgie soprattutto a caviglie e ginocchia. Alcuni di questi orientano verso una forma secondaria.</p>
+      <div class="src">Pérez-Garza 2021, §4</div>
+    </div>
+
+    <h2>Il quadro è tipico?</h2>
+    <p>Segna gli elementi presenti.</p>
+    <div class="check-list" id="core">
+      <label class="chk"><input type="checkbox" value="1"><span>Noduli dolenti, bilaterali e simmetrici</span></label>
+      <label class="chk"><input type="checkbox" value="1"><span>Sede pretibiale</span></label>
+      <label class="chk"><input type="checkbox" value="1"><span>Involuzione di aspetto ecchimotico</span></label>
+      <label class="chk"><input type="checkbox" value="1"><span>Guarigione senza ulcerazione, cicatrice o atrofia</span></label>
+    </div>
+    <div class="check-list">
+      <label class="chk"><input type="checkbox" id="ulc"><span>Lesioni ulcerate o che drenano materiale oleoso<small>Elemento che orienta verso altre pannicoliti</small></span></label>
+    </div>
+    <div class="result idle" id="core-out">Seleziona gli elementi presenti per vedere l'orientamento.</div>
+    <div class="src" style="margin-top:-4px">Pérez-Garza 2021, §4, Fig. 3 e Tab. 3; Maniam 2025, Introduzione</div>
+
+    <details id="ddx">
+      <summary>Diagnosi differenziali</summary>
+      <div class="dd"><b>Eritema indurato di Bazin</b> — pannicolite lobulare associata soprattutto a tubercolosi; noduli sulla faccia posteriore delle gambe, tendenza a ulcerazione necrotica e cicatrici.<div class="src">Pérez-Garza 2021, Tab. 3; Maniam 2025, Vasculite nodulare</div></div>
+      <div class="dd"><b>Tromboflebite superficiale</b> — dolore, indurimento ed eritema lungo il decorso di una vena superficiale, talvolta cordone palpabile.<div class="src">Pérez-Garza 2021, Tab. 3</div></div>
+      <div class="dd"><b>Poliarterite nodosa cutanea</b> — noduli sottocutanei dolenti, livedo reticularis e/o ulcere agli arti inferiori; biopsia di una lesione nodulare, ANCA e ANA per escludere altre vasculiti.<div class="src">Pérez-Garza 2021, Tab. 3; Maniam 2025, Poliarterite nodosa</div></div>
+      <div class="dd"><b>Linfoma T sottocutaneo simil-pannicolite</b> — noduli o placche a estremità e tronco, esito in lipoatrofia, possibili sintomi sistemici.<div class="src">Pérez-Garza 2021, Tab. 3; Maniam 2025, Pannicolite maligna</div></div>
+      <div class="dd"><b>Eritema nodoso leproso</b> — reazione lebbrosa di tipo 2; noduli e papule soprattutto a volto ed estremità.<div class="src">Pérez-Garza 2021, Tab. 3</div></div>
+      <div class="dd"><b>Pannicolite pancreatica</b> — noduli anche a tronco, arti superiori e cuoio capelluto; possono fluttuare e ulcerarsi drenando materiale oleoso. Possono essere utili amilasi, lipasi e imaging addominale.<div class="src">Pérez-Garza 2021, Tab. 3; Maniam 2025, Pannicolite pancreatica</div></div>
+      <div class="dd"><b>Deficit di alfa-1 antitripsina</b> — noduli o placche che possono ulcerarsi e drenare, a tronco inferiore e arti prossimali; guarigione con cicatrici e atrofia. Dosaggio sierico di alfa-1 antitripsina; all'elettroforesi proteica la banda alfa-1 ridotta o assente supporta la diagnosi.<div class="src">Pérez-Garza 2021, Tab. 3; Maniam 2025, Deficit di AAT</div></div>
+      <div class="dd"><b>Pannicolite lupica</b> — noduli e placche a volto, braccia, spalle, glutei, mammelle e tronco; richiede conferma istologica.<div class="src">Pérez-Garza 2021, Tab. 3; Maniam 2025, Pannicolite lupica</div></div>
+      <div class="dd"><b>Calcifilassi</b> — dolore intenso, livedo o porpora retiforme, poi ulcere con escara nera; la malattia renale terminale è il principale fattore di rischio della forma uremica.<div class="src">Maniam 2025, Calcifilassi</div></div>
+    </details>
+
+    <h2>Conferma istologica</h2>
+    <div class="rec-card violet">
+      <p>La diagnosi si basa sul quadro clinico e istologico. Nel testo gli autori indicano la conferma con biopsia profonda, incisionale o escissionale, con un'ampia porzione di tessuto adiposo sottocutaneo; nel loro algoritmo la biopsia compare come da considerare.</p>
+      <div class="src">Pérez-Garza 2021, §4, §7 e Fig. 3; Maniam 2025, Eritema nodoso</div>
+    </div>
+    <div class="rec-card violet">
+      <p>Quadro atteso: pannicolite prevalentemente settale senza vasculite. I granulomi radiali di Miescher sono relativamente specifici ma non patognomonici.</p>
+      <div class="src">Pérez-Garza 2021, §5</div>
+    </div>
+
+    <h2>Esami iniziali</h2>
+    <div class="rec-card sage">
+      <p>Pannello iniziale suggerito dagli autori:</p>
+      <ul>
+        <li>emocromo, VES, PCR</li>
+        <li>titolo antistreptolisinico e tampone faringeo</li>
+        <li>radiografia del torace</li>
+        <li>test di gravidanza nelle donne in età fertile</li>
+      </ul>
+      <div class="src">Pérez-Garza 2021, §7</div>
+    </div>
+    <div class="rec-card sage">
+      <p>Gli esami vanno orientati da anamnesi ed esame obiettivo e non tutti i pazienti richiedono un inquadramento esteso. Nei pazienti sintomatici senza segni specifici di malattia serve invece un inquadramento completo, per non mancare una causa grave.</p>
+      <div class="src">Pérez-Garza 2021, §7</div>
+    </div>
+    <div class="rec-card sage">
+      <p>In aggiunta, in base al contesto:</p>
+      <ul>
+        <li>area endemica per tubercolosi o radiografia del torace alterata: ricerca di BAAR nell'espettorato, coltura micobatterica, intradermoreazione di Mantoux o IGRA</li>
+        <li>diarrea, dolore addominale o altri disturbi gastrointestinali: esame delle feci, coprocoltura ed esame parassitologico</li>
+      </ul>
+      <div class="src">Pérez-Garza 2021, §7</div>
+    </div>
+
+    <h2>Ricerca della causa</h2>
+    <p>Le cause restano sconosciute nel 32–72% dei casi. Segna gli elementi emersi da anamnesi ed esame obiettivo.</p>
+    <div class="src" style="margin:-4px 0 8px">Pérez-Garza 2021, §6</div>
+    <div class="check-list" id="clues">
+      <label class="chk"><input type="checkbox" value="strep"><span>Sintomi di infezione delle vie aeree superiori, febbre</span></label>
+      <label class="chk"><input type="checkbox" value="behcet"><span>Afte orali o genitali ricorrenti, lesioni oculari, altre lesioni cutanee</span></label>
+      <label class="chk"><input type="checkbox" value="gi"><span>Diarrea, dolore addominale, disturbi gastrointestinali</span></label>
+      <label class="chk"><input type="checkbox" value="sarc"><span>Tosse, dispnea, dolore toracico, astenia, febbre, artralgie</span></label>
+      <label class="chk"><input type="checkbox" value="tb"><span>Febbre, sudorazione notturna, tosse, calo ponderale, contatti con casi di tubercolosi</span></label>
+      <label class="chk"><input type="checkbox" value="neo"><span>Anoressia, calo ponderale, astenia, linfoadenopatia</span></label>
+      <label class="chk"><input type="checkbox" value="drug"><span>Farmaci, vaccini o radioterapia recenti</span></label>
+      <label class="chk"><input type="checkbox" value="preg"><span>Donna in età fertile</span></label>
+    </div>
+    <div id="clue-out"><div class="result idle">Nessun elemento selezionato. In assenza di segni specifici, la forma idiopatica è una diagnosi di esclusione, dopo un inquadramento completo senza reperti patologici; va poi seguita fino alla risoluzione delle lesioni.<div class="src">Pérez-Garza 2021, §7 e Fig. 3; Maniam 2025, Tab. 1</div></div></div>
+
+    <h2>Forma primaria o secondaria</h2>
+    <div class="rec-card clay">
+      <p>Predittori di eritema nodoso secondario: leucocitosi, PCR elevata, VES accelerata, febbre prolungata, tosse, faringodinia, diarrea, artrite, episodio non recidivante, radiografia del torace alterata. L'eritema nodoso recidivante è risultato predittivo di forma primaria.</p>
+      <div class="src">Pérez-Garza 2021, §7 (dati di Mert et al.)</div>
+    </div>
+    <div class="rec-card clay">
+      <p>Anche se nei dati di Mert la recidiva orienta verso la forma primaria, gli stessi autori della revisione raccomandano di ricercare una neoplasia sottostante, soprattutto ematologica, in caso di recidive o di scarsa risposta alle terapie abituali.</p>
+      <div class="src">Pérez-Garza 2021, §6.6</div>
+    </div>
+  </section>
+
+  <!-- ===================== TERAPIA ===================== -->
+  <section class="panel" id="p-ter" role="tabpanel" aria-labelledby="t-ter" hidden>
+
+    <h2>Principi generali</h2>
+    <div class="rec-card teal">
+      <p>Le terapie per le lesioni agiscono sui sintomi, non sulla causa. Se si identifica una condizione sottostante va trattata; se il fattore scatenante è un farmaco va sospeso quando possibile, in accordo con il medico prescrittore.</p>
+      <div class="src">Pérez-Garza 2021, Abstract e §10; Maniam 2025, Tab. 1</div>
+    </div>
+    <div class="rec-card teal">
+      <p>La prognosi è in genere eccellente, con risoluzione spontanea nella maggior parte dei pazienti.</p>
+      <div class="src">Pérez-Garza 2021, §10</div>
+    </div>
+
+    <h2>Scegli lo scenario</h2>
+    <div class="opts" id="scen">
+      <label class="opt"><input type="radio" name="sc" value="base" checked>Primo episodio</label>
+      <label class="opt"><input type="radio" name="sc" value="grave">Forma grave</label>
+      <label class="opt"><input type="radio" name="sc" value="ric">Ricorrente o cronico</label>
+      <label class="opt"><input type="radio" name="sc" value="refr">Refrattario</label>
+      <label class="opt"><input type="radio" name="sc" value="behcet">Associato a Behçet</label>
+      <label class="opt"><input type="radio" name="sc" value="mici">Associato a MICI</label>
+      <label class="opt"><input type="radio" name="sc" value="grav">In gravidanza</label>
+    </div>
+    <div id="scen-out"></div>
+
+    <h2>Farmaci riportati in letteratura</h2>
+    <p class="note">La tabella riporta dosi e note così come indicate dalla fonte. Non è un elenco completo delle controindicazioni: per ogni farmaco fa fede la scheda tecnica. La categoria in gravidanza è quella della vecchia classificazione FDA riportata dalla fonte.</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Farmaco</th><th>Dose riportata</th><th>Uso suggerito</th><th>Note dalla fonte</th><th>Gravidanza</th></tr></thead>
+        <tbody>
+          <tr><td>Indometacina<div class="src">Pérez-Garza 2021, Tab. 4</div></td><td>100–150 mg/die</td><td>Controllo del dolore</td><td>Cautela nelle MICI: possibile riacutizzazione</td><td>C</td></tr>
+          <tr><td>Naprossene<div class="src">Pérez-Garza 2021, Tab. 4</div></td><td>500–1000 mg/die</td><td>Controllo del dolore</td><td>Cautela nelle MICI: possibile riacutizzazione</td><td>C</td></tr>
+          <tr><td>Ioduro di potassio<div class="src">Pérez-Garza 2021, §9 e Tab. 4; Maniam 2025</div></td><td>300–900 mg/die in 3 dosi, poi a scalare fino a 150 mg/die</td><td>Forme refrattarie; forme croniche o ricorrenti</td><td>Cautela nelle tireopatie; controindicato in gravidanza e allattamento; iodismo o tossicità da potassio con l'uso prolungato; un recente studio ne ha ridimensionato l'efficacia</td><td>D</td></tr>
+          <tr><td>Colchicina<div class="src">Pérez-Garza 2021, §9 e Tab. 4; Maniam 2025</div></td><td>1–2 mg/die, in base al peso</td><td>Soprattutto EN in malattia di Behçet; valutata nelle forme croniche o ricorrenti</td><td>Effetti avversi gastrointestinali</td><td>C</td></tr>
+          <tr><td>Dapsone<div class="src">Pérez-Garza 2021, §9 e Tab. 4; Maniam 2025</div></td><td>50–75 mg/die</td><td>Forme ricorrenti e refrattarie</td><td>Valutare screening per deficit di G6PD; metaemoglobinemia, emolisi, agranulocitosi, neuropatia motoria periferica</td><td>C</td></tr>
+          <tr><td>Idrossiclorochina<div class="src">Pérez-Garza 2021, Tab. 4; Maniam 2025</div></td><td>200 mg due volte al giorno</td><td>Forme croniche e ricorrenti</td><td>—</td><td>C (non formale)</td></tr>
+          <tr><td>Triamcinolone acetonide intralesionale<div class="src">Pérez-Garza 2021, Tab. 4</div></td><td>5 mg/mL, al centro della lesione</td><td>Noduli refrattari</td><td>—</td><td>C</td></tr>
+          <tr><td>Prednisone<div class="src">Pérez-Garza 2021, §9 e Tab. 4</div></td><td>40–60 mg/die</td><td>Forme gravi, uso raro</td><td>Escludere prima un'infezione o una neoplasia sottostante</td><td>D nel I trimestre, C nel II e III</td></tr>
+          <tr><td>Minociclina<div class="src">Pérez-Garza 2021, §9 e Tab. 4</div></td><td>100 mg due volte al giorno</td><td>Lesioni refrattarie, forme croniche</td><td>—</td><td>D</td></tr>
+          <tr><td>Tetraciclina<div class="src">Pérez-Garza 2021, §9 e Tab. 4</div></td><td>500 mg da due a quattro volte al giorno</td><td>Lesioni refrattarie, forme croniche</td><td>—</td><td>D</td></tr>
+          <tr><td>Eritromicina<div class="src">Pérez-Garza 2021, Tab. 4</div></td><td>500 mg quattro volte al giorno</td><td>Lesioni refrattarie</td><td>Dato riferito a una forma grave associata a Behçet</td><td>B</td></tr>
+          <tr><td>Etanercept<div class="src">Pérez-Garza 2021, Tab. 4</div></td><td>25–50 mg due volte a settimana, poi 25–50 mg a settimana</td><td>Forme refrattarie; da considerare nelle MICI</td><td>Screening per tubercolosi latente, HBV, HCV e HIV prima dell'avvio</td><td>B</td></tr>
+          <tr><td>Adalimumab<div class="src">Pérez-Garza 2021, Tab. 4</div></td><td>40 mg ogni 2 settimane</td><td>Forme refrattarie; da considerare nelle MICI</td><td>Screening per tubercolosi latente, HBV, HCV e HIV prima dell'avvio</td><td>B</td></tr>
+          <tr><td>Infliximab<div class="src">Pérez-Garza 2021, Tab. 4</div></td><td>5 mg/kg alle settimane 0, 2 e 6</td><td>Forme refrattarie; da considerare nelle MICI</td><td>Screening per tubercolosi latente, HBV, HCV e HIV prima dell'avvio</td><td>B</td></tr>
+          <tr><td>Talidomide<div class="src">Pérez-Garza 2021, Tab. 4</div></td><td>Nessun dato specifico</td><td>EN associato a MICI</td><td>—</td><td>X</td></tr>
+          <tr><td>Ciclosporina<div class="src">Pérez-Garza 2021, Tab. 4; Maniam 2025</div></td><td>Nessun dato specifico</td><td>EN associato a MICI; valutata nelle forme croniche o ricorrenti</td><td>—</td><td>C</td></tr>
+                  <tr><td>Sulfasalazina<div class="src">Maniam 2025, Eritema nodoso</div></td><td>Non riportata</td><td>Gravidanza, pazienti molto sintomatiche</td><td>—</td><td>Non riportata</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <h2>Fonti</h2>
+  <ol class="refs">
+    <li><b>Pérez-Garza 2021</b> — Pérez-Garza DM, Chavez-Alvarez S, Ocampo-Candiani J, Gomez-Flores M. Erythema nodosum: a practical approach and diagnostic algorithm. Am J Clin Dermatol. 2021;22(3):367–378. <a href="https://doi.org/10.1007/s40257-021-00592-w" target="_blank" rel="noopener">doi:10.1007/s40257-021-00592-w</a></li>
+    <li><b>Maniam 2025</b> — Maniam GB, Limmer EE, Gibson LE, Tolkachjov SN, Alavi A. Panniculitis: a narrative review. Arch Dermatol Res. 2025;317:373. <a href="https://doi.org/10.1007/s00403-025-03816-9" target="_blank" rel="noopener">doi:10.1007/s00403-025-03816-9</a></li>
+  </ol>
+
+  <footer>Strumento di supporto per professionisti sanitari. Non sostituisce il giudizio clinico né la consultazione delle schede tecniche dei farmaci.</footer>
+</div>
+
+<script>
+/* --- tab --- */
+const tabs=[...document.querySelectorAll('.tab')];
+tabs.forEach(t=>t.addEventListener('click',()=>{
+  tabs.forEach(x=>{
+    const on=x===t;
+    x.setAttribute('aria-selected',on);
+    document.getElementById(x.getAttribute('aria-controls')).hidden=!on;
+  });
+}));
+
+/* --- quadro tipico --- */
+const coreBoxes=[...document.querySelectorAll('#core input')];
+const ulc=document.getElementById('ulc');
+const coreOut=document.getElementById('core-out');
+function evalCore(){
+  const on=coreBoxes.map(b=>b.checked);
+  const n=on.filter(Boolean).length;
+  const ddx=document.getElementById('ddx');
+  if(n===0&&!ulc.checked){coreOut.className='result idle';coreOut.textContent='Seleziona gli elementi presenti per vedere l\'orientamento.';return;}
+  if(ulc.checked){
+    coreOut.className='result warn';
+    coreOut.textContent='L\'ulcerazione non fa parte del quadro tipico. Il deficit di alfa-1 antitripsina, la pannicolite pancreatica e la calcifilassi sono le pannicoliti con maggiore tendenza all\'ulcerazione; possono ulcerarsi anche l\'eritema indurato di Bazin e la poliarterite nodosa cutanea. Valuta le diagnosi differenziali.';
+    ddx.open=true;return;
+  }
+  if(n===4){coreOut.className='result ok';coreOut.textContent='Quadro clinico tipico di eritema nodoso. Procedi con la valutazione istologica e con gli esami iniziali.';return;}
+  if(on[0]&&on[1]&&!on[2]&&!on[3]){
+    coreOut.className='result warn';
+    coreOut.textContent='Involuzione e guarigione si osservano solo nel decorso: le lesioni evolvono in 1–6 settimane e possono coesistere lesioni in stadi diversi. Finché questi elementi non sono valutabili il quadro resta incompleto: considera anche le diagnosi differenziali e rivaluta nel tempo.';
+    ddx.open=true;return;
+  }
+  coreOut.className='result warn';coreOut.textContent='Quadro incompleto: considera le diagnosi differenziali.';ddx.open=true;
+}
+[...coreBoxes,ulc].forEach(b=>b.addEventListener('change',evalCore));
+
+/* --- ricerca della causa --- */
+const CLUES={
+  strep:{t:'Infezione streptococcica',c:'teal',
+    b:'Le lesioni compaiono circa 2–3 settimane dopo la faringite. Esami: tampone faringeo con coltura (gold standard), test antigenico rapido per streptococco di gruppo A, titolo antistreptolisinico.',
+    s:'Pérez-Garza 2021, §6.4.1 e Fig. 3'},
+  behcet:{t:'Malattia di Behçet',c:'violet',
+    b:'Verifica i criteri ISG o ICBD; può essere eseguito il test di patergia. Indaga anche la familiarità per questi sintomi.',
+    s:'Pérez-Garza 2021, Fig. 3; Maniam 2025, Tab. 1'},
+  gi:{t:'MICI o enterite infettiva',c:'clay',
+    b:'Esame delle feci, coprocoltura ed esame parassitologico; endoscopia in base ai risultati. Indaga sangue nelle feci, calo ponderale, anemia, familiarità per MICI, altre manifestazioni cutanee (pioderma gangrenoso, afte, sindrome di Sweet) ed extraintestinali (artrite, uveite). Valuta l\'invio al gastroenterologo, soprattutto dopo aver escluso un\'enterite infettiva.',
+    s:'Pérez-Garza 2021, Fig. 3; Maniam 2025, Tab. 1'},
+  sarc:{t:'Sarcoidosi',c:'sage',
+    b:'Radiografia del torace per adenopatia ilare bilaterale o micronoduli polmonari. La sindrome di Löfgren (eritema nodoso, adenopatia ilare bilaterale, febbre, a cui può associarsi un\'artrite periarticolare di caviglia) ha prognosi eccellente. La diagnosi si conferma con biopsia (granulomi non caseificanti).',
+    s:'Pérez-Garza 2021, §6.3 e Fig. 3; Maniam 2025, Tab. 1'},
+  tb:{t:'Tubercolosi',c:'amber',
+    b:'Intradermoreazione di Mantoux o IGRA, ricerca di BAAR nell\'espettorato, coltura micobatterica, test di amplificazione degli acidi nucleici, radiografia del torace.',
+    s:'Pérez-Garza 2021, §6.4.2 e Fig. 3'},
+  neo:{t:'Neoplasia',c:'clay',
+    b:'Più spesso ematologica (leucemie e linfomi), più raramente solida. Screening oncologico appropriato per età e orientato dal sospetto clinico.',
+    s:'Pérez-Garza 2021, §6.6 e Fig. 3; Maniam 2025, Tab. 1'},
+  drug:{t:'Farmaci, vaccini, radioterapia',c:'violet',
+    b:'Tra i farmaci più spesso associati: sulfonamidi, bromuri, contraccettivi orali. Indaga anche farmaci da banco, integratori e vaccinazioni recenti. Se possibile, concorda con il prescrittore la sospensione del farmaco sospetto.',
+    s:'Pérez-Garza 2021, §6.5; Maniam 2025, Tab. 1'},
+  preg:{t:'Gravidanza',c:'sage',
+    b:'Test di gravidanza; se positivo, invio all\'ostetrico-ginecologo. L\'eritema nodoso in gravidanza compare spesso nel primo trimestre e si risolve entro il terzo.',
+    s:'Pérez-Garza 2021, §7; Maniam 2025, Tab. 1'}
+};
+const clueBoxes=[...document.querySelectorAll('#clues input')];
+const clueOut=document.getElementById('clue-out');
+const idleClue=clueOut.innerHTML;
+function evalClues(){
+  const sel=clueBoxes.filter(b=>b.checked).map(b=>b.value);
+  if(!sel.length){clueOut.innerHTML=idleClue;return;}
+  clueOut.innerHTML=sel.map(k=>{const x=CLUES[k];return `<div class="rec-card ${x.c}"><h3>${x.t}</h3><p>${x.b}</p><div class="src">${x.s}</div></div>`}).join('');
+}
+clueBoxes.forEach(b=>b.addEventListener('change',evalClues));
+
+/* --- scenari di terapia --- */
+const R=(c,body,src)=>`<div class="rec-card ${c}"><p>${body}</p><div class="src">${src}</div></div>`;
+const SCEN={
+  base:[
+    R('teal','La terapia di supporto è adeguata per la maggior parte dei pazienti: bendaggio compressivo e sollevamento dell\'arto per edema e dolore.','Pérez-Garza 2021, §9; Maniam 2025, Eritema nodoso'),
+    R('teal','FANS per il controllo del dolore: indometacina 100–150 mg/die oppure naprossene 500–1000 mg/die. Cautela nelle MICI, perché possono peggiorarne i sintomi.','Pérez-Garza 2021, §9 e Tab. 4'),
+    R('sage','Il decorso è in genere autolimitante, con risoluzione in 1–6 settimane.','Pérez-Garza 2021, §4')
+  ],
+  grave:[
+    R('amber','I corticosteroidi sistemici sono usati raramente; il prednisone a 40–60 mg/die è stato impiegato nelle forme gravi.','Pérez-Garza 2021, §9 e Tab. 4'),
+    R('amber','Prima di avviare un corticosteroide escludere un\'infezione o una neoplasia sottostante.','Pérez-Garza 2021, §9 e Tab. 4')
+  ],
+  ric:[
+    R('violet','Le recidive sono frequenti soprattutto nella forma idiopatica, con un tasso complessivo intorno al 30%.','Maniam 2025, Eritema nodoso'),
+    R('violet','Opzioni per le forme croniche o ricorrenti: dapsone, ioduro di potassio, idrossiclorochina, anti-TNF.','Maniam 2025, Eritema nodoso'),
+    R('violet','Colchicina, ciclosporina e tetracicline sono state valutate in base all\'eziologia e alle comorbidità del paziente.','Maniam 2025, Eritema nodoso'),
+    R('clay','In caso di recidive ricercare una neoplasia sottostante.','Pérez-Garza 2021, §6.6')
+  ],
+  refr:[
+    R('violet','Ioduro di potassio 300–900 mg/die in tre dosi, poi a scalare fino a 150 mg/die. Un recente studio ne ha ridimensionato l\'efficacia.','Pérez-Garza 2021, §9'),
+    R('violet','Triamcinolone acetonide intralesionale 5 mg/mL, iniettato al centro della lesione infiammata, per i noduli refrattari.','Pérez-Garza 2021, §9 e Tab. 4'),
+    R('violet','Dapsone 50–75 mg/die nelle forme ricorrenti e refrattarie, con valutazione del deficit di G6PD.','Pérez-Garza 2021, §9 e Tab. 4'),
+    R('violet','Tetracicline (minociclina, tetraciclina) ed eritromicina per le lesioni refrattarie.','Pérez-Garza 2021, Tab. 4'),
+    R('violet','Anti-TNF (etanercept, adalimumab, infliximab) nelle forme refrattarie, dopo screening per tubercolosi latente, HBV, HCV e HIV.','Pérez-Garza 2021, §9 e Tab. 4'),
+    R('clay','In caso di scarsa risposta alle terapie abituali ricercare una neoplasia sottostante.','Pérez-Garza 2021, §6.6')
+  ],
+  behcet:[
+    R('violet','Colchicina 1–2 mg/die, adattata al peso: usata soprattutto nell\'eritema nodoso associato a malattia di Behçet.','Pérez-Garza 2021, §9 e Tab. 4'),
+    R('violet','Ioduro di potassio, colchicina e dapsone, usati nelle dermatosi neutrofile, sono una buona opzione nell\'eritema nodoso associato a Behçet.','Pérez-Garza 2021, §9'),
+    R('violet','Eritromicina 500 mg quattro volte al giorno: riportata risposta in una forma grave associata a Behçet.','Pérez-Garza 2021, Tab. 4 (rif. 98)')
+  ],
+  mici:[
+    R('clay','FANS con cautela: possono scatenare una riacutizzazione o peggiorare un episodio in corso.','Pérez-Garza 2021, §9 e Tab. 4'),
+    R('violet','Anti-TNF da considerare, dopo screening per tubercolosi latente, HBV, HCV e HIV.','Pérez-Garza 2021, Tab. 4'),
+    R('violet','Talidomide e ciclosporina sono state usate nell\'eritema nodoso associato a MICI, senza dati specifici di dose. La talidomide è in categoria X per la gravidanza.','Pérez-Garza 2021, §9 e Tab. 4'),
+    R('teal','Trattare la malattia di base in collaborazione con il gastroenterologo.','Pérez-Garza 2021, §10; Maniam 2025, Tab. 1')
+  ],
+  grav:[
+    R('teal','Compare spesso nel primo trimestre e si risolve entro il terzo.','Maniam 2025, Tab. 1'),
+    R('teal','Terapia di supporto: bendaggio compressivo e sollevamento dell\'arto.','Pérez-Garza 2021, §9'),
+    R('violet','Nelle pazienti molto sintomatiche può essere considerata la sulfasalazina.','Maniam 2025, Eritema nodoso'),
+    R('clay','Ioduro di potassio controindicato in gravidanza e allattamento.','Pérez-Garza 2021, §9')
+  ]
+};
+const scenOut=document.getElementById('scen-out');
+function evalScen(){
+  const v=document.querySelector('#scen input:checked').value;
+  let html=SCEN[v].join('');
+  if(v==='grav') html+='<p class="note">Le fonti non riportano altre indicazioni specifiche per la gravidanza. Per ogni altro farmaco fa fede la scheda tecnica.</p>';
+  scenOut.innerHTML=html;
+}
+document.querySelectorAll('#scen input').forEach(r=>r.addEventListener('change',evalScen));
+evalScen();
+</script>
+</body>
+</html>
