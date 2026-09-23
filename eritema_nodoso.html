@@ -28,10 +28,13 @@
 *,*::before,*::after{box-sizing:inherit}
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
-.wrap{max-width:860px;margin:0 auto;padding:24px 20px 64px}
+.wrap{max-width:860px;margin:0 auto;padding:40px 20px 64px}
 a{color:var(--teal-deep)}
-.back{display:inline-block;font-size:.9rem;text-decoration:none;color:var(--muted);margin-bottom:18px}
-.back:hover{color:var(--teal-deep)}
+.crumbs{background:#fff;border-top:3px solid var(--violet-soft);border-bottom:1px solid var(--line)}
+.crumbs-in{max-width:860px;margin:0 auto;padding:16px 20px;font-size:.9rem;color:var(--muted)}
+.crumbs a{color:var(--muted);text-decoration:underline;text-underline-offset:3px;text-decoration-color:#B9C4C8}
+.crumbs a:hover{color:var(--teal-deep);text-decoration-color:var(--teal)}
+.crumbs .sep{margin:0 8px;color:#A9B4B8}
 h1{font-family:var(--serif);font-weight:500;font-size:2.4rem;line-height:1.15;margin:0 0 6px}
 .lead{color:var(--muted);max-width:62ch;margin:0 0 26px}
 h2{font-family:var(--serif);font-weight:500;font-size:1.5rem;margin:40px 0 12px}
@@ -95,14 +98,14 @@ details[open] summary{border-bottom:1px solid var(--line);margin-bottom:8px}
 .refs li{margin:6px 0}
 footer{margin-top:40px;font-size:.8rem;color:var(--muted)}
 
-@media (max-width:560px){h1{font-size:1.9rem}.wrap{padding:18px 14px 48px}}
+@media (max-width:560px){h1{font-size:1.9rem}.wrap{padding:28px 14px 48px}.crumbs-in{padding:14px}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
 <!-- v1.0.0 -->
 <body>
+<nav class="crumbs" aria-label="Percorso"><div class="crumbs-in"><a href="index.html">RheumaDoc</a><span class="sep">/</span><span aria-current="page">Eritema nodoso</span></div></nav>
 <div class="wrap">
-   <div class="site-inner"><a href="index.html">RheumaDoc</a><span class="sep">/</span>Eritema Nodoso</div>
   <h1>Eritema nodoso</h1>
   <p class="lead">Inquadramento diagnostico e opzioni terapeutiche. Le indicazioni della pagina provengono da due revisioni narrative, citate accanto a ogni punto.</p>
 
@@ -320,7 +323,7 @@ const CLUES={
     b:'Esame delle feci, coprocoltura ed esame parassitologico; endoscopia in base ai risultati. Indaga sangue nelle feci, calo ponderale, anemia, familiarità per MICI, altre manifestazioni cutanee (pioderma gangrenoso, afte, sindrome di Sweet) ed extraintestinali (artrite, uveite). Valuta l\'invio al gastroenterologo, soprattutto dopo aver escluso un\'enterite infettiva.',
     s:'Pérez-Garza 2021, Fig. 3; Maniam 2025, Tab. 1'},
   sarc:{t:'Sarcoidosi',c:'sage',
-    b:'Radiografia del torace per adenopatia ilare bilaterale o micronoduli polmonari. La sindrome di Löfgren (eritema nodoso, adenopatia ilare bilaterale, febbre, a cui può associarsi un\'artrite periarticolare di caviglia) ha prognosi eccellente. La diagnosi si conferma con biopsia (granulomi non caseificanti).',
+    b:'Radiografia del torace per adenopatia ilare bilaterale, infiltrati o micronoduli polmonari. La sindrome di Löfgren (eritema nodoso, adenopatia ilare bilaterale, febbre, a cui può associarsi un\'artrite periarticolare di caviglia) ha prognosi eccellente. La diagnosi si conferma con biopsia (granulomi non caseificanti).',
     s:'Pérez-Garza 2021, §6.3 e Fig. 3; Maniam 2025, Tab. 1'},
   tb:{t:'Tubercolosi',c:'amber',
     b:'Intradermoreazione di Mantoux o IGRA, ricerca di BAAR nell\'espettorato, coltura micobatterica, test di amplificazione degli acidi nucleici, radiografia del torace.',
@@ -380,7 +383,7 @@ const SCEN={
     R('clay','FANS con cautela: possono scatenare una riacutizzazione o peggiorare un episodio in corso.','Pérez-Garza 2021, §9 e Tab. 4'),
     R('violet','Anti-TNF da considerare, dopo screening per tubercolosi latente, HBV, HCV e HIV.','Pérez-Garza 2021, Tab. 4'),
     R('violet','Talidomide e ciclosporina sono state usate nell\'eritema nodoso associato a MICI, senza dati specifici di dose. La talidomide è in categoria X per la gravidanza.','Pérez-Garza 2021, §9 e Tab. 4'),
-    R('teal','Trattare la malattia di base in collaborazione con il gastroenterologo.','Pérez-Garza 2021, §10; Maniam 2025, Tab. 1')
+    R('teal','Trattare la malattia di base.','Pérez-Garza 2021, §10')
   ],
   grav:[
     R('teal','Compare spesso nel primo trimestre e si risolve entro il terzo.','Maniam 2025, Tab. 1'),
