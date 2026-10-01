@@ -109,6 +109,10 @@
   .box p{margin:0;}
   .box.info{background:var(--teal-soft); border-color:var(--teal-line); color:var(--teal-dark); font-weight:600;}
 
+  /* ---- src-tag ---- */
+  .src{font-size:11.5px; color:var(--text-faint); margin-top:6px; line-height:1.45;}
+  .src::before{content:"Fonte: ";}
+
   /* ---- domain sub-tabs ---- */
   .subtab-row{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:4px;}
   .subtab{
@@ -158,7 +162,8 @@
   .result .verdict{font-size:15px; margin-top:6px; color:var(--text-muted);}
   .result.pos .verdict{color:var(--sage-dark); font-weight:600;}
 
-  .sev-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:12px; margin-top:20px; max-width:420px; margin-left:auto; margin-right:auto;}
+  .sev-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:20px;}
+  @media(max-width:560px){.sev-grid{grid-template-columns:1fr;}}
   .sev-box{padding:18px; border-radius:var(--radius-md); text-align:center; border:1px solid var(--border); background:var(--surface-alt); transition:all .2s ease;}
   .sev-box .k{font-size:12.5px; font-weight:700; color:var(--text-muted);}
   .sev-box .v{font-family:'Spectral',serif; font-size:26px; font-weight:700; margin-top:4px; color:var(--text);}
@@ -174,6 +179,9 @@
 
   .thresholds{margin-top:22px; font-size:12.5px; color:var(--text-faint); line-height:1.8;}
   .thresholds strong{color:var(--text-muted);}
+  .thresholds .src{line-height:1.45; margin:0 0 6px 0;}
+
+  .note-28{margin-top:18px; padding:14px 16px; background:var(--violet-soft); border:1px solid var(--violet-line); border-radius:var(--radius-md); font-size:13.5px; color:#3E3560; line-height:1.55;}
 
   /* ---- criteri sub-nav ---- */
   .crit-tabs{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:22px;}
@@ -241,7 +249,7 @@
     </button>
     <button type="button" class="landing-btn" data-target="attivita">
       <span class="lb-title">Attività di malattia</span>
-      <span class="lb-desc">DAPSA e DAS28-PCR.</span>
+      <span class="lb-desc">DAPSA, DAPSA28 e DAS28-PCR.</span>
     </button>
   </div>
 
@@ -543,19 +551,19 @@
   <!-- ================= MODULO: ATTIVITÀ DI MALATTIA ================= -->
   <section class="block hidden" id="attivita">
     <button type="button" class="back-link" data-back>← Cambia sezione</button>
-    <div class="block-head"><h2>Attività di malattia — DAPSA e DAS28-PCR</h2></div>
-    <p class="block-note">Il DAPSA è lo strumento raccomandato da GRAPPA/EULAR per il dominio periferico; il DAS28-PCR è riportato come riferimento aggiuntivo.</p>
+    <div class="block-head"><h2>Attività di malattia — DAPSA, DAPSA28 e DAS28-PCR</h2></div>
+    <p class="block-note">Il DAPSA è lo strumento raccomandato da GRAPPA/EULAR per il dominio periferico. Il DAPSA28 è una sua versione su 28 articolazioni, da usare quando non è disponibile il conteggio completo; il DAS28-PCR è riportato come riferimento aggiuntivo.</p>
 
     <div class="panel">
       <div class="fields-grid">
         <div class="field"><label for="TJC68">TJC68 — articolazioni dolenti (0–68)<span class="hint">DAPSA</span></label><input type="number" id="TJC68" min="0" max="68" value="0"></div>
         <div class="field"><label for="SJC66">SJC66 — articolazioni tumefatte (0–66)<span class="hint">DAPSA</span></label><input type="number" id="SJC66" min="0" max="66" value="0"></div>
-        <div class="field"><label for="PGA_DAPSA">PGA — attività di malattia, paziente (0–10)<span class="hint">DAPSA</span></label><input type="number" id="PGA_DAPSA" min="0" max="10" step="0.1" value="0"></div>
-        <div class="field"><label for="PAIN_DAPSA">Dolore, paziente (0–10)<span class="hint">DAPSA</span></label><input type="number" id="PAIN_DAPSA" min="0" max="10" step="0.1" value="0"></div>
-        <div class="field"><label for="CRP_DAPSA">PCR (mg/dL)<span class="hint">DAPSA e DAS28</span></label><input type="number" id="CRP_DAPSA" min="0" step="0.1" value="0"></div>
+        <div class="field"><label for="TJC28_DAS">TJC28 — articolazioni dolenti (0–28)<span class="hint">DAPSA28 e DAS28</span></label><input type="number" id="TJC28_DAS" min="0" max="28" value="0"></div>
+        <div class="field"><label for="SJC28_DAS">SJC28 — articolazioni tumefatte (0–28)<span class="hint">DAPSA28 e DAS28</span></label><input type="number" id="SJC28_DAS" min="0" max="28" value="0"></div>
+        <div class="field"><label for="PGA_DAPSA">PGA — attività di malattia, paziente (0–10)<span class="hint">DAPSA e DAPSA28</span></label><input type="number" id="PGA_DAPSA" min="0" max="10" step="0.1" value="0"></div>
+        <div class="field"><label for="PAIN_DAPSA">Dolore, paziente (0–10)<span class="hint">DAPSA e DAPSA28</span></label><input type="number" id="PAIN_DAPSA" min="0" max="10" step="0.1" value="0"></div>
+        <div class="field"><label for="CRP_DAPSA">PCR (mg/dL)<span class="hint">DAPSA, DAPSA28 e DAS28</span></label><input type="number" id="CRP_DAPSA" min="0" step="0.1" value="0"></div>
         <div class="field"><label for="GH_DAS">GH — salute generale, paziente (0–10)<span class="hint">solo DAS28</span></label><input type="number" id="GH_DAS" min="0" max="10" step="0.1" value="0"></div>
-        <div class="field"><label for="TJC28_DAS">TJC28 — articolazioni dolenti (0–28)<span class="hint">solo DAS28</span></label><input type="number" id="TJC28_DAS" min="0" max="28" value="0"></div>
-        <div class="field"><label for="SJC28_DAS">SJC28 — articolazioni tumefatte (0–28)<span class="hint">solo DAS28</span></label><input type="number" id="SJC28_DAS" min="0" max="28" value="0"></div>
       </div>
 
       <div class="sev-grid">
@@ -563,6 +571,11 @@
           <div class="k">DAPSA</div>
           <div class="v" id="dapsa_score">0.0</div>
           <div class="status" id="dapsa_status">Inserisci i dati</div>
+        </div>
+        <div class="sev-box" id="dapsa28_box">
+          <div class="k">DAPSA28</div>
+          <div class="v" id="dapsa28_score">0.0</div>
+          <div class="status" id="dapsa28_status">Inserisci i dati</div>
         </div>
         <div class="sev-box" id="das28_psa_box">
           <div class="k">DAS28-PCR</div>
@@ -572,9 +585,22 @@
       </div>
 
       <div class="thresholds">
-        <div><strong>Soglie di attività</strong></div>
-        <div>DAPSA: ≤4 remissione · 4–14 bassa · 14–28 moderata · &gt;28 alta</div>
+        <div><strong>Formule</strong></div>
+        <div>DAPSA = TJC68 + SJC66 + PGA + dolore + PCR (mg/dL)</div>
+        <div class="src">Schoels 2016</div>
+        <div>DAPSA28 = (TJC28 × 1,6) + (SJC28 × 1,6) + PGA + dolore + PCR (mg/dL)</div>
+        <div class="src">Michelsen 2018</div>
+        <div style="margin-top:10px;"><strong>Soglie di attività</strong></div>
+        <div>DAPSA: ≤4 remissione · &gt;4–14 bassa · &gt;14–28 moderata · &gt;28 alta</div>
+        <div class="src">Schoels 2016</div>
+        <div>DAPSA28: stesse soglie del DAPSA</div>
+        <div class="src">Michelsen 2018 (stati di attività confrontati con le soglie del DAPSA); Linde 2024 (remissione DAPSA28 ≤4)</div>
         <div>DAS28-PCR: &lt;2.6 remissione · 2.6–3.2 bassa · 3.2–5.1 moderata · ≥5.1 alta</div>
+      </div>
+
+      <div class="note-28">
+        La concordanza tra DAPSA28 e DAPSA è migliore nei livelli di attività bassi che in quelli alti. Gli autori raccomandano di eseguire il conteggio su 66/68 articolazioni e di preferire il DAPSA originale; il DAPSA28 è utile quando è disponibile solo il conteggio su 28.
+        <div class="src">Michelsen 2018</div>
       </div>
     </div>
   </section>
@@ -588,6 +614,8 @@
       <li><span class="t">Coates LC, Soriano ER, Corp N, et al.</span> Group for Research and Assessment of Psoriasis and Psoriatic Arthritis (GRAPPA): updated treatment recommendations for psoriatic arthritis.</li>
       <li><span class="t">Gossec L, Baraliakos X, Kerschbaumer A, et al.</span> EULAR recommendations for the management of psoriatic arthritis with pharmacological therapies.</li>
       <li><span class="t">Schoels MM, Aletaha D, Alasti F, Smolen JS.</span> Disease activity in psoriatic arthritis (PsA): defining remission and treatment success using the DAPSA score.</li>
+      <li><span class="t">Michelsen B, Sexton J, Smolen JS, et al.</span> Can disease activity in patients with psoriatic arthritis be adequately assessed by a modified Disease Activity index for PSoriatic Arthritis (DAPSA) based on 28 joints? Ann Rheum Dis 2018;77:1736–1741. <a href="https://doi.org/10.1136/annrheumdis-2018-213463" target="_blank" rel="noopener">doi:10.1136/annrheumdis-2018-213463</a></li>
+      <li><span class="t">Linde L, Ørnbjerg LM, Georgiadis S, et al.</span> Predictors of DAPSA28 remission in patients with psoriatic arthritis initiating a first TNF inhibitor: results from 13 European registries. Rheumatology 2024;63(3):751–764. <a href="https://doi.org/10.1093/rheumatology/kead284" target="_blank" rel="noopener">doi:10.1093/rheumatology/kead284</a></li>
     </ol>
   </div>
 
@@ -764,7 +792,7 @@
   }
   updatePer();
 
-  // ---------------- DAPSA / DAS28-PCR ----------------
+  // ---------------- DAPSA / DAPSA28 / DAS28-PCR ----------------
   function severityKey(score, rem, low, mod, type){
     if(type === 'DAS28'){
       if(score >= 5.1) return 'high';
@@ -798,6 +826,10 @@
     // DAPSA = TJC68 + SJC66 + PGA(0-10) + Dolore(0-10) + PCR(mg/dL)
     const DAPSA = TJC68 + SJC66 + PGA + PAIN + CRP_mgdL;
     updateSevBox('dapsa', severityKey(DAPSA, 4, 14, 28, 'DAPSA'), DAPSA.toFixed(1));
+
+    // DAPSA28 (Michelsen 2018) = TJC28×1.6 + SJC28×1.6 + PGA(0-10) + Dolore(0-10) + PCR(mg/dL); soglie del DAPSA
+    const DAPSA28 = (TJC28 * 1.6) + (SJC28 * 1.6) + PGA + PAIN + CRP_mgdL;
+    updateSevBox('dapsa28', severityKey(DAPSA28, 4, 14, 28, 'DAPSA'), DAPSA28.toFixed(1));
 
     // DAS28-CRP: GH da 0-10 a 0-100mm, PCR da mg/dL a mg/L
     const CRP_mgL = CRP_mgdL * 10;
@@ -844,6 +876,6 @@
 })();
 </script>
 
-<!-- v1.0.0 -->
+<!-- v1.0.1 -->
 </body>
 </html>
