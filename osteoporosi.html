@@ -188,6 +188,48 @@
   .rec-card.note{border-left-color:var(--violet); background:var(--violet-soft);}
   .rec-card.note .src{color:var(--violet-dark);}
 
+  /* ---- terapia sequenziale: percorso a passi ---- */
+  .step-head{display:flex; align-items:center; gap:10px; margin-bottom:2px;}
+  .step-head h3{margin:0;}
+  .step-badge{flex:none; width:26px; height:26px; border-radius:50%; background:var(--teal); color:#fff; font-family:'Inter',sans-serif; font-size:13px; font-weight:700; display:flex; align-items:center; justify-content:center;}
+  .src-line{font-size:11px; font-weight:700; color:var(--text-faint); text-transform:uppercase; letter-spacing:.03em; margin-top:14px;}
+
+  .start-grid{display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:12px;}
+  @media(max-width:480px){.start-grid{grid-template-columns:1fr;}}
+  .start-tile{background:var(--surface-alt); border-radius:var(--radius-md); padding:14px 16px;}
+  .start-tile .k{font-size:12.5px; font-weight:600; color:var(--text-muted);}
+  .start-tile .v{font-family:'Spectral',serif; font-size:26px; font-weight:600; color:var(--teal-dark); line-height:1.2; margin-top:2px;}
+  .start-tile .gap{font-size:13px; color:var(--text-muted); margin-top:2px;}
+  .start-tile .gap.ok{color:var(--sage-dark); font-weight:600;}
+
+  .legend{display:flex; flex-wrap:wrap; gap:16px; font-size:12.5px; color:var(--text-muted); margin:12px 0 4px 0;}
+  .legend .sw{display:inline-block; width:12px; height:12px; vertical-align:-1px; margin-right:6px;}
+  .legend .sw.zone{background:var(--sage-soft); border:1px solid var(--sage); border-radius:3px;}
+  .legend .sw.dot{background:var(--teal-dark); border-radius:50%;}
+
+  .tx-row{display:grid; grid-template-columns:minmax(150px,1.2fr) 2fr 78px; gap:6px 14px; align-items:center; padding:12px 0; border-top:1px solid var(--border);}
+  .tx-row.tx-axis{border-top:none; padding:4px 0 0 0;}
+  .tx-name{font-size:13.5px; font-weight:600; color:var(--text);}
+  .tx-thr{font-size:12px; font-weight:400; color:var(--text-faint); margin-top:1px;}
+  .scale{position:relative; height:10px; background:var(--surface-alt); border:1px solid var(--border); border-radius:var(--radius-pill);}
+  .scale-ok{position:absolute; top:-1px; bottom:-1px; right:-1px; background:var(--sage-soft); border:1px solid var(--sage); border-radius:0 var(--radius-pill) var(--radius-pill) 0;}
+  .scale-dot{position:absolute; top:50%; width:14px; height:14px; margin:-7px 0 0 -7px; border-radius:50%; background:var(--teal-dark); border:2px solid #fff; box-shadow:0 0 0 1px var(--teal-dark);}
+  .scale-axis{display:flex; justify-content:space-between; font-size:10.5px; color:var(--text-faint);}
+  .tx-verdict{font-size:11px; font-weight:700; letter-spacing:.02em; padding:4px 8px; border-radius:var(--radius-pill); white-space:nowrap; text-align:center;}
+  .tx-verdict.ok{background:var(--sage-soft); color:var(--sage-dark);}
+  .tx-verdict.no{background:var(--clay-soft); color:#8A4A38;}
+  .tx-verdict.na{background:var(--surface-alt); color:var(--text-faint);}
+  @media(max-width:560px){
+    .tx-row{grid-template-columns:1fr 78px;}
+    .tx-row .scale-wrap{grid-column:1 / -1; order:3;}
+    .tx-row.tx-axis{display:none;}
+  }
+
+  .flow{display:flex; align-items:center; flex-wrap:wrap; gap:10px; margin:12px 0 10px 0;}
+  .flow-step{background:var(--teal-soft); border:1px solid var(--teal-line); color:var(--teal-dark); font-weight:600; font-size:14.5px; padding:10px 16px; border-radius:var(--radius-md);}
+  .flow-step small{display:block; font-weight:400; font-size:12px; color:var(--text-muted); margin-top:2px;}
+  .flow-arrow{color:var(--text-faint); font-size:20px; line-height:1;}
+
   /* ---- drug rows (Terapia module) ---- */
   .drug-row{display:flex; align-items:flex-start; justify-content:space-between; gap:14px; padding:14px 16px; border-radius:var(--radius-md); margin-bottom:10px; border:1px solid var(--border); background:var(--surface-alt);}
   .drug-row .dinfo{flex:1;}
@@ -437,45 +479,53 @@
 
   <!-- ================= MODULO: TERAPIA SEQUENZIALE ================= -->
   <div class="mod-panel" id="mod-sequenziale">
-    <p class="profile-note" style="margin-bottom:18px;">Target di T-score, sequenza iniziale e cosa fare quando il target è (o non è) raggiunto — sullo stesso profilo.</p>
+    <p class="profile-note" style="margin-bottom:18px;">Si parte dall'obiettivo: dove deve arrivare il T-score, da dove parte il paziente e quale terapia ha almeno il 50% di probabilità di portarlo lì in 3 anni. Tutto calcolato sullo stesso profilo.</p>
 
-    <div class="out-card" id="targetCard">
-      <h3>Target di T-score</h3>
+    <!-- PASSO 1 -->
+    <div class="out-card">
+      <div class="step-head"><span class="step-badge">1</span><h3>Obiettivo</h3></div>
       <div class="big" id="targetBig">—</div>
+      <div class="sub" id="targetSub"></div>
       <ul class="crit-list" id="targetReasonList"></ul>
     </div>
 
-    <div class="out-card" id="seqCard">
-      <h3>Sequenza iniziale consigliata</h3>
-      <div class="big" id="seqBig">—</div>
-      <div class="sub" id="seqSub"></div>
-    </div>
-
-    <div class="rec-card warn" id="seqWarnCard" style="display:none;">
-      <div class="src">Attenzione all'ordine</div>
-      <div class="txt">Se prevedi di usare un anabolico, non iniziare con un antiriassorbitivo potente (denosumab o zoledronato): ne riduce la risposta successiva. È particolarmente marcato dopo denosumab → teriparatide, dove la BMD del femore totale <strong>diminuisce</strong> per almeno 2 anni invece di aumentare. Se possibile, decidi la sequenza completa prima di iniziare.</div>
-    </div>
-
+    <!-- PASSO 2 -->
     <div class="out-card">
-      <h3>Probabilità di raggiungere il target (T-score &gt; −2.5) in 3 anni</h3>
-      <p class="sub" style="margin-bottom:12px;">T-score di partenza minimo per avere ≥50% di probabilità di superare −2.5 al sito trattato, a 3 anni.</p>
-      <div style="overflow-x:auto;">
-        <table id="probTable" style="width:100%; border-collapse:collapse; font-size:13px;">
-          <thead>
-            <tr style="border-bottom:1px solid var(--border);">
-              <th style="text-align:left; padding:8px 6px; color:var(--text-muted); font-weight:600;">Terapia</th>
-              <th style="text-align:right; padding:8px 6px; color:var(--text-muted); font-weight:600;">Femore totale</th>
-              <th style="text-align:right; padding:8px 6px; color:var(--text-muted); font-weight:600;">Colonna</th>
-            </tr>
-          </thead>
-          <tbody id="probTableBody"></tbody>
-        </table>
-      </div>
-      <p class="sub" id="probNote" style="margin-top:12px;"></p>
+      <div class="step-head"><span class="step-badge">2</span><h3>Punto di partenza</h3></div>
+      <div id="startBody"></div>
     </div>
 
+    <!-- PASSO 3 -->
+    <div class="out-card">
+      <div class="step-head"><span class="step-badge">3</span><h3>Quale terapia può arrivarci in 3 anni</h3></div>
+      <p class="sub" style="margin:6px 0 12px 0;">Per ogni terapia, la zona verde comprende i T-score di partenza da cui c'è almeno il 50% di probabilità di superare −2.5 al sito scelto entro 3 anni. Se il pallino del paziente cade nella zona verde, quella terapia ha almeno il 50% di probabilità di portarlo sopra −2.5.</p>
+      <div class="toggle-row" data-p="seqSite">
+        <button type="button" class="toggle-opt on" data-val="femore">Femore totale</button>
+        <button type="button" class="toggle-opt" data-val="colonna">Colonna</button>
+      </div>
+      <div class="legend">
+        <span><span class="sw zone"></span>Probabilità ≥50% di superare −2.5</span>
+        <span><span class="sw dot"></span>T-score del paziente</span>
+      </div>
+      <div id="txList"></div>
+      <div id="txNotes" style="margin-top:12px;"></div>
+      <div class="src-line">Fonte: ASBMR/BHOF 2024</div>
+    </div>
+
+    <!-- PASSO 4 -->
+    <div class="out-card">
+      <div class="step-head"><span class="step-badge">4</span><h3>Sequenza consigliata</h3></div>
+      <div class="flow" id="seqFlow"></div>
+      <div class="sub" id="seqSub"></div>
+      <div class="rec-card warn" id="seqWarnCard" style="display:none; margin-top:14px;">
+        <div class="src">Attenzione all'ordine</div>
+        <div class="txt">Se prevedi di usare un anabolico, non iniziare con un antiriassorbitivo potente (denosumab o zoledronato): ne riduce la risposta successiva. È particolarmente marcato dopo denosumab → teriparatide, dove la BMD del femore totale <strong>diminuisce</strong> per almeno 2 anni invece di aumentare. Se possibile, decidi la sequenza completa prima di iniziare.</div>
+      </div>
+    </div>
+
+    <!-- PASSO 5 -->
     <div class="pgroup">
-      <h3 style="margin-bottom:14px;">Dove si trova il paziente nel percorso</h3>
+      <h3><span class="n">5</span>A che punto è il paziente</h3>
       <div class="toggle-row" data-p="fase">
         <button type="button" class="toggle-opt" data-val="non-iniziata">Non ancora in trattamento</button>
         <button type="button" class="toggle-opt" data-val="in-anabolico">In anabolico, target non ancora raggiunto</button>
@@ -738,6 +788,7 @@
     egfr:null,
     cx:{epatopatia:false, ima:false, ictus:false, tev:false, ipocalcemia:false, ipercalcemia:false, dentale:false, neoplasiaossea:false, gravidanza:false},
     fase:null,
+    seqSite:'femore',
     fxOnTx:null,
     n79:{nuovaFx:false, blocco:false},
     vdMalass:false,
@@ -780,6 +831,7 @@
   });
   bindToggleRow('[data-p="gcDose"]', function(val){ P.gcDose = val; compute(); });
   bindToggleRow('[data-p="fase"]', function(val){ P.fase = val; compute(); });
+  bindToggleRow('[data-p="seqSite"]', function(val){ P.seqSite = val; renderSequenziale(); });
   bindToggleRow('[data-p="fxOnTx"]', function(val){ P.fxOnTx = val; renderFxOnTx(); });
   document.getElementById('n79nuovaFx').addEventListener('change', function(e){ P.n79.nuovaFx = e.target.checked; renderNota79(); });
   document.getElementById('n79blocco').addEventListener('change', function(e){ P.n79.blocco = e.target.checked; renderNota79(); });
@@ -1221,6 +1273,7 @@
   }
 
   // ================= TERAPIA SEQUENZIALE =================
+  // Soglie: T-score di partenza minimo per avere ≥50% di probabilità di superare −2.5 al sito trattato in 3 anni (th = femore totale, ls = colonna).
   const PROB_TABLE = [
     {name:'Alendronato', th:-2.7, ls:-3.0},
     {name:'Denosumab', th:-2.8, ls:-3.1},
@@ -1229,27 +1282,40 @@
     {name:'Romosozumab → Denosumab', th:-3.1, ls:-3.7}
   ];
 
+  const SC_MIN = -4.5, SC_MAX = -1.5;
+  function scalePct(v){ return Math.max(0, Math.min(100, (v - SC_MIN) / (SC_MAX - SC_MIN) * 100)); }
+  function fmtT(v){ return (v < 0 ? '−' : '') + Math.abs(v).toFixed(1); }
+  function hasVal(v){ return v !== null && v !== undefined && !isNaN(v); }
+
   function computeTarget(){
     const reasons = [];
-    let targetText = 'T-score > −2.5 al femore totale (sito preferito per il target)';
-
     const higherRisk = (P.age !== null && P.age >= 75) || P.rf.cadute || totalFx() >= 2;
+    let targetVal = -2.5;
+    let targetText = 'Portare il T-score sopra −2.5';
+
     if(higherRisk){
-      targetText = 'T-score > −2.0 (target più alto del solito)';
+      targetVal = -2.0;
+      targetText = 'Portare il T-score sopra −2.0 (obiettivo più alto del solito)';
       if(P.age !== null && P.age >= 75) reasons.push(['Età ≥75 anni', 'ASBMR/BHOF 2024']);
       if(P.rf.cadute) reasons.push(['Cadute nell\'ultimo anno', 'ASBMR/BHOF 2024']);
       if(totalFx() >= 2) reasons.push(['Fratture multiple', 'ASBMR/BHOF 2024']);
     }
 
     const ts = minTscore();
+    let increment = false;
     if(totalFx() === 0 && ts !== null && ts > -2.5){
       reasons.push(['Nessuna frattura, T-score &gt; −2.5: il target è un incremento assoluto (femore totale +0.2, o colonna +0.5) rispetto al basale, non un valore soglia', 'ASBMR/BHOF 2024']);
+      if(!higherRisk){
+        increment = true;
+        targetVal = null;
+        targetText = 'Un guadagno di densità rispetto al basale';
+      }
     }
     if(P.tsHip !== null && P.tsHip < -3.5){
       reasons.push(['T-score femore &lt; −3.5: il target potrebbe non essere raggiungibile in 3 anni con nessun farmaco attuale — punta comunque al miglioramento massimo possibile', 'ASBMR/BHOF 2024']);
     }
 
-    return {targetText:targetText, reasons:reasons};
+    return {targetText:targetText, targetVal:targetVal, increment:increment, reasons:reasons};
   }
 
   function computeSequence(){
@@ -1258,41 +1324,59 @@
     const veryLowBMD = (P.tsHip !== null && P.tsHip < -2.8) || (P.tsSpine !== null && P.tsSpine < -3.0);
     if(r.level === 'molto-alto' || veryLowBMD){
       return {
-        big: 'Anabolico prima, poi antiriassorbitivo',
-        sub: (r.level === 'molto-alto' ? 'Rischio molto alto' : 'BMD molto bassa') + ': gli aumenti di BMD sono maggiori e più rapidi iniziando con un anabolico (teriparatide, abaloparatide o romosozumab, secondo eleggibilità nel modulo Terapia) rispetto all\'ordine inverso. Dopo l\'anabolico, consolidare con un antiriassorbitivo.',
+        steps: [
+          {t:'Anabolico', s:'teriparatide, abaloparatide o romosozumab, secondo eleggibilità'},
+          {t:'Antiriassorbitivo', s:'per consolidare il guadagno'}
+        ],
+        sub: (r.level === 'molto-alto' ? 'Rischio molto alto' : 'BMD molto bassa') + ': gli aumenti di BMD sono maggiori e più rapidi iniziando con un anabolico rispetto all\'ordine inverso. Verifica l\'eleggibilità dei singoli farmaci nel modulo Terapia.',
         warn: true
       };
     }
     return {
-      big: 'Antiriassorbitivo',
-      sub: 'Bisfosfonato orale come prima scelta; denosumab o zoledronato se non idonei o mal tollerati. Un anabolico come prima linea non è generalmente necessario con questo profilo di rischio.',
+      steps: [
+        {t:'Antiriassorbitivo', s:'bisfosfonato orale; denosumab o zoledronato se non idonei o mal tollerati'}
+      ],
+      sub: 'Un anabolico come prima linea non è generalmente necessario con questo profilo di rischio.',
       warn: false
     };
   }
 
-  function probCell(patientTs, threshold){
-    if(patientTs === null || patientTs === undefined || isNaN(patientTs)){
-      return '<span>' + threshold.toFixed(1) + '</span>';
+  function startTileHtml(label, v, t){
+    if(!hasVal(v)){
+      return '<div class="start-tile"><div class="k">' + label + '</div><div class="v" style="color:var(--text-faint);">—</div><div class="gap">non inserito nel profilo</div></div>';
     }
-    const ok = patientTs >= threshold;
-    const color = ok ? 'var(--sage-dark)' : '#8A4A38';
-    const tag = ok ? '≥50%' : '&lt;50%';
-    return '<span style="color:' + color + '; font-weight:700;">' + threshold.toFixed(1) + '</span> <span style="font-size:10.5px; color:' + color + ';">(' + tag + ')</span>';
+    let gap;
+    if(t.targetVal === null){
+      gap = '<div class="gap">obiettivo: guadagno rispetto a questo valore</div>';
+    } else if(v > t.targetVal){
+      gap = '<div class="gap ok">già sopra l\'obiettivo (' + fmtT(t.targetVal) + ')</div>';
+    } else {
+      gap = '<div class="gap">mancano ' + (t.targetVal - v).toFixed(1) + ' punti per superare ' + fmtT(t.targetVal) + '</div>';
+    }
+    return '<div class="start-tile"><div class="k">' + label + '</div><div class="v">' + fmtT(v) + '</div>' + gap + '</div>';
   }
 
   function renderSequenziale(){
-    // ---- target ----
     const targetBig = document.getElementById('targetBig');
+    const targetSub = document.getElementById('targetSub');
     const targetList = document.getElementById('targetReasonList');
-    if(P.sex === null){
+    const startBody = document.getElementById('startBody');
+    const txList = document.getElementById('txList');
+    const txNotes = document.getElementById('txNotes');
+
+    const tMode = usesTscore();
+    const t = P.sex === null ? null : computeTarget();
+
+    // ---- passo 1: obiettivo ----
+    targetList.innerHTML = '';
+    if(!t){
       targetBig.textContent = 'Completa il profilo per iniziare';
-      targetList.innerHTML = '';
+      targetSub.textContent = '';
     } else {
-      const t = computeTarget();
       targetBig.textContent = t.targetText;
-      targetList.innerHTML = '';
+      targetSub.textContent = t.increment ? '' : 'Il femore totale è il sito preferito per definire l\'obiettivo.';
       if(t.reasons.length === 0){
-        targetList.innerHTML = '<li><span class="src">—</span><span>Target standard, nessun fattore che lo modifichi con i dati inseriti.</span></li>';
+        targetList.innerHTML = '<li><span class="src">ASBMR/BHOF 2024</span><span>Obiettivo standard: nessun fattore lo modifica con i dati inseriti.</span></li>';
       } else {
         t.reasons.forEach(function(rr){
           const li = document.createElement('li');
@@ -1302,37 +1386,72 @@
       }
     }
 
-    // ---- sequence ----
-    const seqBig = document.getElementById('seqBig');
+    // ---- passo 2: punto di partenza ----
+    if(!t){
+      startBody.innerHTML = '<p class="sub" style="margin-top:8px;">Completa il profilo per iniziare.</p>';
+    } else if(tMode === false){
+      startBody.innerHTML = '<p class="sub" style="margin-top:8px;">Questo percorso si basa sul T-score; con il profilo attuale (donna in pre-menopausa o uomo &lt;50 anni) si usa lo Z-score.</p>';
+    } else {
+      startBody.innerHTML = '<div class="start-grid">' + startTileHtml('Femore', P.tsHip, t) + startTileHtml('Colonna', P.tsSpine, t) + '</div>';
+    }
+
+    // ---- passo 3: quale terapia ----
+    const site = P.seqSite;
+    const pts = (tMode === false) ? null : (site === 'femore' ? P.tsHip : P.tsSpine);
+    let html = '<div class="tx-row tx-axis"><span></span><div class="scale-wrap"><div class="scale-axis"><span>−4.5</span><span>−3.5</span><span>−2.5</span><span>−1.5</span></div></div><span></span></div>';
+    PROB_TABLE.forEach(function(row){
+      const thr = site === 'femore' ? row.th : row.ls;
+      let cls = 'na', lab = '—';
+      if(hasVal(pts)){
+        const ok = pts >= thr;
+        cls = ok ? 'ok' : 'no';
+        lab = ok ? '≥50%' : '&lt;50%';
+      }
+      html += '<div class="tx-row">' +
+        '<div class="tx-name">' + row.name + '<div class="tx-thr">zona verde da ' + fmtT(thr) + ' in su</div></div>' +
+        '<div class="scale-wrap"><div class="scale"><div class="scale-ok" style="left:' + scalePct(thr) + '%"></div>' +
+          (hasVal(pts) ? '<div class="scale-dot" style="left:' + scalePct(pts) + '%"></div>' : '') +
+        '</div></div>' +
+        '<div class="tx-verdict ' + cls + '">' + lab + '</div>' +
+      '</div>';
+    });
+    txList.innerHTML = html;
+
+    const notes = [];
+    if(!hasVal(pts) && tMode !== false){
+      notes.push(['note', 'Come leggerlo', 'Inserisci nel profilo il T-score ' + (site === 'femore' ? 'del femore' : 'della colonna') + ' per vedere dove si colloca il paziente.']);
+    }
+    if(hasVal(pts) && pts > -2.5){
+      notes.push(['note', 'Come leggerlo', 'A questo sito il paziente è già sopra −2.5: le soglie qui sotto servono soprattutto per i pazienti che partono più in basso.']);
+    }
+    if(t && t.targetVal === -2.0){
+      notes.push(['warn', 'Attenzione', 'Per questo profilo l\'obiettivo è −2.0, ma le soglie si riferiscono al superamento di −2.5: una terapia che risulta ≥50% potrebbe non bastare per arrivare a −2.0.']);
+    }
+    if(t && t.increment){
+      notes.push(['note', 'Come leggerlo', 'Con questo profilo l\'obiettivo è un guadagno di densità, non una soglia: il confronto è solo orientativo.']);
+    }
+    if(site === 'femore'){
+      notes.push(['note', 'Sito', 'Le soglie si riferiscono al femore totale: se nel profilo hai inserito il collo femorale, il confronto è indicativo.']);
+    }
+    txNotes.innerHTML = notes.map(function(n){
+      return '<div class="rec-card ' + n[0] + '"><div class="src">' + n[1] + '</div><div class="txt">' + n[2] + '</div></div>';
+    }).join('');
+
+    // ---- passo 4: sequenza ----
+    const seqFlow = document.getElementById('seqFlow');
     const seqSub = document.getElementById('seqSub');
     const seqWarn = document.getElementById('seqWarnCard');
     const seq = computeSequence();
     if(!seq){
-      seqBig.textContent = 'Completa il profilo per iniziare';
+      seqFlow.innerHTML = '<span class="sub">Completa il profilo per iniziare.</span>';
       seqSub.textContent = '';
       seqWarn.style.display = 'none';
     } else {
-      seqBig.textContent = seq.big;
+      seqFlow.innerHTML = seq.steps.map(function(s, i){
+        return (i > 0 ? '<span class="flow-arrow">→</span>' : '') + '<div class="flow-step">' + s.t + '<small>' + s.s + '</small></div>';
+      }).join('');
       seqSub.textContent = seq.sub;
       seqWarn.style.display = seq.warn ? 'block' : 'none';
-    }
-
-    // ---- probability table ----
-    const tbody = document.getElementById('probTableBody');
-    tbody.innerHTML = '';
-    PROB_TABLE.forEach(function(row){
-      const tr = document.createElement('tr');
-      tr.style.borderBottom = '1px solid var(--border)';
-      tr.innerHTML = '<td style="padding:8px 6px;">' + row.name + '</td>' +
-        '<td style="padding:8px 6px; text-align:right;">' + probCell(P.tsHip, row.th) + '</td>' +
-        '<td style="padding:8px 6px; text-align:right;">' + probCell(P.tsSpine, row.ls) + '</td>';
-      tbody.appendChild(tr);
-    });
-    const probNote = document.getElementById('probNote');
-    if(P.tsHip !== null || P.tsSpine !== null){
-      probNote.textContent = 'Colorato in base ai T-score inseriti nel profilo: verde = probabilità ≥50% di superare −2.5 in 3 anni con quella terapia; rosso = probabilità inferiore.';
-    } else {
-      probNote.textContent = 'Inserisci il T-score nel profilo per confrontarlo con le soglie.';
     }
 
     renderFaseOutput();
@@ -1347,7 +1466,7 @@
     if(P.fase === 'in-anabolico'){
       card = ['note', 'ASBMR/BHOF 2024', 'Al termine del ciclo anabolico, la scelta successiva dipende da quanto si è vicini al target: se ancora lontano, il denosumab dà un guadagno di BMD maggiore rispetto al bisfosfonato; se vicino al target, un bisfosfonato (orale o EV) è sufficiente per consolidare. Se in futuro è previsto un secondo ciclo di anabolico, preferisci comunque il bisfosfonato come ponte: evita il rimbalzo di rimodellamento osseo post-denosumab, che smorzerebbe la risposta del secondo ciclo anabolico.'];
     } else if(P.fase === 'target-raggiunto'){
-      card = ['note', 'ASBMR/BHOF 2024', 'Target raggiunto: l\'obiettivo ora è il mantenimento. Opzioni: continuare la terapia attuale, passare a un bisfosfonato (anche a intervalli prolungati) se si proveniva da anabolico o denosumab, oppure — solo se il farmaco attuale è già un bisfosfonato — considerare una pausa terapeutica ("bisphosphonate holiday"). La pausa non è un\'opzione sicura dopo denosumab: la sospensione senza bisfosfonato di consolidamento espone a un rischio di fratture vertebrali da rimbalzo (vedi Gestione a lungo termine, in arrivo).'];
+      card = ['note', 'ASBMR/BHOF 2024', 'Target raggiunto: l\'obiettivo ora è il mantenimento. Opzioni: continuare la terapia attuale, passare a un bisfosfonato (anche a intervalli prolungati) se si proveniva da anabolico o denosumab, oppure — solo se il farmaco attuale è già un bisfosfonato — considerare una pausa terapeutica ("bisphosphonate holiday"). La pausa non è un\'opzione sicura dopo denosumab: la sospensione senza bisfosfonato di consolidamento espone a un rischio di fratture vertebrali da rimbalzo (vedi Gestione a lungo termine).'];
     } else if(P.fase === 'target-non-raggiunto'){
       card = ['warn', 'ASBMR/BHOF 2024', 'Una frattura clinica o vertebrale confermata in corso di terapia, o il mancato raggiungimento del target, indicano un rischio più alto di quanto stimato — non necessariamente un fallimento della terapia in sé. Prima di intensificare: rivaluta cause secondarie di osteoporosi, rischio di cadute e aderenza al trattamento. Poi passa alla terapia più potente disponibile (o continua la più potente già in corso) per almeno 2 anni; valuta l\'aggiunta o il passaggio a un anabolico.'];
     }
@@ -1644,6 +1763,6 @@
 })();
 </script>
 
-<!-- v1.0.0 -->
+<!-- v1.0.5 -->
 </body>
 </html>
