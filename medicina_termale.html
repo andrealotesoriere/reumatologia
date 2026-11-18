@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title>Medicina termale | RheumaDoc</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F6F8F7; --surface:#FFFFFF; --surface-alt:#EEF3F1; --border:#DCE4E1;
+    --text:#25302E; --text-muted:#5B6A66; --text-faint:#8B9793;
+    --teal:#3E6D69; --teal-dark:#2C504D; --teal-soft:#DDEBE8; --teal-line:#BBD6D2;
+    --violet:#7669A0; --violet-dark:#584D80; --violet-soft:#E7E2F3; --violet-line:#CBC0E3;
+    --clay:#B15F49; --clay-soft:#F3DED7; --clay-line:#E2B7A8;
+    --sage:#5E8467; --sage-dark:#33503E; --sage-soft:#E1EAE2; --sage-line:#BFD3C4;
+    --amber:#B99A4A; --amber-dark:#7A6530; --amber-soft:#F1EAD3; --amber-line:#DCC894;
+    --radius-lg:22px; --radius-md:14px; --radius-sm:9px; --radius-pill:999px;
+    --shadow-card: 0 1px 2px rgba(37,48,46,0.04), 0 6px 20px rgba(37,48,46,0.05);
+  }
+  *{box-sizing:border-box;}
+  body{margin:0; background:var(--bg); color:var(--text); font-family:'Inter', system-ui, sans-serif; font-size:16px; line-height:1.55; -webkit-font-smoothing:antialiased;}
+  h1,h2,h3,h4{font-family:'Spectral', Georgia, serif; font-weight:600; color:var(--teal-dark); margin:0 0 0.4em 0; line-height:1.3;}
+  a{color:var(--teal-dark);}
+  .wrap{max-width:760px; margin:0 auto; padding:0 20px 60px 20px;}
+
+  header.site{background:var(--surface); border-bottom:1px solid var(--border);}
+  .site-inner{max-width:760px; margin:0 auto; padding:18px 20px; font-size:14px; color:var(--text-muted);}
+  .site-inner a{text-decoration:none; color:var(--text-muted); border-bottom:1px solid var(--border);}
+  .site-inner a:hover{color:var(--teal-dark);}
+  .site-inner .sep{margin:0 6px; color:var(--text-faint);}
+
+  .hero{padding:44px 0 8px 0;}
+  .hero h1{font-size:clamp(28px,4vw,38px); letter-spacing:-0.01em;}
+  .hero .sub{color:var(--text-muted); font-size:17px; max-width:58ch; margin-top:10px;}
+  .disclaimer{margin:22px 0 0 0; padding:16px 18px; background:var(--violet-soft); border:1px solid var(--violet-line); border-radius:var(--radius-md); color:#3E3560; font-size:14.5px; line-height:1.55;}
+  .disclaimer strong{color:#2E2650;}
+
+  .hidden{display:none !important;}
+
+  .landing{display:grid; grid-template-columns:repeat(2,1fr); gap:16px; margin:34px 0 12px 0;}
+  @media(max-width:640px){.landing{grid-template-columns:1fr;}}
+  .landing-btn{font-family:inherit; text-align:left; background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-lg); padding:26px 22px; cursor:pointer; box-shadow:var(--shadow-card); transition:border-color .15s ease, transform .12s ease;}
+  .landing-btn:hover{border-color:var(--teal-line); transform:translateY(-1px);}
+  .landing-btn .lb-title{display:block; font-family:'Spectral',serif; font-weight:600; font-size:18px; color:var(--teal-dark);}
+  .landing-btn .lb-desc{display:block; margin-top:6px; font-size:13px; color:var(--text-muted); line-height:1.5;}
+
+  .back-link{display:inline-flex; align-items:center; gap:6px; font-family:inherit; font-size:13.5px; font-weight:600; color:var(--text-muted); background:none; border:none; cursor:pointer; padding:0; margin-bottom:22px;}
+  .back-link:hover{color:var(--teal-dark);}
+
+  section.block{margin-top:40px;}
+  .block-head h2{font-size:22px;}
+  .block-note{color:var(--text-muted); font-size:14.5px; margin-bottom:20px;}
+
+  .panel{background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-lg); padding:22px 24px; box-shadow:var(--shadow-card); margin-bottom:16px;}
+  .panel h3{font-size:17px; margin-bottom:12px;}
+  .step-label{display:flex; align-items:center; gap:10px; margin-bottom:12px;}
+  .step-label .n{flex:none; width:24px; height:24px; border-radius:50%; background:var(--teal); color:#fff; font-size:12.5px; font-weight:700; display:flex; align-items:center; justify-content:center;}
+  .step-label h3{margin:0;}
+
+  .src{font-size:11.5px; color:var(--text-faint); margin-top:6px; line-height:1.45;}
+  .src::before{content:"Fonte: ";}
+
+  .toggle-row{display:flex; flex-wrap:wrap; gap:8px;}
+  .toggle-opt{font-family:inherit; font-size:13.5px; font-weight:600; color:var(--text-muted); background:var(--surface-alt); border:1px solid var(--border); border-radius:var(--radius-pill); padding:8px 16px; cursor:pointer; transition:all .15s ease;}
+  .toggle-opt:hover{border-color:var(--teal-line);}
+  .toggle-opt.on{background:var(--teal); border-color:var(--teal); color:#fff;}
+  .toggle-opt:focus-visible, .landing-btn:focus-visible, select:focus-visible, button:focus-visible{outline:2px solid var(--teal); outline-offset:2px;}
+
+  select{width:100%; padding:11px 12px; border:1px solid var(--border); border-radius:var(--radius-sm); background:var(--surface-alt); font-family:inherit; font-size:14.5px; color:var(--text); cursor:pointer;}
+
+  .ciclo-opt{display:flex; gap:12px; align-items:flex-start; padding:12px 14px; background:var(--surface-alt); border:1px solid var(--border); border-radius:var(--radius-md); margin-bottom:8px; cursor:pointer;}
+  .ciclo-opt:hover{border-color:var(--teal-line);}
+  .ciclo-opt input{margin-top:4px; accent-color:var(--teal); width:16px; height:16px; flex:none;}
+  .ciclo-opt.sel{background:var(--teal-soft); border-color:var(--teal);}
+  .ciclo-opt .code{font-weight:700; font-size:13px; color:var(--teal-dark);}
+  .ciclo-opt .desc{font-size:14px; margin-top:2px;}
+  .ciclo-opt .why{font-size:12.5px; color:var(--text-muted); margin-top:4px;}
+  .badge{display:inline-block; font-size:10.5px; font-weight:700; letter-spacing:.02em; padding:2px 8px; border-radius:var(--radius-pill); background:var(--sage-soft); color:var(--sage-dark); margin-left:6px; vertical-align:1px;}
+
+  .dicitura{background:#FBFCFB; border:1px dashed var(--teal-line); border-radius:var(--radius-md); padding:16px 18px; font-size:15px; line-height:1.6; white-space:pre-line;}
+  .copy-row{display:flex; align-items:center; gap:12px; margin-top:10px;}
+  .btn{font-family:inherit; font-size:13.5px; font-weight:700; color:#fff; background:var(--teal); border:none; padding:10px 18px; border-radius:var(--radius-pill); cursor:pointer;}
+  .btn:hover{background:var(--teal-dark);}
+  .copy-msg{font-size:13px; color:var(--sage-dark);}
+
+  .rec-card{border-left:3px solid var(--teal); background:var(--surface-alt); border-radius:0 var(--radius-sm) var(--radius-sm) 0; padding:12px 16px; margin-bottom:10px;}
+  .rec-card .txt{font-size:14px; line-height:1.55;}
+  .rec-card.warn{border-left-color:var(--clay); background:var(--clay-soft);}
+  .rec-card.note{border-left-color:var(--violet); background:var(--violet-soft);}
+  .rec-card.muted{border-left-color:var(--border); background:var(--surface-alt);}
+  .rec-card.muted .txt{color:var(--text-muted);}
+
+  .check-list{display:flex; flex-direction:column; gap:7px; margin:10px 0 6px 0;}
+  .check-item{display:flex; align-items:flex-start; gap:10px; padding:10px 14px; background:var(--surface-alt); border-radius:var(--radius-sm); cursor:pointer; font-size:13.5px; line-height:1.45;}
+  .check-item:hover{background:var(--teal-soft);}
+  .check-item input{margin-top:2px; width:16px; height:16px; accent-color:var(--clay); flex:none;}
+  .check-item .src{margin-top:3px;}
+  .check-item.on{background:var(--clay-soft);}
+
+  .result{border-radius:var(--radius-md); padding:16px 18px; border:1px solid var(--border); background:var(--surface-alt); margin-top:14px; font-size:14.5px;}
+  .result.block{background:var(--clay-soft); border-color:var(--clay-line); color:#5A3527;}
+  .result strong{display:block; margin-bottom:4px;}
+  .result ul{margin:6px 0 0 0; padding-left:18px;}
+
+  .rules dt{font-weight:600; font-size:14px; margin-top:12px;}
+  .rules dt:first-child{margin-top:0;}
+  .rules dd{margin:3px 0 0 0; font-size:14px; color:var(--text-muted);}
+
+  .fonti{margin-top:64px; padding-top:32px; border-top:1px solid var(--border);}
+  .fonti h2{font-size:21px;}
+  .fonti ol{padding-left:20px; margin:16px 0 0 0;}
+  .fonti li{font-size:13.5px; color:var(--text-muted); margin-bottom:9px; line-height:1.55;}
+  .fonti li .t{color:var(--text); font-weight:600;}
+  footer.site{max-width:760px; margin:40px auto 0 auto; padding:24px 20px 40px 20px; color:var(--text-faint); font-size:12.5px; border-top:1px solid var(--border);}
+  @media (prefers-reduced-motion:reduce){*{transition:none !important;}}
+</style>
+</head>
+<!-- v1.0.0 -->
+<body>
+
+<header class="site">
+  <div class="site-inner"><a href="index.html">RheumaDoc</a><span class="sep">/</span>Medicina termale</div>
+</header>
+
+<div class="wrap">
+
+  <div class="hero">
+    <h1>Medicina termale</h1>
+    <p class="sub">Dalla patologia al ciclo di cure a carico del SSN, con la dicitura da riportare in ricetta. Per la visita di accettazione: tecniche inalatorie per distretto e controindicazioni.</p>
+    <div class="disclaimer">
+      <strong>Da leggere prima di usarlo.</strong> Supporto alla prescrizione e alla visita, non sostituisce il giudizio del medico. Patologie e cicli seguono l'Allegato 9 dei LEA. Un atto nazionale unico che associ ogni patologia al suo ciclo non esiste: il collegamento indicato deriva dal nome del ciclo nell'Allegato 9 e dalla tabella dei cicli consigliati costruita sulle categorie del DM 15/12/1994, recepita negli atti regionali.
+    </div>
+  </div>
+
+  <div class="landing" id="landing">
+    <button type="button" class="landing-btn" data-target="prescrizione">
+      <span class="lb-title">Prescrizione</span>
+      <span class="lb-desc">Per il medico di base: patologia, ciclo SSN e dicitura per la ricetta rossa.</span>
+    </button>
+    <button type="button" class="landing-btn" data-target="accettazione">
+      <span class="lb-title">Visita di accettazione</span>
+      <span class="lb-desc">Per il medico termale: tecniche inalatorie per distretto e controindicazioni.</span>
+    </button>
+  </div>
+
+  <!-- ================= PRESCRIZIONE ================= -->
+  <section class="block hidden" id="prescrizione">
+    <button type="button" class="back-link" data-back>← Cambia sezione</button>
+    <div class="block-head"><h2>Prescrizione</h2></div>
+
+    <div class="panel">
+      <div class="step-label"><span class="n">1</span><h3>Gruppo di patologie</h3></div>
+      <div class="toggle-row" id="gruppoRow"></div>
+      <div class="src">Allegato 9 LEA</div>
+    </div>
+
+    <div class="panel hidden" id="patPanel">
+      <div class="step-label"><span class="n">2</span><h3>Patologia</h3></div>
+      <select id="patSelect" aria-label="Patologia"></select>
+      <div class="src">Allegato 9 LEA (descrizione e codice ICD-9-CM come riportati nell'elenco)</div>
+      <div id="patNotes" style="margin-top:12px;"></div>
+    </div>
+
+    <div class="panel hidden" id="cicloPanel">
+      <div class="step-label"><span class="n">3</span><h3>Ciclo di cure</h3></div>
+      <div id="cicloList"></div>
+    </div>
+
+    <div class="panel hidden" id="dicPanel">
+      <div class="step-label"><span class="n">4</span><h3>Dicitura per la ricetta</h3></div>
+      <div class="dicitura" id="dicitura"></div>
+      <div class="copy-row"><button type="button" class="btn" id="copyBtn">Copia la dicitura</button><span class="copy-msg" id="copyMsg"></span></div>
+      <div class="src">Contenuto della prescrizione: diagnosi tra quelle previste e ciclo corrispondente — DGR Lombardia 6/37451/1998, All. A. Descrizioni e codici: Allegato 9 LEA.</div>
+    </div>
+
+    <div class="panel">
+      <h3>Prima di consegnare la ricetta</h3>
+      <div class="rec-card">
+        <div class="txt">Ricettario SSN (ricetta rossa). La prescrizione dematerializzata non è ancora attiva per le cure termali: secondo il Ministero lo sarà dopo l'aggiornamento dell'Allegato 9 con codici specifici per le prestazioni termali.</div>
+        <div class="src">Regione Lombardia; Quotidiano Sanità 2025</div>
+      </div>
+      <div class="rec-card">
+        <div class="txt">Indica una diagnosi compresa nell'elenco e il ciclo che le corrisponde.</div>
+        <div class="src">DGR Lombardia 6/37451/1998, All. A</div>
+      </div>
+      <div class="rec-card">
+        <div class="txt">Se il paziente lo richiede, riporta in ricetta il diritto all'esenzione totale o parziale e il relativo codice. L'esenzione autocertificata non è accettata dalle strutture.</div>
+        <div class="src">Regione Lombardia</div>
+      </div>
+      <div class="rec-card">
+        <div class="txt">Il paziente dichiara sul retro, sotto la propria responsabilità, di non aver usufruito di un altro ciclo a carico del SSN nell'anno, oppure di appartenere a una categoria protetta.</div>
+        <div class="src">Regione Lombardia; DGR Lombardia 6/37451/1998, All. A</div>
+      </div>
+      <div class="rec-card warn">
+        <div class="txt">Cosa succede se la ricetta non è corretta: con una diagnosi non trattabile in ambito termale il paziente non viene ammesso; con una diagnosi corretta ma un ciclo non corrispondente o generico, la struttura eroga le cure correlate alla diagnosi, concordandole in caso di dubbio con il medico ASL di riferimento.</div>
+        <div class="src">DGR Lombardia 6/37451/1998, All. A4</div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h3>Regole del ciclo</h3>
+      <dl class="rules">
+        <dt>Quanti cicli</dt>
+        <dd>Uno per anno solare (1 gennaio – 31 dicembre) a carico del SSN, nell'anno in cui il ciclo inizia. Un secondo ciclo nello stesso anno, legato alla patologia invalidante, è previsto per invalidi di guerra e per servizio, ciechi, sordi e invalidi civili.<div class="src">Regione Lombardia</div></dd>
+        <dt>Durata</dt>
+        <dd>Una volta iniziato, il ciclo dura 12 giorni e va completato entro 60, salvo sospensione da parte del medico termale.<div class="src">Regione Lombardia</div></dd>
+        <dt>Sedute al giorno</dt>
+        <dd>Una per fango-balneoterapia, due per le cure inalatorie, fino a tre a giorni alterni per il ciclo integrato di ventilazione polmonare.<div class="src">Regione Lombardia</div></dd>
+        <dt>Ticket</dt>
+        <dd>Fino a 55 € per chi non è esente; 3,10 € per gli esenti parziali (per esempio per reddito, età o patologia); nessun importo per gli esenti totali.<div class="src">Regione Emilia-Romagna</div></dd>
+      </dl>
+    </div>
+  </section>
+
+  <!-- ================= ACCETTAZIONE ================= -->
+  <section class="block hidden" id="accettazione">
+    <button type="button" class="back-link" data-back>← Cambia sezione</button>
+    <div class="block-head"><h2>Visita di accettazione</h2></div>
+
+    <div class="panel">
+      <h3>Tecniche inalatorie per distretto</h3>
+      <p class="block-note" style="margin-bottom:14px;">Il medico di base prescrive il ciclo; la scelta delle tecniche al suo interno spetta al medico termale. Qui sotto solo le tecniche per cui esiste uno studio citabile; le altre sono elencate a parte.</p>
+      <div style="margin-bottom:12px;">
+        <div class="block-note" style="margin-bottom:6px; font-weight:600; color:var(--text);">Distretto</div>
+        <div class="toggle-row" id="distrettoRow">
+          <button type="button" class="toggle-opt" data-val="naso">Naso</button>
+          <button type="button" class="toggle-opt" data-val="seni">Seni paranasali</button>
+          <button type="button" class="toggle-opt" data-val="orecchio">Rinofaringe, tuba e orecchio medio</button>
+          <button type="button" class="toggle-opt" data-val="faringe">Faringe e laringe</button>
+          <button type="button" class="toggle-opt" data-val="bronchi">Bronchi</button>
+        </div>
+      </div>
+      <div>
+        <div class="block-note" style="margin-bottom:6px; font-weight:600; color:var(--text);">Paziente</div>
+        <div class="toggle-row" id="etaRow">
+          <button type="button" class="toggle-opt on" data-val="adulto">Adulto</button>
+          <button type="button" class="toggle-opt" data-val="bambino">Bambino</button>
+        </div>
+      </div>
+      <div id="tecnicheOut" style="margin-top:18px;"></div>
+      <div class="rec-card muted" style="margin-top:14px;">
+        <div class="txt">Previste dall'Allegato 9 o dai cicli INPS, ma senza uno studio clinico trovato: humage, nebulizzazione, doccia nasale micronizzata, ventilazione polmonare controllata. Non ne riporto indicazioni.</div>
+        <div class="src">Allegato 9 LEA</div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h3>Controindicazioni in atto</h3>
+      <p class="block-note" style="margin-bottom:14px;">Scegli il tipo di ciclo e spunta ciò che è presente. Le voci derivano da fonti diverse, indicate accanto a ciascuna: per le cure inalatorie un elenco sistematico di controindicazioni non l'ho trovato.</p>
+      <div class="toggle-row" id="tipoCicloRow" style="margin-bottom:12px;">
+        <button type="button" class="toggle-opt on" data-val="fango">Fanghi e bagni</button>
+        <button type="button" class="toggle-opt" data-val="inal">Cure inalatorie e ORL</button>
+        <button type="button" class="toggle-opt" data-val="altro">Altri cicli</button>
+      </div>
+      <div class="check-list" id="ciList"></div>
+      <div class="result" id="ciResult">Nessuna voce selezionata.</div>
+      <div id="ciCaso" style="margin-top:14px;"></div>
+    </div>
+  </section>
+
+  <div class="fonti">
+    <h2>Fonti</h2>
+    <ol>
+      <li><span class="t">Allegato 9 LEA.</span> Assistenza termale: aventi diritto (patologie con codice ICD-9-CM) e prestazioni. Livelli essenziali di assistenza, DPCM 12 gennaio 2017; versione del documento fornito dalla docente di medicina termale.</li>
+      <li><span class="t">DM 15 dicembre 1994.</span> Elenco delle patologie per il cui trattamento è assicurata l'erogazione delle cure termali a carico del SSN. Testo consultato sul sito della <a href="https://www.regione.vda.it/allegato.aspx?pk=5798" target="_blank" rel="noopener">Regione Valle d'Aosta</a>.</li>
+      <li><span class="t">DGR Lombardia 17 luglio 1998, n. 6/37451.</span> Erogazione di prestazioni termali. BURL n. 34 del 24/08/1998; Allegati A, A3 (patologie trattabili e ciclo di cura consigliato), A4. <a href="https://www.consultazioniburl.servizirl.it/pdf/1998/01340.pdf" target="_blank" rel="noopener">PDF</a></li>
+      <li><span class="t">Regione Lombardia.</span> Cure termali e terme. <a href="https://www.regione.lombardia.it/sanita/cure-specialistiche/cure-termali-e-terme" target="_blank" rel="noopener">Pagina</a></li>
+      <li><span class="t">Regione Emilia-Romagna.</span> Aventi diritto alle cure termali. <a href="https://salute.regione.emilia-romagna.it/normativa-e-documentazione/elenchi/archivio/aventi-diritto-cure-termali" target="_blank" rel="noopener">Pagina</a></li>
+      <li><span class="t">Quotidiano Sanità, 2025.</span> Lea, Ministero Salute: con il loro aggiornamento si darà attuazione alla ricetta dematerializzata nel settore termale. <a href="https://www.quotidianosanita.it/?p=142753" target="_blank" rel="noopener">Articolo</a></li>
+      <li><span class="t">INPS, Messaggio n. 23 dell'11 aprile 2003</span>, richiamato dal Messaggio n. 1274 del 27 marzo 2017: controindicazioni alla fangoterapia e alla balneoterapia. Testo riportato da <a href="https://fimmg.bari.it/articoli/VBAVP" target="_blank" rel="noopener">FIMMG Bari</a>.</li>
+      <li><span class="t">Di Giacomo S.</span> Cure termali per le malattie respiratorie: funzionano davvero? SIF Magazine, Società Italiana di Farmacologia, 29/02/2024. <a href="https://www.sifweb.org/sif-magazine/articolo/cure-termali-per-le-malattie-respiratorie-funzionano-davvero-2024-02-29" target="_blank" rel="noopener">Articolo</a></li>
+      <li><span class="t">Labiris NR, Dolovich MB.</span> Pulmonary drug delivery. Part I: physiological factors affecting therapeutic effectiveness of aerosolized medications. Br J Clin Pharmacol 2003;56(6):588–599. <a href="https://doi.org/10.1046/j.1365-2125.2003.01892.x" target="_blank" rel="noopener">doi:10.1046/j.1365-2125.2003.01892.x</a></li>
+      <li><span class="t">Möller W, Schuschnig U, Celik G, et al.</span> Topical drug delivery in chronic rhinosinusitis patients before and after sinus surgery using pulsating aerosols. PLoS One 2013;8(9):e74991. <a href="https://doi.org/10.1371/journal.pone.0074991" target="_blank" rel="noopener">doi:10.1371/journal.pone.0074991</a></li>
+      <li><span class="t">Chong LY, Head K, Hopkins C, et al.</span> Saline irrigation for chronic rhinosinusitis. Cochrane Database Syst Rev 2016;(4):CD011995. <a href="https://doi.org/10.1002/14651858.CD011995.pub2" target="_blank" rel="noopener">doi:10.1002/14651858.CD011995.pub2</a></li>
+      <li><span class="t">Casale M, Moffa A, Cassano M, et al.</span> Saline nasal irrigations for chronic rhinosinusitis: from everyday practice to evidence-based medicine. An update. Int J Immunopathol Pharmacol 2018;32:2058738418802676. <a href="https://doi.org/10.1177/2058738418802676" target="_blank" rel="noopener">doi:10.1177/2058738418802676</a></li>
+      <li><span class="t">Keller S, König V, Mösges R.</span> Thermal water applications in the treatment of upper respiratory tract diseases: a systematic review and meta-analysis. J Allergy 2014;2014:943824. <a href="https://doi.org/10.1155/2014/943824" target="_blank" rel="noopener">doi:10.1155/2014/943824</a></li>
+      <li><span class="t">Varricchio A, Brindisi G, Brunese FP, et al.</span> Thermal water inhalation for allergic rhinitis and recurrent respiratory infections: a narrative review of the evidence. Ital J Pediatr 2025;51:290. <a href="https://doi.org/10.1186/s13052-025-02133-1" target="_blank" rel="noopener">doi:10.1186/s13052-025-02133-1</a></li>
+      <li><span class="t">Salami A, Dellepiane M, Crippa B, et al.</span> Sulphurous water inhalations in the prophylaxis of recurrent upper respiratory tract infections. Int J Pediatr Otorhinolaryngol 2008;72(11). <a href="https://doi.org/10.1016/j.ijporl.2008.08.014" target="_blank" rel="noopener">doi:10.1016/j.ijporl.2008.08.014</a></li>
+      <li><span class="t">Nappi G, Passali D, De Luca S.</span> Studio caso-controllo della terapia inalatoria presso la Grotta Giusti sulla funzionalità respiratoria nasale. Università di Milano, Scuola di Specializzazione in Idrologia Medica. <a href="https://espalibrary.eu/documents/314/70ca9457-86e3-4f18-9c5c-e718056f0e3b-4_terapia_inalatoria_grotta_giusti_61.pdf" target="_blank" rel="noopener">PDF</a></li>
+      <li><span class="t">Costantino M, Lampa E, Nappi G.</span> Efficacia del politzer crenoterapico sulfureo nel trattamento della sordità rinogena. Acta Otorhinolaryngol Ital 2006;26:7–13. <a href="https://old.actaitalica.it/issues/2006/1-06/costantino.pdf" target="_blank" rel="noopener">PDF</a></li>
+      <li><span class="t">Mirandola P, Gobbi G, Malinverno C, et al.</span> Impact of sulphurous water politzer inhalation on audiometric parameters in children with otitis media with effusion. Clin Exp Otorhinolaryngol 2013;6(1):7–11. <a href="https://doi.org/10.3342/ceo.2013.6.1.7" target="_blank" rel="noopener">doi:10.3342/ceo.2013.6.1.7</a></li>
+      <li><span class="t">De Nobili E, Bellomo AM.</span> Studio comparativo dell'efficacia del politzer crenoterapico con acqua sulfurea versus politzer crenoterapico e autoinsufflazione domiciliare (metodo Otovent) in pazienti affetti da disfunzione tubarica e otite media secretiva. Terme di Arta. <a href="https://espalibrary.eu/documents/315/08f88ef0-e457-4974-b776-af47606b478d-5_politzer_crenoterapico_64.pdf" target="_blank" rel="noopener">PDF</a></li>
+      <li><span class="t">Antonelli M, Pennacchi A, Pasquarella G, et al.</span> Inhalation therapy with sulfur-rich thermal water for rhinogenic deafness: a series of case reports. Int J Biometeorol 2025;69:703–707. <a href="https://doi.org/10.1007/s00484-024-02841-z" target="_blank" rel="noopener">doi:10.1007/s00484-024-02841-z</a></li>
+      <li><span class="t">Contoli M, Gnesini G, Forini G, et al.</span> Reducing agents decrease the oxidative burst and improve clinical outcomes in COPD patients: a randomised controlled trial on the effects of sulphurous thermal water inhalation. ScientificWorldJournal 2013;2013:927835. <a href="https://doi.org/10.1155/2013/927835" target="_blank" rel="noopener">doi:10.1155/2013/927835</a></li>
+    </ol>
+  </div>
+
+  <footer class="site">Strumento di supporto clinico, non sostituisce il giudizio del medico.</footer>
+</div>
+
+<script>
+(function(){
+  // ============ CICLI (descrizioni dall'Allegato 9 LEA) ============
+  const CICLI = {
+    '89.90.1': 'Fanghi più bagni o docce effettuate con acque minerali (c.d. di "Annettamento") per malattie artroreumatiche (ciclo di 12 fanghi e 12 bagni o docce)',
+    '89.90.2': 'Fanghi più bagni terapeutici (ciclo di 12 fanghi e 12 bagni)',
+    '89.90.3': 'Bagni per malattie artroreumatiche (ciclo di 12 bagni)',
+    '89.90.4': 'Bagni per malattie dermatologiche (ciclo di 12 bagni)',
+    '89.91.1': 'Stufe o grotte (ciclo di 12 sedute)',
+    '89.91.2': 'Cure inalatorie (inalazioni, nebulizzazioni, aerosol, humages) (ciclo di 24 prestazioni)',
+    '89.92.1': 'Irrigazioni vaginali (ciclo di 12 irrigazioni)',
+    '89.92.2': 'Irrigazioni vaginali più bagni (ciclo di 12 irrigazioni e 12 bagni)',
+    '89.92.3': 'Docce rettali (ciclo di 12 docce)',
+    '89.92.4': 'Cure idropiniche per calcolosi delle vie urinarie e sue recidive (ciclo di 12 prestazioni)',
+    '89.92.5': 'Cure idropiniche per malattie dell’apparato gastroenterico (ciclo di 12 prestazioni)',
+    '89.93.2': 'Ciclo di cura della sordità rinogena (visita specialistica, esame audiometrico, 12 insufflazioni endotimpaniche, 12 cure inalatorie)',
+    '89.93.3': 'Ciclo di cura integrato della ventilazione polmonare controllata (visita specialistica, 12 ventilazioni polmonari e non, 12 aerosol, 6 inalazioni o nebulizzazioni a giorni alterni)',
+    '89.93.5': 'Ciclo di idrofangobalneoterapia (c.d. "Fanghi epatici") (visita specialistica, 6 fanghi epatici, 6 bagni carbogassosi, 12 cure idropiniche)',
+    '89.94.1': 'Ciclo di cura dei postumi di flebopatie di tipo cronico (visita specialistica, ECG, esami ematochimici, oscillometria, doppler, 12 bagni terapeutici con idromassaggio)'
+  };
+  // brevi per la dicitura
+  const CICLI_BREVI = {
+    '89.90.1': 'Fanghi più bagni o docce di annettamento per malattie artroreumatiche (12 fanghi e 12 bagni o docce)',
+    '89.90.2': 'Fanghi più bagni terapeutici (12 fanghi e 12 bagni)',
+    '89.90.3': 'Bagni per malattie artroreumatiche (12 bagni)',
+    '89.90.4': 'Bagni per malattie dermatologiche (12 bagni)',
+    '89.91.1': 'Stufe o grotte (12 sedute)',
+    '89.91.2': 'Cure inalatorie (24 prestazioni)',
+    '89.92.1': 'Irrigazioni vaginali (12 irrigazioni)',
+    '89.92.2': 'Irrigazioni vaginali più bagni (12 irrigazioni e 12 bagni)',
+    '89.92.3': 'Docce rettali (12 docce)',
+    '89.92.4': 'Cure idropiniche per calcolosi delle vie urinarie (12 prestazioni)',
+    '89.92.5': 'Cure idropiniche per malattie dell’apparato gastroenterico (12 prestazioni)',
+    '89.93.2': 'Ciclo di cura della sordità rinogena',
+    '89.93.3': 'Ciclo di cura integrato della ventilazione polmonare controllata',
+    '89.93.5': 'Ciclo di idrofangobalneoterapia (fanghi epatici)',
+    '89.94.1': 'Ciclo di cura dei postumi di flebopatie di tipo cronico'
+  };
+
+  // ============ PATOLOGIE (Allegato 9 LEA) ============
+  function sedi(base, codeBase, labels){
+    return labels.map(function(l){ return [codeBase + l[0], base + l[1]]; });
+  }
+  const SEDI_9 = [['0',', sede non specificata'],['1',', spalla'],['2',', gomito'],['3',', polso'],['4',', carpo, metacarpo e articolazioni interfalangee della mano'],['5',', anca'],['6',', ginocchio'],['7',', tibio-tarsica e articolazione del piede'],['8',', altre sedi specificate']];
+
+  const REUMA = [
+    ['715.0','Artrosi generalizzata'],
+    ['715.1','Artrosi localizzata, primaria'],
+    ['715.10','Artrosi localizzata primaria sede non specificata'],
+    ['715.2','Artrosi localizzata, secondaria'],
+    ['715.3','Artrosi localizzata, non specificata se primaria o secondaria'],
+    ['715.8','Artrosi con interessamento di più di una sede, non specificata se generalizzata'],
+    ['715.90','Artrosi non specificata se generalizzata o localizzata, sede non specificata'],
+    ['715.91','Artrosi non specificata se generalizzata o localizzata, spalla'],
+    ['715.92','Artrosi non specificata se generalizzata o localizzata, gomito'],
+    ['715.93','Artrosi non specificata se generalizzata o localizzata, polso'],
+    ['715.94','Artrosi non specificata se generalizzata o localizzata, carpo, metacarpo ed articolazioni interfalangee della mano'],
+    ['715.95','Artrosi non specificata se generalizzata o localizzata, anca'],
+    ['715.96','Artrosi non specificata se generalizzata o localizzata, ginocchio'],
+    ['715.97','Artrosi non specificata se generalizzata o localizzata, tibio-tarsica ed articolazione del piede'],
+    ['715.98','Artrosi non specificata se generalizzata o localizzata, altre sedi specificate']
+  ]
+  .concat(sedi('Reumatismo recidivante', '719.3', SEDI_9)).concat([['719.39','Reumatismo recidivante, sedi multiple']])
+  .concat(sedi('Artralgia', '719.4', SEDI_9).map(function(x){ return x[0] === '719.47' ? ['719.47','Artralgia, tibio-tarsica ed articolazioni del piede'] : x; })).concat([['719.49','Artralgia, sedi multiple']])
+  .concat([
+    ['721.0','Spondilosi cervicale senza mielopatia'],
+    ['721.2','Spondilosi toracica senza mielopatia'],
+    ['721.3','Spondilosi lombosacrale senza mielopatia'],
+    ['721.90','Spondilosi in sede non specificata senza mielopatia'],
+    ['738.4','Spondilolistesi acquisita'],
+    ['716.50','Poliartropatia o poliartrite non specificata, sede non specificata'],
+    ['729.0','Fibromialgia e reumatismi extrarticolari diffusi non specificati']
+  ]);
+
+  const NOTE_DM94_BRONCHITE = {cls:'warn', txt:'Il DM 15/12/1994 esclude l’asma e l’enfisema avanzato. L’Allegato 9 attuale non riporta questa esclusione.', src:'DM 15/12/1994'};
+  const NOTE_ACUTA = {cls:'warn', txt:'Codice presente nell’elenco, ma le cure termali sono controindicate nella fase acuta della malattia.', src:'Di Giacomo, SIF 2024'};
+  const NOTE_COLESTEATOMA = {cls:'warn', txt:'Il DM 15/12/1994 comprende solo le otiti croniche purulente non colesteatomatose. L’Allegato 9 attuale non riporta questa esclusione.', src:'DM 15/12/1994'};
+  const NOTE_PSORIASI = {cls:'warn', txt:'Il DM 15/12/1994 esclude la psoriasi pustolosa ed eritrodermica. L’Allegato 9 attuale non riporta questa esclusione.', src:'DM 15/12/1994'};
+  const NOTE_ECZEMA = {cls:'warn', txt:'Il DM 15/12/1994 esclude le forme acute vescicolari ed essudative. L’Allegato 9 attuale non riporta questa esclusione.', src:'DM 15/12/1994'};
+  const NOTE_PSA = {cls:'note', txt:'Nell’Allegato 9 l’artropatia psoriasica è inserita tra le malattie dermatologiche, non tra le reumatiche.', src:'Allegato 9 LEA'};
+  const NOTE_NUOVA = {cls:'note', txt:'Patologia non presente nelle categorie del DM 15/12/1994: il ciclo indicato segue il gruppo di patologie dell’Allegato 9 e il nome del ciclo.', src:'Allegato 9 LEA'};
+
+  // ciclo options: [code, why, src, consigliato]
+  const C_REUMA = [
+    ['89.90.2','Osteoartrosi e forme degenerative: fangoterapia con o senza bagni. Reumatismi extra-articolari: fango-balneoterapia.','DGR Lombardia 6/37451/1998, All. A3; Allegato 9 LEA (prestazioni INPS per forme reumo-artropatiche)', true],
+    ['89.90.1','Ciclo dedicato alle malattie artroreumatiche.','Allegato 9 LEA', false],
+    ['89.90.3','Ciclo dedicato alle malattie artroreumatiche.','Allegato 9 LEA', false],
+    ['89.91.1','Indicato tra le prestazioni per le forme reumo-artropatiche.','Allegato 9 LEA (prestazioni INPS)', false]
+  ];
+  const C_INAL = [['89.91.2','Rinopatie, faringolaringiti, sinusiti croniche e sindromi rinosinusitiche: cure inalatorie.','DGR Lombardia 6/37451/1998, All. A3', true]];
+  const C_BRONCO = [
+    ['89.93.3','Bronchite cronica: ciclo integrato di ventilazione polmonare.','DGR Lombardia 6/37451/1998, All. A3', true],
+    ['89.91.2','Ciclo inalatorio generico delle vie respiratorie.','Allegato 9 LEA', false]
+  ];
+  const C_ORECCHIO = [['89.93.2','Stenosi tubarica, otiti e sordità rinogena: ciclo della sordità rinogena.','DGR Lombardia 6/37451/1998, All. A3; Allegato 9 LEA', true]];
+  const C_DERMA = [['89.90.4','Psoriasi, eczema, dermatite atopica e seborroica: balneoterapia.','DGR Lombardia 6/37451/1998, All. A3; Allegato 9 LEA', true]];
+  const C_VAGINITI = [
+    ['89.92.1','Leucorrea persistente da vaginiti croniche: irrigazioni vaginali.','DGR Lombardia 6/37451/1998, All. A3', true],
+    ['89.92.2','Ciclo ginecologico con irrigazioni e bagni.','Allegato 9 LEA', false]
+  ];
+  const C_PELVI = [
+    ['89.92.2','Sclerosi del connettivo pelvico e condizioni affini: irrigazioni vaginali con bagni.','DGR Lombardia 6/37451/1998, All. A3', true],
+    ['89.92.1','Ciclo ginecologico con sole irrigazioni.','Allegato 9 LEA', false]
+  ];
+  const C_URO = [['89.92.4','Calcolosi delle vie urinarie: cure idropiniche.','DGR Lombardia 6/37451/1998, All. A3; Allegato 9 LEA', true]];
+  const C_VASC = [['89.94.1','Postumi di flebopatie e insufficienza venosa cronica.','DGR Lombardia 6/37451/1998, All. A3; Allegato 9 LEA', true]];
+  const C_GASTRO = [
+    ['89.92.5','Dispepsia e intestino irritabile: cure idropiniche.','DGR Lombardia 6/37451/1998, All. A3; Allegato 9 LEA', true],
+    ['89.93.5','Dispepsia e intestino irritabile: in alternativa cure idropiniche con idrofangobalneoterapia.','DGR Lombardia 6/37451/1998, All. A3', false]
+  ];
+  const C_INTESTINO = C_GASTRO.concat([['89.92.3','Forme intestinali con stipsi: docce rettali.','DGR Lombardia 6/37451/1998, All. A3', false]]);
+  const C_EPATO = [
+    ['89.92.5','Cure idropiniche per malattie dell’apparato gastroenterico.','Allegato 9 LEA', true],
+    ['89.93.5','Ciclo denominato "fanghi epatici".','Allegato 9 LEA', false]
+  ];
+
+  function P(code, label, cicli, notes){ return {code:code, label:label, cicli:cicli, notes:notes || []}; }
+
+  const GRUPPI = [
+    {id:'reuma', nome:'Reumatiche', pat: REUMA.map(function(r){
+      return P(r[0], r[1], C_REUMA, r[0] === '729.0' ? [NOTE_NUOVA] : (/^719\.[34]/.test(r[0]) ? [NOTE_NUOVA] : []));
+    })},
+    {id:'resp', nome:'Vie respiratorie', pat:[
+      P('472.0','Rinite cronica', C_INAL),
+      P('491','Bronchite cronica', C_BRONCO, [NOTE_DM94_BRONCHITE]),
+      P('491.0','Bronchite cronica semplice', C_BRONCO, [NOTE_DM94_BRONCHITE]),
+      P('491.1','Bronchite cronica muco-purulenta', C_BRONCO, [NOTE_DM94_BRONCHITE]),
+      P('491.8','Altre bronchiti croniche', C_BRONCO, [NOTE_DM94_BRONCHITE]),
+      P('491.20','Bronchite cronica ostruttiva, senza esacerbazione', C_BRONCO, [NOTE_DM94_BRONCHITE]),
+      P('491.21','Bronchite cronica ostruttiva, con esacerbazione', C_BRONCO, [NOTE_DM94_BRONCHITE, NOTE_ACUTA]),
+      P('494.0','Bronchiectasie senza riacutizzazione', C_BRONCO, [NOTE_NUOVA]),
+      P('494.1','Bronchiectasie con riacutizzazione', C_BRONCO, [NOTE_NUOVA, NOTE_ACUTA])
+    ]},
+    {id:'orl', nome:'ORL', pat:[
+      P('381','Otite media non suppurativa e disturbi della tromba di Eustachio', C_ORECCHIO),
+      P('381.10','Otite media cronica sierosa semplice o non specificata', C_ORECCHIO),
+      P('381.20','Otite media cronica mucosa semplice o non specificata', C_ORECCHIO),
+      P('381.6','Ostruzione della tromba di Eustachio', C_ORECCHIO),
+      P('381.60','Ostruzione della tromba di Eustachio non specificata', C_ORECCHIO),
+      P('381.81','Disfunzione della tromba di Eustachio', C_ORECCHIO),
+      P('381.89','Altri disturbi della tromba di Eustachio', C_ORECCHIO),
+      P('382.1','Otite media cronica suppurativa tubotimpanica', C_ORECCHIO, [NOTE_COLESTEATOMA]),
+      P('382.3','Otite media cronica suppurativa non specificata', C_ORECCHIO, [NOTE_COLESTEATOMA]),
+      P('382.9A','Otite media cronica non specificata', C_ORECCHIO),
+      P('382.9B','Sordità rinogena', C_ORECCHIO),
+      P('382.9C','Ototubarite', C_ORECCHIO),
+      P('382.9D','Ipoacusia rinogena', C_ORECCHIO),
+      P('382.9E','Otite siero-mucosa cronica', C_ORECCHIO),
+      P('382.9F','Otite catarrale cronica', C_ORECCHIO),
+      P('382.9G','Otite purulenta cronica', C_ORECCHIO, [NOTE_COLESTEATOMA]),
+      P('389.0','Sordità di conduzione', C_ORECCHIO),
+      P('389.03','Sordità di conduzione orecchio medio', C_ORECCHIO),
+      P('389.08','Sordità di conduzione di tipo combinato', C_ORECCHIO),
+      P('471.0','Polipi della cavità nasale', C_INAL, [NOTE_NUOVA]),
+      P('473','Sinusite cronica', C_INAL),
+      P('473.0','Sinusite cronica mascellare', C_INAL),
+      P('473.1','Sinusite cronica frontale', C_INAL),
+      P('473.2','Sinusite cronica etmoidale', C_INAL),
+      P('473.3','Sinusite cronica sfenoidale', C_INAL),
+      P('473.8','Altre sinusiti croniche', C_INAL),
+      P('473.9A','Sinusite allergica', C_INAL),
+      P('473.9B','Polisinusite cronica', C_INAL),
+      P('473.9C','Rinosinusite cronica', C_INAL),
+      P('473.9D','Sinusiti croniche recidivanti', C_INAL),
+      P('473.9E','Sinusiti iperplastiche', C_INAL),
+      P('474','Malattie croniche delle tonsille e delle adenoidi', C_INAL, [NOTE_NUOVA]),
+      P('474.00','Tonsillite cronica', C_INAL, [NOTE_NUOVA]),
+      P('474.01','Adenoidite cronica', C_INAL, [NOTE_NUOVA]),
+      P('474.1','Ipertrofia delle tonsille e delle adenoidi', C_INAL, [NOTE_NUOVA]),
+      P('472','Faringite e rinofaringite cronica', C_INAL),
+      P('472.1','Faringite cronica', C_INAL),
+      P('472.2','Rinofaringite cronica', C_INAL),
+      P('476','Laringite e laringotracheite cronica', C_INAL),
+      P('476.0','Laringite cronica', C_INAL),
+      P('476.1','Laringotracheite cronica', C_INAL),
+      P('477','Rinite allergica', C_INAL),
+      P('478.0','Ipertrofia dei turbinati nasali', C_INAL, [NOTE_NUOVA])
+    ]},
+    {id:'derma', nome:'Dermatologiche', pat:[
+      P('690.1','Dermatite seborroica', C_DERMA),
+      P('690.10','Dermatite seborroica, non specificata', C_DERMA),
+      P('690.12','Dermatite seborroica infantile', C_DERMA),
+      P('690.18','Altre dermatiti seborroiche', C_DERMA),
+      P('706.0','Acne varioliforme', C_DERMA, [NOTE_NUOVA]),
+      P('706.1','Altre acni', C_DERMA, [NOTE_NUOVA]),
+      P('691','Dermatite atopica non specificata', C_DERMA, [NOTE_ECZEMA]),
+      P('691.8','Altre dermatiti atopiche e affezioni correlate', C_DERMA, [NOTE_ECZEMA]),
+      P('692','Dermatite da contatto ed altri eczemi', C_DERMA, [NOTE_ECZEMA]),
+      P('696','Psoriasi e altre affezioni similari', C_DERMA, [NOTE_PSORIASI]),
+      P('696.0','Artropatia psoriasica', C_DERMA, [NOTE_PSA, NOTE_NUOVA]),
+      P('696.1','Altre psoriasi', C_DERMA, [NOTE_PSORIASI])
+    ]},
+    {id:'gine', nome:'Ginecologiche', pat:[
+      P('131.00','Tricomoniasi urogenitale, non specificata', C_VAGINITI),
+      P('131.01','Vulvovaginite', C_VAGINITI),
+      P('616.10','Vaginite e vulvovaginite, non specificate', C_VAGINITI),
+      P('623.5','Leucorrea, non specificata se infettiva', C_VAGINITI),
+      P('627.3','Vaginite atrofica postmenopausale', C_VAGINITI),
+      P('654.6A','Cervice cicatrizzata', C_PELVI),
+      P('654.6B','Cervice rigida', C_PELVI),
+      P('654.6C','Pregresso intervento chirurgico cervicale', C_PELVI),
+      P('654.6D','Stenosi o strettura cervicale', C_PELVI),
+      P('614.9A','Infiammazione pelvica cronica', C_PELVI)
+    ]},
+    {id:'uro', nome:'Apparato urinario', pat:[ P('592.0','Calcolosi renale', C_URO) ]},
+    {id:'vasc', nome:'Vascolari', pat:[
+      P('459.10','Sindrome postflebitica senza complicazioni', C_VASC),
+      P('459.81','Insufficienza (periferica) venosa non specificata', C_VASC)
+    ]},
+    {id:'gastro', nome:'Gastroenteriche', pat:[
+      P('306.4A','Dispepsia psicogena', C_GASTRO),
+      P('306.4B','Gastrite nervosa', C_GASTRO),
+      P('536.8','Dispepsia e altri disturbi specificati della funzione gastrica', C_GASTRO),
+      P('576.9A','Discinesie delle vie biliari con dispepsia', C_GASTRO),
+      P('569.9A','Dispepsia di origine gastroenterica e biliare', C_GASTRO),
+      P('569.9B','Colecistite cronica alitiasica', C_GASTRO, [NOTE_NUOVA]),
+      P('569.9C','(Gastro)duodenite cronica con dispepsia', C_GASTRO),
+      P('564.1','Sindrome del colon irritabile', C_INTESTINO),
+      P('564.89','Altri disturbi funzionali specificati dell’intestino', C_INTESTINO),
+      P('571.8','Altra epatopatia cronica non alcolica', C_EPATO, [NOTE_NUOVA]),
+      P('571.9','Epatopatia cronica non specificata senza menzione di alcool', C_EPATO, [NOTE_NUOVA])
+    ]}
+  ];
+
+  // ============ STATO E RENDER: PRESCRIZIONE ============
+  const S = {gruppo:null, pat:null, ciclo:null};
+  const gruppoRow = document.getElementById('gruppoRow');
+  GRUPPI.forEach(function(g){
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'toggle-opt'; b.dataset.val = g.id; b.textContent = g.nome;
+    b.addEventListener('click', function(){
+      gruppoRow.querySelectorAll('.toggle-opt').forEach(function(x){ x.classList.remove('on'); });
+      b.classList.add('on');
+      S.gruppo = g; S.pat = null; S.ciclo = null;
+      renderPatSelect();
+    });
+    gruppoRow.appendChild(b);
+  });
+
+  const patSelect = document.getElementById('patSelect');
+  function renderPatSelect(){
+    document.getElementById('patPanel').classList.remove('hidden');
+    patSelect.innerHTML = '<option value="">Scegli la patologia…</option>' + S.gruppo.pat.map(function(p, i){
+      return '<option value="' + i + '">' + p.code + ' — ' + p.label + '</option>';
+    }).join('');
+    document.getElementById('patNotes').innerHTML = '';
+    document.getElementById('cicloPanel').classList.add('hidden');
+    document.getElementById('dicPanel').classList.add('hidden');
+  }
+  patSelect.addEventListener('change', function(){
+    if(patSelect.value === ''){ S.pat = null; document.getElementById('cicloPanel').classList.add('hidden'); document.getElementById('dicPanel').classList.add('hidden'); document.getElementById('patNotes').innerHTML=''; return; }
+    S.pat = S.gruppo.pat[parseInt(patSelect.value, 10)];
+    S.ciclo = S.pat.cicli[0][0];
+    renderNotes(); renderCicli(); renderDicitura();
+  });
+
+  function renderNotes(){
+    document.getElementById('patNotes').innerHTML = S.pat.notes.map(function(n){
+      return '<div class="rec-card ' + n.cls + '"><div class="txt">' + n.txt + '</div><div class="src">' + n.src + '</div></div>';
+    }).join('');
+  }
+
+  function renderCicli(){
+    const wrap = document.getElementById('cicloList');
+    document.getElementById('cicloPanel').classList.remove('hidden');
+    wrap.innerHTML = S.pat.cicli.map(function(c){
+      const sel = c[0] === S.ciclo;
+      return '<label class="ciclo-opt' + (sel ? ' sel' : '') + '"><input type="radio" name="ciclo" value="' + c[0] + '"' + (sel ? ' checked' : '') + '>' +
+        '<div><div class="code">' + c[0] + (c[3] ? '<span class="badge">consigliato</span>' : '') + '</div>' +
+        '<div class="desc">' + CICLI[c[0]] + '</div>' +
+        '<div class="why">' + c[1] + '</div><div class="src">' + c[2] + '</div></div></label>';
+    }).join('');
+    wrap.querySelectorAll('input[name="ciclo"]').forEach(function(r){
+      r.addEventListener('change', function(){ S.ciclo = r.value; renderCicli(); renderDicitura(); });
+    });
+  }
+
+  function renderDicitura(){
+    document.getElementById('dicPanel').classList.remove('hidden');
+    document.getElementById('dicitura').textContent =
+      'Diagnosi: ' + S.pat.label + ' (ICD-9-CM ' + S.pat.code + ')\n' +
+      'Si richiede: ' + CICLI_BREVI[S.ciclo] + ' – cod. ' + S.ciclo;
+    document.getElementById('copyMsg').textContent = '';
+  }
+
+  document.getElementById('copyBtn').addEventListener('click', function(){
+    const txt = document.getElementById('dicitura').textContent;
+    const msg = document.getElementById('copyMsg');
+    function fallback(){
+      const ta = document.createElement('textarea'); ta.value = txt; document.body.appendChild(ta); ta.select();
+      try{ document.execCommand('copy'); msg.textContent = 'Copiata.'; }catch(e){ msg.textContent = 'Copia non riuscita: seleziona il testo a mano.'; }
+      document.body.removeChild(ta);
+    }
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(txt).then(function(){ msg.textContent = 'Copiata.'; }, fallback);
+    } else { fallback(); }
+  });
+
+  // ============ TECNICHE PER DISTRETTO ============
+  function R(txt, src, cls){ return {txt:txt, src:src, cls:cls || ''}; }
+  const TECNICHE = {
+    naso: {
+      ciclo:'89.91.2',
+      adulto:[
+        R('Inalazione caldo-umida seguita da aerosol nasale, una volta al giorno per 12 giorni: schema studiato in riniti e rinosinusiti.', 'Nappi, Passali, De Luca (Grotta Giusti)'),
+        R('Nei dati aggregati, le applicazioni di acqua termale nelle vie aeree superiori migliorano il trasporto mucociliare e, a 30–90 giorni, le resistenze nasali. Evidenza di qualità bassa.', 'Keller 2014'),
+        R('Irrigazione nasale con acqua termale: studiata nella rinite cronica non allergica dei fumatori, con più cellule ciliate e migliore quadro endoscopico a un mese rispetto alla soluzione isotonica.', 'Casale 2018; Keller 2014 (studi inclusi)'),
+        R('Le goccioline grandi, come quelle degli spray nasali (circa 60 µm), vengono trattenute nel naso.', 'Möller 2013', 'note')
+      ],
+      bambino:[
+        R('Aerosol con acqua termale nella rinite allergica stagionale del bambino.', 'Keller 2014 (studi inclusi); Varricchio 2025'),
+        R('Inalazioni caldo-umide con acqua sulfurea per 12 giorni nelle infezioni ricorrenti delle alte vie: episodi meno frequenti, più brevi e meno gravi nei 3 mesi successivi rispetto alla soluzione fisiologica (100 bambini).', 'Salami 2008'),
+        R('Evidenza promettente ma limitata: studi piccoli, eterogenei, quasi solo italiani.', 'Varricchio 2025', 'note')
+      ]
+    },
+    seni: {
+      ciclo:'89.91.2',
+      adulto:[
+        R('Per raggiungere i seni mascellari e sfenoidali servono goccioline sotto i 5 µm e un flusso pulsante: con l’aerosol pulsante (sonico) i seni vengono ventilati, con lo spray nasale no. Il seno frontale non viene raggiunto in modo significativo.', 'Möller 2013'),
+        R('Irrigazione nasale ad alto volume: beneficio sui sintomi nella rinosinusite cronica, con evidenza di qualità bassa (dati su soluzione salina).', 'Chong 2016 (Cochrane)'),
+        R('Con acque termali o marine ipertoniche il beneficio dell’irrigazione potrebbe essere maggiore che con l’isotonica; i dati sono eterogenei.', 'Casale 2018'),
+        R('Inalazione più irrigazione nasale con acqua sulfurea: studiata nella rinosinusite cronica senza e con poliposi.', 'Keller 2014 (studi inclusi)')
+      ],
+      bambino:[
+        R('Aerosol con acqua termale nella rinosinusite cronica del bambino.', 'Keller 2014 (studi inclusi)'),
+        R('Evidenza promettente ma limitata: studi piccoli, eterogenei, quasi solo italiani.', 'Varricchio 2025', 'note')
+      ]
+    },
+    orecchio: {
+      ciclo:'89.93.2',
+      adulto:[
+        R('Insufflazioni endotimpaniche: sono la componente specifica del ciclo della sordità rinogena, insieme a 12 cure inalatorie.', 'Allegato 9 LEA'),
+        R('In una serie di 8 adulti con sordità rinogena da rinosinusite cronica con poliposi, 12 aerosol sulfurei e 12 insufflazioni tubariche hanno riportato il timpanogramma a tipo A in tutti.', 'Antonelli 2025'),
+        R('Politzer crenoterapico preceduto da inalazione caldo-umida: miglioramento audiometrico nella sordità rinogena (studio senza gruppo di controllo).', 'Costantino 2006'),
+        R('Il Politzer è preferito quando il cateterismo tubarico è difficile, doloroso o mal tollerato.', 'De Nobili, Bellomo')
+      ],
+      bambino:[
+        R('Politzer crenoterapico: ventila la tuba in modo indiretto sfruttando la deglutizione, senza catetere. È la tecnica usata nei bambini e quando il cateterismo è mal tollerato.', 'De Nobili, Bellomo; Mirandola 2013'),
+        R('Schema studiato in bambini di 4–10 anni con otite media secretiva e disfunzione tubarica: inalazione caldo-umida, Politzer e aerosol sulfureo per 12 giorni. Il miglioramento timpanometrico a due mesi era maggiore se seguito da autoinsufflazione domiciliare.', 'De Nobili, Bellomo'),
+        R('In bambini di 5–9 anni con otite media con effusione, cicli annuali ripetuti di Politzer sulfureo si sono associati a un miglioramento stabile dell’udito (studio retrospettivo; l’otite con effusione può risolversi spontaneamente).', 'Mirandola 2013')
+      ]
+    },
+    faringe: {
+      ciclo:'89.91.2',
+      adulto:[
+        R('Inalazione con acqua termale nelle flogosi croniche rinofaringo-tubariche.', 'Keller 2014 (studi inclusi)'),
+        R('Laringite cronica: nessuno studio specifico trovato. Restano le tecniche previste dal ciclo.', 'Allegato 9 LEA', 'muted')
+      ],
+      bambino:[
+        R('Inalazioni caldo-umide con acqua sulfurea per 12 giorni nelle infezioni ricorrenti delle alte vie: episodi meno frequenti nei 3 mesi successivi rispetto alla soluzione fisiologica.', 'Salami 2008')
+      ]
+    },
+    bronchi: {
+      ciclo:'89.93.3',
+      adulto:[
+        R('Per raggiungere piccole vie aeree e alveoli servono particelle di 1–5 µm; quelle di 5–10 µm si depositano soprattutto nelle grandi vie aeree e nell’orofaringe.', 'Labiris 2003', 'note'),
+        R('Inalazione seguita da aerosol con acqua sulfurea, a domicilio riproducendo un ciclo termale, una volta al giorno per 12 giorni, in BPCO GOLD 2–3 stabile: riduzione dello stress ossidativo e miglioramento del CAT a un mese, senza variazioni della funzione respiratoria. Asma esclusa.', 'Contoli 2013 (RCT)'),
+        R('Ventilazione polmonare controllata: componente del ciclo, nessuno studio clinico trovato.', 'Allegato 9 LEA', 'muted'),
+        R('Il DM 15/12/1994 esclude l’asma e l’enfisema avanzato.', 'DM 15/12/1994', 'warn')
+      ],
+      bambino:[
+        R('Nessuno studio pediatrico trovato per le basse vie respiratorie.', '—', 'muted')
+      ]
+    }
+  };
+
+  const T = {distretto:null, eta:'adulto'};
+  function bindRow(id, onPick){
+    const row = document.getElementById(id);
+    row.querySelectorAll('.toggle-opt').forEach(function(b){
+      b.addEventListener('click', function(){
+        row.querySelectorAll('.toggle-opt').forEach(function(x){ x.classList.remove('on'); });
+        b.classList.add('on');
+        onPick(b.dataset.val);
+      });
+    });
+  }
+  bindRow('distrettoRow', function(v){ T.distretto = v; renderTecniche(); });
+  bindRow('etaRow', function(v){ T.eta = v; renderTecniche(); });
+
+  function renderTecniche(){
+    const out = document.getElementById('tecnicheOut');
+    if(!T.distretto){ out.innerHTML = '<p class="block-note">Scegli il distretto.</p>'; return; }
+    const d = TECNICHE[T.distretto];
+    let html = '<div class="rec-card note"><div class="txt"><strong>Ciclo SSN di riferimento: ' + d.ciclo + '</strong> — ' + CICLI[d.ciclo] + '</div><div class="src">Allegato 9 LEA; DGR Lombardia 6/37451/1998, All. A3</div></div>';
+    html += d[T.eta].map(function(r){
+      return '<div class="rec-card ' + r.cls + '"><div class="txt">' + r.txt + '</div>' + (r.src !== '—' ? '<div class="src">' + r.src + '</div>' : '') + '</div>';
+    }).join('');
+    out.innerHTML = html;
+  }
+  renderTecniche();
+
+  // ============ CONTROINDICAZIONI ============
+  const INPS = 'INPS, Messaggio 23/2003';
+  const CI = [
+    {t:'Fase acuta della malattia o infiammazione in atto', s:'Di Giacomo, SIF 2024', a:['fango','inal','altro']},
+    {t:'Malattie infettive e contagiose', s:INPS, a:['fango']},
+    {t:'Tubercolosi in atto (per la fangoterapia: non prima di 2 anni dalla guarigione clinica completa)', s:INPS, a:['fango']},
+    {t:'Cardiopatia in fase di scompenso cardio-circolatorio', s:INPS, a:['fango']},
+    {t:'Infarto miocardico acuto', s:INPS, a:['fango']},
+    {t:'Miocardiopatia medio-grave', s:INPS, a:['fango']},
+    {t:'Insufficienza respiratoria grave', s:INPS, a:['fango']},
+    {t:'Neoplasia in fase di trattamento', s:INPS, a:['fango']},
+    {t:'Tromboflebite in fase acuta', s:INPS, a:['fango']},
+    {t:'Manifestazioni emorragiche in atto o recenti', s:INPS, a:['fango']},
+    {t:'Insufficienza renale medio-grave', s:INPS, a:['fango']},
+    {t:'Nefropatia acuta', s:INPS, a:['fango']},
+    {t:'Diabete mellito non compensato', s:INPS, a:['fango']},
+    {t:'Gravidanza o allattamento', s:INPS, a:['fango']},
+    {t:'Ulcera gastro-duodenale in fase attiva', s:INPS, a:['fango']},
+    {t:'Malattie cutanee definite "ripugnanti" dalla fonte', s:INPS, a:['fango']},
+    {t:'Psoriasi pustolosa o eritrodermica (esclusione dal SSN, solo bagni dermatologici)', s:'DM 15/12/1994', a:['fango']},
+    {t:'Eczema o dermatite atopica in forma acuta vescicolare o essudativa (esclusione dal SSN, solo bagni dermatologici)', s:'DM 15/12/1994', a:['fango']},
+    {t:'Asma (esclusione dal SSN per la bronchite cronica)', s:'DM 15/12/1994', a:['inal']},
+    {t:'Enfisema avanzato (esclusione dal SSN per la bronchite cronica)', s:'DM 15/12/1994', a:['inal']},
+    {t:'Otite cronica colesteatomatosa (esclusione dal SSN)', s:'DM 15/12/1994', a:['inal']}
+  ];
+  const CASO = [
+    'Esiti di infarto complicato',
+    'Nefropatie croniche',
+    'Epilessia: valutare l’ultimo episodio, il periodo di latenza e la terapia in atto',
+    'Difetti valvolari, ipertensione o ipotensione arteriosa, patologie psichiatriche o neurologiche: non sono controindicazioni assolute'
+  ];
+
+  let tipo = 'fango';
+  const checked = {};
+  bindRow('tipoCicloRow', function(v){ tipo = v; renderCI(); });
+
+  function renderCI(){
+    const list = document.getElementById('ciList');
+    const visibili = CI.map(function(c, i){ return {c:c, i:i}; }).filter(function(x){ return x.c.a.indexOf(tipo) !== -1; });
+    list.innerHTML = visibili.map(function(x){
+      const on = !!checked[x.i];
+      return '<label class="check-item' + (on ? ' on' : '') + '"><input type="checkbox" data-i="' + x.i + '"' + (on ? ' checked' : '') + '><span>' + x.c.t + '<div class="src">' + x.c.s + '</div></span></label>';
+    }).join('');
+    list.querySelectorAll('input[type=checkbox]').forEach(function(cb){
+      cb.addEventListener('change', function(){ checked[cb.dataset.i] = cb.checked; renderCI(); });
+    });
+
+    const presenti = visibili.filter(function(x){ return checked[x.i]; });
+    const res = document.getElementById('ciResult');
+    if(presenti.length === 0){
+      res.className = 'result';
+      res.textContent = 'Nessuna voce selezionata. Non significa idoneità: la valutazione resta del medico termale.';
+    } else {
+      res.className = 'result block';
+      res.innerHTML = '<strong>Controindicazione presente: il ciclo non va avviato.</strong><ul>' +
+        presenti.map(function(x){ return '<li>' + x.c.t + '</li>'; }).join('') + '</ul>';
+    }
+
+    const caso = document.getElementById('ciCaso');
+    if(tipo === 'fango'){
+      caso.innerHTML = '<div class="rec-card note"><div class="txt"><strong>Da valutare caso per caso</strong><ul style="margin:6px 0 0 0; padding-left:18px;">' +
+        CASO.map(function(c){ return '<li>' + c + '</li>'; }).join('') +
+        '</ul>Per la balneoterapia valgono in genere le stesse patologie della fangoterapia, con particolare attenzione all’apparato cardiocircolatorio e respiratorio.</div><div class="src">' + INPS + '</div></div>';
+    } else if(tipo === 'inal'){
+      caso.innerHTML = '<div class="rec-card muted"><div class="txt">Per le cure inalatorie non ho trovato un elenco sistematico di controindicazioni: qui compaiono solo la fase acuta e le esclusioni dal SSN previste dal DM 15/12/1994.</div></div>';
+    } else {
+      caso.innerHTML = '<div class="rec-card muted"><div class="txt">Per cure idropiniche, irrigazioni, docce rettali e stufe non ho trovato un elenco specifico di controindicazioni. Se il ciclo comprende bagni (per esempio 89.92.2 o 89.94.1), valgono anche le voci di fanghi e bagni.</div></div>';
+    }
+  }
+  renderCI();
+
+  // ============ LANDING ============
+  const landing = document.getElementById('landing');
+  const modules = {prescrizione: document.getElementById('prescrizione'), accettazione: document.getElementById('accettazione')};
+  function showLanding(){
+    landing.classList.remove('hidden');
+    Object.values(modules).forEach(function(m){ m.classList.add('hidden'); });
+    window.scrollTo({top:0, behavior:'smooth'});
+    history.replaceState(null, '', window.location.pathname);
+  }
+  function showModule(key){
+    landing.classList.add('hidden');
+    Object.keys(modules).forEach(function(k){ modules[k].classList.toggle('hidden', k !== key); });
+    window.scrollTo({top:0, behavior:'smooth'});
+    history.replaceState(null, '', '#' + key);
+  }
+  document.querySelectorAll('.landing-btn').forEach(function(b){ b.addEventListener('click', function(){ showModule(b.dataset.target); }); });
+  document.querySelectorAll('[data-back]').forEach(function(b){ b.addEventListener('click', showLanding); });
+  const h = window.location.hash.replace('#', '');
+  if(modules[h]) showModule(h); else showLanding();
+})();
+</script>
+</body>
+</html>
